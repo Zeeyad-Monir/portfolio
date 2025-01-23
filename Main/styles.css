@@ -1,0 +1,1251 @@
+/* Import Google Fonts for a personalized touch */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@900&display=swap');
+
+/* Define CSS Variables for Black and Cream Color Scheme with Dark Gold Accents */
+:root {
+  /* Base Colors */
+  --base-bg: #000000; /* Black */
+  --base-text: #F5F5DC; /* Cream */
+  
+  /* Accent Colors */
+  --accent-dark: #1A1A1A; /* Very Dark Gray */
+  --accent-light: #CCCCCC; /* Light Gray */
+  
+  /* Highlight Colors */
+  --highlight-primary: #B8860B; /* Dark Goldenrod */
+  --highlight-secondary: #DAA520; /* Goldenrod */
+}
+
+/* Reset some default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Enable Smooth Scrolling and Adjust Scroll Position */
+html {
+  scroll-behavior: smooth; /* Enables smooth scrolling */
+  scroll-padding-top: 80px; /* Adjust based on nav bar height */
+}
+
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--base-text); /* Cream text color */
+  background-color: var(--base-bg); /* Black background */
+  overflow-x: hidden;
+  cursor: none; /* Hide default cursor */
+  font-size: 16px; /* Scalable Typography */
+}
+
+/* Custom Cursor */
+.cursor {
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, rgba(245, 245, 220, 0.7), transparent); /* Cream cursor */
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  transition: transform 0.1s;
+}
+
+/* Navbar Styles (Enhanced for Responsiveness) */
+.unique-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--accent-dark); /* Very Dark Gray background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.unique-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  justify-content: center; /* Center items horizontally */
+  width: 100%;
+  max-width: 1200px; /* Optional: Limit max width */
+}
+
+.unique-nav li {
+  margin: 0 10px; /* Reduced margin for better spacing */
+  flex: 1; /* Distribute space evenly */
+}
+
+.unique-nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--base-text); /* Cream text for nav links */
+  font-size: clamp(12px, 2vw, 18px); /* Responsive font size */
+  font-weight: 500;
+  padding: 10px 0;
+  transition: color 0.3s;
+  text-align: center; /* Center text within flex item */
+  white-space: nowrap; /* Prevent text from wrapping */
+  display: block; /* Make entire area clickable */
+  min-width: 0; /* Allow flex items to shrink below content size */
+}
+
+/* Navbar Hover Effects */
+.unique-nav a::before,
+.unique-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--highlight-primary); /* Dark Gold underline */
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.unique-nav a::before {
+  top: 0;
+  transform-origin: left;
+}
+
+.unique-nav a::after {
+  bottom: 0;
+  transform-origin: right;
+}
+
+.unique-nav a:hover::before,
+.unique-nav a:hover::after {
+  background: var(--highlight-primary); /* Maintain Dark Gold underline on hover */
+  transform: scaleX(1);
+}
+
+/* Home Section */
+#home {
+  position: relative;
+  min-height: 100vh;
+  background: var(--base-bg); /* Black background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-top: 100px; /* Add padding at the top */
+}
+
+/* Starfield canvas styling */
+#starfield {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Ensure content is above the canvas */
+.name-animation,
+.animated-role,
+.bio-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Name Animation */
+.name-animation {
+  font-size: 90px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: var(--base-text); /* Cream main title text */
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 15px;
+  display: inline-block;
+  position: relative;
+  transform: translateY(-100px); /* Adjust to keep the name higher */
+}
+
+.name-animation span {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.name-animation span:hover {
+  animation: bounce 1.5s;
+  color: var(--highlight-primary); /* Dark Gold hover color */
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-15px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  70% {
+    transform: translateY(-7px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Animated Role */
+.animated-role {
+  font-size: 2.25rem; /* Keep the original size */
+  color: var(--accent-light); /* Light Gray role description text */
+  margin-top: 20px;
+  text-align: center;
+  display: inline-block;
+  position: relative; /* Keeps it in normal flow */
+  white-space: nowrap; /* Prevent line breaks */
+  min-height: 2rem; /* Set a consistent height */
+  line-height: 2rem; /* Maintain line height */
+  transform: translateY(-80px); /* Adjust to keep the name higher */
+}
+
+/* Preserve the Underline Style and Animation */
+.animated-role::after {
+  content: '';
+  display: block;
+  width: 60px; /* Start with a visible minimum width */
+  height: 2px;
+  background-color: var(--highlight-primary); /* Dark Gold underline */
+  position: absolute;
+  bottom: -20px; /* Position the underline directly beneath the text */
+  left: 50%;
+  transform: translateX(-50%); /* Center the underline */
+  animation: symmetricalExpand 2s infinite; /* Animation to expand symmetrically */
+}
+
+/* Keyframes for Symmetrical Expansion */
+@keyframes symmetricalExpand {
+  0%, 100% { width: 60px; } /* Minimum width maintained */
+  50% { width: 100px; } /* Expand evenly to both sides */
+}
+
+/* Bio Container within Home Section */
+.bio-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1000px;
+  margin-bottom: 45px;
+  background-color: rgba(204, 204, 204, 0.1); /* Light Gray with slight transparency */
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s;
+}
+
+/* .bio-container:hover {
+  transform: scale(1.02);
+} */
+
+/* Remove decorative elements from bio-container */
+.bio-container::before,
+.bio-container::after {
+  content: none;
+}
+
+.profile-picture {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+.profile-picture img {
+  border-radius: 50%;
+  border: 5px solid rgba(204, 204, 204, 0.2); /* Light border */
+  width: 200px;
+  height: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Light shadow for minimalist look */
+}
+
+.bio-info {
+  flex: 2;
+  padding: 20px;
+  color: var(--base-text); /* Cream text */
+}
+
+.bio-info p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--base-text); /* Cream text */
+}
+
+.bio-info p .highlight {
+  background: linear-gradient(45deg, var(--highlight-primary), var(--highlight-secondary)); /* Gradient background */
+  -webkit-background-clip: text; /* Clips the background to the text */
+  background-clip: text;
+  color: transparent; /* Makes the actual text color transparent */
+  font-weight: 700;
+}
+
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: var(--base-text); /* Cream social link text */
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.social-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--highlight-primary); /* Dark Gold underline */
+  transition: width 0.3s;
+}
+
+.social-links a:hover::after {
+  width: 100%;
+}
+
+.social-links a:hover {
+  color: var(--highlight-primary); /* Dark Gold color on hover */
+}
+
+.social-links a .icon {
+  margin-right: 8px;
+  transition: transform 0.3s;
+}
+
+.social-links a:hover .icon {
+  transform: rotate(360deg);
+}
+
+.bio-cta {
+  margin-top: 30px;
+}
+
+.bio-cta a {
+  display: inline-block;
+  text-decoration: none;
+  background: var(--highlight-primary); /* Dark Gold background */
+  color: var(--base-bg); /* Black text */
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.bio-cta a:hover {
+  background: var(--highlight-secondary); /* Gold on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(218, 165, 32, 0.5); /* Gold shadow on hover */
+}
+
+/* Skills Section */
+#skills {
+  background: var(--base-bg); /* Black background */
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.skills-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#skills h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--base-text); /* Cream color */
+  margin-bottom: 1rem;
+}
+
+.skills-subtitle {
+  font-size: 1.2rem;
+  color: var(--accent-light); /* Light Gray */
+  margin-bottom: 3rem;
+}
+
+/* Continuous Scroll Styles */
+.skills-scroll {
+  overflow: hidden;
+  position: relative;
+}
+
+.skills-track {
+  display: flex;
+  width: calc(200%); /* Double the width due to duplication */
+  animation: scroll 40s linear infinite; /* Slowed down from 20s to 40s */
+}
+
+.skill-card {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 200px;
+  margin-right: 60px; /* Increased for more space */
+  background-color: #333333; /* Dark Gray background */
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  user-select: none; /* Prevent text selection */
+}
+
+.skill-card:last-child {
+  margin-right: 0;
+}
+
+.skill-card:hover {
+  transform: scale(1.05);
+}
+
+.skill-card:focus {
+  outline: 3px solid var(--highlight-primary); /* Dark Gold focus indicator */
+  outline-offset: 2px;
+}
+
+.skill-icon {
+  width: 50px;
+  height: 50px;
+  margin-top: 1rem;
+}
+
+.skill-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--base-text); /* Cream */
+  margin-top: 0.5rem;
+}
+
+/* Keyframes for Continuous Scroll */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Swiper Scrollbar Hidden */
+.swiper-scrollbar {
+  display: none;
+}
+
+/* Code Projects Section */
+#code-projects {
+  background-color: var(--base-bg); /* Black background */
+  padding: 100px 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+#code-projects h2 {
+  font-size: 50px;
+  font-weight: bold;
+  color: var(--base-text); /* Cream */
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: 'Helvetica', sans-serif;
+  position: relative;
+}
+
+#code-projects h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 2px;
+  background-color: var(--highlight-primary); /* Dark Gold underline */
+  transform: translateX(-50%);
+}
+
+/* Carousel Container */
+.carousel-container {
+  perspective: 1000px;
+  overflow: visible; /* Allow overflow for expanded cards */
+  position: relative;
+  height: 420px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+/* Carousel */
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: visible; /* Allow overflow for expanded cards */
+}
+
+/* =====================
+   Updated Arrow Buttons Styling
+   ===================== */
+
+/* Arrow Buttons for Code Projects Carousel */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(to right, rgba(51, 51, 51, 0.5) 50%, rgba(255, 255, 255, 0));
+  border: none;
+  color: var(--base-bg); /* Cream/White arrow color */
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px; /* Rounded edges for the square background */
+  z-index: 5;
+  transition: background 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Fixed width for consistency */
+  height: 40px; /* Fixed height for consistency */
+}
+
+.carousel-arrow:hover {
+  background: linear-gradient(to right, rgba(51, 51, 51, 0.8) 50%, rgba(255, 255, 255, 0.2));
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Positioning the Left Arrow */
+.left-arrow {
+  margin-left: -40px; /* Adjust spacing from the left edge */
+}
+
+/* Positioning the Right Arrow */
+.right-arrow {
+  right: 80px; /* Adjust spacing from the right edge */
+}
+
+/* Arrow Buttons for Design Projects Carousel */
+.design-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(to right, rgba(51, 51, 51, 0.5) 50%, rgba(255, 255, 255, 0));
+  border: none;
+  color: var(--base-bg); /* Cream/White arrow color */
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px; /* Rounded edges for the square background */
+  z-index: 5;
+  transition: background 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Fixed width for consistency */
+  height: 40px; /* Fixed height for consistency */
+}
+
+.design-carousel-arrow:hover {
+  background: linear-gradient(to right, rgba(51, 51, 51, 0.8) 50%, rgba(255, 255, 255, 0.2));
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Positioning the Left Arrow for Design Carousel */
+.design-left-arrow {
+  left: 10px; /* Adjust spacing from the left edge */
+}
+
+/* Positioning the Right Arrow for Design Carousel */
+.design-right-arrow {
+  right: 10px; /* Adjust spacing from the right edge */
+}
+
+/* Optional: Enhance Accessibility with Focus Styles */
+.carousel-arrow:focus,
+.design-carousel-arrow:focus {
+  outline: 2px solid var(--highlight-primary); /* Dark Gold outline for focus */
+  outline-offset: 2px;
+}
+
+/* Experience Cards for Code Projects */
+.experience-card {
+  width: 300px;
+  height: 430px;
+  border-radius: 15px;
+  background-color: #333333; /* Dark Gray background */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  backface-visibility: hidden;
+  cursor: pointer;
+  margin: 0 35px;
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color */
+}
+
+.experience-card img {
+  width: 100px;
+  height: 100px;
+  margin: 15px auto 5px;
+  display: block;
+}
+
+.experience-card:not(.active) {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  cursor: pointer;
+  margin: 0 35px;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Expanded Card Styles */
+.experience-card.expanded {
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  width: 100vw; 
+  height: 100vh; 
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  transform: none;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+  overflow-y: auto; /* Enable scrolling for overflow content */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--base-bg); /* Black background */
+}
+
+/* Expanded content styles */
+.expanded-content {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Show expanded content when card is expanded */
+.experience-card.expanded .expanded-content {
+  display: flex;
+}
+
+/* Banner styles */
+.banner {
+  background-color: #333333; /* Dark Gray */
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.banner h2 {
+  font-size: 3rem;
+  margin: 0;
+  color: var(--base-text); /* Cream */
+}
+
+/* Close button */
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--base-text); /* Cream */
+  outline: none;
+  z-index: 1001;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: var(--accent-light); /* Light Gray on hover */
+}
+
+/* Project details content */
+.project-details {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: var(--base-bg); /* Black */
+}
+
+/* Card Content */
+.card-content {
+  text-align: center;
+  padding: 0 10px;
+}
+
+.interactive-text {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--accent-light); /* Light Gray */
+  margin-bottom: 10px;
+}
+
+.experience-card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--base-text); /* Cream */
+}
+
+.experience-card p.subtitle {
+  font-size: 15px;
+  color: var(--accent-light); /* Light Gray */
+  margin-bottom: 10px;
+}
+
+/* Active Card */
+.carousel .experience-card.active {
+  opacity: 1;
+  transform: translateX(-50%) translateZ(0) scale(1);
+  z-index: 3;
+}
+
+/* Adjacent Cards */
+.carousel .experience-card.prev,
+.carousel .experience-card.next {
+  opacity: 0.8;
+  transform: translateX(calc(-50% - 220px)) translateZ(-100px) scale(0.95) rotateY(15deg);
+  z-index: 2;
+}
+
+.carousel .experience-card.next {
+  transform: translateX(calc(-50% + 220px)) translateZ(-100px) scale(0.95) rotateY(-15deg);
+}
+
+/* Further Adjacent Cards */
+.carousel .experience-card.prev2,
+.carousel .experience-card.next2 {
+  opacity: 0.5;
+  transform: translateX(calc(-50% - 440px)) translateZ(-200px) scale(0.9) rotateY(30deg);
+  z-index: 1;
+}
+
+.carousel .experience-card.next2 {
+  transform: translateX(calc(-50% + 440px)) translateZ(-200px) scale(0.9) rotateY(-30deg);
+}
+
+/* Hover Effects on Cards */
+.experience-card:hover {
+  transform: translateX(-50%) translateZ(0) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation Dots */
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  z-index: 10;
+}
+
+.pagination-dots button {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-light); /* Light Gray */
+  border: none;
+  border-radius: 50%;
+  margin: 0 7px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  opacity: 0.8;
+}
+
+.pagination-dots button:hover {
+  transform: scale(1.2);
+  background-color: var(--highlight-primary); /* Dark Gold on hover */
+  opacity: 1;
+}
+
+.pagination-dots button.active {
+  width: 12px;
+  height: 12px;
+  background-color: var(--highlight-primary); /* Dark Gold active dot */
+  opacity: 1;
+}
+
+/* Prevent background scrolling */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Experience Cards for Design Projects */
+.design-experience-card {
+  width: 300px;
+  height: 430px;
+  border-radius: 15px;
+  background-color: #333333; /* Dark Gray background */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  backface-visibility: hidden;
+  cursor: pointer;
+  margin: 0 35px;
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color */
+}
+
+.design-experience-card img {
+  width: 100px;
+  height: 100px;
+  margin: 15px auto 5px;
+  display: block;
+}
+
+.design-experience-card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--base-text); /* Cream */
+}
+
+.design-experience-card p.subtitle {
+  font-size: 15px;
+  color: var(--accent-light); /* Light Gray */
+  margin-bottom: 10px;
+}
+
+/* Active Card for Design Projects */
+.design-carousel .design-experience-card.active {
+  opacity: 1;
+  transform: translateX(-50%) translateZ(0) scale(1);
+  z-index: 3;
+}
+
+/* Adjacent Cards for Design Projects */
+.design-carousel .design-experience-card.prev,
+.design-carousel .design-experience-card.next {
+  opacity: 0.8;
+  transform: translateX(calc(-50% - 220px)) translateZ(-100px) scale(0.95) rotateY(15deg);
+  z-index: 2;
+}
+
+.design-carousel .design-experience-card.next {
+  transform: translateX(calc(-50% + 220px)) translateZ(-100px) scale(0.95) rotateY(-15deg);
+}
+
+/* Further Adjacent Cards for Design Projects */
+.design-carousel .design-experience-card.prev2,
+.design-carousel .design-experience-card.next2 {
+  opacity: 0.5;
+  transform: translateX(calc(-50% - 440px)) translateZ(-200px) scale(0.9) rotateY(30deg);
+  z-index: 1;
+}
+
+.design-carousel .design-experience-card.next2 {
+  transform: translateX(calc(-50% + 440px)) translateZ(-200px) scale(0.9) rotateY(-30deg);
+}
+
+/* Hover Effects on Design Cards */
+.design-experience-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation Dots for Design Projects */
+.design-pagination-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  z-index: 10;
+}
+
+.design-pagination-dots button {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-light); /* Light Gray */
+  border: none;
+  border-radius: 50%;
+  margin: 0 7px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  opacity: 0.8;
+}
+
+.design-pagination-dots button:hover {
+  transform: scale(1.2);
+  background-color: var(--highlight-primary); /* Dark Gold on hover */
+  opacity: 1;
+}
+
+.design-pagination-dots button.active {
+  width: 12px;
+  height: 12px;
+  background-color: var(--highlight-primary); /* Dark Gold active dot */
+  opacity: 1;
+}
+
+/* Contact Section */
+#contact {
+  background-color: var(--base-bg); /* Black background */
+  color: var(--base-text); /* Cream text */
+  padding: 50px 20px;
+}
+
+#contact h2 {
+  text-align: center;
+  color: var(--base-text); /* Cream */
+  margin-bottom: 40px;
+}
+
+#contact form {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#contact form::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: url('floating-shape.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.2;
+}
+
+#contact input,
+#contact textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid var(--accent-dark); /* Very Dark Gray border */
+  border-radius: 30px;
+  background-color: #1A1A1A; /* Very Dark Gray background for inputs */
+  color: var(--base-text); /* Cream text inside inputs */
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+#contact input::placeholder,
+#contact textarea::placeholder {
+  color: var(--accent-light); /* Light Gray placeholders */
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  box-shadow: 0 0 10px rgba(184, 134, 11, 0.5); /* Dark Gold shadow on focus */
+  transform: translateY(-5px);
+  outline: none;
+}
+
+#contact button {
+  padding: 15px 30px;
+  background-color: var(--highlight-primary); /* Dark Gold background */
+  border: none;
+  color: var(--base-bg); /* Black text */
+  cursor: pointer;
+  border-radius: 30px;
+  width: 100%;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-bottom: 70px;
+}
+
+#contact button:hover {
+  background-color: var(--highlight-secondary); /* Gold on hover */
+  transform: translateY(-5px);
+}
+
+/* Footer Styles */
+footer {
+  padding: 20px 20px;
+  background-color: var(--accent-dark); /* Very Dark Gray background */
+  color: var(--base-text); /* Cream text */
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: var(--highlight-primary); /* Dark Gold links */
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: var(--highlight-secondary); /* Gold on hover */
+}
+
+/* Section Titles Styling */
+section h2 {
+  font-size: 36px;
+  text-align: center;
+  color: var(--base-text); /* Cream */
+  margin-bottom: 40px;
+  font-weight: 700;
+  position: relative;
+}
+
+section h2::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background-color: var(--highlight-primary); /* Dark Gold underline */
+  display: block;
+  margin: 10px auto 0;
+  animation: titleUnderline 1.5s infinite;
+}
+
+@keyframes titleUnderline {
+  0%, 100% {
+    width: 60px;
+  }
+  50% {
+    width: 80px;
+  }
+}
+
+/* Design Projects Section */
+#design-projects {
+  background-color: var(--base-bg); /* Black background */
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+#design-projects h2 {
+  font-size: 50px;
+  font-weight: bold;
+  color: var(--base-text); /* Cream */
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: 'Helvetica', sans-serif;
+  position: relative;
+}
+
+#design-projects h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 2px;
+  background-color: var(--highlight-primary); /* Dark Gold underline */
+  transform: translateX(-50%);
+}
+
+/* Carousel Container for Design Projects */
+.design-carousel-container {
+  perspective: 1000px;
+  overflow: visible;
+  position: relative;
+  height: 420px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+/* Carousel for Design Projects */
+.design-carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .bio-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bio-info {
+    left: 0;
+    margin-top: 20px;
+  }
+
+  .skill-item,
+  .project-card,
+  .experience-card,
+  .design-experience-card {
+    width: 80%;
+  }
+
+  .unique-nav ul {
+    justify-content: space-between; /* Distribute space evenly */
+  }
+
+  .unique-nav li {
+    margin: 0 10px; /* Further reduced margin for better fit */
+    flex: 1; /* Allow items to grow and shrink */
+  }
+
+  .unique-nav a {
+    font-size: 16px; /* Reduced font size for smaller screens */
+    padding: 8px 5px; /* Reduced padding */
+  }
+}
+
+@media (max-width: 768px) {
+  .experience-card {
+    width: 200px;
+    height: 320px;
+  }
+
+  .carousel-container {
+    height: 360px;
+  }
+
+  .carousel .experience-card.prev,
+  .carousel .experience-card.next {
+    transform: translateX(calc(-50% - 180px)) translateZ(-80px) scale(0.95) rotateY(15deg);
+  }
+
+  .carousel .experience-card.next {
+    transform: translateX(calc(-50% + 180px)) translateZ(-80px) scale(0.95) rotateY(-15deg);
+  }
+
+  .carousel .experience-card.prev2,
+  .carousel .experience-card.next2 {
+    transform: translateX(calc(-50% - 360px)) translateZ(-160px) scale(0.9) rotateY(30deg);
+  }
+
+  .carousel .experience-card.next2 {
+    transform: translateX(calc(-50% + 360px)) translateZ(-160px) scale(0.9) rotateY(-30deg);
+  }
+
+  .unique-nav ul {
+    justify-content: space-between; /* Ensure even distribution */
+    /* overflow-x: auto; Remove horizontal scrolling */
+  }
+
+  .unique-nav li {
+    margin: 0 8px; /* Further reduced margin */
+    flex: 1; /* Allow items to flex */
+  }
+
+  .unique-nav a {
+    font-size: 14px; /* Further reduced font size */
+    padding: 6px 0; /* Further reduced padding */
+  }
+
+  .name-animation {
+    font-size: 36px;
+  }
+
+  .animated-role {
+    font-size: 24px;
+  }
+
+  .skill-item,
+  .project-card,
+  .experience-card,
+  .design-experience-card {
+    width: 100%;
+  }
+
+  #contact form {
+    width: 100%;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .unique-nav ul {
+    justify-content: space-between; /* Maintain even distribution */
+    padding: 0 10px; /* Add padding to prevent edge clipping */
+  }
+
+  .unique-nav li {
+    margin: 0 5px; /* Minimal margin */
+    flex: 1; /* Ensure even spacing */
+  }
+
+  .unique-nav a {
+    font-size: 12px; /* Smallest font size */
+    padding: 4px 0; /* Minimal padding */
+  }
+
+  .name-animation {
+    font-size: 28px;
+  }
+
+  .animated-role {
+    font-size: 20px;
+  }
+
+  .skill-item,
+  .project-card,
+  .experience-card,
+  .design-experience-card {
+    width: 100%;
+  }
+
+  #contact form::before {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Fluid Grid Layouts */
+.skills-grid,
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+/* Flexible Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Touch and Interaction Responsiveness dog */
+.unique-nav a {
+  padding: 15px;
+}
+
+/* Design Projects Additional Styles if needed */
+.design-experience-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments for design-experience-card */
+@media (max-width: 1024px) {
+  /* Add any design projects specific responsive styles here */
+}
+
+@media (max-width: 768px) {
+  /* Adjust design-experience-card transformations if needed */
+}
+
+@media (max-width: 480px) {
+  /* Add any design projects specific mobile styles here */
+}

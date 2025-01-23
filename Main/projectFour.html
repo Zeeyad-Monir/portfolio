@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake Game Project</title>
+    <link rel="stylesheet" href="projectFour.css">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="unique-nav">
+        <ul>
+            <li><a href="main.html#home">Home</a></li>
+            <!-- <li><a href="main.html#bio">Bio</a></li> -->
+            <li><a href="main.html#skills">Skills</a></li>
+            <li><a href="main.html#code-projects">Code Projects</a></li>
+            <li><a href="main.html#design-projects">Design Projects</a></li>
+            <li><a href="main.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Snake Game</h1>
+            <p>An engaging and classic Snake game built with JavaScript, Html, and Css.</p>
+            <!-- Updated the Explore button to link to your YouTube video -->
+            <a href="https://www.youtube.com/watch?v=C3Ya00PuLRk&ab_channel=ZeeyadMonir" class="cta-button" target="_blank">Explore the Project</a>
+        </div>
+        <!-- "View All Projects" Button -->
+        <a href="main.html#code-projects" class="view-all-button">View All Projects</a>
+    </section>
+
+    <!-- Project Showcase Section -->
+    <section class="project-showcase" id="project-showcase">
+        <h2>Project Gallery</h2>
+        <div class="project-gallery">
+            <div class="project-image">
+                <img src="snakegame-image1.png" alt="Gameplay Overview" loading="lazy">
+                <div class="project-caption">Gameplay Overview</div>
+            </div>
+            <div class="project-image">
+                <img src="snakegame-image2.png" alt="User Interface" loading="lazy">
+                <div class="project-caption">User Interface</div>
+            </div>
+            <div class="project-image">
+                <img src="snakegame-image3.png" alt="Collision Detection" loading="lazy">
+                <div class="project-caption">Collision Detection</div>
+            </div>
+            <div class="project-image">
+                <img src="snakegame-image4.png" alt="Score Tracking" loading="lazy">
+                <div class="project-caption">Score Tracking</div>
+            </div>
+            <div class="project-image">
+                <img src="snakegame-image5.png" alt="Dynamic Difficulty" loading="lazy">
+                <div class="project-caption">Dynamic Difficulty</div>
+            </div>
+            <!-- Add more project-image divs as needed -->
+        </div>
+    </section>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <img src="" alt="Enlarged Image">
+    </div>
+
+    <!-- About the Project Section -->
+    <section class="about-project" id="about-project">
+        <h2>About the Project</h2>
+        <div class="content">
+            <div class="text-content">
+                <p>
+                    The Snake Game project is a classic and engaging game developed using Java, designed to provide users with a nostalgic yet smooth gaming experience. The objective is simple: navigate the snake to consume food, growing longer with each bite while avoiding collisions with walls and itself.
+                </p>
+                <p><strong>Key Highlights:</strong></p>
+                <ul>
+                    <li>Classic Snake gameplay mechanics with smooth controls</li>
+                    <li>Dynamic difficulty levels that increase as the game progresses</li>
+                    <li>Responsive and intuitive user interface</li>
+                    <li>Real-time score tracking and high score management</li>
+                    <li>Efficient collision detection algorithms</li>
+                    <li>Implemented using Java Swing for GUI components</li>
+                </ul>
+                <p>
+                    For more detailed information, check out the <a href="https://github.com/yourusername/snake-game" target="_blank">GitHub repository</a>.
+                </p>
+            </div>
+            <div class="image-content">
+                <!-- Embedded YouTube Video -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/C3Ya00PuLRk" title="Snake Game Project Demo" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+
+    <!-- JavaScript for Scroll to Top Button and Lightbox -->
+    <script>
+        // Scroll to Top Button Functionality
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        };
+
+        scrollTopBtn.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // Lightbox Functionality
+        const projectImages = document.querySelectorAll('.project-image img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+
+        projectImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        // Optional: Close lightbox with Esc key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

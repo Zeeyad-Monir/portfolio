@@ -1,0 +1,678 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Montserrat:wght@800&display=swap');
+
+/* Root Variables for Theme Colors */
+:root {
+  --primary-color: hsl(194, 92%, 53%);
+  --secondary-color: #ffffff;
+  --accent-color: #ffffff;
+  --background-color: #f3f3f3;
+  --text-color: #1a1a1a;
+  --gold: #FFD700;
+  --gold-hover: #FFC107;
+  --light-gray: #f9f9f9;
+  --neon-purple: #BB86FC; /* Retained for other uses */
+  --soft-white: #FFF8E1; /* For spotlight effect */
+  --light-gray-text: #E0E0E0; /* For captions */
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* Navbar Styles (from main.css) */
+.unique-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(135deg, #000, #6a0dad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.unique-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.unique-nav li {
+  margin: 0 20px;
+}
+
+.unique-nav a {
+  position: relative;
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 0;
+  transition: color 0.3s;
+}
+
+.unique-nav a::before,
+.unique-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.unique-nav a::before {
+  top: 0;
+  transform-origin: left;
+}
+
+.unique-nav a::after {
+  bottom: 0;
+  transform-origin: right;
+}
+
+.unique-nav a:hover::before,
+.unique-nav a:hover::after {
+  background: #fff;
+  transform: scaleX(1);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 92vh;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-color);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15), transparent 70%);
+  animation: rotateBackground 30s infinite linear;
+}
+
+@keyframes rotateBackground {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Call to Action Button */
+.hero .cta-button {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 30px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.hero .cta-button:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-5px);
+}
+
+/* "View All Projects" Button */
+.view-all-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 20px;
+ 
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+
+.view-all-button:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+/* Project Showcase Section */
+.project-showcase {
+  padding: 100px 20px; /* Increased padding for more breathing space */
+  background-color: var(--secondary-color);
+  background-image: url('gallery-texture.png'); /* Subtle textured background */
+  background-repeat: repeat;
+  background-size: cover;
+  color: var(--text-color);
+  position: relative; /* For positioning the spotlights */
+  overflow: hidden;
+}
+
+/* Spotlight Effects */
+.project-showcase::before,
+.project-showcase::after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  width: 50%;
+  height: 150%;
+  background: radial-gradient(
+      circle at top,
+      rgba(255, 248, 225, 0.3),
+      transparent 70%
+    );
+  transform: scale(1.5);
+}
+
+.project-showcase::before {
+  left: -50px;
+  transform-origin: top left;
+}
+
+.project-showcase::after {
+  right: -50px;
+  transform-origin: top right;
+}
+
+/* Gallery Title Styling */
+.project-showcase h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  color: #000; /* Changed to black */
+  /* Removed neon glow effect */
+}
+
+/* Animated Underline */
+.project-showcase h2::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+  display: block;
+  margin: 10px auto 0;
+  animation: titleUnderline 1.5s infinite;
+}
+
+@keyframes titleUnderline {
+  0%, 100% {
+    width: 60px;
+  }
+  50% {
+    width: 80px;
+  }
+}
+
+.project-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px; /* Reduced gap for tighter layout */
+  padding-top: 50px;
+}
+
+/* Staggered Grid Layout */
+.project-image {
+  position: relative;
+  width: calc(33.333% - 20px); /* Three columns */
+  overflow: hidden;
+  border: 2px solid #ccc; /* Framed effect */
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-image:nth-child(odd) {
+  margin-top: 30px; /* Staggered effect */
+}
+
+.project-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hover Effects */
+.project-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.project-image:hover img {
+  filter: brightness(1.1);
+}
+
+/* Shadow Under Images */
+.project-image::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 5%;
+  width: 90%;
+  height: 20px;
+  background: rgba(0,0,0,0.2);
+  filter: blur(10px);
+  z-index: -1;
+}
+
+/* Captions */
+.project-caption {
+  text-align: center;
+  padding: 10px;
+  font-style: italic;
+  color: var(--light-gray-text);
+}
+
+/* Hover Spotlight Effect */
+.project-image::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 248, 225, 0.3), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.project-image:hover::before {
+  opacity: 1;
+}
+
+/* Lightbox Effect */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+.lightbox:after {
+  content: '×';
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 3rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* "View More" Button (Removed from here as it's moved to Hero) */
+/* .view-more-button {
+  display: inline-block;
+  margin: 40px auto 0;
+  padding: 15px 30px;
+  background-color: transparent;
+  color: var(--neon-purple);
+  border: 2px solid var(--neon-purple);
+  border-radius: 30px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.view-more-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(187, 134, 252, 0.2);
+  transition: left 0.3s;
+}
+
+.view-more-button:hover {
+  background-color: rgba(187, 134, 252, 0.1);
+  box-shadow: 0 0 15px rgba(187, 134, 252, 0.6);
+}
+
+.view-more-button:hover::before {
+  left: 0;
+} */
+
+/* About the Project Section */
+.about-project {
+  padding: 80px 20px;
+  background-color: var(--light-gray); /* Changed to differentiate from Project Gallery */
+  color: var(--text-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-project h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/* Animated Underline */
+.about-project h2::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+  display: block;
+  margin: 10px auto 0;
+  animation: titleUnderline 1.5s infinite;
+}
+
+.about-project .content {
+  max-width: 1200px; /* Increased max-width for more text space */
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.about-project .text-content {
+  flex: 2; /* Increased flex ratio to make text section wider */
+  background-color: var(--light-gray);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeInLeft 1s ease forwards;
+}
+
+.about-project .text-content p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.about-project .text-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.about-project .text-content ul li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+}
+
+.about-project .text-content ul li::before {
+  content: '✔️';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.about-project .text-content ul li:hover::before {
+  transform: scale(1.2);
+}
+
+.about-project .text-content a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.about-project .text-content a:hover {
+  color: var(--accent-color);
+}
+
+.about-project .image-content {
+  flex: 1;
+  text-align: center;
+  animation: fadeInRight 1s ease forwards;
+}
+
+.about-project .image-content img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease;
+}
+
+.about-project .image-content img:hover {
+  transform: scale(1.05);
+}
+
+/* Fade In Animations */
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Footer Styles */
+footer {
+  padding: 20px 20px;
+  background-color: #000; /* Retained original footer background */
+  color: #FFF; /* Retained original footer text color */
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: #FFD700; /* Inspired by a luxurious gold */
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: #FFC107; /* Slightly lighter gold on hover */
+}
+
+/* Scroll to Top Button */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  z-index: 100;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+#scrollTopBtn:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-5px);
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .project-image {
+    width: calc(33.333% - 20px); /* Adjust if needed */
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .project-gallery {
+    gap: 30px;
+  }
+
+  .project-image {
+    width: calc(50% - 20px); /* Two columns on smaller screens */
+  }
+
+  .about-project .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-project .image-content img {
+    max-width: 300px;
+  }
+
+  .about-project .text-content {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .unique-nav ul {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    padding: 0 20px;
+  }
+
+  .project-image {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .project-gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-project .content {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .unique-nav {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+    background: rgba(0,0,0,0.9);
+    clip-path: none;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+  }
+
+  .unique-nav ul {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .unique-nav li {
+    margin: 10px 0;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero .cta-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .about-project h2 {
+    font-size: 2rem;
+  }
+
+  .about-project .content {
+    font-size: 1rem;
+  }
+
+  .about-project .image-content img {
+    max-width: 100%;
+  }
+}

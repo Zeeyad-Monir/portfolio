@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zeeyad Monir - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="unique-nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <!-- Removed the Bio link as it's now part of Home -->
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#code-projects">Code Projects</a></li>
+            <li><a href="#design-projects">Design Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <!-- Starfield Canvas -->
+        <canvas id="starfield"></canvas>
+
+        <h1 class="name-animation">
+            <span>Z</span><span>E</span><span>E</span><span>Y</span><span>A</span><span>D</span>
+            &nbsp;
+            <span>M</span><span>O</span><span>N</span><span>I</span><span>R</span>
+        </h1>
+        <h2 class="animated-role"><span id="role-animation"></span></h2> <!-- Animated Profession -->
+
+        <!-- Bio Content Integrated Here -->
+        <div class="bio-container">
+            <div class="profile-picture">
+                <img src="your-profile-picture.jpg" alt="Zeeyad Monir">
+            </div>
+            <div class="bio-info">
+                <p>
+                    Hi, I'm <span class="highlight">Zeeyad Monir</span>, a passionate
+                    <span class="highlight">Front-End Developer</span> and
+                    <span class="highlight">UI/UX Designer</span> dedicated to creating engaging user experiences.
+                </p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+                        <img src="icons/linkedin.svg" alt="LinkedIn" class="icon">
+                    </a>
+                    <a href="https://github.com/yourprofile" target="_blank">
+                        <img src="icons/github.svg" alt="GitHub" class="icon">
+                    </a>
+                    <a href="https://dribbble.com/yourprofile" target="_blank">
+                        <img src="icons/dribbble.svg" alt="Dribbble" class="icon">
+                    </a>
+                </div>
+                <div class="bio-cta">
+                    <a href="#contact">Let's Connect</a>
+                </div>
+            </div>
+        </div>
+        <!-- End of Bio Content -->
+
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="skills-container">
+            <h2>Skills</h2>
+            <p class="skills-subtitle">
+                Diverse toolkit of technologies mastered to build innovative solutions and drive digital transformation.
+            </p>
+
+            <!-- Continuous Scroll Wrapper -->
+            <div class="skills-scroll">
+                <div class="skills-track">
+                    <!-- Original Skill Cards -->
+
+                    <!-- Skill Card 1: HTML5 -->
+                    <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
+                        <img src="icons/html5.svg" alt="HTML5 Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">HTML5</p>
+                    </div>
+
+                    <!-- Skill Card 2: CSS3 -->
+                    <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
+                        <img src="icons/css3.svg" alt="CSS3 Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">CSS3</p>
+                    </div>
+
+                    <!-- Skill Card 3: JavaScript -->
+                    <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
+                        <img src="icons/javascript.svg" alt="JavaScript Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">JavaScript</p>
+                    </div>
+
+                    <!-- Skill Card 4: React -->
+                    <div class="skill-card" tabindex="0" aria-label="React - JavaScript library for building user interfaces">
+                        <img src="icons/react.svg" alt="React Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">React</p>
+                    </div>
+
+                    <!-- Skill Card 5: Node.js -->
+                    <div class="skill-card" tabindex="0" aria-label="Node.js - JavaScript runtime for server-side development">
+                        <img src="icons/nodejs.svg" alt="Node.js Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">Node.js</p>
+                    </div>
+
+                    <!-- Skill Card 6: Python -->
+                    <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
+                        <img src="icons/python.svg" alt="Python Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">Python</p>
+                    </div>
+
+                    <!-- Duplicate Skill Cards for Seamless Scrolling -->
+
+                    <!-- Duplicate Skill Card 1: HTML5 -->
+                    <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
+                        <img src="icons/html5.svg" alt="HTML5 Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">HTML5</p>
+                    </div>
+
+                    <!-- Duplicate Skill Card 2: CSS3 -->
+                    <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
+                        <img src="icons/css3.svg" alt="CSS3 Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">CSS3</p>
+                    </div>
+
+                    <!-- Duplicate Skill Card 3: JavaScript -->
+                    <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
+                        <img src="icons/javascript.svg" alt="JavaScript Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">JavaScript</p>
+                    </div>
+
+                    <!-- Duplicate Skill Card 4: React -->
+                    <div class="skill-card" tabindex="0" aria-label="React - JavaScript library for building user interfaces">
+                        <img src="icons/react.svg" alt="React Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">React</p>
+                    </div>
+
+                    <!-- Duplicate Skill Card 5: Node.js -->
+                    <div class="skill-card" tabindex="0" aria-label="Node.js - JavaScript runtime for server-side development">
+                        <img src="icons/nodejs.svg" alt="Node.js Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">Node.js</p>
+                    </div>
+
+                    <!-- Duplicate Skill Card 6: Python -->
+                    <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
+                        <img src="icons/python.svg" alt="Python Icon" class="skill-icon" loading="lazy">
+                        <p class="skill-label">Python</p>
+                    </div>
+
+                    <!-- You can add more skill cards and duplicates as needed for a longer scroll -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Projects Section -->
+    <section id="code-projects">
+        <h2>Code Projects</h2>
+        <div class="carousel-container">
+            <!-- Left Arrow Button -->
+            <button class="carousel-arrow left-arrow" id="experience-left-arrow" aria-label="Previous Project">
+                &#8249;
+            </button>
+
+            <div class="carousel">
+                <!-- Example of a single project card linking to another page -->
+                <a href="projectOne.html" class="experience-card">
+                    <img src="logo1.png" alt="Project 1 Logo">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>PROJECT 1</h3>
+                        <p class="subtitle">Developed responsive web applications.</p>
+                    </div>
+                </a>
+
+                <a href="projectTwo.html" class="experience-card">
+                    <img src="logo2.png" alt="Project 2 Logo">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>PROJECT 2</h3>
+                        <p class="subtitle">Implemented user authentication systems.</p>
+                    </div>
+                </a>
+
+                <a href="projectThree.html" class="experience-card">
+                    <img src="logo3.png" alt="Project 3 Logo">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>PROJECT 3</h3>
+                        <p class="subtitle">Implemented user authentication systems.</p>
+                    </div>
+                </a>
+
+                <a href="projectFour.html" class="experience-card">
+                    <img src="logo4.png" alt="Project 4 Logo">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>PROJECT 4</h3>
+                        <p class="subtitle">Implemented user authentication systems.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right Arrow Button -->
+            <button class="carousel-arrow right-arrow" id="experience-right-arrow" aria-label="Next Project">
+                &#8250;
+            </button>
+        </div>
+
+        <div class="pagination-dots">
+            <button class="active"></button>
+            <button class="active"></button>
+            <button class="active"></button>
+            <button></button>
+        </div>
+    </section>
+
+    <!-- Design Projects Section -->
+    <section id="design-projects">
+        <h2>Design Projects</h2>
+        <div class="design-carousel-container">
+            <!-- Left Arrow Button -->
+            <button class="design-carousel-arrow design-left-arrow" id="design-left-arrow" aria-label="Previous Design Project">
+                &#8249;
+            </button>
+
+            <div class="design-carousel">
+                <!-- Experience Cards for Design Projects -->
+                <a href="projectOneDesign.html" class="design-experience-card">
+                    <img src="logo1.png" alt="Company Logo 1">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>DESIGN PROJECT 1</h3>
+                        <p class="subtitle">Creative graphic designs.</p>
+                    </div>
+                </a>
+                <a href="designProject2.html" class="design-experience-card">
+                    <img src="logo2.png" alt="Company Logo 2">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>DESIGN PROJECT 2</h3>
+                        <p class="subtitle">User interface improvements.</p>
+                    </div>
+                </a>
+                <a href="designProject3.html" class="design-experience-card">
+                    <img src="logo3.png" alt="Company Logo 3">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>DESIGN PROJECT 3</h3>
+                        <p class="subtitle">Illustrations and icons.</p>
+                    </div>
+                </a>
+                <a href="designProject4.html" class="design-experience-card">
+                    <img src="logo4.png" alt="Company Logo 4">
+                    <div class="card-content">
+                        <p class="interactive-text">Click to view more</p>
+                        <h3>DESIGN PROJECT 4</h3>
+                        <p class="subtitle">Brand identity creation.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right Arrow Button -->
+            <button class="design-carousel-arrow design-right-arrow" id="design-right-arrow" aria-label="Next Design Project">
+                &#8250;
+            </button>
+        </div>
+        <!-- Navigation Dots for Design Projects -->
+        <div class="design-pagination-dots">
+            <button class="active"></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <form action="your-form-handler.php" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Get in Touch</button>
+        </form>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Zeeyad Monir. All rights reserved.</p>
+      <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
+  </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>

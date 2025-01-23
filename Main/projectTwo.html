@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arduino & Java AC Cooling Fan Project</title>
+    <link rel="stylesheet" href="projectTwo.css">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="unique-nav">
+        <ul>
+            <li><a href="main.html#home">Home</a></li>
+            <!-- <li><a href="main.html#bio">Bio</a></li> -->
+            <li><a href="main.html#skills">Skills</a></li>
+            <li><a href="main.html#code-projects">Code Projects</a></li>
+            <li><a href="main.html#design-projects">Design Projects</a></li>
+            <li><a href="main.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Arduino & Java AC Cooling Fan</h1>
+            <p>Smart cooling solution with automated and manual controls.</p>
+            <!-- Updated the Explore button to link to your YouTube video -->
+            <a href="https://www.youtube.com/watch?v=C3Ya00PuLRk&ab_channel=ZeeyadMonir" class="cta-button" target="_blank">Explore the Project</a>
+        </div>
+        <!-- "View All Projects" Button moved to Hero Section -->
+        <a href="main.html#code-projects" class="view-all-button">View All Projects</a>
+    </section>
+
+    <!-- Project Showcase Section -->
+    <section class="project-showcase" id="project-showcase">
+        <h2>Project Gallery</h2>
+        <div class="project-gallery">
+            <div class="project-image">
+                <img src="coolingfan-image1.png" alt="Automatic Mode Functionality" loading="lazy">
+                <div class="project-caption">Automatic Mode Functionality</div>
+            </div>
+            <div class="project-image">
+                <img src="coolingfan-image2.png" alt="Manual Control Interface" loading="lazy">
+                <div class="project-caption">Manual Control Interface</div>
+            </div>
+            <div class="project-image">
+                <img src="coolingfan-image3.png" alt="Sensor Integration" loading="lazy">
+                <div class="project-caption">Sensor Integration</div>
+            </div>
+            <div class="project-image">
+                <img src="coolingfan-image4.png" alt="Water Cooling Mechanism" loading="lazy">
+                <div class="project-caption">Water Cooling Mechanism</div>
+            </div>
+            <div class="project-image">
+                <img src="coolingfan-image5.png" alt="User Alert System" loading="lazy">
+                <div class="project-caption">User Alert System</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Container -->
+    <div class="lightbox" id="lightbox">
+        <img src="" alt="Enlarged Image">
+    </div>
+
+    <!-- About the Project Section -->
+    <section class="about-project" id="about-project">
+        <h2>About the Project</h2>
+        <div class="content">
+            <div class="text-content">
+                <p>
+                    The Arduino and Java-based AC Cooling Fan project is designed to offer an intelligent cooling solution tailored to user presence and environmental conditions. By integrating temperature, distance, and water level sensors, the system dynamically adjusts the cooling intensity to ensure comfort while optimizing energy usage.
+                </p>
+                <p><strong>Key Highlights:</strong></p>
+                <ul>
+                    <li>Three-sensor integration for comprehensive environmental monitoring</li>
+                    <li>Automatic mode adjusts fan speed based on user proximity</li>
+                    <li>Manual mode provides direct control over fan speeds</li>
+                    <li>Water cooling system enhances air cooling efficiency</li>
+                    <li>Alert system notifies users when water maintenance is required</li>
+                    <li>Developed using Arduino for hardware control and Java for user interface</li>
+                </ul>
+                <p>
+                    For more detailed information, check out the <a href="https://github.com/yourusername/ac-cooling-fan" target="_blank">GitHub repository</a>.
+                </p>
+            </div>
+            <div class="image-content">
+                <!-- Embedded YouTube Video -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/C3Ya00PuLRk" title="Arduino & Java AC Cooling Fan Project" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+
+    <!-- JavaScript for Scroll to Top Button and Lightbox -->
+    <script>
+        // Scroll to Top Button Functionality
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        };
+
+        scrollTopBtn.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // Lightbox Functionality
+        const projectImages = document.querySelectorAll('.project-image img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+
+        projectImages.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        // Optional: Close lightbox with Esc key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
