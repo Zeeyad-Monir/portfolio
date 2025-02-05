@@ -251,10 +251,6 @@ body {
   transition: transform 0.3s;
 }
 
-/* .bio-container:hover {
-  transform: scale(1.02);
-} */
-
 /* Remove decorative elements from bio-container */
 .bio-container::before,
 .bio-container::after {
@@ -268,11 +264,15 @@ body {
 }
 
 .profile-picture img {
-  border-radius: 50%;
-  border: 5px solid rgba(204, 204, 204, 0.2); /* Light border */
-  width: 200px;
-  height: 200px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Light shadow for minimalist look */
+  margin-left: 50px;
+  border-radius: 20%;
+  border: 5px solid rgba(204, 204, 204, 0.2);
+  width: 175px; /* Set a max width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures image fills the container */
+  max-width: 100%; /* Ensures responsiveness */
+  display: block;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .bio-info {
@@ -328,10 +328,12 @@ body {
 }
 
 .social-links a .icon {
+  margin-top: 5px;
   margin-right: 8px;
   transition: transform 0.3s;
+  width: 35px; /* Adjust icon size */
+  height: 35px; /* Adjust icon size */
 }
-
 .social-links a:hover .icon {
   transform: rotate(360deg);
 }
@@ -395,6 +397,7 @@ body {
   animation: scroll 40s linear infinite; /* Slowed down from 20s to 40s */
 }
 
+/* Skill Card */
 .skill-card {
   flex: 0 0 auto;
   width: 150px;
@@ -405,32 +408,27 @@ body {
   text-align: center;
   transition: transform 0.3s ease-in-out;
   user-select: none; /* Prevent text selection */
+  /* Center contents using flexbox */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.skill-card:last-child {
-  margin-right: 0;
-}
-
-.skill-card:hover {
-  transform: scale(1.05);
-}
-
-.skill-card:focus {
-  outline: 3px solid var(--highlight-primary); /* Dark Gold focus indicator */
-  outline-offset: 2px;
-}
-
+/* Skill Icon */
 .skill-icon {
-  width: 50px;
-  height: 50px;
-  margin-top: 1rem;
+  width: 70px;
+  height: 70px;
+  /* Remove extra top margin and add a small bottom margin */
+  margin: 0 0 1rem 0;
 }
 
+/* Skill Label */
 .skill-label {
   font-size: 1rem;
   font-weight: 600;
   color: var(--base-text); /* Cream */
-  margin-top: 0.5rem;
+  margin: 0;
 }
 
 /* Keyframes for Continuous Scroll */
@@ -498,10 +496,6 @@ body {
   justify-content: center;
   overflow: visible; /* Allow overflow for expanded cards */
 }
-
-/* =====================
-   Updated Arrow Buttons Styling
-   ===================== */
 
 /* Arrow Buttons for Code Projects Carousel */
 .carousel-arrow {
@@ -575,7 +569,7 @@ body {
   right: 10px; /* Adjust spacing from the right edge */
 }
 
-/* Optional: Enhance Accessibility with Focus Styles */
+/* Enhance Accessibility with Focus Styles */
 .carousel-arrow:focus,
 .design-carousel-arrow:focus {
   outline: 2px solid var(--highlight-primary); /* Dark Gold outline for focus */
@@ -1141,7 +1135,6 @@ section h2::after {
 
   .unique-nav ul {
     justify-content: space-between; /* Ensure even distribution */
-    /* overflow-x: auto; Remove horizontal scrolling */
   }
 
   .unique-nav li {
@@ -1226,7 +1219,7 @@ img {
   height: auto;
 }
 
-/* Touch and Interaction Responsiveness dog */
+/* Touch and Interaction Responsiveness */
 .unique-nav a {
   padding: 15px;
 }
