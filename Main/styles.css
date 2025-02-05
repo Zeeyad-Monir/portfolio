@@ -497,17 +497,17 @@ body {
   overflow: visible; /* Allow overflow for expanded cards */
 }
 
-/* Arrow Buttons for Code Projects Carousel */
+/* Updated Arrow Buttons for Code Projects Carousel */
 .carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(to right, rgba(51, 51, 51, 0.5) 50%, rgba(255, 255, 255, 0));
-  border: none;
-  color: var(--base-bg); /* Cream/White arrow color */
+  background-color: var(--highlight-primary); /* More visible background */
+  color: var(--base-text); /* Cream text for contrast */
   font-size: 2rem;
   padding: 10px;
   cursor: pointer;
+  border: none;
   border-radius: 8px; /* Rounded edges for the square background */
   z-index: 5;
   transition: background 0.3s, transform 0.3s;
@@ -519,31 +519,31 @@ body {
 }
 
 .carousel-arrow:hover {
-  background: linear-gradient(to right, rgba(51, 51, 51, 0.8) 50%, rgba(255, 255, 255, 0.2));
-  transform: translateY(-50%) scale(1.1);
+  background-color: var(--highlight-secondary);
 }
 
 /* Positioning the Left Arrow */
 .left-arrow {
-  margin-left: -40px; /* Adjust spacing from the left edge */
+  /* Instead of using margin-left, we position it directly */
+  left: 10px;
 }
 
 /* Positioning the Right Arrow */
 .right-arrow {
-  right: 80px; /* Adjust spacing from the right edge */
+  right: 10px;
 }
 
-/* Arrow Buttons for Design Projects Carousel */
+/* Updated Arrow Buttons for Design Projects Carousel */
 .design-carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(to right, rgba(51, 51, 51, 0.5) 50%, rgba(255, 255, 255, 0));
-  border: none;
-  color: var(--base-bg); /* Cream/White arrow color */
+  background-color: var(--highlight-primary); /* More visible background */
+  color: var(--base-text); /* Cream text for contrast */
   font-size: 2rem;
   padding: 10px;
   cursor: pointer;
+  border: none;
   border-radius: 8px; /* Rounded edges for the square background */
   z-index: 5;
   transition: background 0.3s, transform 0.3s;
@@ -555,18 +555,17 @@ body {
 }
 
 .design-carousel-arrow:hover {
-  background: linear-gradient(to right, rgba(51, 51, 51, 0.8) 50%, rgba(255, 255, 255, 0.2));
-  transform: translateY(-50%) scale(1.1);
+  background-color: var(--highlight-secondary);
 }
 
 /* Positioning the Left Arrow for Design Carousel */
 .design-left-arrow {
-  left: 10px; /* Adjust spacing from the left edge */
+  left: 10px;
 }
 
 /* Positioning the Right Arrow for Design Carousel */
 .design-right-arrow {
-  right: 10px; /* Adjust spacing from the right edge */
+  right: 10px;
 }
 
 /* Enhance Accessibility with Focus Styles */
@@ -1115,56 +1114,23 @@ section h2::after {
     height: 360px;
   }
 
-  .carousel .experience-card.prev,
-  .carousel .experience-card.next {
-    transform: translateX(calc(-50% - 180px)) translateZ(-80px) scale(0.95) rotateY(15deg);
+  .carousel-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+  }
+  
+  /* Reposition carousel arrows on mobile */
+  .left-arrow {
+    left: 5px;
+  }
+  .right-arrow {
+    right: 5px;
   }
 
-  .carousel .experience-card.next {
-    transform: translateX(calc(-50% + 180px)) translateZ(-80px) scale(0.95) rotateY(-15deg);
-  }
-
-  .carousel .experience-card.prev2,
-  .carousel .experience-card.next2 {
-    transform: translateX(calc(-50% - 360px)) translateZ(-160px) scale(0.9) rotateY(30deg);
-  }
-
-  .carousel .experience-card.next2 {
-    transform: translateX(calc(-50% + 360px)) translateZ(-160px) scale(0.9) rotateY(-30deg);
-  }
-
-  .unique-nav ul {
-    justify-content: space-between; /* Ensure even distribution */
-  }
-
-  .unique-nav li {
-    margin: 0 8px; /* Further reduced margin */
-    flex: 1; /* Allow items to flex */
-  }
-
-  .unique-nav a {
-    font-size: 14px; /* Further reduced font size */
-    padding: 6px 0; /* Further reduced padding */
-  }
-
-  .name-animation {
-    font-size: 36px;
-  }
-
-  .animated-role {
-    font-size: 24px;
-  }
-
-  .skill-item,
-  .project-card,
-  .experience-card,
   .design-experience-card {
-    width: 100%;
-  }
-
-  #contact form {
-    width: 100%;
-    padding: 0 20px;
+    width: 200px;
+    height: 320px;
   }
 }
 
