@@ -102,6 +102,11 @@ function typeRole() {
 
 document.addEventListener('DOMContentLoaded', () => typeRole());
 
+
+
+
+
+
 // =====================
 // Starfield Animation (Full-Page Background)
 // =====================

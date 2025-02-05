@@ -457,8 +457,8 @@ section {
   background-color: var(--highlight-secondary);
 }
 
-.left-arrow { left: 10px; }
-.right-arrow { right: 10px; }
+.left-arrow { left: -20px; }
+.right-arrow { right: 70px; }
 
 .carousel-arrow:focus {
   outline: 2px solid var(--highlight-primary);
@@ -760,4 +760,23 @@ section h2::after {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* New Styles for Scroll-Triggered Name Animation */
+.name-container {
+  font-size: 90px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: var(--base-text);
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 15px;
+  /* Starting position as in the original animation */
+  transform: translateY(-100px);
+}
+
+.name-container span {
+  display: inline-block;
+  position: relative; /* Allows individual positioning for animation */
+  transition: transform 0.8s ease, opacity 0.8s ease;
 }

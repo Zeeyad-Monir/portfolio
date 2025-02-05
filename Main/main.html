@@ -1,310 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Zeeyad Monir - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Zeeyad Monir - Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Starfield Canvas as full-page background -->
+  <canvas id="starfield"></canvas>
 
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
 
-    <!-- Navigation Bar -->
-    <nav class="unique-nav">
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <!-- Removed the Bio link as it's now part of Home -->
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#code-projects">Projects</a></li>
-            <!-- <li><a href="#design-projects">Design Projects</a></li> -->
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- Navigation Bar -->
+  <nav class="unique-nav">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <!-- Removed the Bio link as it's now part of Home -->
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#code-projects">Projects</a></li>
+      <!-- <li><a href="#design-projects">Design Projects</a></li> -->
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <!-- Home Section -->
-    <section id="home">
-        <!-- Starfield Canvas -->
-        <canvas id="starfield"></canvas>
+  <!-- Home Section -->
+  <section id="home">
+    <div id="name" class="name-container">
+        <span>Z</span><span>E</span><span>E</span><span>Y</span><span>A</span><span>D</span>
+        <span>M</span><span>O</span><span>N</span><span>I</span><span>R</span>
+    </div>
+    <h2 class="animated-role"><span id="role-animation"></span></h2>
 
-        <h1 class="name-animation">
-            <span>Z</span><span>E</span><span>E</span><span>Y</span><span>A</span><span>D</span>
-            &nbsp;
-            <span>M</span><span>O</span><span>N</span><span>I</span><span>R</span>
-        </h1>
-        <h2 class="animated-role"><span id="role-animation"></span></h2> <!-- Animated Profession -->
-
-        <!-- Bio Content Integrated Here -->
-        <div class="bio-container">
-            <div class="profile-picture">
-                <img src="../photos/myself.png" alt="Zeeyad Monir">
-            </div>
-            <div class="bio-info">
-                <p>
-                    Hi, I'm <span class="highlight">Zeeyad Monir</span>, a passionate
-                    <span class="highlight">Front-End Developer</span> and
-                    <span class="highlight">UI/UX Designer</span> dedicated to creating engaging user experiences.
-                </p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
-                        <img src="../photos/linkedin.png" alt="LinkedIn" class="icon">
-                    </a>
-                    <a href="https://github.com/yourprofile" target="_blank">
-                        <img src="../photos/github2.png" alt="GitHub" class="icon">
-                    </a>
-                </div>
-                <div class="bio-cta">
-                    <a href="#contact">Let's Connect</a>
-                </div>
-            </div>
+    <!-- Bio Content Integrated Here -->
+    <div class="bio-container">
+      <div class="profile-picture">
+        <img src="../photos/myself.png" alt="Zeeyad Monir">
+      </div>
+      <div class="bio-info">
+        <p>
+          Hi, I'm <span class="highlight">Zeeyad Monir</span>, a passionate
+          <span class="highlight">Front-End Developer</span> and
+          <span class="highlight">UI/UX Designer</span> dedicated to creating engaging user experiences.
+        </p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+            <img src="../photos/linkedin.png" alt="LinkedIn" class="icon">
+          </a>
+          <a href="https://github.com/yourprofile" target="_blank">
+            <img src="../photos/github2.png" alt="GitHub" class="icon">
+          </a>
         </div>
-        <!-- End of Bio Content -->
-
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="skills-container">
-            <h2>Skills</h2>
-            <p class="skills-subtitle">
-                Diverse toolkit of technologies mastered to build innovative solutions and drive digital transformation.
-            </p>
-
-            <!-- Continuous Scroll Wrapper -->
-            <div class="skills-scroll">
-                <div class="skills-track">
-                    <!-- Original Skill Cards -->
-
-                    <!-- Skill Card 1: HTML5 -->
-                    <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
-                        <img src="../photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">HTML5</p>
-                    </div>
-
-                    <!-- Skill Card 2: CSS3 -->
-                    <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
-                        <img src="../photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">                        <p class="skill-label">CSS3</p>
-                    </div>
-
-                    <!-- Skill Card 3: JavaScript -->
-                    <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
-                        <img src="../photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">JavaScript</p>
-                    </div>
-
-                     <!--  Skill Card 4: Figma -->
-                     <div class="skill-card" tabindex="0" aria-label="Figma - Figma for Ui Development and interfaces">
-                        <img src="../photos/figma.png" alt="figma Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Figma</p>
-                    </div>
-
-                 <!--  Skill Card 5: Unity -->
-                 <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
-                    <img src="../photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
-                    <p class="skill-label">Unity</p>
-                </div>
-
-                    <!-- Skill Card 6: Python -->
-                    <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
-                        <img src="../photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Python</p>
-                    </div>
-
-                    <!-- Skill Card 7: Final Cut Pro -->
-                    <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
-                        <img src="../photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Final Cut Pro</p>
-                    </div>
-
-                     <!-- Skill Card 8: Photoshop -->
-                     <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
-                        <img src="../photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Photoshop</p>
-                    </div>
-
-                    <!-- Duplicate Skill Cards for Seamless Scrolling -->
-
-                    <!-- Duplicate Skill Card 1: HTML5 -->
-                    <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
-                        <img src="../photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">HTML5</p>
-                    </div>
-
-                    <!-- Duplicate Skill Card 2: CSS3 -->
-                    <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
-                        <img src="../photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">                        <p class="skill-label">CSS3</p>
-                        <p class="skill-label"></p>
-                    </div>
-
-                    <!-- Duplicate Skill Card 3: JavaScript -->
-                    <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
-                        <img src="../photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">JavaScript</p>
-                    </div>
-
-                    <!-- Duplicate Skill Card 4: Figma -->
-                    <div class="skill-card" tabindex="0" aria-label="Figma - Figma for Ui Development and interfaces">
-                        <img src="../photos/figma.png" alt="figma Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Figma</p>
-                    </div>
-
-                    <!-- Duplicate Skill Card 5: Unity -->
-                    <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
-                        <img src="../photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Unity</p>
-                    </div>
-
-                    <!-- Duplicate Skill Card 6: Python -->
-                    <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
-                        <img src="../photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Python</p>
-                    </div>
-
-                    <!-- Duplicate Skill Card 7: Final Cut Pro -->
-                    <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
-                        <img src="../photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Final Cut Pro</p>
-                    </div>
-
-                    <!-- Duplicate Skill Card 8: Photoshop -->
-                    <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
-                        <img src="../photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Photoshop</p>
-                    </div>
-
-                     <!-- Duplicate 2 Skill Card 1: HTML5 -->
-                     <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
-                        <img src="../photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">HTML5</p>
-                    </div>
-
-                    <!-- Duplicate 2 Skill Card 2: CSS3 -->
-                    <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
-                        <img src="../photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">                        <p class="skill-label">CSS3</p>
-                    </div>
-
-                    <!-- Duplicate 2 Skill Card 3: JavaScript -->
-                    <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
-                        <img src="../photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">JavaScript</p>
-                    </div>
-
-                     <!-- Duplicate 2 Skill Card 4: Figma -->
-                     <div class="skill-card" tabindex="0" aria-label="Figma - Figma for Ui Development and interfaces">
-                        <img src="../photos/figma.png" alt="figma Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Figma</p>
-                    </div>
-
-                  <!-- Duplicate 2 Skill Card 5: Unity -->
-                  <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
-                    <img src="../photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
-                    <p class="skill-label">Unity</p>
-                </div>
-
-                    <!-- Duplicate 2 Skill Card 6: Python -->
-                    <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
-                        <img src="../photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Python</p>
-                    </div>
-
-                    <!-- Duplicate 2 Skill Card 7: Final Cut Pro -->
-                    <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
-                        <img src="../photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Final Cut Pro</p>
-                    </div>
-
-                     <!-- Duplicate 2 Skill Card 8: Photoshop -->
-                     <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
-                        <img src="../photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
-                        <p class="skill-label">Photoshop</p>
-                    </div>
-
-                    <!-- You can add more skill cards and duplicates as needed for a longer scroll -->
-                </div>
-            </div>
+        <div class="bio-cta">
+          <a href="#contact">Let's Connect</a>
         </div>
-    </section>
+      </div>
+    </div>
+    <!-- End of Bio Content -->
+  </section>
 
-    <!-- Code Projects Section -->
-    <section id="code-projects">
-        <h2>Projects</h2>
-        <div class="carousel-container">
-            <!-- Left Arrow Button -->
-            <button class="carousel-arrow left-arrow" id="experience-left-arrow" aria-label="Previous Project">
-                &#8249;
-            </button>
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="skills-container">
+      <h2>Skills</h2>
+      <p class="skills-subtitle">
+        Diverse toolkit of technologies mastered to build innovative solutions and drive digital transformation.
+      </p>
 
-            <div class="carousel">
-                <!-- Example of a single project card linking to another page -->
-                <a href="projectOne.html" class="experience-card">
-                    <img src="logo1.png" alt="Project 1 Logo">
-                    <div class="card-content">
-                        <p class="interactive-text">Click to view more</p>
-                        <h3>PROJECT 1</h3>
-                        <p class="subtitle">Developed responsive web applications.</p>
-                    </div>
-                </a>
+      <!-- Continuous Scroll Wrapper -->
+      <div class="skills-scroll">
+        <div class="skills-track">
+          <!-- Skill Cards (include duplicates as needed for continuous scroll) -->
+          <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
+            <img src="../photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">HTML5</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
+            <img src="../photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">CSS3</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
+            <img src="../photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">JavaScript</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Figma - Figma for Ui Development and interfaces">
+            <img src="../photos/figma.png" alt="figma Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Figma</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
+            <img src="../photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Unity</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
+            <img src="../photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Python</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
+            <img src="../photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Final Cut Pro</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
+            <img src="../photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Photoshop</p>
+          </div>
 
-                <a href="projectTwo.html" class="experience-card">
-                    <img src="logo2.png" alt="Project 2 Logo">
-                    <div class="card-content">
-                        <p class="interactive-text">Click to view more</p>
-                        <h3>PROJECT 2</h3>
-                        <p class="subtitle">Implemented user authentication systems.</p>
-                    </div>
-                </a>
-
-                <a href="projectThree.html" class="experience-card">
-                    <img src="logo3.png" alt="Project 3 Logo">
-                    <div class="card-content">
-                        <p class="interactive-text">Click to view more</p>
-                        <h3>PROJECT 3</h3>
-                        <p class="subtitle">Implemented user authentication systems.</p>
-                    </div>
-                </a>
-
-                <a href="projectFour.html" class="experience-card">
-                    <img src="logo4.png" alt="Project 4 Logo">
-                    <div class="card-content">
-                        <p class="interactive-text">Click to view more</p>
-                        <h3>PROJECT 4</h3>
-                        <p class="subtitle">Implemented user authentication systems.</p>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Right Arrow Button -->
-            <button class="carousel-arrow right-arrow" id="experience-right-arrow" aria-label="Next Project">
-                &#8250;
-            </button>
+           <!-- Skill Cards (include duplicates as needed for continuous scroll) -->
+           <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
+            <img src="../photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">HTML5</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
+            <img src="../photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">CSS3</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
+            <img src="../photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">JavaScript</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Figma - Figma for Ui Development and interfaces">
+            <img src="../photos/figma.png" alt="figma Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Figma</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
+            <img src="../photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Unity</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
+            <img src="../photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Python</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
+            <img src="../photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Final Cut Pro</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
+            <img src="../photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Photoshop</p>
+          </div>
+          
+           <!-- Skill Cards (include duplicates as needed for continuous scroll) -->
+           <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
+            <img src="../photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">HTML5</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
+            <img src="../photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">CSS3</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
+            <img src="../photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">JavaScript</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Figma - Figma for Ui Development and interfaces">
+            <img src="../photos/figma.png" alt="figma Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Figma</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
+            <img src="../photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Unity</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
+            <img src="../photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Python</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
+            <img src="../photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Final Cut Pro</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
+            <img src="../photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Photoshop</p>
+          </div>
+          
+           <!-- Skill Cards (include duplicates as needed for continuous scroll) -->
+           <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
+            <img src="../photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">HTML5</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
+            <img src="../photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">CSS3</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
+            <img src="../photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">JavaScript</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Figma - Figma for Ui Development and interfaces">
+            <img src="../photos/figma.png" alt="figma Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Figma</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
+            <img src="../photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Unity</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
+            <img src="../photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Python</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
+            <img src="../photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Final Cut Pro</p>
+          </div>
+          <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
+            <img src="../photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
+            <p class="skill-label">Photoshop</p>
+          </div>
+          <!-- (Include duplicate cards as in your original code for seamless scrolling) -->
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="pagination-dots">
-            <button class="active"></button>
-            <button class="active"></button>
-            <button class="active"></button>
-            <button></button>
-        </div>
-    </section>
-        
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact</h2>
-        <form action="your-form-handler.php" method="post">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Get in Touch</button>
-        </form>
-    </section>
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2024 Zeeyad Monir. All rights reserved.</p>
-      <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
+  <!-- Code Projects Section -->
+  <section id="code-projects">
+    <h2>Projects</h2>
+    <div class="carousel-container">
+      <!-- Left Arrow Button -->
+      <button class="carousel-arrow left-arrow" id="experience-left-arrow" aria-label="Previous Project">
+        &#8249;
+      </button>
+
+      <div class="carousel">
+        <!-- Example project cards -->
+        <a href="projectOne.html" class="experience-card">
+          <img src="logo1.png" alt="Project 1 Logo">
+          <div class="card-content">
+            <p class="interactive-text">Click to view more</p>
+            <h3>PROJECT 1</h3>
+            <p class="subtitle">Developed responsive web applications.</p>
+          </div>
+        </a>
+
+        <a href="projectTwo.html" class="experience-card">
+          <img src="logo2.png" alt="Project 2 Logo">
+          <div class="card-content">
+            <p class="interactive-text">Click to view more</p>
+            <h3>PROJECT 2</h3>
+            <p class="subtitle">Implemented user authentication systems.</p>
+          </div>
+        </a>
+
+        <a href="projectThree.html" class="experience-card">
+          <img src="logo3.png" alt="Project 3 Logo">
+          <div class="card-content">
+            <p class="interactive-text">Click to view more</p>
+            <h3>PROJECT 3</h3>
+            <p class="subtitle">Implemented user authentication systems.</p>
+          </div>
+        </a>
+
+        <a href="projectFour.html" class="experience-card">
+          <img src="logo4.png" alt="Project 4 Logo">
+          <div class="card-content">
+            <p class="interactive-text">Click to view more</p>
+            <h3>PROJECT 4</h3>
+            <p class="subtitle">Implemented user authentication systems.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Right Arrow Button -->
+      <button class="carousel-arrow right-arrow" id="experience-right-arrow" aria-label="Next Project">
+        &#8250;
+      </button>
+    </div>
+
+    <div class="pagination-dots">
+      <button class="active"></button>
+      <button class="active"></button>
+      <button class="active"></button>
+      <button></button>
+    </div>
+  </section>
+      
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <form action="your-form-handler.php" method="post">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Get in Touch</button>
+    </form>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Zeeyad Monir. All rights reserved.</p>
+    <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
   </footer>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
-
+  <!-- JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
