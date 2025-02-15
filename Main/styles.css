@@ -28,7 +28,6 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--base-text);
-  /* Remove background-color so that the canvas below shows through */
   background: transparent;
   overflow-x: hidden;
   cursor: none;
@@ -58,7 +57,6 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  /* Ensure pointer events do not interfere */
   pointer-events: none;
 }
 
@@ -73,7 +71,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .unique-nav ul {
@@ -142,7 +140,6 @@ section {
 #home {
   position: relative;
   min-height: 100vh;
-  /* No background color so starfield is visible */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -151,7 +148,7 @@ section {
   padding-top: 100px;
 }
 
-.name-animation {
+.name-container {
   font-size: 90px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
@@ -162,13 +159,13 @@ section {
   transform: translateY(-100px);
 }
 
-.name-animation span {
+.name-container span {
   display: inline-block;
-  cursor: pointer;
-  transition: color 0.3s;
+  position: relative;
+  transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
-.name-animation span:hover {
+.name-container span:hover {
   animation: bounce 1.5s;
   color: var(--highlight-primary);
 }
@@ -190,6 +187,7 @@ section {
   min-height: 2rem;
   line-height: 2rem;
   transform: translateY(-80px);
+  position: relative;
 }
 
 .animated-role::after {
@@ -217,10 +215,10 @@ section {
   align-items: center;
   max-width: 1000px;
   margin-bottom: 45px;
-  background-color: rgba(204,204,204,0.1);
+  background-color: rgba(204, 204, 204, 0.1);
   border-radius: 20px;
   padding: 30px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .profile-picture {
@@ -232,12 +230,12 @@ section {
 .profile-picture img {
   margin-left: 50px;
   border-radius: 20%;
-  border: 5px solid rgba(204,204,204,0.2);
+  border: 5px solid rgba(204, 204, 204, 0.2);
   width: 175px;
   height: auto;
   object-fit: cover;
   display: block;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .bio-info {
@@ -321,7 +319,7 @@ section {
 .bio-cta a:hover {
   background: var(--highlight-secondary);
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(218,165,32,0.5);
+  box-shadow: 0 10px 20px rgba(218, 165, 32, 0.5);
 }
 
 /* Skills Section */
@@ -349,8 +347,7 @@ section {
 
 .skills-track {
   display: flex;
-  width: calc(200%);
-  animation: scroll 40s linear infinite;
+  will-change: transform;
 }
 
 .skill-card {
@@ -378,12 +375,6 @@ section {
 .skill-label {
   font-size: 1rem;
   font-weight: 600;
-}
-
-/* Continuous Scroll Keyframes */
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 /* Code Projects Section */
@@ -470,7 +461,7 @@ section {
   height: 430px;
   border-radius: 15px;
   background-color: #333333;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 20px;
   left: 50%;
@@ -535,7 +526,7 @@ section {
 
 .experience-card:hover {
   transform: translateX(-50%) translateZ(0) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Navigation Dots */
@@ -615,7 +606,7 @@ section {
 
 #contact input:focus,
 #contact textarea:focus {
-  box-shadow: 0 0 10px rgba(184,134,11,0.5);
+  box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
   transform: translateY(-5px);
   outline: none;
 }
@@ -736,7 +727,7 @@ section h2::after {
     font-size: 12px;
     padding: 4px 0;
   }
-  .name-animation {
+  .name-container {
     font-size: 28px;
   }
   .animated-role {
@@ -760,23 +751,4 @@ section h2::after {
 img {
   max-width: 100%;
   height: auto;
-}
-
-/* New Styles for Scroll-Triggered Name Animation */
-.name-container {
-  font-size: 90px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  color: var(--base-text);
-  text-align: center;
-  margin-top: 60px;
-  margin-bottom: 15px;
-  /* Starting position as in the original animation */
-  transform: translateY(-100px);
-}
-
-.name-container span {
-  display: inline-block;
-  position: relative; /* Allows individual positioning for animation */
-  transition: transform 0.8s ease, opacity 0.8s ease;
 }

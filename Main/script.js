@@ -1,18 +1,11 @@
-// =====================
-// Cursor Tracking Effect
-// =====================
-const cursor = document.createElement('div');
-cursor.classList.add('cursor');
-document.body.appendChild(cursor);
-
+/* Custom Cursor Tracking Effect */
+const cursor = document.querySelector('.cursor');
 document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
 
-// =====================
-// Experience Projects Carousel Functionality
-// =====================
+/* Experience Projects Carousel Functionality */
 document.addEventListener('DOMContentLoaded', function () {
   const experienceCarousel = document.querySelector('.carousel');
   if (experienceCarousel) {
@@ -71,9 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// =====================
-// Home Section Typing Effect
-// =====================
+/* Home Section Typing Effect */
 const roles = ['Front End Developer', 'UI/UX Designer'];
 let roleIndex = 0;
 let charIndex = 0;
@@ -102,14 +93,7 @@ function typeRole() {
 
 document.addEventListener('DOMContentLoaded', () => typeRole());
 
-
-
-
-
-
-// =====================
-// Starfield Animation (Full-Page Background)
-// =====================
+/* Starfield Animation (Full-Page Background) */
 function initStarfield() {
   const canvas = document.getElementById('starfield');
   const ctx = canvas.getContext('2d');
@@ -138,21 +122,18 @@ function initStarfield() {
   createStars();
 
   function animate() {
-    // Instead of clearing, fill the canvas with a black rectangle
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, w, h);
-    
+
     ctx.fillStyle = '#FFFFFF';
-    for (let i = 0; i < stars.length; i++) {
-      let s = stars[i];
+    for (let s of stars) {
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
       ctx.fill();
-      
+
       s.x += s.vx;
       s.y += s.vy;
-      
-      // Wrap around edges
+
       if (s.x < 0) s.x = w;
       if (s.x > w) s.x = 0;
       if (s.y < 0) s.y = h;
@@ -165,4 +146,21 @@ function initStarfield() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initStarfield();
+});
+
+/* Skills Section Infinite Scroll using JS */
+document.addEventListener('DOMContentLoaded', function() {
+  const skillsTrack = document.querySelector('.skills-track');
+  // Duplicate the content for seamless scrolling
+  skillsTrack.innerHTML += skillsTrack.innerHTML;
+  let offset = 0;
+  function animateSkills() {
+    offset += 0.5; // Adjust speed as needed (pixels per frame)
+    if (offset >= skillsTrack.scrollWidth / 2) {
+      offset = 0;
+    }
+    skillsTrack.style.transform = `translateX(-${offset}px)`;
+    requestAnimationFrame(animateSkills);
+  }
+  animateSkills();
 });
