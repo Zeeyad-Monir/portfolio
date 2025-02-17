@@ -1,149 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Project 1 - E-commerce Webpage</title>
-    <link rel="stylesheet" href="projectOne.css">
-    <!-- Include Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Project 1 - SznLuv: Seasonal Date Planning App</title>
+  <link rel="stylesheet" href="projectOne.css">
+  <!-- Include Font Awesome for icons (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Include Lottie Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="unique-nav">
-        <ul>
-            <li><a href="main.html#home">Home</a></li>
-            <!-- <li><a href="main.html#bio">Bio</a></li> -->
-            <li><a href="main.html#skills">Skills</a></li>
-            <li><a href="main.html#code-projects">Code Projects</a></li>
-            <li><a href="main.html#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- Navigation -->
+  <nav class="unique-nav">
+      <ul>
+          <li><a href="main.html#home">Home</a></li>
+          <li><a href="main.html#skills">Skills</a></li>
+          <li><a href="main.html#code-projects">Code Projects</a></li>
+          <li><a href="main.html#contact">Contact</a></li>
+      </ul>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>Welcome to My E-commerce Project</h1>
-            <p>An innovative platform that redefines online shopping.</p>
-            <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/Project2_AZ%20finalversion/" class="cta-button" target="_blank">Explore the Project</a>
-        </div>
-        <!-- "View All Projects" Button moved to Hero Section -->
-        <a href="main.html#code-projects" class="view-all-button">View All Projects</a>
-    </section>
-
-    <!-- Project Showcase Section -->
-    <section class="project-showcase" id="project-showcase">
-        <h2>Project Gallery</h2>
-        <div class="project-gallery">
-            <div class="project-image">
-                <img src="project1-image1.png" alt="Responsive Design" loading="lazy">
-                <div class="project-caption">Responsive Design</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image2.png" alt="Secure Authentication" loading="lazy">
-                <div class="project-caption">Secure Authentication</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image3.png" alt="Real-time Tracking" loading="lazy">
-                <div class="project-caption">Real-time Tracking</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image4.png" alt="Payment Integration" loading="lazy">
-                <div class="project-caption">Payment Integration</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image5.png" alt="Admin Dashboard" loading="lazy">
-                <div class="project-caption">Admin Dashboard</div>
-            </div>
-            <!-- Add more project-image divs as needed -->
-        </div>
-        <!-- "View All Projects" button removed from here as it's moved to Hero -->
-    </section>
-
-    <!-- Lightbox Container -->
-    <div class="lightbox" id="lightbox">
-        <img src="" alt="Enlarged Image">
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <!-- Lottie Background Container -->
+    <div id="lottie-container">
+      <!-- Lottie player or animation can go here -->
     </div>
 
-    <!-- About the Project Section -->
-    <section class="about-project" id="about-project">
-        <h2>About the Project</h2>
-        <div class="content">
-            <div class="text-content">
-                <p>
-                    This e-commerce platform was developed to provide users with a seamless online shopping experience. It features a modern and responsive design, ensuring accessibility across all devices. My involvement included designing the user interface, implementing frontend functionalities with HTML, CSS, and JavaScript, and integrating backend services for user authentication and real-time data visualization.
-                </p>
-                <p>
-                    <strong>Key Highlights:</strong>
-                </p>
-                <ul>
-                    <li>Responsive and intuitive user interface</li>
-                    <li>Secure user authentication and authorization</li>
-                    <li>Real-time inventory and order tracking</li>
-                    <li>Integration with payment gateways</li>
-                    <li>Comprehensive admin dashboard for managing products and orders</li>
-                </ul>
-                <p>
-                    For more detailed information, visit the <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/Project2_AZ%20finalversion/" target="_blank">live project page</a> or check out the <a href="https://github.com/yourusername/project1" target="_blank">GitHub repository</a>.
-                </p>
-            </div>
-            <div class="image-content">
-                <img src="about-project-image.png" alt="About Project Illustration" loading="lazy">
-            </div>
+    <!-- Your hero content on top of the Lottie animation -->
+    <div class="hero-content">
+      <h1>SznLuv</h1>
+      <p>A seasonal date-planning app for Vancouver couples, making every outing memorable.</p>
+      <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/Project2_AZ%20finalversion/" 
+         class="cta-button" 
+         target="_blank">
+        Explore the App
+      </a>
+    </div>
+    <a href="main.html#code-projects" class="view-all-button">View All Projects</a>
+  </section>
+
+  <!-- Project Showcase Section -->
+  <section class="project-showcase" id="project-showcase">
+    <h2>Project Gallery</h2>
+    <div class="project-gallery">
+      <!-- Each "project-card" is a new item with overlay -->
+      <div class="project-card">
+        <img src="../photos/homeScreen.png" alt="Seasonal Date Listings" loading="lazy">
+        <div class="overlay">
+          <h3>Seasonal Date Listings</h3>
         </div>
-    </section>
+      </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-        <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
-    </footer>
+      <div class="project-card">
+        <img src="../photos/mapScreen.png" alt="Interactive Maps" loading="lazy">
+        <div class="overlay">
+          <h3>Interactive Maps</h3>
+        </div>
+      </div>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+      <div class="project-card">
+        <img src="../photos/weatherScreen.png" alt="Weather Forecasts" loading="lazy">
+        <div class="overlay">
+          <h3>Weather Forecasts</h3>
+        </div>
+      </div>
 
-    <!-- JavaScript for Scroll to Top Button and Lightbox -->
-    <script>
-        // Scroll to Top Button Functionality
-        const scrollTopBtn = document.getElementById("scrollTopBtn");
+      <div class="project-card">
+        <img src="../photos/favouriteScreen.png" alt="Random Date Generator" loading="lazy">
+        <div class="overlay">
+          <h3>Random Date Generator</h3>
+        </div>
+      </div>
 
-        window.onscroll = function() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                scrollTopBtn.style.display = "block";
-            } else {
-                scrollTopBtn.style.display = "none";
-            }
-        };
+      <div class="project-card">
+        <img src="../photos/seasonalDates2.png" alt="User Authentication" loading="lazy">
+        <div class="overlay">
+          <h3>User Authentication</h3>
+        </div>
+      </div>
 
-        scrollTopBtn.onclick = function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
+      <div class="project-card">
+        <img src="../photos/spinTheWheel.png" alt="Spin-The-Wheel Randomizer" loading="lazy">
+        <div class="overlay">
+          <h3>Spin-The-Wheel Randomizer</h3>
+        </div>
+      </div>
 
-        // Lightbox Functionality
-        const projectImages = document.querySelectorAll('.project-image img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
+      <div class="project-card">
+        <img src="../photos/loginScreen.png" alt="User Login" loading="lazy">
+        <div class="overlay">
+          <h3>User Login</h3>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        projectImages.forEach(img => {
-            img.addEventListener('click', () => {
-                lightbox.style.display = 'flex';
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-            });
-        });
+  <!-- Lightbox Container (Optional) -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Enlarged Image">
+  </div>
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                lightbox.style.display = 'none';
-            }
-        });
+  <!-- About the Project Section -->
+  <section class="about-project" id="about-project">
+    <h2>About SznLuv</h2>
+    <div class="content">
+      <div class="text-content">
+        <p>
+          SznLuv is a seasonal date-planning app designed for Vancouver couples. It curates unique date spots for every season, ensuring your plans match the local vibe and weather.
+        </p>
+        <p><strong>Core Features:</strong></p>
+        <ul>
+          <li><strong>Seasonal Date Listings:</strong> Tailored recommendations for Fall, Winter, Spring, and Summer.</li>
+          <li><strong>Interactive Maps:</strong> Google Maps integration for easy navigation.</li>
+          <li><strong>Weather Forecasts:</strong> 7-day forecasts to help you plan outings effectively.</li>
+          <li><strong>Spin-The-Wheel Randomizer:</strong> Instantly generate a fun date idea.</li>
+          <li><strong>User Authentication & Favorites:</strong> Secure sign-up (Face ID on iOS) with a Favorites system.</li>
+        </ul>
+        <p>
+          <strong>APIs & Technologies:</strong> Google Maps API (planned), OpenWeather API, Firebase Authentication, Firestore, and React Native with Expo.
+        </p>
+        <p>
+          For more details, visit the 
+          <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/Project2_AZ%20finalversion/" target="_blank">
+            live app page
+          </a> 
+          or check out the 
+          <a href="https://github.com/yourusername/sznluv" target="_blank">GitHub repository</a>.
+        </p>
+      </div>
+      <div class="image-content">
+        <img src="about-sznluv.png" alt="SznLuv App Illustration" loading="lazy">
+      </div>
+    </div>
+  </section>
 
-        // Optional: Close lightbox with Esc key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                lightbox.style.display = 'none';
-            }
-        });
-    </script>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Your Name. All rights reserved.</p>
+    <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+
+  <script src="scriptProjects.js"></script>
+  <div class="cursor"></div>
 </body>
 </html>

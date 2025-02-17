@@ -3,9 +3,9 @@
 
 /* Root Variables for Theme Colors */
 :root {
-  --primary-color: hsl(194, 92%, 53%);
+  --primary-color: #6a0dad;
   --secondary-color: #ffffff;
-  --accent-color: #ffffff;
+  --accent-color: #ff6fcf;
   --background-color: #f3f3f3;
   --text-color: #1a1a1a;
   --gold: #FFD700;
@@ -58,7 +58,7 @@ body {
 .unique-nav a {
   position: relative;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #FFFFFF; /* Text color for nav links */
   font-size: 18px;
   font-weight: 500;
   padding: 10px 0;
@@ -72,7 +72,7 @@ body {
   left: 0;
   width: 100%;
   height: 2px;
-  background: var(--gold);
+  background: var(--gold); /* Gold underline */
   transform: scaleX(0);
   transition: transform 0.3s;
 }
@@ -89,7 +89,7 @@ body {
 
 .unique-nav a:hover::before,
 .unique-nav a:hover::after {
-  background: #fff;
+  background: #fff; /* Hover underline color */
   transform: scaleX(1);
 }
 
