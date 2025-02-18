@@ -386,33 +386,9 @@ section {
   100% { transform: translateX(-50%); }
 }
 
-/* Code Projects Section */
-#code-projects {
-  padding: 100px 50px;
-  overflow: hidden;
-}
-
-#code-projects h2 {
-  font-size: 50px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 30px;
-  font-family: 'Helvetica', sans-serif;
-  position: relative;
-}
-
-#code-projects h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  width: 60px;
-  height: 2px;
-  background-color: var(--highlight-primary);
-  transform: translateX(-50%);
-}
-
-/* Carousel Styles */
+/* =======================================
+   Carousel Styles (Unchanged)
+======================================= */
 .carousel-container {
   perspective: 1000px;
   overflow: visible;
@@ -457,19 +433,29 @@ section {
   background-color: var(--highlight-secondary);
 }
 
-.left-arrow { left: -20px; }
-.right-arrow { right: 70px; }
+.left-arrow {
+  left: -20px;
+}
+
+.right-arrow {
+  right: 70px;
+}
 
 .carousel-arrow:focus {
   outline: 2px solid var(--highlight-primary);
   outline-offset: 2px;
 }
 
+/* =======================================
+   Experience Cards
+======================================= */
 .experience-card {
   width: 300px;
   height: 430px;
   border-radius: 15px;
-  background-color: #333333;
+  /* Updated background & text color */
+  background-color: #3a3a3a;
+  color: #f0e6d2;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   position: absolute;
   top: 20px;
@@ -480,11 +466,13 @@ section {
   cursor: pointer;
   margin: 0 35px;
   text-decoration: none;
-  color: inherit;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  /* New default font family */
+  font-family: 'Arial', sans-serif;
 }
 
 .experience-card .card-content {
@@ -498,6 +486,7 @@ section {
   margin-bottom: 140px;
 }
 
+/* Keep this if you still need a default image style for other cards */
 .experience-card img {
   width: 100px;
   height: 100px;
@@ -505,6 +494,9 @@ section {
   display: block;
 }
 
+/* =======================================
+   Carousel 3D Positions (Unchanged)
+======================================= */
 .carousel .experience-card.active {
   opacity: 1;
   transform: translateX(-50%) translateZ(0) scale(1);
@@ -538,7 +530,9 @@ section {
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-/* Navigation Dots */
+/* =======================================
+   Navigation Dots (Unchanged)
+======================================= */
 .pagination-dots {
   display: flex;
   justify-content: center;
@@ -571,6 +565,65 @@ section {
   background-color: var(--highlight-primary);
   opacity: 1;
 }
+
+/* =======================================
+   NEW / ADDITIONAL STYLES FOR SznLuv CARD
+   (Only used if the card has these classes)
+======================================= */
+
+/* Circular illustration at the top */
+.experience-card .sznluv-illustration {
+  display: block;
+  margin: 20px auto 10px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover; /* Prevents distortion if the image isn't a perfect circle */
+}
+
+/* Main title (serif) for "SznLuv" */
+.experience-card .sznluv-title {
+  font-family: 'Georgia', serif; /* or another serif font */
+  font-size: 2rem;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Subtitle (app description) */
+.experience-card .subtitle {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Ensure tech badges stay at the bottom without overlapping */
+.experience-card .tech-badges {
+  position: absolute;
+  bottom: 20px; /* Adjust to give enough space */
+  left: 50%;
+  transform: translateX(-50%); /* Centers the badges */
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to avoid overlap */
+  justify-content: center;
+  gap: 10px; /* Adds spacing between badges */
+  width: 90%; /* Prevents badges from extending beyond the card */
+}
+
+/* Ensure individual badges do not touch */
+.experience-card .tech-badges span {
+  background-color: #797979;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  text-align: center;
+  white-space: nowrap; /* Prevents text from breaking */
+}
+
+
+
+
 
 /* Contact Section */
 #contact h2 {
