@@ -13,7 +13,7 @@ scrollTopBtn.onclick = function() {
 };
 
 /* Lightbox Functionality */
-const projectImages = document.querySelectorAll('.project-image img');
+const projectImages = document.querySelectorAll('.project-card img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
 
@@ -98,4 +98,19 @@ function loadNextAnimation() {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadNextAnimation();
+
+  // Scroll arrows functionality for horizontal gallery
+  const scrollGallery = document.querySelector('.scroll-gallery');
+  const leftArrow = document.querySelector('.scroll-arrows .arrow.left');
+  const rightArrow = document.querySelector('.scroll-arrows .arrow.right');
+    
+  if (leftArrow && rightArrow && scrollGallery) {
+    leftArrow.addEventListener('click', () => {
+      scrollGallery.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+        
+    rightArrow.addEventListener('click', () => {
+      scrollGallery.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  }
 });

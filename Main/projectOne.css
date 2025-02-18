@@ -169,42 +169,44 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Modern Call-to-Action Button */
 .cta-button {
   display: inline-block;
-  padding: 15px 30px;
+  padding: 12px 25px;
   background-color: var(--accent-color);
   color: var(--text-color);
-  border-radius: 30px;
+  border-radius: 6px;
   font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .cta-button:hover {
   background-color: var(--highlight-color);
-  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Modern View-All Button */
 .view-all-button {
   position: absolute;
   bottom: 40px;
   left: 20px;
-  padding: 10px 20px;
+  padding: 8px 16px;
   background-color: var(--accent-color);
   color: var(--text-color);
   border: none;
-  border-radius: 25px;
+  border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
   text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .view-all-button:hover {
   background-color: var(--highlight-color);
-  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* ========================= */
@@ -238,18 +240,6 @@ body {
 @keyframes underlineExpand {
   0%, 100% { width: 60px; }
   50% { width: 80px; }
-}
-
-/* 
-  GRID-BASED GALLERY:
-  - repeat(auto-fit, minmax(200px, 1fr)) will create columns that are at least 200px wide.
-  - Gap of 20px between items.
-*/
-.project-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  justify-items: center;
 }
 
 /* Each card includes the image + overlay on hover */
@@ -459,25 +449,25 @@ footer a:hover {
   color: var(--highlight-color);
 }
 
-/* Scroll to Top Button */
+/* Modern Scroll to Top Button */
 #scrollTopBtn {
   position: fixed;
   bottom: 40px;
   right: 40px;
-  background-color: var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.9);
   color: var(--text-color);
   border: none;
-  padding: 15px;
+  padding: 12px;
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
   display: none;
   z-index: 1200;
   transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
 #scrollTopBtn:hover {
-  background-color: var(--highlight-color);
+  background-color: rgba(255, 255, 255, 1);
   transform: translateY(-5px);
 }
 
@@ -569,8 +559,8 @@ footer a:hover {
   padding-bottom: 56.25%; 
   height: 0;
   width: 100%;
-  margin: 0 auto; /* center if you have a max-width or something similar */
-  max-width: 800px; /* limit the max width so it doesn't stretch too wide */
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 .video-wrapper iframe {
@@ -579,4 +569,69 @@ footer a:hover {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Horizontal Scroll Gallery Styles */
+.scroll-gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* For Firefox */
+}
+.scroll-gallery::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+.scroll-gallery .project-card {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+}
+
+/* Modern Carousel Arrow Styles */
+.scroll-arrows {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 20px;
+}
+.scroll-arrows .arrow {
+    width: 36px;
+    height: 36px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.scroll-arrows .arrow.left:active {
+    transform: scale(1.1) translateX(-1px);
+}
+.scroll-arrows .arrow.right:active {
+    transform: scale(1.1) translateX(1px);
+}
+.scroll-arrows .arrow:hover {
+    transform: scale(1.1);
+}
+.scroll-arrows .arrow .chevron {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-left: 2px solid rgba(51,51,51,0.85);
+    border-bottom: 2px solid rgba(51,51,51,0.85);
+    border-radius: 1px;
+}
+.scroll-arrows .arrow.left .chevron {
+    transform: rotate(45deg);
+}
+.scroll-arrows .arrow.right .chevron {
+    transform: rotate(-135deg);
+}
+.scroll-arrows .arrow:hover .chevron {
+    border-color: #666666;
 }
