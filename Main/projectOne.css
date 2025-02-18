@@ -562,3 +562,21 @@ footer a:hover {
     max-width: 180px;
   }
 }
+
+.video-wrapper {
+  position: relative;
+  /* This padding-bottom maintains a 16:9 ratio: (9/16 * 100) = 56.25% */
+  padding-bottom: 56.25%; 
+  height: 0;
+  width: 100%;
+  margin: 0 auto; /* center if you have a max-width or something similar */
+  max-width: 800px; /* limit the max width so it doesn't stretch too wide */
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
