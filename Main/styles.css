@@ -613,6 +613,28 @@ section {
   text-align: center;
 }
 
+/* =======================================
+   NEW / ADDITIONAL STYLES FOR Snake Game CARD
+   (Only used if the card has these classes)
+======================================= */
+/* Circular illustration at the top */
+.experience-card .snake-illustration {
+  display: block;
+  margin: 20px auto 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 20%;
+  object-fit: cover; /* Prevents distortion if the image isn't a perfect circle */
+}
+
+/* Main title (serif) for "packit" */
+.experience-card .snake-title {
+  font-family: 'Georgia', serif; /* or another serif font */
+  font-size: 2rem;
+  margin: 10px 0;
+  text-align: center;
+}
+
 /* Subtitle (app description) */
 .experience-card .subtitle {
   font-size: 1rem;
