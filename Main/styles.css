@@ -671,71 +671,56 @@ section {
 
 
 
-/* Contact Section */
-#contact h2 {
+/* Contact Section Styles */
+#contact {
   text-align: center;
-  margin-bottom: 40px;
+  padding: 50px 20px;
 }
 
-#contact form {
-  max-width: 600px;
-  margin: 0 auto;
+#contact h2 {
+  margin-bottom: 40px;
+  font-size: 50px;
+  font-weight: 700;
+  color: var(--base-text);
   position: relative;
 }
 
-#contact form::before {
+#contact h2::after {
   content: '';
-  position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 100px;
-  height: 100px;
-  background: url('floating-shape.png') no-repeat center center;
-  background-size: contain;
-  opacity: 0.2;
-}
-
-#contact input,
-#contact textarea {
-  width: 100%;
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid var(--accent-dark);
-  border-radius: 30px;
-  background-color: #1A1A1A;
-  color: var(--base-text);
-  transition: box-shadow 0.3s, transform 0.3s;
-}
-
-#contact input::placeholder,
-#contact textarea::placeholder {
-  color: var(--accent-light);
-}
-
-#contact input:focus,
-#contact textarea:focus {
-  box-shadow: 0 0 10px rgba(184,134,11,0.5);
-  transform: translateY(-5px);
-  outline: none;
-}
-
-#contact button {
-  padding: 15px 30px;
+  width: 60px;
+  height: 3px;
   background-color: var(--highlight-primary);
-  border: none;
-  color: var(--base-bg);
-  cursor: pointer;
-  border-radius: 30px;
-  width: 100%;
-  font-size: 16px;
-  transition: background-color 0.3s, transform 0.3s;
-  margin-bottom: 70px;
+  display: block;
+  margin: 10px auto 0;
+  animation: titleUnderline 1.5s infinite;
 }
 
-#contact button:hover {
-  background-color: var(--highlight-secondary);
-  transform: translateY(-5px);
+.contact-info {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(204, 204, 204, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
+
+.contact-info p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.contact-info a {
+  color: var(--highlight-primary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.contact-info a:hover {
+  color: var(--highlight-secondary);
+}
+
 
 /* Footer */
 footer {
