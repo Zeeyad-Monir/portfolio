@@ -23,7 +23,8 @@
   /* New Static Light Background for Gallery & About Sections */
   --bg-static-light: #EAEAEA;
   --bg-light: #f9f8f8;
-  --text-dark: #333333;                /* Dark text for readability in light sections */
+  --text-dark: #1e90ff;   
+  --text-body: #2b2e30;              /* Dark text for readability in light sections */
 
   /* Supporting Colors */
   --power-up-green: #2ecc71;           /* Multiplier Power-Up glow */
@@ -241,7 +242,7 @@ body {
 .project-showcase {
   padding: 120px 20px;
   /* Lighter, clean static background for calm aesthetics */
-  background-color: var(--bg-static-light);
+  background: white;
   position: relative;
 }
 
@@ -264,17 +265,22 @@ body {
   animation: underlineExpand 1.5s infinite;
 }
 
-/* Project Card */
+
 .project-card {
   position: relative;
-  width: 100%;
-  max-width: 312.5px;
+  width: auto; /* Let the image dictate width */
+  max-width: 400px;
   border-radius: 8px;
   overflow: hidden;
-  background: none;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  background: transparent;
+  box-shadow: none;
+  padding: 5;
+  margin: 5;
+  display: flex;
+  flex-direction: column; /* Ensure proper stacking */
+  align-items: center; /* Center content */
 }
+
 
 
 .project-card:hover {
@@ -283,12 +289,13 @@ body {
 }
 
 .project-card img {
-  display: block;
   width: 100%;
   height: auto;
-  opacity: 0;
-  animation: fadeIn 1s forwards;
+  background-color: transparent;
+  object-fit: cover;
+  border-radius: inherit;
 }
+
 
 /* Overlay on Project Card */
 .overlay {
@@ -342,12 +349,12 @@ body {
   padding: 80px 20px;
   /* Lighter, clean static background */
   background-color: var(--bg-light);
-  color: var(--text-dark);
+  color: var(--text-body);
 }
 
 .about-project h2 {
   font-family: var(--headline-font);
-  font-size: clamp(20px, 5vw, 32px);
+  font-size: clamp(25px, 8vw, 35px);
   text-align: center;
   margin-bottom: 40px;
   color: var(--text-dark);
@@ -377,7 +384,7 @@ body {
   flex: 2;
   font-family: var(--body-font);
   font-size: clamp(14px, 3vw, 18px);
-  color: var(--text-dark);
+  color: var(--text-body);
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -406,7 +413,7 @@ body {
   position: absolute;
   left: 0;
   top: 2px;
-  color: var(--primary-color);
+  color: var(--bg-gradient-mid);
   font-size: 1.5rem;
   transition: transform 0.3s;
 }
@@ -416,7 +423,7 @@ body {
 }
 
 .about-project .text-content a {
-  color: var(--primary-color);
+  color: var(--bg-gradient-mid);
   text-decoration: underline;
   font-weight: 600;
 }
@@ -450,7 +457,7 @@ footer {
   padding: 20px;
   background: var(--bg-gradient-mid);
   text-align: center;
-  color: var(--text-dark);
+  color: var(--text-body);
   box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
@@ -497,8 +504,8 @@ footer a:hover {
 .scroll-gallery {
   display: flex;
   overflow-x: auto;
-  gap: 15px;
-  padding: 20px;
+  gap: 25px;
+  padding: 30px;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
