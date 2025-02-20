@@ -268,13 +268,14 @@ body {
 .project-card {
   position: relative;
   width: 100%;
-  max-width: 250px;
+  max-width: 312.5px;
   border-radius: 8px;
   overflow: hidden;
-  background: #fff;
+  background: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   transition: transform 0.3s, box-shadow 0.3s;
 }
+
 
 .project-card:hover {
   transform: scale(1.02);
@@ -329,8 +330,8 @@ body {
 }
 
 .lightbox img {
-  max-width: 90%;
-  max-height: 80%;
+  max-width: 120%;
+  max-height: 110%;
   border-radius: 10px;
 }
 
