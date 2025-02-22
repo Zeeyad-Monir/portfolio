@@ -79,7 +79,7 @@
        TYPING EFFECT
        ========================== */
     (function initTypingEffect() {
-      const roles = ['Front End Developer', 'UI/UX Designer'];
+      const roles = ['Full Stack Developer', 'UI/UX Designer'];
       let roleIndex = 0;
       let charIndex = 0;
       let currentRole = '';
