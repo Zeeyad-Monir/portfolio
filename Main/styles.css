@@ -328,7 +328,7 @@ section {
 #skills .skills-container {
   max-width: 1200px;
   margin: 0 auto;
-  margin-bottom: 100px;
+  margin-bottom: 125px;
 }
 
 #skills h2 {
@@ -341,6 +341,7 @@ section {
   font-size: 1.2rem;
   color: var(--accent-light);
   margin-bottom: 3rem;
+  text-align: center;
 }
 
 .skills-scroll {
@@ -454,7 +455,6 @@ section {
   width: 300px;
   height: 430px;
   border-radius: 15px;
-  /* Updated background & text color */
   background-color: #3a3a3a;
   color: #f0e6d2;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -675,6 +675,8 @@ section {
 #contact {
   text-align: center;
   padding: 50px 20px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 #contact h2 {
