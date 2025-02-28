@@ -1217,3 +1217,306 @@ img {
     z-index: 15;
   }
 }
+
+/* Mobile Responsiveness Overhaul */
+
+/* General Mobile Optimizations */
+@media (max-width: 767px) {
+  html {
+    font-size: 14px;
+    scroll-padding-top: 60px;
+  }
+  
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  section {
+    padding: 40px 15px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  /* Fix Name and Role Text */
+  .name-animation, 
+  .name-container {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+    transform: translateY(0);
+    word-wrap: break-word;
+    width: 100%;
+  }
+  
+  .animated-role {
+    font-size: 1.2rem;
+    transform: translateY(0);
+    margin-bottom: 2.5rem;
+    width: 100%;
+  }
+  
+  /* Bio Container & Profile Picture Fixes */
+  .bio-container {
+    flex-direction: column;
+    width: 95%;
+    padding: 1.25rem;
+    margin: 0 auto 2rem;
+    gap: 0.75rem;
+  }
+  
+  .profile-picture {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0 auto 0.5rem;
+  }
+  
+  .profile-picture img {
+    width: 150px;
+    height: 160px;
+    margin: 0 auto;
+    border-radius: 20%;
+    max-width: none;
+  }
+  
+  .bio-info {
+    width: 100%;
+    padding: 0.5rem;
+    text-align: center;
+    min-width: 0;
+  }
+  
+  .social-links {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* Fix Navigation */
+  .unique-nav {
+    height: 60px;
+  }
+  
+  .unique-nav ul {
+    width: 95%;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  .unique-nav li {
+    margin: 0 5px;
+  }
+  
+  .unique-nav a {
+    font-size: 14px;
+    padding: 8px 5px;
+  }
+  
+  /* Skills Section Fixes */
+  .skills-subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+    margin-bottom: 2rem;
+  }
+  
+  .skill-card {
+    width: 90px;
+    height: 140px;
+    margin-right: 20px;
+  }
+  
+  .skill-icon {
+    width: 45px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .skill-label {
+    font-size: 0.8rem;
+  }
+  
+  /* Projects Section Fixes */
+  .carousel-container {
+    height: 380px;
+    margin-top: 30px;
+    width: 95%;
+  }
+  
+  .experience-card {
+    width: 280px;
+    height: 400px;
+  }
+  
+  .carousel .experience-card.prev,
+  .carousel .experience-card.next {
+    transform: translateX(calc(-50% - 120px)) translateZ(-80px) scale(0.8) rotateY(15deg);
+  }
+  
+  .carousel .experience-card.next {
+    transform: translateX(calc(-50% + 120px)) translateZ(-80px) scale(0.8) rotateY(-15deg);
+  }
+  
+  .carousel .experience-card.prev2,
+  .carousel .experience-card.next2 {
+    display: none;
+  }
+  
+  .carousel-arrow {
+    position: absolute;
+    top: auto;
+    bottom: -40px;
+    transform: none;
+    z-index: 10;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+  
+  .carousel-arrow.left-arrow {
+    left: calc(50% - 50px);
+  }
+  
+  .carousel-arrow.right-arrow {
+    right: calc(50% - 50px);
+  }
+  
+  .pagination-dots {
+    margin-top: 50px;
+  }
+  
+  /* Contact Section Fixes */
+  .contact-info {
+    width: 95%;
+    padding: 1.25rem;
+  }
+  
+  .contact-info p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* iPhone SE / Small Device Specific Fixes */
+@media (max-width: 375px) {
+  html {
+    font-size: 13px;
+  }
+  
+  .name-animation,
+  .name-container {
+    font-size: 2.2rem;
+  }
+  
+  .animated-role {
+    font-size: 1rem;
+  }
+  
+  .profile-picture img {
+    width: 130px;
+    height: 140px;
+  }
+  
+  .unique-nav a {
+    font-size: 13px;
+    padding: 6px 2px;
+  }
+  
+  .skill-card {
+    width: 80px;
+    height: 120px;
+    margin-right: 15px;
+  }
+  
+  .skill-icon {
+    width: 40px;
+  }
+  
+  .skill-label {
+    font-size: 0.75rem;
+  }
+  
+  .experience-card {
+    width: 250px;
+    height: 370px;
+  }
+}
+
+/* Fix all section headings */
+@media (max-width: 767px) {
+  section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  section h2::after {
+    width: 50px;
+    height: 2px;
+  }
+  
+  /* Adjust spacing between sections */
+  #skills, #projects, #contact {
+    margin-top: 1rem;
+    padding-top: 2rem;
+  }
+}
+
+/* Fix skills scroll on mobile */
+@media (max-width: 767px) {
+  .skills-scroll {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  .skills-track {
+    width: calc(300%);
+    animation: scroll 30s linear infinite;
+  }
+}
+
+/* Fix for the bio button */
+@media (max-width: 767px) {  
+  .bio-cta {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .bio-cta a {
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: inline-block;
+  }
+}
+
+/* Fix for Project Cards */
+@media (max-width: 767px) {
+  .experience-card .card-content {
+    margin-bottom: 100px;
+  }
+  
+  .experience-card .sznluv-illustration,
+  .experience-card .packit-illustration,
+  .experience-card .snake-illustration {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .experience-card .sznluv-title,
+  .experience-card .packit-title,
+  .experience-card .snake-title {
+    font-size: 1.7rem;
+  }
+  
+  .experience-card .subtitle {
+    font-size: 0.9rem;
+    padding: 0 10px;
+    margin-bottom: 15px;
+  }
+  
+  .experience-card .tech-badges {
+    bottom: 15px;
+    gap: 5px;
+  }
+  
+  .experience-card .tech-badges span {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+}
