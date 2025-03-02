@@ -1520,3 +1520,160 @@ img {
     font-size: 0.7rem;
   }
 }
+
+/* Add these styles to your styles.css file */
+
+/* Mobile Navigation Styles */
+.mobile-menu-button {
+  display: none; /* Hidden by default, shown only on mobile */
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--accent-dark);
+  border-radius: 50%;
+  z-index: 2000;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.hamburger-icon {
+  width: 25px;
+  height: 20px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+}
+
+.hamburger-icon span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: var(--highlight-primary);
+  border-radius: 3px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.hamburger-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger-icon span:nth-child(2) {
+  top: 8px;
+}
+
+.hamburger-icon span:nth-child(3) {
+  top: 16px;
+}
+
+/* Transformed hamburger icon when active */
+.mobile-menu-button.active .hamburger-icon span:nth-child(1) {
+  top: 8px;
+  transform: rotate(135deg);
+}
+
+.mobile-menu-button.active .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.mobile-menu-button.active .hamburger-icon span:nth-child(3) {
+  top: 8px;
+  transform: rotate(-135deg);
+}
+
+/* Mobile Navigation Overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95); /* 80% translucent overlay */
+  z-index: 1500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-nav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.mobile-nav-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-nav-content li {
+  margin: 30px 0;
+}
+
+.mobile-nav-link {
+  color: var(--base-text);
+  font-size: 1.8rem;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  background-color: var(--highlight-primary);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.mobile-nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+  /* Show mobile menu, hide desktop nav */
+  .mobile-menu-button {
+    display: flex;
+  }
+  
+  .unique-nav {
+    display: none;
+  }
+  
+  /* Add additional spacing for mobile layout since the nav is gone */
+  #home {
+    padding-top: 60px;
+  }
+}

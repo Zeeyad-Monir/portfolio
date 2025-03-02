@@ -11,6 +11,56 @@
     }
   
     /* ==========================
+       MOBILE NAVIGATION
+       ========================== */
+    (function initMobileNavigation() {
+      const menuButton = document.querySelector('.mobile-menu-button');
+      const navOverlay = document.querySelector('.mobile-nav-overlay');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+      
+      if (!menuButton || !navOverlay) return;
+      
+      // Toggle mobile menu
+      menuButton.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        
+        // Prevent scrolling when menu is open
+        document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
+        
+        // Staggered animation for nav links
+        if (navOverlay.classList.contains('active')) {
+          mobileNavLinks.forEach((link, index) => {
+            setTimeout(() => {
+              link.style.opacity = '1';
+              link.style.transform = 'translateY(0)';
+            }, 100 * (index + 1));
+          });
+        } else {
+          mobileNavLinks.forEach(link => {
+            link.style.opacity = '0';
+            link.style.transform = 'translateY(20px)';
+          });
+        }
+      });
+      
+      // Close menu when a link is clicked
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          menuButton.classList.remove('active');
+          navOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+          
+          // Reset link animations
+          mobileNavLinks.forEach(link => {
+            link.style.opacity = '0';
+            link.style.transform = 'translateY(20px)';
+          });
+        });
+      });
+    })();
+  
+    /* ==========================
        EXPERIENCE CAROUSEL
        ========================== */
     (function initExperienceCarousel() {
@@ -185,4 +235,3 @@
       animateSkills();
     })();
   });
-  
