@@ -16,56 +16,118 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
-  <!-- Then update your mobile navigation HTML after the <body> tag -->
+<!-- Fixed Mobile Navigation HTML for iPhone -->
+
+<!-- Add this at the top of your HTML file (after any meta tags) -->
+<script type="text/javascript">
+  // Simple debugging helper
+  window.mobileDebug = function(msg) {
+    console.log('Mobile Debug: ' + msg);
+    
+    // Create or get debug element (optional)
+    var debugEl = document.getElementById('mobile-debug');
+    if (!debugEl) {
+      debugEl = document.createElement('div');
+      debugEl.id = 'mobile-debug';
+      debugEl.style.position = 'fixed';
+      debugEl.style.bottom = '10px';
+      debugEl.style.right = '10px';
+      debugEl.style.backgroundColor = 'rgba(0,0,0,0.7)';
+      debugEl.style.color = 'white';
+      debugEl.style.padding = '10px';
+      debugEl.style.fontSize = '12px';
+      debugEl.style.maxWidth = '80%';
+      debugEl.style.maxHeight = '30%';
+      debugEl.style.overflow = 'auto';
+      debugEl.style.zIndex = '9999';
+      document.body.appendChild(debugEl);
+    }
+    
+    // Add new message
+    var p = document.createElement('p');
+    p.textContent = msg;
+    debugEl.appendChild(p);
+    
+    // Trim if too many messages
+    while (debugEl.childNodes.length > 10) {
+      debugEl.removeChild(debugEl.firstChild);
+    }
+  };
   
-  <!-- Starfield Canvas as full-page background -->
-  <canvas id="starfield"></canvas>
-  
-  <!-- Custom Cursor (will be hidden on mobile) -->
-  <div class="cursor"></div>
-  
-  <!-- Enhanced Mobile Menu Button with better touch target -->
-  <div class="mobile-menu-button" role="button" aria-label="Open navigation menu" tabindex="0">
-    <div class="hamburger-icon">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+  // Log platform info
+  document.addEventListener('DOMContentLoaded', function() {
+    window.mobileDebug('UserAgent: ' + navigator.userAgent);
+    window.mobileDebug('Platform: ' + navigator.platform);
+  });
+</script>
+
+<!-- Simple Mobile Menu Structure (Add this right after <body> tag) -->
+<div id="mobile-menu-button" class="mobile-menu-button" onclick="window.toggleMobileMenu()">
+  <div class="hamburger-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-  
-  <!-- Mobile Navigation Overlay with improved structure -->
-  <div class="mobile-nav-overlay" role="dialog" aria-modal="true" aria-label="Site navigation">
-    <div class="mobile-nav-content">
-      <ul role="menu">
-        <li role="menuitem"><a href="#home" class="mobile-nav-link">Home</a></li>
-        <li role="menuitem"><a href="#skills" class="mobile-nav-link">Skills</a></li>
-        <li role="menuitem"><a href="#code-projects" class="mobile-nav-link">Projects</a></li>
-        <li role="menuitem"><a href="#contact" class="mobile-nav-link">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-  
-  <!-- Mobile Navigation Overlay (Add this right after the button) -->
-  <div class="mobile-nav-overlay">
-    <div class="mobile-nav-content">
-      <ul>
-        <li><a href="#home" class="mobile-nav-link">Home</a></li>
-        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
-        <li><a href="#code-projects" class="mobile-nav-link">Projects</a></li>
-        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-  
-  <!-- Navigation Bar -->
-  <nav class="unique-nav">
+</div>
+
+<div id="mobile-nav-overlay" class="mobile-nav-overlay">
+  <div class="mobile-nav-content">
     <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#code-projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#home" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Home</a></li>
+      <li><a href="#skills" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Skills</a></li>
+      <li><a href="#code-projects" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Projects</a></li>
+      <li><a href="#contact" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Contact</a></li>
     </ul>
-  </nav>
+  </div>
+</div>
+
+<!-- Regular Navigation (will be hidden on mobile) -->
+<nav class="unique-nav">
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#code-projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Add a small piece of inline script at the bottom of your body tag -->
+<script type="text/javascript">
+  // Direct button functionality as a fallback
+  window.toggleMobileMenu = function() {
+    var menuButton = document.getElementById('mobile-menu-button');
+    var navOverlay = document.getElementById('mobile-nav-overlay');
+    
+    if (!menuButton || !navOverlay) {
+      console.error("Menu elements not found");
+      return;
+    }
+    
+    window.mobileDebug("Toggle menu clicked");
+    
+    menuButton.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+    
+    // Toggle body scroll
+    document.body.style.overflow = menuButton.classList.contains('active') ? 'hidden' : '';
+    
+    // Toggle link animations
+    var links = document.querySelectorAll('.mobile-nav-link');
+    if (menuButton.classList.contains('active')) {
+      links.forEach(function(link, index) {
+        setTimeout(function() {
+          link.style.opacity = '1';
+          link.style.transform = 'translateY(0)';
+        }, 50 * (index + 1));
+      });
+    } else {
+      links.forEach(function(link) {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(20px)';
+      });
+    }
+  };
+</script>
 
   <!-- Home Section -->
   <section id="home">
