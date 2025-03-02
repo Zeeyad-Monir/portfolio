@@ -12,12 +12,37 @@
   <!-- Custom Cursor -->
   <div class="cursor"></div>
   
-<!-- Hamburger Menu Button (Add this right after <body>) -->
-  <div class="mobile-menu-button">
+<!-- Add/update these meta tags in your <head> section -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Then update your mobile navigation HTML after the <body> tag -->
+  
+  <!-- Starfield Canvas as full-page background -->
+  <canvas id="starfield"></canvas>
+  
+  <!-- Custom Cursor (will be hidden on mobile) -->
+  <div class="cursor"></div>
+  
+  <!-- Enhanced Mobile Menu Button with better touch target -->
+  <div class="mobile-menu-button" role="button" aria-label="Open navigation menu" tabindex="0">
     <div class="hamburger-icon">
       <span></span>
       <span></span>
       <span></span>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation Overlay with improved structure -->
+  <div class="mobile-nav-overlay" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <div class="mobile-nav-content">
+      <ul role="menu">
+        <li role="menuitem"><a href="#home" class="mobile-nav-link">Home</a></li>
+        <li role="menuitem"><a href="#skills" class="mobile-nav-link">Skills</a></li>
+        <li role="menuitem"><a href="#code-projects" class="mobile-nav-link">Projects</a></li>
+        <li role="menuitem"><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
     </div>
   </div>
   

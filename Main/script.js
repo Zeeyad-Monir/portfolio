@@ -10,56 +10,152 @@
       });
     }
   
-    /* ==========================
-       MOBILE NAVIGATION
-       ========================== */
-    (function initMobileNavigation() {
-      const menuButton = document.querySelector('.mobile-menu-button');
-      const navOverlay = document.querySelector('.mobile-nav-overlay');
-      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-      
-      if (!menuButton || !navOverlay) return;
-      
-      // Toggle mobile menu
-      menuButton.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-        
-        // Prevent scrolling when menu is open
-        document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
-        
-        // Staggered animation for nav links
-        if (navOverlay.classList.contains('active')) {
-          mobileNavLinks.forEach((link, index) => {
-            setTimeout(() => {
-              link.style.opacity = '1';
-              link.style.transform = 'translateY(0)';
-            }, 100 * (index + 1));
-          });
-        } else {
-          mobileNavLinks.forEach(link => {
-            link.style.opacity = '0';
-            link.style.transform = 'translateY(20px)';
-          });
-        }
-      });
-      
-      // Close menu when a link is clicked
-      mobileNavLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          menuButton.classList.remove('active');
-          navOverlay.classList.remove('active');
-          document.body.style.overflow = '';
-          
-          // Reset link animations
-          mobileNavLinks.forEach(link => {
-            link.style.opacity = '0';
-            link.style.transform = 'translateY(20px)';
-          });
-        });
-      });
-    })();
+    /* Enhanced Mobile Navigation JavaScript for iPhone compatibility */
+
+/* ==========================
+   MOBILE NAVIGATION
+   ========================== */
+(function initMobileNavigation() {
+  const menuButton = document.querySelector('.mobile-menu-button');
+  const navOverlay = document.querySelector('.mobile-nav-overlay');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
   
+  if (!menuButton || !navOverlay) return;
+  
+  // Helper function to check if the device is iOS
+  function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+  
+  // Apply iOS-specific fixes if needed
+  if (isIOS()) {
+    // Fix for -webkit-overflow properties
+    document.documentElement.style.setProperty('--webkit-overflow-scrolling', 'touch');
+    
+    // Fix for potential 100vh issues on iOS
+    function setVhProperty() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    // Set initially and update on resize
+    setVhProperty();
+    window.addEventListener('resize', setVhProperty);
+  }
+  
+  // Toggle mobile menu with improved touch handling
+  menuButton.addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent default touch behavior
+    this.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+    
+    // Prevent scrolling when menu is open
+    document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
+    
+    // Fix for iOS body scroll
+    if (isIOS()) {
+      document.body.style.position = this.classList.contains('active') ? 'fixed' : '';
+      document.body.style.width = this.classList.contains('active') ? '100%' : '';
+      document.body.style.top = this.classList.contains('active') ? `-${window.scrollY}px` : '';
+    }
+    
+    // Staggered animation for nav links
+    if (navOverlay.classList.contains('active')) {
+      mobileNavLinks.forEach((link, index) => {
+        setTimeout(() => {
+          link.style.opacity = '1';
+          link.style.transform = 'translateY(0)';
+        }, 80 * (index + 1)); // Slightly faster animation
+      });
+    } else {
+      mobileNavLinks.forEach(link => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(20px)';
+      });
+      
+      // Restore scroll position for iOS
+      if (isIOS() && document.body.style.top) {
+        const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10));
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        window.scrollTo(0, scrollY);
+      }
+    }
+  });
+  
+  // Use touchend for more responsive behavior on iOS
+  menuButton.addEventListener('touchend', function(e) {
+    e.preventDefault(); // Prevent additional click events
+  }, { passive: false });
+  
+  // Close menu when a link is clicked with improved touch handling
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      menuButton.classList.remove('active');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      // Reset link animations
+      mobileNavLinks.forEach(link => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(20px)';
+      });
+      
+      // Fix for iOS body scroll
+      if (isIOS() && document.body.style.top) {
+        const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10));
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        window.scrollTo(0, scrollY);
+      }
+      
+      // Small delay before allowing hash navigation
+      setTimeout(() => {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const targetElement = document.querySelector(href);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        }
+      }, 300);
+    });
+    
+    // Use touchend for more responsive behavior on iOS
+    link.addEventListener('touchend', function(e) {
+      e.preventDefault(); // Prevent additional click events
+    }, { passive: false });
+  });
+  
+  // Close the menu when clicking outside of it
+  navOverlay.addEventListener('click', function(e) {
+    if (e.target === this) {
+      menuButton.classList.remove('active');
+      this.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      // Reset link animations
+      mobileNavLinks.forEach(link => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(20px)';
+      });
+      
+      // Fix for iOS body scroll
+      if (isIOS() && document.body.style.top) {
+        const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10));
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        window.scrollTo(0, scrollY);
+      }
+    }
+  });
+})();
     /* ==========================
        EXPERIENCE CAROUSEL
        ========================== */
