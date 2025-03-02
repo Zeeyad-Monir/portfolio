@@ -16,10 +16,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
-<!-- Removed the debugging helper code so no logs will appear on screen or console -->
-
-<!-- Simple Mobile Menu Structure (Add this right after <body> tag) -->
-<div id="mobile-menu-button" class="mobile-menu-button" onclick="window.toggleMobileMenu()">
+<!-- Improved Mobile Menu Structure -->
+<div id="mobile-menu-button" class="mobile-menu-button">
   <div class="hamburger-icon">
     <span></span>
     <span></span>
@@ -30,10 +28,10 @@
 <div id="mobile-nav-overlay" class="mobile-nav-overlay">
   <div class="mobile-nav-content">
     <ul>
-      <li><a href="#home" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Home</a></li>
-      <li><a href="#skills" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Skills</a></li>
-      <li><a href="#code-projects" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Projects</a></li>
-      <li><a href="#contact" class="mobile-nav-link" onclick="window.toggleMobileMenu()">Contact</a></li>
+      <li><a href="#home" class="mobile-nav-link">Home</a></li>
+      <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
+      <li><a href="#code-projects" class="mobile-nav-link">Projects</a></li>
+      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
     </ul>
   </div>
 </div>
@@ -47,41 +45,6 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
-
-<!-- Add a small piece of inline script at the bottom of your body tag -->
-<script type="text/javascript">
-  // We keep the toggleMobileMenu function but remove any debug logs or calls
-  window.toggleMobileMenu = function() {
-    var menuButton = document.getElementById('mobile-menu-button');
-    var navOverlay = document.getElementById('mobile-nav-overlay');
-    
-    if (!menuButton || !navOverlay) {
-      return;
-    }
-    
-    menuButton.classList.toggle('active');
-    navOverlay.classList.toggle('active');
-    
-    // Toggle body scroll
-    document.body.style.overflow = menuButton.classList.contains('active') ? 'hidden' : '';
-    
-    // Toggle link animations
-    var links = document.querySelectorAll('.mobile-nav-link');
-    if (menuButton.classList.contains('active')) {
-      links.forEach(function(link, index) {
-        setTimeout(function() {
-          link.style.opacity = '1';
-          link.style.transform = 'translateY(0)';
-        }, 50 * (index + 1));
-      });
-    } else {
-      links.forEach(function(link) {
-        link.style.opacity = '0';
-        link.style.transform = 'translateY(20px)';
-      });
-    }
-  };
-</script>
 
   <!-- Home Section -->
   <section id="home">
