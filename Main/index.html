@@ -12,7 +12,54 @@
   <!-- Custom Cursor -->
   <div class="cursor"></div>
   
- <!-- Clean Mobile Navigation HTML for iPhone (no debug) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+<!-- Fixed Mobile Navigation HTML for iPhone -->
+
+<!-- Add this at the top of your HTML file (after any meta tags) -->
+<script type="text/javascript">
+  // Simple debugging helper
+  window.mobileDebug = function(msg) {
+    console.log('Mobile Debug: ' + msg);
+    
+    // Create or get debug element (optional)
+    var debugEl = document.getElementById('mobile-debug');
+    if (!debugEl) {
+      debugEl = document.createElement('div');
+      debugEl.id = 'mobile-debug';
+      debugEl.style.position = 'fixed';
+      debugEl.style.bottom = '10px';
+      debugEl.style.right = '10px';
+      debugEl.style.backgroundColor = 'rgba(0,0,0,0.7)';
+      debugEl.style.color = 'white';
+      debugEl.style.padding = '10px';
+      debugEl.style.fontSize = '12px';
+      debugEl.style.maxWidth = '80%';
+      debugEl.style.maxHeight = '30%';
+      debugEl.style.overflow = 'auto';
+      debugEl.style.zIndex = '9999';
+      document.body.appendChild(debugEl);
+    }
+    
+    // Add new message
+    var p = document.createElement('p');
+    p.textContent = msg;
+    debugEl.appendChild(p);
+    
+    // Trim if too many messages
+    while (debugEl.childNodes.length > 10) {
+      debugEl.removeChild(debugEl.firstChild);
+    }
+  };
+  
+  // Log platform info
+  document.addEventListener('DOMContentLoaded', function() {
+    window.mobileDebug('UserAgent: ' + navigator.userAgent);
+    window.mobileDebug('Platform: ' + navigator.platform);
+  });
+</script>
 
 <!-- Simple Mobile Menu Structure (Add this right after <body> tag) -->
 <div id="mobile-menu-button" class="mobile-menu-button" onclick="window.toggleMobileMenu()">
@@ -52,8 +99,11 @@
     var navOverlay = document.getElementById('mobile-nav-overlay');
     
     if (!menuButton || !navOverlay) {
+      console.error("Menu elements not found");
       return;
     }
+    
+    window.mobileDebug("Toggle menu clicked");
     
     menuButton.classList.toggle('active');
     navOverlay.classList.toggle('active');
