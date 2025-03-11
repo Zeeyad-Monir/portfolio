@@ -419,10 +419,13 @@ section {
   overflow: visible;
 }
 
+/* Fixed Carousel Arrow Styles */
 .carousel-arrow {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: auto;
+  bottom: -110px;
+  transform: none;
+  z-index: 10;
   background-color: var(--highlight-primary);
   color: var(--base-text);
   font-size: 2rem;
@@ -430,13 +433,19 @@ section {
   cursor: pointer;
   border: none;
   border-radius: 8px;
-  z-index: 5;
   transition: background 0.3s, transform 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
+  /* These are the critical properties for clickability */
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(184, 134, 11, 0.5);
+  /* Fix for iOS */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .carousel-arrow:hover {
@@ -444,16 +453,33 @@ section {
 }
 
 .left-arrow {
-  left: -20px;
+  left: calc(50% - 130px);
+  right: auto;
 }
 
 .right-arrow {
-  right: 70px;
+  right: calc(50% - 130px);
+  left: auto;
 }
 
 .carousel-arrow:focus {
   outline: 2px solid var(--highlight-primary);
   outline-offset: 2px;
+}
+
+/* Ensure the child elements don't interfere with clicks */
+.carousel-arrow * {
+  pointer-events: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .carousel-arrow {
+    bottom: -40px;
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+  }
 }
 
 /* =======================================
@@ -546,8 +572,10 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 42px;
+  padding-top: 40px;
   z-index: 10;
+  position: relative;
 }
 
 .pagination-dots button {
@@ -917,6 +945,14 @@ img {
   .social-links {
     justify-content: center;
   }
+  
+  .carousel-arrow.left-arrow {
+    left: calc(50% - 70px);
+  }
+  
+  .carousel-arrow.right-arrow {
+    right: calc(50% - 70px);
+  }
 }
 
 @media (max-width: 480px) {
@@ -957,6 +993,24 @@ img {
     font-size: 16px;
     padding: 8px 5px;
   }
+  
+  .carousel-arrow.left-arrow {
+    left: calc(50% - 60px);
+  }
+  
+  .carousel-arrow.right-arrow {
+    right: calc(50% - 60px);
+  }
+}
+
+@media (max-width: 375px) {
+  .carousel-arrow.left-arrow {
+    left: calc(50% - 50px);
+  }
+  
+  .carousel-arrow.right-arrow {
+    right: calc(50% - 50px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -996,14 +1050,6 @@ img {
   
   .carousel .experience-card.next2 {
     transform: translateX(calc(-50% + 320px)) translateZ(-150px) scale(0.8) rotateY(-25deg);
-  }
-  
-  .carousel-arrow.left-arrow {
-    left: 10px;
-  }
-  
-  .carousel-arrow.right-arrow {
-    right: 10px;
   }
   
   .skill-card {
@@ -1196,25 +1242,7 @@ img {
 /* Fix for carousel navigation specifically on mobile */
 @media (max-width: 600px) {
   .carousel-arrow {
-    position: absolute;
-    top: auto;
-    bottom: -85px;
-    transform: none;
-    z-index: 10;
-  }
-  
-  .carousel-arrow.left-arrow {
-    left: calc(50% - 100px);
-  }
-  
-  .carousel-arrow.right-arrow {
-    right: calc(50% - 100px);
-  }
-  
-  .pagination-dots {
-    margin-top: 60px;
-    position: relative;
-    z-index: 15;
+    bottom: -40px;
   }
 }
 
@@ -1367,18 +1395,6 @@ img {
     width: 35px;
     height: 35px;
     font-size: 1.2rem;
-  }
-  
-  .carousel-arrow.left-arrow {
-    left: calc(50% - 50px);
-  }
-  
-  .carousel-arrow.right-arrow {
-    right: calc(50% - 50px);
-  }
-  
-  .pagination-dots {
-    margin-top: 50px;
   }
   
   /* Contact Section Fixes */
