@@ -104,6 +104,193 @@ body {
   background: var(--accent-color);
 }
 
+/* Enhanced Mobile Menu Styles */
+
+/* Mobile Menu Button - Improved for iOS */
+.mobile-menu-button {
+  display: none; /* Hidden by default, shown only on mobile */
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 248, 238, 0.95); /* Based on var(--bg-light) */
+  border-radius: 50%;
+  z-index: 9999; /* Very high z-index to ensure it's above everything */
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--accent-color);
+  -webkit-tap-highlight-color: rgba(254, 202, 202, 0.5);
+  touch-action: manipulation; /* Improves touch handling */
+}
+
+/* Make the entire button a touch target */
+.mobile-menu-button * {
+  pointer-events: none; /* Make sure child elements don't interfere with clicks */
+}
+
+.hamburger-icon {
+  width: 30px;
+  height: 25px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+}
+
+.hamburger-icon span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: var(--accent-color);
+  border-radius: 4px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.hamburger-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger-icon span:nth-child(2) {
+  top: 10px;
+}
+
+.hamburger-icon span:nth-child(3) {
+  top: 20px;
+}
+
+/* Transformed hamburger icon when active */
+.mobile-menu-button.active .hamburger-icon span:nth-child(1) {
+  top: 10px;
+  transform: rotate(135deg);
+}
+
+.mobile-menu-button.active .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.mobile-menu-button.active .hamburger-icon span:nth-child(3) {
+  top: 10px;
+  transform: rotate(-135deg);
+}
+
+/* Mobile Navigation Overlay - Improved for iOS */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 248, 238, 0.95);
+  z-index: 9998; /* Just below the button */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  touch-action: none; /* Prevents iOS scrolling issues */
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-nav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.mobile-nav-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-nav-content li {
+  margin: 30px 0;
+}
+
+.mobile-nav-link {
+  color: var(--text-color);
+  font-size: 2.2rem;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 15px 30px; /* Larger touch target */
+  -webkit-tap-highlight-color: rgba(254, 202, 202, 0.5);
+}
+
+.mobile-nav-overlay.active .mobile-nav-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -8px;
+  left: 50%;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.mobile-nav-link:hover::after,
+.mobile-nav-link:focus::after,
+.mobile-nav-link:active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Media Queries - Show mobile menu button on all devices */
+@media (max-width: 1024px) {
+  .mobile-menu-button {
+    display: flex !important;
+  }
+  
+  .unique-nav {
+    display: none !important;
+  }
+  
+  body {
+    cursor: auto;
+  }
+  
+  .cursor {
+    display: none;
+  }
+}
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS devices */
+  .mobile-menu-button {
+    width: 60px; /* Even larger on iOS */
+    height: 60px;
+  }
+  
+  .mobile-nav-link {
+    padding: 10px 30px; /* Even larger touch targets on iOS */
+  }
+}
+
 /* ================== */
 /* HERO + LOTTIE CSS */
 /* ================== */
