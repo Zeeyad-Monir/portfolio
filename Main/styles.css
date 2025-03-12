@@ -512,11 +512,15 @@ section {
   }
   
   .left-arrow {
-    left: calc(50% - 50px) !important;
+    left: calc(50% - 100px) !important;
   }
   
   .right-arrow {
-    right: calc(50% - 50px) !important;
+    right: calc(50% - 100px) !important;
+  }
+  .pagination-dots {
+    margin-top: -30px !important;
+    padding-top: 30px !important;
   }
 }
 
