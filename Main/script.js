@@ -213,11 +213,11 @@
     // Additional timer for iOS devices which sometimes need more time
     setTimeout(initMobileNavigation, 1500);
   
-    /* Rest of your JavaScript remains unchanged */
     /* ==========================
-       EXPERIENCE CAROUSEL
+       EXPERIENCE CAROUSEL WITH TOUCH SUPPORT
        ========================== */
     (function initExperienceCarousel() {
+      const carouselContainer = document.querySelector('.carousel-container');
       const experienceCarousel = document.querySelector('.carousel');
       if (!experienceCarousel) return;
   
@@ -228,7 +228,15 @@
       const experienceLeftArrow = document.getElementById('experience-left-arrow');
       const experienceRightArrow = document.getElementById('experience-right-arrow');
       let experienceCurrentIndex = 0;
-  
+      
+      // Touch and wheel tracking variables
+      let touchStartX = 0;
+      let touchEndX = 0;
+      let isDragging = false;
+      let wheelTimeout = null;
+      let wheelDirection = 0;
+      let lastWheelTime = 0;
+      
       function updateExperienceCarousel() {
         experienceCards.forEach((card, index) => {
           card.classList.remove('prev2', 'prev', 'active', 'next', 'next2');
@@ -246,10 +254,10 @@
           }
         });
   
-        experienceDots.forEach(dot => dot.classList.remove('active'));
-        if (experienceDots[experienceCurrentIndex]) {
-          experienceDots[experienceCurrentIndex].classList.add('active');
-        }
+        // Update pagination dots
+        experienceDots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === experienceCurrentIndex);
+        });
       }
   
       function showNextExperienceCard() {
@@ -261,21 +269,153 @@
         experienceCurrentIndex = (experienceCurrentIndex - 1 + experienceCards.length) % experienceCards.length;
         updateExperienceCarousel();
       }
-  
+      
+      // FIXED Mouse wheel event handler
+      function handleWheel(event) {
+        // Get the element that triggered the wheel event
+        const targetElement = event.target;
+        
+        // Check if the wheel event originated within the carousel container
+        const isCarouselEvent = carouselContainer.contains(targetElement);
+        
+        // Only proceed if we're directly interacting with the carousel
+        if (!isCarouselEvent) return;
+        
+        // Check if the carousel is in viewport
+        const rect = carouselContainer.getBoundingClientRect();
+        const isInViewport = (
+          rect.top <= window.innerHeight && 
+          rect.bottom >= 0 && 
+          rect.left <= window.innerWidth && 
+          rect.right >= 0
+        );
+        
+        if (!isInViewport) return;
+        
+        const now = Date.now();
+        const deltaX = event.deltaX || 0;
+        const deltaY = event.deltaY || 0;
+        // Horizontal scroll has priority
+        const delta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+        
+        // Debounce wheel events
+        if (now - lastWheelTime > 50) {
+          wheelDirection = delta > 0 ? 1 : -1;
+        }
+        lastWheelTime = now;
+        
+        // Clear any pending timeout
+        if (wheelTimeout) {
+          clearTimeout(wheelTimeout);
+        }
+        
+        // Set a timeout to actually move the carousel
+        wheelTimeout = setTimeout(() => {
+          if (wheelDirection > 0) {
+            showNextExperienceCard();
+          } else {
+            showPrevExperienceCard();
+          }
+          wheelDirection = 0;
+        }, 100);
+        
+        // Prevent default scrolling when interacting with carousel
+        if (Math.abs(delta) > 5) {
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+      }
+      
+      // Touch event handlers for mobile
+      function handleTouchStart(event) {
+        touchStartX = event.touches[0].clientX;
+        isDragging = true;
+      }
+      
+      function handleTouchMove(event) {
+        if (!isDragging) return;
+        
+        const touchX = event.touches[0].clientX;
+        const diff = touchStartX - touchX;
+        
+        // If we're making a significant horizontal swipe
+        if (Math.abs(diff) > 10) {
+          // Prevent the page from scrolling
+          event.preventDefault();
+        }
+      }
+      
+      function handleTouchEnd(event) {
+        if (!isDragging) return;
+        
+        touchEndX = event.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        
+        // Only register as a swipe if the movement is significant
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            showNextExperienceCard();
+          } else {
+            showPrevExperienceCard();
+          }
+        }
+        
+        isDragging = false;
+      }
+      
+      // Make arrow buttons work properly
+      if (experienceLeftArrow) {
+        const handleLeftArrowClick = function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          showPrevExperienceCard();
+        };
+        
+        // Remove any existing listeners
+        const newLeftArrow = experienceLeftArrow.cloneNode(true);
+        experienceLeftArrow.parentNode.replaceChild(newLeftArrow, experienceLeftArrow);
+        
+        // Add new listeners
+        const freshLeftArrow = document.getElementById('experience-left-arrow');
+        freshLeftArrow.addEventListener('click', handleLeftArrowClick);
+        freshLeftArrow.addEventListener('touchstart', handleLeftArrowClick, { passive: false });
+      }
+      
+      if (experienceRightArrow) {
+        const handleRightArrowClick = function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          showNextExperienceCard();
+        };
+        
+        // Remove any existing listeners
+        const newRightArrow = experienceRightArrow.cloneNode(true);
+        experienceRightArrow.parentNode.replaceChild(newRightArrow, experienceRightArrow);
+        
+        // Add new listeners
+        const freshRightArrow = document.getElementById('experience-right-arrow');
+        freshRightArrow.addEventListener('click', handleRightArrowClick);
+        freshRightArrow.addEventListener('touchstart', handleRightArrowClick, { passive: false });
+      }
+      
+      // Add pagination dot listeners
       experienceDots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
           experienceCurrentIndex = index;
           updateExperienceCarousel();
         });
       });
-  
-      if (experienceLeftArrow) {
-        experienceLeftArrow.addEventListener('click', showPrevExperienceCard);
-      }
-      if (experienceRightArrow) {
-        experienceRightArrow.addEventListener('click', showNextExperienceCard);
-      }
-  
+      
+      // Add event listeners for mouse wheel
+      window.addEventListener('wheel', handleWheel, { passive: false });
+      
+      // Add event listeners for touch interaction
+      carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+      carouselContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+      carouselContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+      
+      // Initialize carousel position
       updateExperienceCarousel();
     })();
   
