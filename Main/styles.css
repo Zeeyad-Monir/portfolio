@@ -519,7 +519,7 @@ section {
     right: calc(50% - 100px) !important;
   }
   .pagination-dots {
-    margin-top: -30px !important;
+    margin-top: -40px !important;
     padding-top: 30px !important;
   }
 }
