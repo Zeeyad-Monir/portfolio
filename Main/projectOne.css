@@ -740,24 +740,67 @@ footer a:hover {
   }
 }
 
-.video-wrapper {
-  position: relative;
-  /* This padding-bottom maintains a 16:9 ratio: (9/16 * 100) = 56.25% */
-  padding-bottom: 56.25%; 
-  height: 0;
+/* ================== */
+/* VIDEO WRAPPER     */
+/* ================== */
+.mobile-video-container {
   width: 100%;
   margin: 0 auto;
   max-width: 800px;
 }
 
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+.mobile-video-container iframe {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16/9;
+  height: auto;
+  border: none;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+
+
+@media (max-width: 1000px) {
+  .about-project .content {
+    display: block; /* Use block instead of flex for more reliable display */
+  }
+
+  .about-project .text-content,
+  .about-project .image-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 20px 0;
+  }
+  
+  .mobile-video-container {
+    margin-top: 20px;
+    padding: 0 15px;
+  }
+}
+@media (max-width: 768px) {
+  .about-project .content {
+    display: block; /* Use block instead of flex for more reliable display */
+  }
+
+  .about-project .text-content,
+  .about-project .image-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 20px 0;
+  }
+  
+  .mobile-video-container {
+    margin-top: 20px;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-video-container {
+    padding: 0 10px;
+  }
+}
 /* Horizontal Scroll Gallery Styles */
 .scroll-gallery {
     display: flex;
