@@ -472,13 +472,51 @@ section {
   pointer-events: none;
 }
 
-/* Mobile adjustments */
+/* Fixed positioning for carousel arrows on mobile */
 @media (max-width: 768px) {
   .carousel-arrow {
-    bottom: -40px;
+    position: absolute;
+    bottom: -60px !important; /* Increase bottom spacing */
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+  }
+  
+  .left-arrow {
+    left: calc(50% - 100px) !important;
+  }
+  
+  .right-arrow {
+    right: calc(50% - 100px) !important;
+  }
+  
+  /* Increase container height to accommodate arrows */
+  .carousel-container {
+    height: 450px !important;
+    margin-bottom: 40px !important;
+  }
+  
+  /* Adjust pagination dots to not overlap with arrows */
+  .pagination-dots {
+    margin-top: -30px !important;
+    padding-top: 30px !important;
+  }
+}
+
+/* For very small screens, adjust further */
+@media (max-width: 480px) {
+  .carousel-arrow {
+    bottom: -50px !important;
     width: 35px;
     height: 35px;
-    font-size: 1.5rem;
+  }
+  
+  .left-arrow {
+    left: calc(50% - 50px) !important;
+  }
+  
+  .right-arrow {
+    right: calc(50% - 50px) !important;
   }
 }
 
