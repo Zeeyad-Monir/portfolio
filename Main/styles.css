@@ -514,11 +514,11 @@ section {
   }
   
   .left-arrow {
-    left: calc(50% - 100px) !important;
+    left: calc(50% - 90px) !important;
   }
   
   .right-arrow {
-    right: calc(50% - 100px) !important;
+    right: calc(50% - 90px) !important;
   }
   .pagination-dots {
     margin-top: -40px !important;
