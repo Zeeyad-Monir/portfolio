@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Project 1 - Snake Game: Modern Arcade Classic</title>
-  <link rel="stylesheet" href="projectThree.css">
+  <title>Project 1 - Asteroids Game: Space Shooter Classic</title>
+  <link rel="stylesheet" href="projectFour.css">
   <!-- Include Font Awesome for icons (optional) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- Include Lottie Library -->
@@ -30,9 +30,9 @@
 
     <!-- Your hero content on top of the Lottie animation -->
     <div class="hero-content">
-      <h1>90's Snake</h1>
-      <p>A modernized version of the classic Snake game featuring power-ups, dynamic levels, and a competitive leaderboard.</p>
-      <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/snakeGame/" 
+      <h1>Asteroids</h1>
+      <p>A modernized version of the classic space shooter game featuring power-ups, dynamic difficulty scaling, and a competitive leaderboard.</p>
+      <a href="#" 
          class="cta-button" 
          target="_blank">
         Play Game
@@ -47,44 +47,44 @@
     <div class="scroll-gallery">
       <!-- Each "project-card" is a new item with overlay -->
       <div class="project-card">
-        <img src="./photos/menuScreen1.png" alt="Snake Gameplay" loading="lazy">
+        <img src="./photos/menuScreen1.png" alt="Asteroids Start Screen" loading="lazy">
         <div class="overlay">
-          <h3>Menu Screen</h3>
+          <h3>Start Screen</h3>
         </div>
       </div>
 
       <div class="project-card">
-        <img src="./photos/menuScreen2.png" alt="Power-Up: Multiplier" loading="lazy">
-        <div class="overlay">
-          <h3>Play Game</h3>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="./photos/GoScreen.png" alt="Power-Up: Invincibility" loading="lazy">
-        <div class="overlay">
-          <h3>Countdown to Go</h3>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="./photos/highscoreBd.png" alt="Level Progression" loading="lazy">
-        <div class="overlay">
-          <h3>Highscore Board</h3>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="./photos/gamePlay.png" alt="Pause Screen" loading="lazy">
+        <img src="./photos/menuScreen2.png" alt="Game Play" loading="lazy">
         <div class="overlay">
           <h3>Game Play</h3>
         </div>
       </div>
 
       <div class="project-card">
-        <img src="./photos/gamePlay2.png" alt="Countdown Overlay" loading="lazy">
+        <img src="./photos/GoScreen.png" alt="Triple Shot Power-Up" loading="lazy">
         <div class="overlay">
-          <h3>Game Play</h3>
+          <h3>Triple Shot Power-Up</h3>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="./photos/highscoreBd.png" alt="Shield Power-Up" loading="lazy">
+        <div class="overlay">
+          <h3>Leaderboard</h3>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="./photos/gamePlay.png" alt="Level Progression" loading="lazy">
+        <div class="overlay">
+          <h3>Level Progression</h3>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="./photos/gamePlay2.png" alt="Game Over Screen" loading="lazy">
+        <div class="overlay">
+          <h3>Game Over Screen</h3>
         </div>
       </div>
 
@@ -103,24 +103,25 @@
 
   <!-- About the Project Section -->
   <section class="about-project" id="about-project">
-    <h2>About Snake Game</h2>
+    <h2>About Asteroids Game</h2>
     <div class="content">
       <div class="text-content">
         <p>
-          The Snake Game is a modernized version of the classic Snake game, reimagined with a classic 90's arcade-inspired UI and enhanced gameplay features. The goal is to have the players experience a blend of retro aesthetics with modern dynamics as they navigate through levels, collect power-ups, and compete on the leaderboard.
+          This Asteroids Game is a reimagined version of the classic space shooter, combining retro arcade aesthetics with modern gameplay enhancements. Players pilot a spaceship through an asteroid field, blasting space rocks while avoiding collisions and collecting power-ups to maximize their score.
         </p>
         <p><strong>Core Features:</strong></p>
         <ul>
-          <li><strong>Levels:</strong> Start at Level 1 and progress by earning points. Every 100 points increases the game’s difficulty by speeding up the snake and altering food spawn patterns.</li>
-          <li><strong>Power-Ups:</strong> Enhance your gameplay with special power-ups like the <em>Multiplier</em> for double points and <em>Invincibility</em> that lets you bypass obstacles.</li>
+          <li><strong>Dynamic Difficulty:</strong> The game progressively gets harder as your score increases. At 400 points, asteroids move 15% faster, and at 1000 points, they speed up by an additional 10%.</li>
+          <li><strong>Power-Ups:</strong> Enhance your gameplay with special power-ups including <em>Triple Shot</em> that lets you fire three bullets at once and <em>Shield</em> that provides temporary invulnerability.</li>
+          <li><strong>Level Progression:</strong> Clear all asteroids to advance to the next level, with each level introducing more challenging asteroid patterns.</li>
           <li><strong>Game States:</strong> Enjoy a robust pause/resume system complete with a countdown, and a Game Over screen that allows high score entry with a leaderboard display.</li>
-          <li><strong>Keyboard Controls:</strong> Use arrow keys or WASD for navigation, and press 'P' to pause the game at any time.</li>
-          <li><strong>Leaderboard System:</strong> Compete for the top 10 high scores! High scores are saved locally, letting you immortalize your achievements.</li>
+          <li><strong>Keyboard Controls:</strong> Use arrow keys or WASD for navigation, SPACE to shoot, and press 'P' to pause the game at any time.</li>
+          <li><strong>Leaderboard System:</strong> Compete for the top high scores! High scores are saved locally, letting you immortalize your achievements.</li>
         </ul>
         <p>
-          Dive into the code to see how canvas rendering, game loops, collision detection, and user inputs come together to create this engaging arcade experience.
+          Dive into the code to see how canvas rendering, game loops, collision detection, and user inputs come together to create this engaging space arcade experience.
           For more info, check out the
-          <a href="https://github.com/Zeeyad-Monir/SnakeGame" target="_blank">Github</a>  
+          <a href="#" target="_blank">Github</a>  
         </p>
       </div>
       <div class="image-content">
@@ -130,7 +131,7 @@
             width="560" 
             height="315" 
             src="https://www.youtube.com/embed/cYkSkniBsNU" 
-            title="90's Snake Game Demo" 
+            title="Asteroids Game Demo" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
@@ -149,7 +150,7 @@
   <!-- Scroll to Top Button -->
   <button id="scrollTopBtn" title="Go to top">&#8679;</button>
 
-  <script src="scriptProjects3.js"></script>
+  <script src="scriptProjects4.js"></script>
   <div class="cursor"></div>
 </body>
 

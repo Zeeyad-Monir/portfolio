@@ -38,7 +38,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 const animations = [
-  { path: 'Json/snakeGame.json', speed: 2.0 },
+  { path: 'Json/asteroidsAnimation.json', speed: 2.0 },
 ];
 
 let currentAnimationIndex = 0;

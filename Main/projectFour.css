@@ -3,32 +3,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap');
 
 /* ================================================== */
-/*             SNAKE GAME AESTHETIC CSS              */
+/*             ASTEROIDS GAME AESTHETIC CSS          */
 /* ================================================== */
 
 /* ====== Root Variables ====== */
 :root {
   /* Primary & Secondary Colors */
-  --primary-color: #fbfbfb;            /* Primary Red for highlights, Game Over borders */
-  --secondary-color: #1e90ff;          /* Secondary Blue for UI elements & text contrast */
-  --snake-head-color: #f1c40f;         /* Snake Head Yellow */
-  --snake-body-color: #f39c12;         /* Snake Body Orange */
+  --primary-color: #00FFFF;            /* Cyan for highlights */
+  --secondary-color: #FFFFFF;          /* White for UI elements & text contrast */
+  --ship-color: #FFFFFF;               /* Ship color */
+  --asteroid-color: #AAAAAA;           /* Asteroid color */
 
-  /* Background Gradient Colors (for animated header) */
-  /* Reduced opacity by 10% (alpha 0.9) */
-  --bg-gradient-start: rgba(26, 42, 108, 0.791);    /* Originally #1a2a6c */
-  --bg-gradient-mid: rgba(178, 31, 31, 0.799);        /* Originally #b21f1f */
-  --bg-gradient-end: rgba(253, 187, 45, 0.753);       /* Originally #fdbb2d */
+  /* Background Gradient Colors */
+  --bg-gradient-start: rgba(7, 7, 95, 0.837);    /* Deep space blue */
+  --bg-gradient-mid: rgba(20, 20, 60, 0.854);    /* Medium space blue */
+  --bg-gradient-end: rgba(40, 0, 80, 0.787);     /* Space purple */
 
   /* New Static Light Background for Gallery & About Sections */
   --bg-static-light: #EAEAEA;
   --bg-light: #f9f8f8;
-  --text-dark: #1e90ff;   
+  --text-dark: #00CCFF;   
   --text-body: #2b2e30;              /* Dark text for readability in light sections */
 
   /* Supporting Colors */
-  --power-up-green: #2ecc71;           /* Multiplier Power-Up glow */
-  --power-up-purple: #9b59b6;          /* Invincibility Power-Up glow */
+  --power-up-yellow: #FFFF00;          /* Triple-Shot Power-Up glow */
+  --power-up-blue: #00FFFF;            /* Shield Power-Up glow */
   --overlay-black: rgba(0, 0, 0, 0.85);/* Overlays for Pause, Game Over, etc. */
   --text-color: #ecf0f1;               /* Light text used in header areas */
 
@@ -37,9 +36,9 @@
   --body-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   /* Button Colors */
-  --button-bg: #27ae60;                /* General button background */
-  --button-hover-bg: #2ecc71;          /* Lighter green for hover */
-  --button-glow-color: #2ecc71;
+  --button-bg: #1a6e8e;                /* General button background */
+  --button-hover-bg: #00CCFF;          /* Lighter cyan for hover */
+  --button-glow-color: #00FFFF;
 }
 
 /* ================== */
@@ -132,30 +131,27 @@ body {
 }
 
 /* Enhanced Mobile Menu Styles */
-
-/* Mobile Menu Button - Improved for iOS */
 .mobile-menu-button {
-  display: none; /* Hidden by default, shown only on mobile */
+  display: none;
   position: fixed;
   top: 15px;
   right: 15px;
   width: 60px;
   height: 60px;
-  background-color: rgba(0, 0, 0, 0.8); /* Dark background to match the game aesthetic */
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 50%;
-  z-index: 9999; /* Very high z-index to ensure it's above everything */
+  z-index: 9999;
   cursor: pointer;
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  border: 2px solid var(--snake-head-color); /* Using snake-head-color from your variables */
-  -webkit-tap-highlight-color: rgba(241, 196, 15, 0.5);
-  touch-action: manipulation; /* Improves touch handling */
+  border: 2px solid var(--primary-color);
+  -webkit-tap-highlight-color: rgba(0, 255, 255, 0.5);
+  touch-action: manipulation;
 }
 
-/* Make the entire button a touch target */
 .mobile-menu-button * {
-  pointer-events: none; /* Make sure child elements don't interfere with clicks */
+  pointer-events: none;
 }
 
 .hamburger-icon {
@@ -171,7 +167,7 @@ body {
   position: absolute;
   height: 4px;
   width: 100%;
-  background: var(--snake-head-color); /* Using snake-head-color from your variables */
+  background: var(--primary-color);
   border-radius: 4px;
   opacity: 1;
   left: 0;
@@ -191,7 +187,6 @@ body {
   top: 20px;
 }
 
-/* Transformed hamburger icon when active */
 .mobile-menu-button.active .hamburger-icon span:nth-child(1) {
   top: 10px;
   transform: rotate(135deg);
@@ -207,7 +202,6 @@ body {
   transform: rotate(-135deg);
 }
 
-/* Mobile Navigation Overlay - Improved for iOS */
 .mobile-nav-overlay {
   display: none;
   position: fixed;
@@ -218,12 +212,12 @@ body {
   background: linear-gradient(45deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
   background-size: 600% 600%;
   animation: gradientShift 16s ease infinite;
-  z-index: 9998; /* Just below the button */
+  z-index: 9998;
   opacity: 0;
   transition: opacity 0.3s ease;
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
-  touch-action: none; /* Prevents iOS scrolling issues */
+  touch-action: none;
 }
 
 .mobile-nav-overlay.active {
@@ -253,7 +247,7 @@ body {
 }
 
 .mobile-nav-link {
-  font-family: var(--headline-font); /* Using your Press Start 2P font */
+  font-family: var(--headline-font);
   color: var(--text-color);
   font-size: 1.8rem;
   text-decoration: none;
@@ -262,8 +256,8 @@ body {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  padding: 15px 30px; /* Larger touch target */
-  -webkit-tap-highlight-color: rgba(241, 196, 15, 0.5);
+  padding: 15px 30px;
+  -webkit-tap-highlight-color: rgba(0, 255, 255, 0.5);
   text-shadow: 2px 2px #000;
 }
 
@@ -279,7 +273,7 @@ body {
   height: 3px;
   bottom: -8px;
   left: 50%;
-  background-color: var(--snake-head-color);
+  background-color: var(--primary-color);
   transition: width 0.3s ease, left 0.3s ease;
 }
 
@@ -290,7 +284,6 @@ body {
   left: 0;
 }
 
-/* Media Queries - Show mobile menu button on all devices */
 @media (max-width: 1024px) {
   .mobile-menu-button {
     display: flex !important;
@@ -309,16 +302,14 @@ body {
   }
 }
 
-/* iOS-specific fixes */
 @supports (-webkit-touch-callout: none) {
-  /* iOS devices */
   .mobile-menu-button {
-    width: 60px; /* Even larger on iOS */
+    width: 60px;
     height: 60px;
   }
   
   .mobile-nav-link {
-    padding: 10px 30px; /* Even larger touch targets on iOS */
+    padding: 10px 30px;
   }
 }
 
@@ -332,7 +323,6 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* Animated gradient background with reduced opacity */
   background: linear-gradient(45deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
   background-size: 600% 600%;
   animation: gradientShift 16s ease infinite;
@@ -343,9 +333,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 80%;
+  width: 100%;
   height: 100%;
-  margin-left: 100px;
   z-index: 0;
   opacity: 0.15;
   pointer-events: none;
@@ -354,8 +343,8 @@ body {
 #lottie-container lottie-player,
 #lottie-container canvas,
 #lottie-container img {
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -374,6 +363,7 @@ body {
   animation: fadeDown 1s ease forwards;
   text-transform: uppercase;
   letter-spacing: -1px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
 }
 
 .hero p {
@@ -384,7 +374,6 @@ body {
   animation: fadeUp 1s ease forwards;
 }
 
-/* Call-to-Action Button */
 .cta-button {
   display: inline-block;
   padding: 12px 25px;
@@ -404,7 +393,6 @@ body {
   box-shadow: 0 0 10px var(--button-glow-color);
 }
 
-/* View-All Button */
 .view-all-button {
   position: absolute;
   bottom: 40px;
@@ -432,7 +420,6 @@ body {
 /* ================== */
 .project-showcase {
   padding: 120px 20px;
-  /* Lighter, clean static background for calm aesthetics */
   background: white;
   position: relative;
 }
@@ -456,23 +443,20 @@ body {
   animation: underlineExpand 1.5s infinite;
 }
 
-
 .project-card {
   position: relative;
-  width: auto; /* Let the image dictate width */
+  width: auto;
   max-width: 400px;
   border-radius: 8px;
   overflow: hidden;
   background: transparent;
   box-shadow: none;
-  padding: 5;
-  margin: 5;
+  padding: 5px;
+  margin: 5px;
   display: flex;
-  flex-direction: column; /* Ensure proper stacking */
-  align-items: center; /* Center content */
+  flex-direction: column;
+  align-items: center;
 }
-
-
 
 .project-card:hover {
   transform: scale(1.02);
@@ -487,8 +471,6 @@ body {
   border-radius: inherit;
 }
 
-
-/* Overlay on Project Card */
 .overlay {
   position: absolute;
   left: 0;
@@ -538,7 +520,6 @@ body {
 /* ================== */
 .about-project {
   padding: 80px 20px;
-  /* Lighter, clean static background */
   background-color: var(--bg-light);
   color: var(--text-body);
 }
@@ -660,11 +641,9 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-
-
 @media (max-width: 1000px) {
   .about-project .content {
-    display: block; /* Use block instead of flex for more reliable display */
+    display: block;
   }
 
   .about-project .text-content,
@@ -681,7 +660,7 @@ body {
 }
 @media (max-width: 768px) {
   .about-project .content {
-    display: block; /* Use block instead of flex for more reliable display */
+    display: block;
   }
 
   .about-project .text-content,
@@ -701,7 +680,17 @@ body {
   .mobile-video-container {
     padding: 0 10px;
   }
+  .view-all-button {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+  }
 }
+
 /* ================== */
 /* FOOTER            */
 /* ================== */
@@ -743,7 +732,6 @@ footer a:hover {
   display: none;
   z-index: 1200;
   transition: background-color 0.3s, transform 0.3s;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 #scrollTopBtn:hover {
   background-color: rgba(255, 255, 255, 1);
@@ -848,72 +836,4 @@ footer a:hover {
 @keyframes underlineExpand {
   0%, 100% { width: 60px; }
   50% { width: 80px; }
-}
-
-/* ================== */
-/* RESPONSIVE DESIGN */
-/* ================== */
-@media (max-width: 768px) {
-  /* Stack content vertically on mobile */
-  .about-project .content {
-    flex-direction: column;
-    gap: 30px;
-  }
-  
-  .about-project .text-content,
-  .about-project .image-content {
-    flex: 0 0 100%;
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  .about-project .text-content {
-    order: 1; /* Text first */
-  }
-  
-  .about-project .image-content {
-    order: 2; /* Video second */
-    padding: 0 15px; /* Add side padding to match text content */
-    margin-top: 0;
-  }
-  
-  .video-wrapper {
-    max-width: 100%;
-  }
-  
-  #lottie-container {
-    margin-left: 0;
-    width: 100%;
-  }
-}
-
-/* Extra small screens */
-@media (max-width: 480px) {
-  .video-wrapper {
-    margin: 0; /* Remove margins on very small screens */
-  }
-  
-  /* Adjust padding in the content container */
-  .about-project .content {
-    gap: 20px; /* Reduce gap between text and video */
-  }
-  
-  .about-project .text-content {
-    padding: 20px 15px; /* Consistent padding */
-  }
-  
-  .about-project .image-content {
-    padding: 0 15px; /* Consistent padding */
-  }
-  
-  .view-all-button {
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-  }
 }
