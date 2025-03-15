@@ -529,3 +529,61 @@
       animateSkills();
     })();
   });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Create sunburst effects
+    const emailSunburst = document.querySelector('.email-sunburst');
+    const linkedinSunburst = document.querySelector('.linkedin-sunburst');
+  
+    if (emailSunburst && linkedinSunburst) {
+      createSunburst(emailSunburst);
+      createSunburst(linkedinSunburst);
+    }
+  
+    /**
+     * Dynamically create a sunburst effect
+     * @param {HTMLElement} element - The .sunburst element where lines are appended
+     */
+    function createSunburst(element) {
+      const numLines = 20; // how many radial lines
+      for (let i = 0; i < numLines; i++) {
+        const line = document.createElement('div');
+        line.className = 'sunburst-line';
+        
+        // Evenly distribute lines around 360 degrees
+        const angle = (i / numLines) * 360;
+        
+        // Tweak these values to get your desired ring size
+        const lineLength = 60;       // length of each line in pixels
+        const offsetFromCenter = 20; // how far from center the line starts
+  
+        // Set the line's width and transform
+        line.style.width = `${lineLength}px`;
+        // Rotate around the center, then push the line outward
+        line.style.transform = `rotate(${angle}deg) translateX(${offsetFromCenter}px)`;
+        
+        element.appendChild(line);
+      }
+    }
+  
+    // Optional: Speed up the rotation on hover is handled by CSS:
+    // .contact-item:hover .sunburst { animation-duration: 10s; }
+  
+    // Additional hover logic for any other animations you want:
+    const contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const sunburst = item.querySelector('.sunburst');
+        if (sunburst) {
+          sunburst.style.animationDuration = '10s';
+        }
+      });
+      item.addEventListener('mouseleave', () => {
+        const sunburst = item.querySelector('.sunburst');
+        if (sunburst) {
+          sunburst.style.animationDuration = '20s';
+        }
+      });
+    });
+  });
