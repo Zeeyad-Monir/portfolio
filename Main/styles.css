@@ -747,59 +747,403 @@ section {
   white-space: nowrap; /* Prevents text from breaking */
 }
 
-/* Contact Section Styles */
+/* Enhanced Contact Section Styles */
 #contact {
   text-align: center;
-  padding: 50px 20px;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 #contact h2 {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   font-size: clamp(2rem, 6vw, 3.1rem);
   font-weight: 700;
   color: var(--base-text);
   position: relative;
 }
 
-#contact h2::after {
-  content: '';
-  width: 60px;
-  height: 3px;
-  background-color: var(--highlight-primary);
-  display: block;
-  margin: 10px auto 0;
-  animation: titleUnderline 1.5s infinite;
+.space-contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Planet Animation */
+.contact-planet {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(145deg, var(--highlight-primary), #6b4e07);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 30px rgba(184, 134, 11, 0.5);
+  margin-bottom: 40px;
+  z-index: 1;
+  position: relative;
+  overflow: visible;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(184, 134, 11, 0.5); }
+  50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(184, 134, 11, 0.7); }
+}
+
+.planet-orbit {
+  width: 200px;
+  height: 200px;
+  border: 2px dashed rgba(204, 204, 204, 0.3);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotate 15s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.satellite {
+  width: 20px;
+  height: 20px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  left: calc(50% - 10px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Contact Card */
+.contact-card {
+  background-color: rgba(26, 26, 26, 0.85);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 
+              0 0 20px rgba(184, 134, 11, 0.2),
+              inset 0 0 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(184, 134, 11, 0.3);
+  z-index: 2;
+}
+
+.contact-card h3 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--highlight-primary);
+  font-weight: 700;
+}
+
+.contact-tagline {
+  font-size: 1.2rem;
+  color: var(--accent-light);
+  margin-bottom: 30px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Contact Methods */
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(51, 51, 51, 0.5);
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 3px solid var(--highlight-primary);
+}
+
+.contact-method:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: rgba(51, 51, 51, 0.8);
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(184, 134, 11, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+  color: var(--highlight-primary);
+}
+
+.contact-method:hover .contact-icon {
+  background-color: rgba(184, 134, 11, 0.4);
+}
+
+.contact-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .contact-info {
-  width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: rgba(204, 204, 204, 0.1);
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  flex: 1;
 }
 
-.contact-info p {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  line-height: 1.6;
-  margin-bottom: 20px;
+.contact-info h4 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--base-text);
 }
 
-.contact-info a {
+.animated-link {
+  position: relative;
   color: var(--highlight-primary);
   text-decoration: none;
-  font-weight: 700;
-  transition: color 0.3s;
+  font-weight: 500;
+  padding-bottom: 3px;
+  transition: color 0.3s ease;
 }
 
-.contact-info a:hover {
+.animated-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--highlight-primary);
+  transition: width 0.3s ease;
+}
+
+.animated-link:hover {
   color: var(--highlight-secondary);
 }
 
+.animated-link:hover::after {
+  width: 100%;
+}
+
+/* Shooting Stars Animation */
+.shooting-stars-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transform: rotate(-45deg);
+  animation: shootingStars 5s linear infinite;
+}
+
+.shooting-star:nth-child(1) {
+  top: 10%;
+  left: 0%;
+  animation-delay: 0s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 50%;
+  left: 10%;
+  animation-delay: 2s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 30%;
+  left: -10%;
+  animation-delay: 4s;
+}
+
+@keyframes shootingStars {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-45deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  15% {
+    transform: translateX(200px) translateY(200px) rotate(-45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(200px) translateY(200px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* CTA Button */
+.contact-cta {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(184, 134, 11, 0.3);
+}
+
+.contact-cta p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: var(--accent-light);
+}
+
+.cta-button {
+  display: inline-block;
+  background: linear-gradient(45deg, var(--highlight-primary), var(--highlight-secondary));
+  color: #000;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--highlight-secondary), var(--highlight-primary));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(184, 134, 11, 0.3);
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .contact-card {
+    padding: 30px 20px;
+  }
+  
+  .contact-tagline {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+  
+  .contact-method {
+    padding: 12px;
+  }
+  
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+  }
+  
+  .contact-info h4 {
+    font-size: 1rem;
+  }
+  
+  .contact-planet {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .planet-orbit {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-card {
+    padding: 25px 15px;
+  }
+  
+  .contact-card h3 {
+    font-size: 2rem;
+  }
+  
+  .contact-tagline {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  .contact-methods {
+    gap: 15px;
+  }
+  
+  .contact-method {
+    padding: 10px;
+  }
+  
+  .contact-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+  
+  .contact-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .contact-info h4 {
+    font-size: 0.9rem;
+  }
+  
+  .cta-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  
+  .contact-planet {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 30px;
+  }
+  
+  .planet-orbit {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .satellite {
+    width: 15px;
+    height: 15px;
+    top: -8px;
+    left: calc(50% - 8px);
+  }
+}
 
 /* Footer */
 footer {
