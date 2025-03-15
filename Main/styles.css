@@ -753,7 +753,7 @@ section {
 #contact {
   text-align: center;
   padding: 70px 20px;
-  margin-top: 100px;
+  margin-top: 200px;
   margin-bottom: 100px;
   position: relative;
 }
@@ -780,7 +780,7 @@ section {
 .contact-container {
   display: flex;
   justify-content: center;
-  gap: 150px; /* space between Email & LinkedIn columns */
+  gap: 300px; /* space between Email & LinkedIn columns */
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
@@ -801,6 +801,7 @@ section {
   align-items: center;
   justify-content: center;
   height: 300px;
+  
 }
 
 /* Content container (centered in the sunburst) */
@@ -817,6 +818,7 @@ section {
   /* Optionally remove or reduce the background if you want the lines behind the text fully visible */
   background-color: transparent; 
   border-radius: 5px;
+  margin-top: 100px;
 }
 
 /* Contact title */
@@ -845,9 +847,11 @@ section {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* Make sure this is big enough so lines don't get cut off */
-  width: 300px; 
-  height: 300px; 
+  /* Increase width/height to accommodate larger offset + line length */
+  width: 350px; 
+  height: 350px; 
+  margin-top: 100px;
+ 
 }
 
 /* The parent element for the rotating lines */
@@ -948,6 +952,7 @@ footer {
   background-color: var(--accent-dark);
   color: var(--base-text);
   text-align: center;
+  margin-top: 200px;
 }
 
 footer p {

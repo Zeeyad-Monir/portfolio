@@ -530,47 +530,47 @@
     })();
   });
 
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // Create sunburst effects
+/* ==========================
+   CONTACT SECTION SUNBURST
+   ========================== */
+   document.addEventListener('DOMContentLoaded', function() {
+    // Query the sunburst elements
     const emailSunburst = document.querySelector('.email-sunburst');
     const linkedinSunburst = document.querySelector('.linkedin-sunburst');
   
+    // If both elements exist, create their sunbursts
     if (emailSunburst && linkedinSunburst) {
       createSunburst(emailSunburst);
       createSunburst(linkedinSunburst);
     }
   
     /**
-     * Dynamically create a sunburst effect
-     * @param {HTMLElement} element - The .sunburst element where lines are appended
+     * Dynamically creates a sunburst effect around the center text.
+     * @param {HTMLElement} element - The .sunburst element where lines are appended.
      */
     function createSunburst(element) {
-      const numLines = 20; // how many radial lines
+      const numLines = 20; // Number of radial lines
       for (let i = 0; i < numLines; i++) {
         const line = document.createElement('div');
         line.className = 'sunburst-line';
-        
+  
         // Evenly distribute lines around 360 degrees
         const angle = (i / numLines) * 360;
-        
-        // Tweak these values to get your desired ring size
-        const lineLength = 60;       // length of each line in pixels
-        const offsetFromCenter = 20; // how far from center the line starts
   
-        // Set the line's width and transform
+        // Adjust these to push lines farther out from the center text
+        const lineLength = 80;       // Length of each line in pixels
+        const offsetFromCenter = 140; // How far from center each line begins
+  
+        // Set each line's width and transform
         line.style.width = `${lineLength}px`;
-        // Rotate around the center, then push the line outward
+        // Rotate around center, then translate outward
         line.style.transform = `rotate(${angle}deg) translateX(${offsetFromCenter}px)`;
-        
+  
         element.appendChild(line);
       }
     }
   
-    // Optional: Speed up the rotation on hover is handled by CSS:
-    // .contact-item:hover .sunburst { animation-duration: 10s; }
-  
-    // Additional hover logic for any other animations you want:
+    // Optional: Speed up rotation on hover from 20s to 10s
     const contactItems = document.querySelectorAll('.contact-item');
     contactItems.forEach(item => {
       item.addEventListener('mouseenter', () => {
