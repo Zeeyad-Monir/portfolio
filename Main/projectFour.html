@@ -1,149 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Project 1 - E-commerce Webpage</title>
-    <link rel="stylesheet" href="projectOne.css">
-    <!-- Include Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Project 1 - Snake Game: Modern Arcade Classic</title>
+  <link rel="stylesheet" href="projectThree.css">
+  <!-- Include Font Awesome for icons (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Include Lottie Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="unique-nav">
-        <ul>
-            <li><a href="index.html#home">Home</a></li>
-            <!-- <li><a href="index.html#bio">Bio</a></li> -->
-            <li><a href="index.html#skills">Skills</a></li>
-            <li><a href="index.html#code-projects">Code Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- Navigation -->
+  <nav class="unique-nav">
+      <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#code-projects">Projects</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>Welcome to My E-commerce Project</h1>
-            <p>An innovative platform that redefines online shopping.</p>
-            <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/Project2_AZ%20finalversion/" class="cta-button" target="_blank">Explore the Project</a>
-        </div>
-        <!-- "View All Projects" Button moved to Hero Section -->
-        <a href="index.html#code-projects" class="view-all-button">View All Projects</a>
-    </section>
-
-    <!-- Project Showcase Section -->
-    <section class="project-showcase" id="project-showcase">
-        <h2>Project Gallery</h2>
-        <div class="project-gallery">
-            <div class="project-image">
-                <img src="project1-image1.png" alt="Responsive Design" loading="lazy">
-                <div class="project-caption">Responsive Design</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image2.png" alt="Secure Authentication" loading="lazy">
-                <div class="project-caption">Secure Authentication</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image3.png" alt="Real-time Tracking" loading="lazy">
-                <div class="project-caption">Real-time Tracking</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image4.png" alt="Payment Integration" loading="lazy">
-                <div class="project-caption">Payment Integration</div>
-            </div>
-            <div class="project-image">
-                <img src="project1-image5.png" alt="Admin Dashboard" loading="lazy">
-                <div class="project-caption">Admin Dashboard</div>
-            </div>
-            <!-- Add more project-image divs as needed -->
-        </div>
-        <!-- "View All Projects" button removed from here as it's moved to Hero -->
-    </section>
-
-    <!-- Lightbox Container -->
-    <div class="lightbox" id="lightbox">
-        <img src="" alt="Enlarged Image">
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <!-- Lottie Background Container -->
+    <div id="lottie-container">
+      <!-- Lottie player or animation can go here -->
     </div>
 
-    <!-- About the Project Section -->
-    <section class="about-project" id="about-project">
-        <h2>About the Project</h2>
-        <div class="content">
-            <div class="text-content">
-                <p>
-                    This e-commerce platform was developed to provide users with a seamless online shopping experience. It features a modern and responsive design, ensuring accessibility across all devices. My involvement included designing the user interface, implementing frontend functionalities with HTML, CSS, and JavaScript, and integrating backend services for user authentication and real-time data visualization.
-                </p>
-                <p>
-                    <strong>Key Highlights:</strong>
-                </p>
-                <ul>
-                    <li>Responsive and intuitive user interface</li>
-                    <li>Secure user authentication and authorization</li>
-                    <li>Real-time inventory and order tracking</li>
-                    <li>Integration with payment gateways</li>
-                    <li>Comprehensive admin dashboard for managing products and orders</li>
-                </ul>
-                <p>
-                    For more detailed information, visit the <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/Project2_AZ%20finalversion/" target="_blank">live project page</a> or check out the <a href="https://github.com/yourusername/project1" target="_blank">GitHub repository</a>.
-                </p>
-            </div>
-            <div class="image-content">
-                <img src="about-project-image.png" alt="About Project Illustration" loading="lazy">
-            </div>
+    <!-- Your hero content on top of the Lottie animation -->
+    <div class="hero-content">
+      <h1>90's Snake</h1>
+      <p>A modernized version of the classic Snake game featuring power-ups, dynamic levels, and a competitive leaderboard.</p>
+      <a href="https://www.sfu.ca/siat/student_projects/iat339_2024_summer/zmon/snakeGame/" 
+         class="cta-button" 
+         target="_blank">
+        Play Game
+      </a>
+    </div>
+    <a href="index.html#code-projects" class="view-all-button">View All Projects</a>
+  </section>
+
+  <!-- Project Showcase Section -->
+  <section class="project-showcase" id="project-showcase">
+    <h2>Project Gallery</h2>
+    <div class="scroll-gallery">
+      <!-- Each "project-card" is a new item with overlay -->
+      <div class="project-card">
+        <img src="./photos/menuScreen1.png" alt="Snake Gameplay" loading="lazy">
+        <div class="overlay">
+          <h3>Menu Screen</h3>
         </div>
-    </section>
+      </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-        <p>Follow me on <a href="https://your-social-link.com" target="_blank">Social Media</a></p>
-    </footer>
+      <div class="project-card">
+        <img src="./photos/menuScreen2.png" alt="Power-Up: Multiplier" loading="lazy">
+        <div class="overlay">
+          <h3>Play Game</h3>
+        </div>
+      </div>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+      <div class="project-card">
+        <img src="./photos/GoScreen.png" alt="Power-Up: Invincibility" loading="lazy">
+        <div class="overlay">
+          <h3>Countdown to Go</h3>
+        </div>
+      </div>
 
-    <!-- JavaScript for Scroll to Top Button and Lightbox -->
-    <script>
-        // Scroll to Top Button Functionality
-        const scrollTopBtn = document.getElementById("scrollTopBtn");
+      <div class="project-card">
+        <img src="./photos/highscoreBd.png" alt="Level Progression" loading="lazy">
+        <div class="overlay">
+          <h3>Highscore Board</h3>
+        </div>
+      </div>
 
-        window.onscroll = function() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                scrollTopBtn.style.display = "block";
-            } else {
-                scrollTopBtn.style.display = "none";
-            }
-        };
+      <div class="project-card">
+        <img src="./photos/gamePlay.png" alt="Pause Screen" loading="lazy">
+        <div class="overlay">
+          <h3>Game Play</h3>
+        </div>
+      </div>
 
-        scrollTopBtn.onclick = function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
+      <div class="project-card">
+        <img src="./photos/gamePlay2.png" alt="Countdown Overlay" loading="lazy">
+        <div class="overlay">
+          <h3>Game Play</h3>
+        </div>
+      </div>
 
-        // Lightbox Functionality
-        const projectImages = document.querySelectorAll('.project-image img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
+    </div>
+    <!-- Horizontal scroll indicator with arrows -->
+    <div class="scroll-arrows">
+      <button class="arrow left"><i class="fas fa-chevron-left"></i></button>
+      <button class="arrow right"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </section>
 
-        projectImages.forEach(img => {
-            img.addEventListener('click', () => {
-                lightbox.style.display = 'flex';
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-            });
-        });
+  <!-- Lightbox Container (Optional) -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Enlarged Image">
+  </div>
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                lightbox.style.display = 'none';
-            }
-        });
+  <!-- About the Project Section -->
+  <section class="about-project" id="about-project">
+    <h2>About Snake Game</h2>
+    <div class="content">
+      <div class="text-content">
+        <p>
+          The Snake Game is a modernized version of the classic Snake game, reimagined with a classic 90's arcade-inspired UI and enhanced gameplay features. The goal is to have the players experience a blend of retro aesthetics with modern dynamics as they navigate through levels, collect power-ups, and compete on the leaderboard.
+        </p>
+        <p><strong>Core Features:</strong></p>
+        <ul>
+          <li><strong>Levels:</strong> Start at Level 1 and progress by earning points. Every 100 points increases the game’s difficulty by speeding up the snake and altering food spawn patterns.</li>
+          <li><strong>Power-Ups:</strong> Enhance your gameplay with special power-ups like the <em>Multiplier</em> for double points and <em>Invincibility</em> that lets you bypass obstacles.</li>
+          <li><strong>Game States:</strong> Enjoy a robust pause/resume system complete with a countdown, and a Game Over screen that allows high score entry with a leaderboard display.</li>
+          <li><strong>Keyboard Controls:</strong> Use arrow keys or WASD for navigation, and press 'P' to pause the game at any time.</li>
+          <li><strong>Leaderboard System:</strong> Compete for the top 10 high scores! High scores are saved locally, letting you immortalize your achievements.</li>
+        </ul>
+        <p>
+          Dive into the code to see how canvas rendering, game loops, collision detection, and user inputs come together to create this engaging arcade experience.
+          For more info, check out the
+          <a href="https://github.com/Zeeyad-Monir/SnakeGame" target="_blank">Github</a>  
+        </p>
+      </div>
+      <div class="image-content">
+        <!-- This div is explicitly for mobile screens -->
+        <div class="mobile-video-container">
+          <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/cYkSkniBsNU" 
+            title="90's Snake Game Demo" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Optional: Close lightbox with Esc key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                lightbox.style.display = 'none';
-            }
-        });
-    </script>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Zeeyad Monir. All rights reserved.</p>
+    <p>Follow me on <a href="https://www.linkedin.com/in/zeeyad-monir-2b1b171a9/" target="_blank">Social Media</a></p>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+
+  <script src="scriptProjects3.js"></script>
+  <div class="cursor"></div>
 </body>
+
+<!-- Improved Mobile Menu Structure -->
+<div id="mobile-menu-button" class="mobile-menu-button">
+  <div class="hamburger-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<div id="mobile-nav-overlay" class="mobile-nav-overlay">
+  <div class="mobile-nav-content">
+    <ul>
+      <li><a href="index.html#home" class="mobile-nav-link">Home</a></li>
+      <li><a href="index.html#skills" class="mobile-nav-link">Skills</a></li>
+      <li><a href="index.html#code-projects" class="mobile-nav-link">Projects</a></li>
+      <li><a href="index.html#contact" class="mobile-nav-link">Contact</a></li>
+    </ul>
+  </div>
+</div>
 </html>
