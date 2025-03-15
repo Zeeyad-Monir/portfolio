@@ -337,6 +337,7 @@ section {
   max-width: 90%;
   margin: 0 auto;
   margin-bottom: 4rem;
+  margin-bottom: 100px;
 }
 
 #skills h2 {
@@ -407,7 +408,7 @@ section {
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
-  margin-top: 20px;
+  margin-top: 30px;
   
 }
 
@@ -751,8 +752,8 @@ section {
 #contact {
   text-align: center;
   padding: 50px 20px;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 200px;
+  margin-bottom: 150px;
 }
 
 #contact h2 {
