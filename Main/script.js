@@ -529,3 +529,60 @@
       animateSkills();
     })();
   });
+
+  /* Updated JavaScript for Expanded Contact Section */
+document.addEventListener('DOMContentLoaded', function() {
+  // Create sunburst effects
+  const emailSunburst = document.querySelector('.email-sunburst');
+  const linkedinSunburst = document.querySelector('.linkedin-sunburst');
+  
+  if (emailSunburst && linkedinSunburst) {
+    // Create email sunburst
+    createSunburst(emailSunburst);
+    
+    // Create linkedin sunburst
+    createSunburst(linkedinSunburst);
+  }
+  
+  function createSunburst(element) {
+    // Number of lines in the sunburst
+    const numLines = 20;
+    
+    // Create each line
+    for (let i = 0; i < numLines; i++) {
+      const line = document.createElement('div');
+      line.className = 'sunburst-line';
+      
+      // Calculate the angle for this line (evenly distributed)
+      const angle = (i / numLines) * 360;
+      
+      // Set length (half of the desired visual length since we're centering)
+      const length = 70; // Increased length for larger sunburst
+      
+      // Style positioning
+      line.style.width = `${length}px`;
+      line.style.transform = `rotate(${angle}deg)`;
+      
+      // Add the line to the sunburst
+      element.appendChild(line);
+    }
+  }
+  
+  // Add hover effects to change animation speed
+  const contactItems = document.querySelectorAll('.contact-item');
+  contactItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const sunburst = item.querySelector('.sunburst');
+      if (sunburst) {
+        sunburst.style.animationDuration = '10s';
+      }
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      const sunburst = item.querySelector('.sunburst');
+      if (sunburst) {
+        sunburst.style.animationDuration = '20s';
+      }
+    });
+  });
+});
