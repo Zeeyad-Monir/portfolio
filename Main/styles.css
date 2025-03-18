@@ -1802,7 +1802,7 @@ img {
   /* Make sure cards stay centered */
   .experience-card {
     position: absolute;
-    left: 40%;
+    left: 35%;
   }
   
   /* Center the navigation arrows */
@@ -1826,6 +1826,6 @@ img {
   
   /* Ensure cards stay properly centered on smaller screens */
   .carousel .experience-card.active {
-    transform: translateX(-50%) translateZ(0) scale(0.9);
+    transform: translateX(-40%) translateZ(0) scale(0.95);
   }
 }
