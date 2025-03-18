@@ -1826,6 +1826,6 @@ img {
   
   /* Ensure cards stay properly centered on smaller screens */
   .carousel .experience-card.active {
-    transform: translateX(-50%) translateZ(0) scale(0.95);
+    transform: translateX(-50%) translateZ(0) scale(0.80);
   }
 }
