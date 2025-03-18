@@ -1768,3 +1768,64 @@ img {
   }
 }
 
+/* Fix for carousel centering on mobile devices */
+@media (max-width: 767px) {
+  /* Make sure the carousel container is properly centered */
+  .carousel-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Ensure carousel is centered */
+  .carousel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  /* Explicitly set the active card transform to ensure proper centering */
+  .carousel .experience-card.active {
+    opacity: 1;
+    transform: translateX(-50%) translateZ(0) scale(1);
+    z-index: 3;
+    left: 50%;
+  }
+  
+  /* Make sure cards stay centered */
+  .experience-card {
+    position: absolute;
+    left: 50%;
+  }
+  
+  /* Center the navigation arrows */
+  .carousel-arrow.left-arrow {
+    position: absolute;
+    left: calc(50% - 60px);
+  }
+  
+  .carousel-arrow.right-arrow {
+    position: absolute;
+    right: calc(50% - 60px);
+  }
+}
+
+/* Additional fix for smaller mobile screens */
+@media (max-width: 375px) {
+  .carousel-container {
+    overflow: visible;
+    width: 100%;
+  }
+  
+  /* Ensure cards stay properly centered on smaller screens */
+  .carousel .experience-card.active {
+    transform: translateX(-50%) translateZ(0) scale(1);
+  }
+}
