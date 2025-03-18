@@ -355,9 +355,10 @@ body {
   padding: 20px;
 }
 
+/* Updated Hero Section Styles */
 .hero h1 {
   font-family: var(--headline-font);
-  font-size: clamp(50px, 10vw, 40px);
+  font-size: clamp(30px, 8vw, 40px);
   margin-bottom: 20px;
   color: var(--primary-color);
   animation: fadeDown 1s ease forwards;
@@ -368,10 +369,37 @@ body {
 
 .hero p {
   font-family: var(--body-font);
-  font-size: clamp(14px, 3vw, 18px);
+  font-size: clamp(12px, 2.5vw, 18px);
   margin-bottom: 30px;
   color: var(--text-color);
   animation: fadeUp 1s ease forwards;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Add these specific mobile adjustments */
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 15px;
+    max-width: 100%;
+  }
+  
+  .hero h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+  
+  .hero p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
 }
 
 .cta-button {
