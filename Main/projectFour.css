@@ -601,7 +601,7 @@ body {
 }
 
 .about-project .text-content a:hover {
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .about-project .image-content {
