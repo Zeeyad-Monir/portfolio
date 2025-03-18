@@ -1802,18 +1802,18 @@ img {
   /* Make sure cards stay centered */
   .experience-card {
     position: absolute;
-    left: 35%;
+    left: 40%;
   }
   
   /* Center the navigation arrows */
   .carousel-arrow.left-arrow {
     position: absolute;
-    left: calc(50% - 60px);
+    left: calc(55% - 60px);
   }
   
   .carousel-arrow.right-arrow {
     position: absolute;
-    right: calc(50% - 60px);
+    right: calc(55% - 60px);
   }
 }
 
@@ -1826,6 +1826,6 @@ img {
   
   /* Ensure cards stay properly centered on smaller screens */
   .carousel .experience-card.active {
-    transform: translateX(-40%) translateZ(0) scale(0.95);
+    transform: translateX(-50%) translateZ(0) scale(0.95);
   }
 }
