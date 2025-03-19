@@ -510,25 +510,94 @@ function handleWheel(event) {
       animate();
     })();
   
-    /* ==========================
-       SKILLS INFINITE SCROLL
-       ========================== */
-    (function initSkillsScroll() {
-      const skillsTrack = document.querySelector('.skills-track');
-      if (!skillsTrack) return;
+  /* ==========================
+   SKILLS INFINITE SCROLL - PERFECTLY SEAMLESS LOOPING
+   ========================== */
+(function initSkillsScroll() {
+  const skillsTrack = document.querySelector('.skills-track');
+  if (!skillsTrack) return;
+
+  // Store and remove any existing CSS animation
+  const originalAnimation = window.getComputedStyle(skillsTrack).getPropertyValue('animation');
+  skillsTrack.style.animation = 'none';
   
-      // Duplicate the content for seamless scrolling
-      skillsTrack.innerHTML += skillsTrack.innerHTML;
-      let offset = 0;
+  // Force browser to acknowledge style change before continuing
+  void skillsTrack.offsetWidth;
   
-      function animateSkills() {
-        offset += 0.5; // Adjust speed as needed (pixels per frame)
-        if (offset >= skillsTrack.scrollWidth / 2) {
-          offset = 0;
-        }
-        skillsTrack.style.transform = `translateX(-${offset}px)`;
-        requestAnimationFrame(animateSkills);
+  // Get the initial content before cloning
+  const initialContent = skillsTrack.innerHTML;
+  
+  // First, measure the width of a single item to determine optimal cloning
+  const firstItem = skillsTrack.querySelector('.skill-card');
+  if (!firstItem) return;
+  
+  const itemWidth = firstItem.offsetWidth + 
+                    parseInt(window.getComputedStyle(firstItem).marginRight);
+  
+  // Get all items and measure total original width
+  const allItems = skillsTrack.querySelectorAll('.skill-card');
+  const totalOriginalWidth = Array.from(allItems).reduce((width, item) => {
+    const itemStyle = window.getComputedStyle(item);
+    return width + item.offsetWidth + parseInt(itemStyle.marginRight);
+  }, 0);
+  
+  // Clone enough items to ensure we have at least 3x viewport width
+  const viewportWidth = window.innerWidth;
+  const minimumWidth = viewportWidth * 3;
+  const repetitions = Math.max(3, Math.ceil(minimumWidth / totalOriginalWidth) * 2);
+  
+  // Duplicate content multiple times for ultimate smoothness
+  let newContent = '';
+  for (let i = 0; i < repetitions; i++) {
+    newContent += initialContent;
+  }
+  skillsTrack.innerHTML = newContent;
+  
+  // Calculate the actual single set width after cloning
+  const actualSetWidth = totalOriginalWidth;
+  
+  // Keep track of our position and whether a reset is pending
+  let position = 0;
+  let resetPending = false;
+  let lastTimestamp = 0;
+  const scrollSpeed = 0.75; // Pixels per frame
+  
+  function animateSkills(timestamp) {
+    // Calculate time delta for smooth animation regardless of frame rate
+    const delta = lastTimestamp ? (timestamp - lastTimestamp) : 16;
+    lastTimestamp = timestamp;
+    
+    // Only advance position if no reset is pending
+    if (!resetPending) {
+      // Advance position based on time delta for consistent speed
+      position += scrollSpeed * (delta / 16);
+      
+      // Check if we need to reset
+      if (position >= actualSetWidth) {
+        // Flag that we need to reset on next frame
+        resetPending = true;
       }
-      animateSkills();
-    })();
+      
+      // Apply transform
+      skillsTrack.style.transform = `translateX(-${position}px)`;
+    } else {
+      // We have a reset pending - do it invisibly
+      // Calculate the exact position within the repeat pattern
+      const newPosition = position % actualSetWidth;
+      
+      // Set position without animation
+      position = newPosition;
+      skillsTrack.style.transform = `translateX(-${position}px)`;
+      
+      // Reset complete
+      resetPending = false;
+    }
+    
+    // Continue animation
+    requestAnimationFrame(animateSkills);
+  }
+  
+  // Start animation
+  requestAnimationFrame(animateSkills);
+})();
   });
