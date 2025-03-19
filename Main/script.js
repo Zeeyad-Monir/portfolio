@@ -560,7 +560,7 @@ function handleWheel(event) {
   let position = 0;
   let resetPending = false;
   let lastTimestamp = 0;
-  const scrollSpeed = 0.75; // Pixels per frame
+  const scrollSpeed = 0.55; // Pixels per frame
   
   function animateSkills(timestamp) {
     // Calculate time delta for smooth animation regardless of frame rate
