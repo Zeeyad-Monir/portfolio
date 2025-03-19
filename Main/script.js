@@ -269,63 +269,66 @@
         experienceCurrentIndex = (experienceCurrentIndex - 1 + experienceCards.length) % experienceCards.length;
         updateExperienceCarousel();
       }
+
       
-      // FIXED Mouse wheel event handler
-      function handleWheel(event) {
-        // Get the element that triggered the wheel event
-        const targetElement = event.target;
-        
-        // Check if the wheel event originated within the carousel container
-        const isCarouselEvent = carouselContainer.contains(targetElement);
-        
-        // Only proceed if we're directly interacting with the carousel
-        if (!isCarouselEvent) return;
-        
-        // Check if the carousel is in viewport
-        const rect = carouselContainer.getBoundingClientRect();
-        const isInViewport = (
-          rect.top <= window.innerHeight && 
-          rect.bottom >= 0 && 
-          rect.left <= window.innerWidth && 
-          rect.right >= 0
-        );
-        
-        if (!isInViewport) return;
-        
-        const now = Date.now();
-        const deltaX = event.deltaX || 0;
-        const deltaY = event.deltaY || 0;
-        // Horizontal scroll has priority
-        const delta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
-        
-        // Debounce wheel events
-        if (now - lastWheelTime > 50) {
-          wheelDirection = delta > 0 ? 1 : -1;
-        }
-        lastWheelTime = now;
-        
-        // Clear any pending timeout
-        if (wheelTimeout) {
-          clearTimeout(wheelTimeout);
-        }
-        
-        // Set a timeout to actually move the carousel
-        wheelTimeout = setTimeout(() => {
-          if (wheelDirection > 0) {
-            showNextExperienceCard();
-          } else {
-            showPrevExperienceCard();
-          }
-          wheelDirection = 0;
-        }, 100);
-        
-        // Prevent default scrolling when interacting with carousel
-        if (Math.abs(delta) > 5) {
-          event.preventDefault();
-          event.stopPropagation();
-          return false;
-        }
+    // FIXED Mouse wheel event handler
+function handleWheel(event) {
+  // Get the element that triggered the wheel event
+  const targetElement = event.target;
+  
+  // Check if the wheel event originated within the carousel container
+  const isCarouselEvent = carouselContainer.contains(targetElement);
+  
+  // Only proceed if we're directly interacting with the carousel
+  if (!isCarouselEvent) return;
+  
+  // Check if the carousel is in viewport
+  const rect = carouselContainer.getBoundingClientRect();
+  const isInViewport = (
+    rect.top <= window.innerHeight && 
+    rect.bottom >= 0 && 
+    rect.left <= window.innerWidth && 
+    rect.right >= 0
+  );
+  
+  if (!isInViewport) return;
+  
+  const now = Date.now();
+  const deltaX = event.deltaX || 0;
+  const deltaY = event.deltaY || 0;
+  
+  // ONLY respond to horizontal scrolling
+  // Check if horizontal scrolling is significant
+  if (Math.abs(deltaX) > 5 && Math.abs(deltaX) > Math.abs(deltaY)) {
+    // Debounce wheel events
+    if (now - lastWheelTime > 50) {
+      wheelDirection = deltaX > 0 ? 1 : -1;
+    }
+    lastWheelTime = now;
+    
+    // Clear any pending timeout
+    if (wheelTimeout) {
+      clearTimeout(wheelTimeout);
+    }
+    
+    // Set a timeout to actually move the carousel
+    wheelTimeout = setTimeout(() => {
+      if (wheelDirection > 0) {
+        showNextExperienceCard();
+      } else {
+        showPrevExperienceCard();
       }
+      wheelDirection = 0;
+    }, 100);
+    
+    // Prevent default scrolling only for horizontal movement
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+  }
+  
+  // Allow vertical scrolling to pass through normally
+}
       
       // Touch event handlers for mobile
       function handleTouchStart(event) {
