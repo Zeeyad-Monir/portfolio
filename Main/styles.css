@@ -1789,6 +1789,7 @@ img {
     justify-content: center;
     align-items: center;
     position: relative;
+    left: 40%;
   }
   
   /* Explicitly set the active card transform to ensure proper centering */
@@ -1802,7 +1803,7 @@ img {
   /* Make sure cards stay centered */
   .experience-card {
     position: absolute;
-    left: 36%;
+    left: 40%;
   }
   
   /* Center the navigation arrows */
