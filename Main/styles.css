@@ -1789,7 +1789,7 @@ img {
     justify-content: center;
     align-items: center;
     position: relative;
-    left: -7%;
+    left: -7.5%;
   }
   
   /* Explicitly set the active card transform to ensure proper centering */
