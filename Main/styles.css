@@ -1803,7 +1803,7 @@ img {
   /* Make sure cards stay centered */
   .experience-card {
     position: absolute;
-    left: 40%;
+    left: 50%;
   }
   
   /* Center the navigation arrows */
