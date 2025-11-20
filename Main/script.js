@@ -464,29 +464,42 @@ function handleWheel(event) {
   
       const ctx = canvas.getContext('2d');
       const dpr = Math.min(window.devicePixelRatio || 1, 2); // crisper stars without overloading mobile
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const STAR_COUNT = isMobile ? 180 : 220;
       let stars = [];
-      let w, h;
+      let w = 0;
+      let h = 0;
   
       function resizeCanvas() {
-        const viewport = window.visualViewport;
-        const vw = viewport ? viewport.width : window.innerWidth;
-        const vh = viewport ? viewport.height : window.innerHeight;
+        const prevW = w || window.innerWidth;
+        const prevH = h || window.innerHeight;
+        const width = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const height = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
   
-        w = vw;
-        h = vh;
+        w = width;
+        h = height;
   
         canvas.style.width = '100vw';
         canvas.style.height = '100vh';
   
-        canvas.width = Math.round(vw * dpr);
-        canvas.height = Math.round(vh * dpr);
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  
+        // Keep stars anchored relative to new size to avoid jitter during small viewport chrome changes
+        if (stars.length) {
+          const scaleX = w / prevW;
+          const scaleY = h / prevH;
+          stars.forEach(s => {
+            s.x *= scaleX;
+            s.y *= scaleY;
+          });
+        }
       }
   
       function createStars() {
-        const count = window.innerWidth < 768 ? 140 : 180;
         stars = [];
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < STAR_COUNT; i++) {
           stars.push({
             x: Math.random() * w,
             y: Math.random() * h,
@@ -499,16 +512,13 @@ function handleWheel(event) {
   
       resizeCanvas();
       createStars();
+  
+      // Throttle resize to avoid rapid reflows on iOS chrome show/hide
+      let resizeTimeout;
       window.addEventListener('resize', () => {
-        resizeCanvas();
-        createStars();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(resizeCanvas, 120);
       });
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', () => {
-          resizeCanvas();
-          createStars();
-        });
-      }
   
       function animate() {
         ctx.fillStyle = '#000000';
