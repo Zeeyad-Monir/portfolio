@@ -463,35 +463,58 @@ function handleWheel(event) {
       if (!canvas) return; // No starfield canvas -> skip
   
       const ctx = canvas.getContext('2d');
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // crisper stars without overloading mobile
       let stars = [];
       let w, h;
   
       function resizeCanvas() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
+        const viewport = window.visualViewport;
+        const vw = viewport ? viewport.width : window.innerWidth;
+        const vh = viewport ? viewport.height : window.innerHeight;
+  
+        w = vw;
+        h = vh;
+  
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+  
+        canvas.width = Math.round(vw * dpr);
+        canvas.height = Math.round(vh * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
   
       function createStars() {
+        const count = window.innerWidth < 768 ? 140 : 180;
         stars = [];
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < count; i++) {
           stars.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            radius: Math.random() * 1.8,
+            radius: Math.random() * 1.8 + 0.4,
             vx: (Math.random() - 0.5) * 0.2,
             vy: (Math.random() - 0.5) * 0.2
           });
         }
       }
+  
+      resizeCanvas();
       createStars();
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        createStars();
+      });
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', () => {
+          resizeCanvas();
+          createStars();
+        });
+      }
   
       function animate() {
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, w, h);
   
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
         for (let s of stars) {
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);

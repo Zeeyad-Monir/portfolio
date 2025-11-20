@@ -33,6 +33,7 @@ body {
   color: var(--base-text);
   background-color: var(--base-bg); /* Match canvas color so chrome resize doesn't flash white */
   min-height: 100%;
+  position: relative; /* Enable layering with the starfield beneath content */
   overflow-x: hidden;
   cursor: none;
   font-size: 16px;
@@ -61,11 +62,14 @@ body {
   width: 100vw;
   height: 100vh;
   height: 100svh;
-  z-index: -1;
+  z-index: 0; /* Behind content but above the base background */
+  display: block;
+  inset: 0;
   /* Fallback color so repaints don't flash white */
   background-color: var(--base-bg);
   /* Ensure pointer events do not interfere */
   pointer-events: none;
+  will-change: transform;
 }
 
 /* Navigation Bar */
@@ -166,6 +170,15 @@ section {
   #home {
     min-height: 100dvh;
   }
+}
+
+/* Keep all foreground content above the starfield */
+section,
+footer,
+.unique-nav,
+.mobile-menu-button {
+  position: relative;
+  z-index: 1;
 }
 
 .name-animation {
