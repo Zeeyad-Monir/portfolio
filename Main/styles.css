@@ -23,14 +23,16 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
   font-size: 16px; /* Base size for rem units */
+  min-height: 100%;
+  background-color: var(--base-bg); /* Dark fallback to hide Safari gaps */
 }
 
 /* General Body Styles */
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--base-text);
-  /* Remove background-color so that the canvas below shows through */
-  background: transparent;
+  background-color: var(--base-bg); /* Match canvas color so chrome resize doesn't flash white */
+  min-height: 100%;
   overflow-x: hidden;
   cursor: none;
   font-size: 16px;
@@ -56,9 +58,12 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
   z-index: -1;
+  /* Fallback color so repaints don't flash white */
+  background-color: var(--base-bg);
   /* Ensure pointer events do not interfere */
   pointer-events: none;
 }
@@ -143,6 +148,7 @@ section {
 #home {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   /* No background color so starfield is visible */
   display: flex;
   flex-direction: column;
@@ -150,6 +156,16 @@ section {
   justify-content: flex-start;
   overflow: hidden;
   padding-top: 100px;
+}
+
+@supports (height: 100dvh) {
+  #starfield {
+    height: 100dvh;
+  }
+
+  #home {
+    min-height: 100dvh;
+  }
 }
 
 .name-animation {
