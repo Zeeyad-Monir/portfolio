@@ -465,6 +465,7 @@ function handleWheel(event) {
       const ctx = canvas.getContext('2d');
       const dpr = Math.min(window.devicePixelRatio || 1, 2); // crisper stars without overloading mobile
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const STAR_ALPHA = isMobile ? 0.6 : 0.9; // softer on mobile
       const STAR_COUNT = isMobile ? 180 : 220;
       let stars = [];
       let w = 0;
@@ -524,7 +525,7 @@ function handleWheel(event) {
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, w, h);
   
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.fillStyle = `rgba(255, 255, 255, ${STAR_ALPHA})`;
         for (let s of stars) {
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
