@@ -433,15 +433,18 @@ function handleWheel(event) {
       let isDeleting = false;
       const target = document.getElementById('role-animation');
       if (!target) return; // If element not found, skip
-  
+      const renderText = (text) => {
+        target.textContent = text && text.length ? text : '\u00a0'; // keep height stable even when empty
+      };
+
       function typeRole() {
         if (!isDeleting && charIndex <= roles[roleIndex].length) {
           currentRole = roles[roleIndex].substring(0, charIndex++);
-          target.innerHTML = currentRole;
+          renderText(currentRole);
           setTimeout(typeRole, 100);
         } else if (isDeleting && charIndex > 0) {
           currentRole = roles[roleIndex].substring(0, charIndex--);
-          target.innerHTML = currentRole;
+          renderText(currentRole);
           setTimeout(typeRole, 60);
         } else if (!isDeleting && charIndex > roles[roleIndex].length) {
           isDeleting = true;
@@ -449,6 +452,7 @@ function handleWheel(event) {
         } else if (isDeleting && charIndex === 0) {
           isDeleting = false;
           roleIndex = (roleIndex + 1) % roles.length;
+          renderText('');
           setTimeout(typeRole, 500);
         }
       }

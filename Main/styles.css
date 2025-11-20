@@ -157,9 +157,21 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   overflow: hidden;
-  padding-top: 100px;
+  padding: clamp(80px, 12vh, 140px) clamp(18px, 4vw, 28px);
+}
+
+.hero-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.65rem, 1.7vh, 1.15rem);
+  width: 100%;
+  max-width: 920px;
+  transform: translateY(-5vh);
+  text-align: center;
 }
 
 @supports (height: 100dvh) {
@@ -182,14 +194,15 @@ footer,
 }
 
 .name-animation {
-  font-size: clamp(2.5rem, 8vw, 5.5rem); /* Fluid font size */
+  font-size: clamp(3.25rem, 10vw, 7.5rem); /* Fluid font size */
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   color: var(--base-text);
   text-align: center;
-  margin-top: 3rem;
-  margin-bottom: 15px;
-  transform: translateY(-5vh);
+  margin-top: 0;
+  margin-bottom: clamp(0.25rem, 1vh, 0.75rem);
+  line-height: 1.05;
+  transform: translateY(0);
 }
 
 .name-animation span {
@@ -212,14 +225,23 @@ footer,
 }
 
 .animated-role {
-  font-size: clamp(1.2rem, 4vw, 2.25rem);
+  font-size: clamp(1.6rem, 5vw, 2.9rem);
   color: var(--accent-light);
-  margin-top: 1rem;
+  margin-top: 0.35rem;
   text-align: center;
   white-space: nowrap;
-  min-height: 2rem;
-  line-height: 2rem;
-  transform: translateY(-4vh);
+  min-height: clamp(2.2rem, 4.6vw, 3.5rem);
+  line-height: 1.3;
+  transform: translateY(0);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#role-animation {
+  display: inline-block;
+  min-height: 1em;
 }
 
 .animated-role::after {
@@ -290,11 +312,12 @@ footer,
 }
 
 .social-links {
-  margin-top: 20px;
+  margin-top: clamp(0.9rem, 2vh, 1.4rem);
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .social-links a {
@@ -306,6 +329,7 @@ footer,
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .social-links a::after {
@@ -328,11 +352,19 @@ footer,
 }
 
 .social-links a .icon {
-  margin-top: 5px;
-  margin-right: 8px;
+  margin-top: 0;
+  margin-right: 0;
   transition: transform 0.3s;
-  width: clamp(25px, 5vw, 35px);
+  width: clamp(32px, 6vw, 44px);
   height: auto;
+}
+
+.hero-social-links {
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.hero-social-links .icon {
+  width: clamp(36px, 7vw, 48px);
 }
 
 .social-links a:hover .icon {
@@ -892,15 +924,18 @@ img {
 
 /* New Styles for Scroll-Triggered Name Animation */
 .name-container {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-size: clamp(3.25rem, 10vw, 7.5rem);
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   color: var(--base-text);
   text-align: center;
-  margin-top: 3rem;
-  margin-bottom: 15px;
+  margin-top: 0;
+  margin-bottom: clamp(0.25rem, 1vh, 0.75rem);
+  line-height: 1.05;
+  white-space: nowrap;
+  max-width: 92vw;
   /* Starting position as in the original animation */
-  transform: translateY(-5vh);
+  transform: translateY(0);
 }
 
 .name-container span {
@@ -1166,12 +1201,18 @@ img {
     padding: 4px 0;
   }
   
-  .name-animation {
-    font-size: 28px;
+  .name-animation,
+  .name-container {
+    font-size: clamp(2.6rem, 12vw, 3.25rem);
   }
   
   .animated-role {
-    font-size: 20px;
+    font-size: clamp(1.3rem, 6vw, 1.9rem);
+    min-height: clamp(1.7rem, 3.6vw, 2.4rem);
+  }
+  
+  .hero-stack {
+    transform: translateY(-2.75vh);
   }
   
   .bio-container {
@@ -1340,25 +1381,36 @@ img {
   }
   
   #home {
-    min-height: auto;
-    padding: 64px 15px 24px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: clamp(64px, 15vh, 100px) 15px clamp(40px, 9vh, 72px);
+  }
+  
+  .hero-stack {
+    gap: clamp(0.6rem, 1.6vh, 1rem);
+    transform: translateY(-3.5vh);
+    max-width: 94vw;
   }
   
   /* Fix Name and Role Text */
   .name-animation, 
   .name-container {
-    font-size: 2.5rem;
-    margin-top: 1rem;
+    font-size: clamp(2.7rem, 11vw, 3.25rem);
+    margin-top: 0;
     transform: translateY(0);
-    word-wrap: break-word;
     width: 100%;
+    max-width: 95vw;
+    line-height: 1.05;
+    white-space: nowrap;
   }
   
   .animated-role {
-    font-size: 1.2rem;
+    font-size: clamp(1.4rem, 6.5vw, 2rem);
     transform: translateY(0);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.75rem;
     width: 100%;
+    line-height: 1.3;
+    min-height: clamp(1.8rem, 4vw, 2.6rem);
   }
   
   /* Bio Container & Profile Picture Fixes */
@@ -1505,11 +1557,15 @@ img {
   
   .name-animation,
   .name-container {
-    font-size: 2.2rem;
+    font-size: clamp(2.4rem, 11vw, 2.9rem);
   }
   
   .animated-role {
-    font-size: 1rem;
+    font-size: clamp(1.1rem, 5.5vw, 1.4rem);
+  }
+  
+  .hero-stack {
+    transform: translateY(-2vh);
   }
   
   .profile-picture img {
