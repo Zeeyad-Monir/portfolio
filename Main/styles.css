@@ -175,6 +175,15 @@ section {
   padding: 50px 20px;
 }
 
+#skills {
+  padding-bottom: 57.5px;
+}
+
+#code-projects {
+  padding-top: 57.5px;
+  padding-bottom: 57.5px;
+}
+
 /* Home Section Specific */
 #home {
   position: relative;
@@ -424,7 +433,7 @@ footer,
 #skills .skills-container {
   max-width: 90%;
   margin: 0 auto;
-  margin-bottom: 4rem;
+  margin-bottom: 4.6rem;
 }
 
 #skills h2 {
@@ -838,8 +847,8 @@ footer,
 /* Contact Section Styles */
 #contact {
   text-align: center;
-  padding: 50px 20px;
-  margin-top: 100px;
+  padding: 57.5px 20px 50px;
+  margin-top: 115px;
   margin-bottom: 100px;
 }
 
@@ -1152,6 +1161,15 @@ img {
   section {
     padding: 40px 15px;
   }
+
+  #skills {
+    padding-bottom: 46px;
+  }
+
+  #code-projects {
+    padding-top: 46px;
+    padding-bottom: 46px;
+  }
   
   .experience-card {
     width: 260px;
@@ -1407,6 +1425,15 @@ img {
     overflow: hidden;
   }
   
+  #skills {
+    padding-bottom: 36.8px;
+  }
+  
+  #code-projects {
+    padding-top: 36.8px;
+    padding-bottom: 36.8px;
+  }
+  
   #home {
     min-height: 100vh;
     min-height: 100svh;
@@ -1501,7 +1528,7 @@ img {
   
   /* Skills Section Fixes */
   #skills .skills-container {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.725rem;
   }
   
   .skills-subtitle {
@@ -1564,9 +1591,9 @@ img {
   
   /* Contact Section Fixes */
   #contact {
-    margin-top: 16px;
+    margin-top: 18.4px;
     margin-bottom: 32px;
-    padding: 32px 15px;
+    padding: 36.8px 15px 32px;
   }
   
   .contact-info {
