@@ -1,285 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Zeeyad Monir - Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeeyad Monir | Product Designer</title>
+    <style>
+        /* SHARED STYLES */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111;
+            line-height: 1.6;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+        h2 {
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
+            color: #666; 
+            /* Increased from 3rem to 3.45rem (15%) */
+            margin-top: 3.25rem; 
+            margin-bottom: 1.5rem;
+            font-weight: 500; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;
+        }
+        p { font-size: 1rem; color: #333; margin-bottom: 1rem; }
+        
+        /* LINK STYLES */
+        a { color: #111; text-decoration: none; border-bottom: 1px solid #ccc; transition: all 0.2s ease; cursor: pointer; }
+        a:hover { border-bottom: 1px solid #000; background-color: #f0f0f0; }
+        
+        /* SPECIAL BUTTON STYLE FOR FIGMA */
+        .figma-btn, .demo-btn, .slide-btn {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2px 4px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+            color: #555;
+            border-bottom: 1px solid #ccc; /* Overwrite default link style */
+        }
+        .figma-btn:hover, .demo-btn:hover, .slide-btn:hover {
+            background-color: #111;
+            color: #fff;
+            border-color: #111;
+        }
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.4rem;
+        }
+
+        .sub-text { color: #666; font-size: 0.95rem; }
+        
+        /* LIST LAYOUTS */
+        .item { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem; }
+        .item-left { flex: 1; padding-right: 20px; }
+        .item-title { font-weight: 600; display: block; margin-bottom: 0.3rem; font-size: 1.1rem; }
+        .item-desc { color: #444; font-size: 1rem; display: block; margin-bottom: 0.5rem; }
+        .item-tools { display: block; font-size: 0.85rem; color: #888; font-family: monospace; margin-top: 0.25rem; }
+        .item-date { font-size: 0.85rem; color: #888; white-space: nowrap; }
+
+        /* SKILLS SPECIFIC */
+        .skill-group { margin-bottom: 1rem; }
+
+        footer { margin-top: 5rem; border-top: 1px solid #eee; padding-top: 2rem; font-size: 0.85rem; color: #666; }
+        
+        @media (max-width: 500px) {
+            .item { flex-direction: column; }
+            .item-date { margin-bottom: 0.25rem; order: -1; display: block; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Starfield Canvas as full-page background -->
-  <canvas id="starfield"></canvas>
 
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  
-<!-- Improved Mobile Menu Structure -->
-<div id="mobile-menu-button" class="mobile-menu-button">
-  <div class="hamburger-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-
-<div id="mobile-nav-overlay" class="mobile-nav-overlay">
-  <div class="mobile-nav-content">
-    <ul>
-      <li><a href="#home" class="mobile-nav-link">Home</a></li>
-      <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
-      <li><a href="#code-projects" class="mobile-nav-link">Projects</a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-    </ul>
-  </div>
-</div>
-
-<!-- Regular Navigation (will be hidden on mobile) -->
-<nav class="unique-nav">
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#code-projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-  <!-- Home Section -->
-  <section id="home">
-    <div class="hero-stack">
-      <div id="name" class="name-container">
-        <span>Z</span>E<span></span><span>E</span><span>Y</span><span>A</span><span>D</span>
-        <span>M</span><span>O</span><span>N</span><span>I</span><span>R</span>
-      </div>
-      <h2 class="animated-role"><span id="role-animation"></span></h2>
-      <div class="social-links hero-social-links">
-        <a href="https://www.linkedin.com/in/zeeyad-monir-2b1b171a9/" target="_blank" aria-label="LinkedIn">
-          <img src="./photos/linkedin.png" alt="LinkedIn" class="icon">
-        </a>
-        <a href="https://github.com/Zeeyad-Monir" target="_blank" aria-label="GitHub">
-          <img src="./photos/github2.png" alt="GitHub" class="icon">
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills">
-    <div class="skills-container">
-      <h2>Skills</h2>
-      <p class="skills-subtitle">
-        Diverse toolkit of technologies mastered to build innovative solutions and drive digital transformation.
-      </p>
-      <!-- Continuous Scroll Wrapper -->
-      <div class="skills-scroll">
-        <div class="skills-track">
-          <!-- Single set of Skill Cards -->
-          <div class="skill-card" tabindex="0" aria-label="HTML5 - Markup Language for creating web pages">
-            <img src="./photos/html5.png" alt="HTML5 Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">HTML5</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="CSS3 - Styling and design of web pages">
-            <img src="./photos/css.png" alt="CSS3 Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">CSS3</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="JavaScript - Programming language for web development">
-            <img src="./photos/js.png" alt="JavaScript Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">JavaScript</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="Python - Versatile programming language for various applications">
-            <img src="./photos/python.png" alt="Python Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Python</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="typescript - Versatile programming platform for various applications">
-            <img src="./photos/typescript.png" alt="typescript Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Typescript</p>
-          </div>
-
-          <div class="skill-card" tabindex="0" aria-label="React - Versatile programming platform for various applications">
-            <img src="./photos/reactnative.png" alt="React Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">React</p>
-          </div>
-
-          <div class="skill-card" tabindex="0" aria-label="Node.js - Versatile programming platform for various applications">
-            <img src="./photos/nodejs.png" alt="Next Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Node.js</p>
-          </div>
-
-          <div class="skill-card" tabindex="0" aria-label="Next.js - Versatile programming platform for various applications">
-            <img src="./photos/next.png" alt="Next Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Next.js</p>
-          </div>
-
-          <div class="skill-card" tabindex="0" aria-label="Firebase Versatile programming platform for various applications">
-            <img src="./photos/firebase.svg" alt="Next Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Firestore</p>
-          </div>
-
-          <div class="skill-card" tabindex="0" aria-label="Figma - Figma for UI Development and interfaces">
-            <img src="./photos/figma.png" alt="Figma Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Figma</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="Unity - Unity is a game development platform">
-            <img src="./photos/unity3.png" alt="Unity Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Unity</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="Final Cut Pro - Versatile Film Editing Application">
-            <img src="./photos/finalcut.png" alt="Final Cut Pro Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Final Cut Pro</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="Photoshop - Versatile Photo Editing Application">
-            <img src="./photos/photoshop.png" alt="Photoshop Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Photoshop</p>
-          </div>
-          <div class="skill-card" tabindex="0" aria-label="Lightroom - Versatile Photo Editing Application">
-            <img src="./photos/lightroom.png" alt="Lightroom Icon" class="skill-icon" loading="lazy">
-            <p class="skill-label">Lightroom</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Code Projects Section -->
-<section id="code-projects">
-    <h2>Projects</h2>
-    <div class="carousel-container">
-      <!-- Left Arrow Button -->
-      <button class="carousel-arrow left-arrow" id="experience-left-arrow" aria-label="Previous Project">
-        &#8249;
-      </button>
-  
-      <div class="carousel">
-        <!-- Updated SznLuv Card -->
-        <a href="projectOne.html" class="experience-card">
-          <!-- New Illustration -->
-          <img src="./photos/sznluvIcon4.png" 
-               alt="sznluv Illustration" 
-               class="sznluv-illustration">
-          
-          <div class="card-content">
-            <!-- Title in a serif font -->
-            <h3 class="sznluv-title">SznLuv</h3>
-            
-            <!-- Subtitle / App Description -->
-            <p class="subtitle">
-              SznLuv is a Vancouver date spot discovery app.
-            </p>
-            
-            <!-- Technology Badges -->
-            <div class="tech-badges">
-              <span>react-native</span>
-              <span>Firebase</span>
-              <span>API's</span>
-            </div>
-          </div>
-        </a>
-  
-         <!-- Updated PACKIT Card -->
-         <a href="projectTwo.html" class="experience-card">
-            <!-- New Illustration -->
-            <img src="./photos/packItIcon2.png" 
-                 alt="PackIT Icon" 
-                 class="packit-illustration">
-            
-            <div class="card-content">
-              <!-- Title in a serif font -->
-              <h3 class="packit-title">PackIt</h3>
-              
-              <!-- Subtitle / App Description -->
-              <p class="subtitle">
-               Student volunteery food waste pick up app design.
-              </p>
-              
-              <!-- Technology Badges -->
-              <div class="tech-badges">
-                <span>Figma</span>
-                <span>Interface Designs</span>
-              </div>
-            </div>
-          </a>
-
-    <!-- Updated Asteroids Game Card -->
-    <a href="projectFour.html" class="experience-card">
-      <!-- New Illustration -->
-      <img src="./photos/asteroidsGame.png" 
-           alt="PackIT Icon" 
-           class="packit-illustration">
-      
-      <div class="card-content">
-        <!-- Title in a serif font -->
-        <h3 class="packit-title">Asteroids Game</h3>
-        
-        <!-- Subtitle / App Description -->
-        <p class="subtitle">
-          A retro space arcade shooter, try to survival, and cause destruction.
+    <header>
+        <h1>Zeeyad Monir</h1>
+        <p class="sub-text">
+            Product Designer & Developer based in Vancouver, BC. <br>
+            BSc Interactive Arts & Tech at SFU.
         </p>
-        
-        <!-- Technology Badges -->
-        <div class="tech-badges">
-          <span>Html</span>
-          <span>CSS</span>
-          <span>JS</span>
+        <div style="margin-top: 1rem;">
+            <a href="mailto:Zeeyadmonir@gmail.com">Email</a> &nbsp;
+            <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a> &nbsp;
+            <a href="https://github.com/Zeeyad-Monir" target="_blank">GitHub</a>
         </div>
-      </div>
-    </a>
-  
-        <!-- Updated SnakeGame Card -->
-        <a href="projectThree.html" class="experience-card">
-            <!-- New Illustration -->
-            <img src="./photos/snakeGameIcon.png" 
-                 alt="Snake Icon" 
-                 class="snake">
-            
-            <div class="card-content">
-              <!-- Title in a serif font -->
-              <h3 class="snake-title">90's Snake</h3>
-              
-              <!-- Subtitle / App Description -->
-              <p class="subtitle">
-                A classic arcade snake game with levels, power-ups, and a high-score system.
-            </p>
-              
-              <!-- Technology Badges -->
-              <div class="tech-badges">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JS</span>
-              </div>
+    </header>
+
+    <section>
+        <h2>Work Experience</h2>
+
+        <div class="item">
+            <div class="item-left">
+                <span class="item-title">Lazer Technologies</span>
+                <span class="item-desc">UI/UX Design Intern.</span>
             </div>
-          </a>
-      </div>
-  
+            <span class="item-date">Apr 2025 — Sept 2025</span>
+        </div>
 
-      
-      <!-- Right Arrow Button -->
-      <button class="carousel-arrow right-arrow" id="experience-right-arrow" aria-label="Next Project">
-        &#8250;
-      </button>
-    </div>
-  
+        <div class="item">
+            <div class="item-left">
+                <span class="item-title">MarshallVapes</span>
+                <span class="item-desc">Co-Founder & Product Designer.</span>
+            </div>
+            <span class="item-date">Sept 2024 — Present</span>
+        </div>
+    </section>
 
-  </section>
-  
-  <!-- Updated Contact Section -->
-<section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-info">
-      <p>Please feel free to contact me! You can email me or connect with me on LinkedIn:</p>
-      <p>Email: <a href="mailto:Zeeyadmonir@gmail.com">Zeeyadmonir@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/zeeyad-monir-2b1b171a9/" target="_blank">Zeeyad Monir</a></p>
-    </div>
-  </section>
-  
+    <section>
+        <h2>Selected Projects</h2>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 Zeeyad Monir. All rights reserved.</p>
-    <p>Follow me on <a href="https://www.linkedin.com/in/zeeyad-monir-2b1b171a9/" target="_blank">Social Media</a></p>
-  </footer>
+        <div class="item">
+            <div class="item-left">
+                <a href="packit.html" class="item-title">PackIt &rarr;</a>
+                <span class="item-desc">App UI of pairing institutions with student volunteers to cut food waste.</span>
+                <span class="item-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</span>
+                <div class="item-actions">
+                    <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" class="figma-btn">Figma</a>
+                    <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" class="slide-btn">Slide Deck</a>
+                </div>
+            </div>
+            <span class="item-date">Sept 2024 — Dec 2024</span>
+        </div>
 
-  <script src="script.js"></script>
+        <div class="item">
+            <div class="item-left">
+                <a href="sznluv.html" class="item-title">SznLuv &rarr;</a>
+                <span class="item-desc">Seasonal Spot discovery app for Vancouver couples.</span>
+                <span class="item-tools">TOOLS: REACT NATIVE · EXPO SDK · JS</span>
+                <div class="item-actions">
+                    <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" class="figma-btn">Figma</a>
+                    <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" class="demo-btn">Demo</a>
+                    <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" class="slide-btn">Slide Deck</a>
+                </div>
+            </div>
+            <span class="item-date">Sept 2024 — Dec 2024</span>
+        </div>
+
+        <div class="item">
+            <div class="item-left">
+                <a href="compfit.html" class="item-title">CompFit &rarr;</a>
+                <span class="item-desc">A fitness competition app where friends track workouts and compete on shared leaderboards.</span>
+                <span class="item-tools">TOOLS: FIGMA · REACT NATIVE · FIREBASE · EXPO</span>
+                <div class="item-actions">
+                    <a href="#" target="_blank" class="figma-btn">Figma</a>
+                    <a href="#" target="_blank" class="demo-btn">Demo</a>
+                </div>
+            </div>
+            <span class="item-date">Aug 2025 — Nov 2025</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Skills & Tools</h2>
+
+        <div class="item">
+            <div class="item-left">
+                <span class="item-title">Design & Prototype</span>
+                <span class="item-desc">Figma, Adobe Creative Suite, Photoshop, ProtoPie, Interaction & Motion Design, Rapid Prototyping.</span>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-left">
+                <span class="item-title">Development</span>
+                <span class="item-desc">HTML, CSS, JavaScript, React Native, SQL, CMS Tooling, Mobile-first UI Systems.</span>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-left">
+                <span class="item-title">Process & Research</span>
+                <span class="item-desc">Usability Testing, A/B Testing, Product Iteration, Market Research, Strategic Problem Solving.</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span>&copy; 2025 Zeeyad Monir</span>
+    </footer>
+
 </body>
 </html>
