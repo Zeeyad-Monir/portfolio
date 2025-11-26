@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1400" viewBox="0 0 800 1400" role="img" aria-label="Placeholder for Flow Hive: app home">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6f8f9" />
+      <stop offset="100%" stop-color="#dce3e8" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1400" fill="url(#grad)" />
+  <rect x="60" y="60" width="680" height="1280" rx="28" ry="28" fill="#ffffff" stroke="#c5d0d6" stroke-width="4" stroke-dasharray="14 12" />
+  <text x="400" y="700" font-family="Helvetica, Arial, sans-serif" font-size="32" fill="#6b7c86" text-anchor="middle">Flow Hive:</text>
+  <text x="400" y="750" font-family="Helvetica, Arial, sans-serif" font-size="36" font-weight="bold" fill="#4a5c66" text-anchor="middle">app home</text>
+  <text x="400" y="820" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#8ca0aa" text-anchor="middle">Replace with final screen</text>
+</svg>
