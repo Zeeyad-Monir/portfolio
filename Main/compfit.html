@@ -17,6 +17,17 @@
             padding: 4rem 1.5rem;
         }
         h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.03em; }
+        .title-icon {
+            height: 2.75rem;
+            width: auto;
+            margin-left: 0.5rem;
+            vertical-align: baseline;
+            display: inline-block;
+            filter: brightness(1.1);
+            position: relative;
+            top: 0.24rem;
+            border-radius: 6px;
+        }
         h3 { font-size: 1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.5rem; }
         p { font-size: 1.05rem; color: #333; margin-bottom: 1.5rem; }
         ul { margin-bottom: 1.5rem; padding-left: 1.2rem; }
@@ -25,7 +36,7 @@
         .back-link:hover { color: #000; }
         .meta { color: #666; font-size: 0.9rem; margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
         .meta-actions { margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .figma-btn, .demo-btn {
+        .figma-btn, .demo-btn, .slide-btn {
             font-size: 0.75rem;
             text-transform: uppercase;
             border: 1px solid #ccc;
@@ -36,7 +47,7 @@
             text-decoration: none;
             transition: all 0.2s ease;
         }
-        .figma-btn:hover, .demo-btn:hover {
+        .figma-btn:hover, .demo-btn:hover, .slide-btn:hover {
             background-color: #111;
             color: #fff;
             border-color: #111;
@@ -94,7 +105,8 @@
 
         .gallery-image img {
             width: 100%;
-            height: auto;
+            aspect-ratio: 9 / 19.5; /* Phone screenshots */
+            object-fit: cover;
             border: 1px solid #e8e8e8;
             border-radius: 4px;
             display: block;
@@ -127,7 +139,7 @@
             justify-content: center;
             align-items: center;
             cursor: zoom-out;
-            padding: 20px;
+            padding: 14px;
         }
 
         #lightbox img {
@@ -140,6 +152,10 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             body { padding: 3rem 1.25rem; }
+            .title-icon {
+                height: 2.42rem;
+                top: 0.13rem;
+            }
             .gallery-grid {
                 gap: 16px;
                 padding-bottom: 0.75rem;
@@ -159,14 +175,15 @@
     <a href="index.html" class="back-link">&larr; Back to Home</a>
 
     <header>
-        <h1>CompFit</h1>
+        <h1>CompFit <img src="PortfolioPhotos/compfit/CompFitAppIcon.png" alt="CompFit icon" class="title-icon"></h1>
         <div class="meta">
             <strong>Role:</strong> Product Designer & Developer <br>
             <strong>Tools:</strong> React Native, Firebase, Figma, Expo <br>
-            <strong>Date:</strong> 2024 - Present
+            <strong>Date:</strong> Aug 2025 - Dec 2025
             <div class="meta-actions">
-                <a href="#" target="_blank" class="figma-btn">Figma</a>
-                <a href="#" target="_blank" class="demo-btn">Demo</a>
+                <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="figma-btn">Figma</a>
+                <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="slide-btn">Slide Deck</a>
+                <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="demo-btn">Test-Flight Beta</a>
             </div>
         </div>
     </header>
@@ -178,9 +195,7 @@
             and compete on shared leaderboards. The product focuses on making group accountability fun, simple, and
             repeatable, so people actually stick with their goals instead of dropping off after a week.
         </p>
-    </section>
 
-    <section>
         <h3>Design Process</h3>
         <ul>
             <li><strong>Product Definition:</strong> Mapped out core use cases around friendly competition, including 1v1 battles, group challenges, and pre-made competition templates.</li>
@@ -188,15 +203,21 @@
             <li><strong>Feedback & Iteration:</strong> Collected feedback from early testers on scoring clarity, tie-break rules, and notification timing, then refined copy, hierarchy, and flows to reduce confusion.</li>
             <li><strong>Technical Implementation:</strong> Built the app in React Native with Firebase for auth, data, and real-time updates, aligning the UX with what is feasible on mobile devices and wearables.</li>
         </ul>
-    </section>
 
-    <section>
         <h3>The Solution</h3>
         <ul>
             <li><strong>Customizable Competitions:</strong> Users can define rules, point systems, and durations so different sports and activities feel fair within the same challenge.</li>
             <li><strong>Social Accountability:</strong> Leaderboards, streaks, and progress summaries make it easy to see how friends are performing, driving motivation without feeling overly gamified.</li>
             <li><strong>Flexible Workout Logging:</strong> Users can log walks, runs, gym sessions, and other activities with custom points and notes, so different training styles still fit inside the same shared challenge.</li>
         </ul>
+
+        <h3>Try It Out</h3>
+        <p>
+            I've launched CompFit on iOS in beta mode! Feel free to test it out and share your feedback.
+        </p>
+        <div class="meta-actions">
+            <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="demo-btn">Test-Flight Beta</a>
+        </div>
     </section>
 
     <section class="gallery-section">
@@ -204,21 +225,89 @@
         <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem; margin-bottom: 1.5rem;">Click any image to view full size.</p>
 
         <div class="gallery-grid">
-
             <figure class="gallery-item">
                 <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="https://via.placeholder.com/600x400/f4f4f4/cccccc?text=Workout+Flows" alt="Workout tracking flows">
+                    <img src="PortfolioPhotos/compfit/StartScreen.png" alt="Start screen" loading="lazy">
                 </div>
-                <figcaption>Workout tracking and logging flows</figcaption>
+                <figcaption>Welcome and start screen</figcaption>
             </figure>
 
             <figure class="gallery-item">
                 <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="https://via.placeholder.com/600x400/f4f4f4/cccccc?text=Leaderboard+Design" alt="Leaderboard designs">
+                    <img src="PortfolioPhotos/compfit/OnboardingScreen.png" alt="Onboarding screen" loading="lazy">
                 </div>
-                <figcaption>Leaderboard and challenge screens</figcaption>
+                <figcaption>User onboarding flow</figcaption>
             </figure>
 
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/LoginIn.png" alt="Login screen" loading="lazy">
+                </div>
+                <figcaption>Login and authentication</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/ActiveCompetitions.png" alt="Active competitions" loading="lazy">
+                </div>
+                <figcaption>Active competitions dashboard</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/PresetCompetitions.png" alt="Preset competitions" loading="lazy">
+                </div>
+                <figcaption>Pre-made competition templates</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/CompetitionRulesScreen.png" alt="Competition rules" loading="lazy">
+                </div>
+                <figcaption>Competition rules and settings</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/CustomCompetitions.png" alt="Custom competitions" loading="lazy">
+                </div>
+                <figcaption>Create custom competition</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/CompetitionLiveScreen.png" alt="Live competition" loading="lazy">
+                </div>
+                <figcaption>Live competition tracking</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/RankScreen.png" alt="Rankings" loading="lazy">
+                </div>
+                <figcaption>Leaderboard and rankings</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/ResultsScreen.png" alt="Results" loading="lazy">
+                </div>
+                <figcaption>Competition results summary</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/ProfileScreen.png" alt="Profile" loading="lazy">
+                </div>
+                <figcaption>User profile and stats</figcaption>
+            </figure>
+
+            <figure class="gallery-item">
+                <div class="gallery-image" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/compfit/FriendsScreen.png" alt="Friends" loading="lazy">
+                </div>
+                <figcaption>Friends and social connections</figcaption>
+            </figure>
         </div>
     </section>
 
@@ -229,12 +318,12 @@
     <script>
         function openLightbox(element) {
             const imgSrc = element.querySelector('img').src;
-            const imgAlt = element.querySelector('img').alt;
+            const captionText = element.querySelector('.caption')?.textContent || element.querySelector('img').alt;
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
 
             lightboxImg.src = imgSrc;
-            lightboxImg.alt = imgAlt;
+            lightboxImg.alt = captionText;
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
