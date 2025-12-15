@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Void - Leaderboard Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #050505;
+            font-family: 'Orbitron', sans-serif;
+            touch-action: none;
+            user-select: none;
+        }
+        canvas { display: block; }
+        
+        /* Neon Glow Effects */
+        .neon-text { text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5); }
+        .neon-text-purple { text-shadow: 0 0 10px rgba(200, 0, 255, 0.7), 0 0 20px rgba(200, 0, 255, 0.5); }
+        .neon-text-danger { text-shadow: 0 0 10px rgba(255, 0, 80, 0.7), 0 0 20px rgba(255, 0, 80, 0.5); }
+        .neon-border { box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.2); }
+        
+        /* Custom Input Styling */
+        .arcade-input {
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            text-shadow: 0 0 5px #0ff;
+            outline: none;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            caret-color: #0ff;
+        }
+
+        /* CRT Scanline Overlay */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.1) 50%,
+                rgba(0,0,0,0.1)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        @keyframes pulse-opacity {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-slow { animation: pulse-opacity 3s infinite; }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <div class="relative w-full h-screen overflow-hidden">
+        <canvas id="gameCanvas"></canvas>
+        <div class="absolute inset-0 scanlines z-10 pointer-events-none"></div>
+
+        <div id="hud" class="absolute top-0 left-0 w-full p-6 flex justify-between items-start z-20 pointer-events-none hidden">
+            <div>
+                <p class="text-cyan-400 text-xs tracking-[0.3em] opacity-80">SCORE</p>
+                <h2 id="scoreEl" class="text-4xl font-bold neon-text">0</h2>
+            </div>
+            
+            <div class="absolute top-6 left-1/2 transform -translate-x-1/2 text-center">
+                <p class="text-gray-500 text-xs tracking-widest animate-pulse-slow mb-1">PRESS [ESC] TO PAUSE</p>
+                <div id="powerupText" class="text-sm font-bold tracking-widest h-6 transition-all duration-300"></div>
+            </div>
+
+            <div class="text-right">
+                <p class="text-cyan-400 text-xs tracking-[0.3em] opacity-80">LIVES</p>
+                <div id="livesEl" class="flex gap-2 text-2xl text-cyan-300">
+                    <span>▲</span><span>▲</span><span>▲</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="startScreen" class="absolute inset-0 flex flex-col items-center justify-center z-30 bg-black/80 backdrop-blur-sm transition-opacity duration-500">
+            <h1 class="text-6xl md:text-8xl font-black mb-2 text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-blue-600 neon-text tracking-tighter">
+                NEON VOID
+            </h1>
+            <p class="text-gray-400 mb-12 tracking-[0.5em] text-sm uppercase">Sector Defense Simulator v3.0</p>
+            
+            <div class="flex flex-col gap-4 w-64">
+                <button id="startBtn" class="px-8 py-4 border border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-black transition-all duration-300 uppercase tracking-widest font-bold text-lg neon-text neon-border group">
+                    <span class="group-hover:translate-x-1 inline-block transition-transform">Initialize</span>
+                </button>
+                <button id="leaderboardBtn" class="px-8 py-3 border border-gray-600 text-gray-400 hover:border-yellow-400 hover:text-yellow-400 transition-all duration-300 uppercase tracking-widest font-bold text-sm">
+                    High Scores
+                </button>
+                <button id="rulesBtn" class="px-8 py-3 border border-gray-600 text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300 uppercase tracking-widest font-bold text-sm">
+                    Briefing
+                </button>
+            </div>
+        </div>
+
+        <div id="leaderboardScreen" class="absolute inset-0 flex flex-col items-center justify-center z-40 bg-black/95 hidden">
+            <div class="max-w-md w-full p-8 border border-yellow-500/30 bg-gray-900/80 backdrop-blur-md">
+                <h2 class="text-3xl font-bold text-yellow-400 mb-6 tracking-widest text-center neon-text border-b border-gray-700 pb-4">TOP ACES</h2>
+                
+                <div class="space-y-2 mb-8" id="highScoreList">
+                    <div class="flex justify-between text-gray-400 text-sm"><span>LOADING...</span></div>
+                </div>
+
+                <div class="flex justify-center">
+                    <button id="closeLeaderboardBtn" class="px-6 py-2 bg-yellow-900/50 hover:bg-yellow-500 hover:text-black text-yellow-400 border border-yellow-500 transition-all uppercase tracking-widest text-sm font-bold">
+                        RETURN
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="rulesScreen" class="absolute inset-0 flex flex-col items-center justify-center z-40 bg-black/95 hidden">
+            <div class="max-w-2xl w-full p-8 border-l-2 border-r-2 border-cyan-500/30 bg-gray-900/50 backdrop-blur-md">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6 tracking-widest border-b border-gray-700 pb-4">MISSION BRIEFING</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-white font-bold mb-4 tracking-widest text-xs">POWER-UPS</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3"><div class="w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_10px_#0ff]"></div><span class="text-gray-300 text-sm">SHIELD: Absorbs 1 hit</span></div>
+                            <div class="flex items-center gap-3"><div class="w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_10px_#a0f]"></div><span class="text-gray-300 text-sm">TRIPLE SHOT: Spread fire</span></div>
+                            <div class="flex items-center gap-3"><div class="w-4 h-4 rounded-full bg-green-500 shadow-[0_0_10px_#0f0]"></div><span class="text-gray-300 text-sm">1-UP: Extra Life</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold mb-4 tracking-widest text-xs">CONTROLS</h3>
+                        <ul class="text-gray-400 text-sm space-y-3">
+                            <li class="flex justify-between border-b border-gray-800 pb-1"><span>THRUST</span> <span class="text-cyan-300">W / ▲</span></li>
+                            <li class="flex justify-between border-b border-gray-800 pb-1"><span>ROTATE</span> <span class="text-cyan-300">A / D / ◀ ▶</span></li>
+                            <li class="flex justify-between border-b border-gray-800 pb-1"><span>FIRE</span> <span class="text-cyan-300">SPACE</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button id="closeRulesBtn" class="px-6 py-2 bg-cyan-900/50 hover:bg-cyan-500 hover:text-black text-cyan-400 border border-cyan-500 transition-all uppercase tracking-widest text-sm font-bold">RETURN</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="pauseScreen" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-black/60 backdrop-blur-md hidden">
+            <h2 class="text-5xl font-bold mb-8 text-white tracking-[0.2em] neon-text">SYSTEM PAUSED</h2>
+            <div class="flex flex-col gap-4 w-64">
+                <button id="resumeBtn" class="px-8 py-3 bg-white text-black hover:bg-cyan-400 transition-all duration-300 uppercase tracking-widest font-bold">Resume</button>
+                <button id="quitBtn" class="px-8 py-3 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 uppercase tracking-widest font-bold">Abort</button>
+            </div>
+        </div>
+
+        <div id="gameOverScreen" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-black/90 hidden">
+            <h2 class="text-6xl font-bold mb-2 text-red-500 neon-text-danger tracking-tighter">GAME OVER</h2>
+            <p class="text-white text-xl mb-8 tracking-widest">FINAL SCORE: <span id="finalScore" class="text-cyan-400 font-bold">0</span></p>
+            
+            <div id="highScoreForm" class="hidden flex-col items-center mb-8 w-full max-w-sm animate-pulse-slow">
+                <p class="text-yellow-400 tracking-widest font-bold mb-4 neon-text">NEW HIGH SCORE!</p>
+                <input type="text" id="initialsInput" maxlength="3" placeholder="AAA" class="text-4xl p-2 w-48 arcade-input font-bold bg-black mb-4" autocomplete="off">
+                <button id="saveScoreBtn" class="px-6 py-2 bg-yellow-500 text-black font-bold uppercase tracking-widest hover:bg-white transition-colors">SAVE RECORD</button>
+            </div>
+
+            <div id="gameOverButtons" class="flex flex-col gap-4">
+                <button id="restartBtn" class="px-8 py-3 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 uppercase tracking-widest font-bold text-lg neon-text-danger">
+                    Reboot System
+                </button>
+                <button id="menuBtn" class="text-gray-500 hover:text-white text-sm tracking-widest uppercase mt-4">Return to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /** CONFIG */
+        const FPS = 60;
+        const FRICTION = 0.98; 
+        const SHIP_SIZE = 20; 
+        const SHIP_THRUST = 0.2; 
+        const TURN_SPEED = 300; 
+        const LASER_DIST = 0.5; 
+        const LASER_SPD = 600; 
+        const ROID_NUM = 4; 
+        const ROID_SIZE = 100; 
+        const ROID_SPD = 50; 
+        const POWERUP_CHANCE = 0.15;
+
+        /** SETUP */
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // DOM Elements
+        const screens = {
+            start: document.getElementById('startScreen'),
+            rules: document.getElementById('rulesScreen'),
+            leaderboard: document.getElementById('leaderboardScreen'),
+            pause: document.getElementById('pauseScreen'),
+            gameOver: document.getElementById('gameOverScreen'),
+            hud: document.getElementById('hud')
+        };
+        const els = {
+            score: document.getElementById('scoreEl'),
+            lives: document.getElementById('livesEl'),
+            finalScore: document.getElementById('finalScore'),
+            powerupText: document.getElementById('powerupText'),
+            hsForm: document.getElementById('highScoreForm'),
+            hsList: document.getElementById('highScoreList'),
+            initials: document.getElementById('initialsInput'),
+            goButtons: document.getElementById('gameOverButtons')
+        };
+
+        // State
+        let level = 0, lives = 3, score = 0;
+        let asteroids = [], lasers = [], particles = [], powerups = [];
+        let ship = null, gameRunning = false, isPaused = false, screenShake = 0;
+        let highScores = JSON.parse(localStorage.getItem('neonVoidScores')) || [
+            {name: 'ZEE', score: 5000},
+            {name: 'DEV', score: 4000},
+            {name: 'CPU', score: 3000},
+            {name: 'BOT', score: 2000},
+            {name: 'NEW', score: 1000}
+        ];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        /** INPUTS */
+        const keys = {};
+        document.addEventListener('keydown', (e) => {
+            if(!els.hsForm.classList.contains('hidden')) return; // Block input if typing name
+            keys[e.key] = true;
+            if(e.key === " " && gameRunning && !isPaused && ship && !ship.dead) shootLaser();
+            if((e.key === "Escape" || e.key === "p") && gameRunning) togglePause();
+        });
+        document.addEventListener('keyup', (e) => keys[e.key] = false);
+
+        /** HIGHSCORE LOGIC */
+        function checkHighScore(finalScore) {
+            const lowest = highScores[highScores.length - 1].score;
+            if(finalScore > lowest) {
+                // Show Input Form
+                els.hsForm.classList.remove('hidden');
+                els.hsForm.classList.add('flex');
+                els.goButtons.classList.add('hidden');
+                els.initials.value = '';
+                els.initials.focus();
+            } else {
+                // Standard Game Over
+                els.hsForm.classList.add('hidden');
+                els.hsForm.classList.remove('flex');
+                els.goButtons.classList.remove('hidden');
+            }
+        }
+
+        function saveHighScore() {
+            const name = els.initials.value.toUpperCase() || 'UNK';
+            highScores.push({ name, score });
+            highScores.sort((a, b) => b.score - a.score);
+            highScores = highScores.slice(0, 5); // Keep top 5
+            localStorage.setItem('neonVoidScores', JSON.stringify(highScores));
+            
+            // Switch to leaderboard view immediately
+            screens.gameOver.classList.add('hidden');
+            screens.gameOver.classList.remove('flex');
+            showLeaderboard();
+        }
+
+        function showLeaderboard() {
+            screens.start.classList.add('hidden');
+            screens.leaderboard.classList.remove('hidden');
+            screens.leaderboard.classList.add('flex');
+            
+            let html = '';
+            highScores.forEach((entry, i) => {
+                const color = i === 0 ? 'text-yellow-400' : (i === 1 ? 'text-gray-300' : (i === 2 ? 'text-orange-400' : 'text-gray-500'));
+                html += `
+                    <div class="flex justify-between items-end border-b border-gray-800 pb-2">
+                        <span class="${color} font-bold text-xl">${i+1}. ${entry.name}</span>
+                        <span class="${color} font-mono tracking-widest">${entry.score.toLocaleString()}</span>
+                    </div>
+                `;
+            });
+            els.hsList.innerHTML = html;
+        }
+
+        /** GAME CLASSES */
+        class Ship {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height / 2;
+                this.a = 90 / 180 * Math.PI; 
+                this.r = SHIP_SIZE;
+                this.dead = false;
+                this.thrust = { x: 0, y: 0 };
+                this.shield = false;
+                this.tripleShotTimer = 0;
+            }
+            update(dt) {
+                if (this.dead) return;
+                if (keys.ArrowLeft || keys.a || keys.A) this.a += TURN_SPEED / 180 * Math.PI * dt;
+                if (keys.ArrowRight || keys.d || keys.D) this.a -= TURN_SPEED / 180 * Math.PI * dt;
+                if (keys.ArrowUp || keys.w || keys.W) {
+                    this.thrust.x += SHIP_THRUST * Math.cos(this.a);
+                    this.thrust.y -= SHIP_THRUST * Math.sin(this.a);
+                    for(let i=0; i<2; i++) {
+                        particles.push(new Particle(
+                            this.x - this.r*(2/3)*Math.cos(this.a)+(Math.random()-0.5)*5,
+                            this.y + this.r*(2/3)*Math.sin(this.a)+(Math.random()-0.5)*5,
+                            -(this.thrust.x + Math.cos(this.a)*5), -(this.thrust.y - Math.sin(this.a)*5),
+                            Math.random()*0.4+0.2, '#00ffff'
+                        ));
+                    }
+                }
+                this.x += this.thrust.x; this.y += this.thrust.y;
+                this.thrust.x *= FRICTION; this.thrust.y *= FRICTION;
+                if(this.tripleShotTimer > 0) this.tripleShotTimer -= dt;
+                handleWrap(this);
+            }
+            draw() {
+                if (this.dead) return;
+                if (this.shield) {
+                    ctx.strokeStyle = `rgba(0, 255, 255, ${0.5 + Math.sin(Date.now()/100)*0.2})`;
+                    ctx.shadowBlur = 20; ctx.shadowColor = '#00ffff'; ctx.lineWidth = 2;
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.r + 10, 0, Math.PI * 2); ctx.stroke();
+                }
+                ctx.strokeStyle = this.tripleShotTimer > 0 ? '#d0f' : '#0ff';
+                ctx.lineWidth = 2; ctx.shadowBlur = 15; ctx.shadowColor = this.tripleShotTimer > 0 ? '#d0f' : '#0ff';
+                ctx.beginPath();
+                ctx.moveTo(this.x + 4/3*this.r*Math.cos(this.a), this.y - 4/3*this.r*Math.sin(this.a));
+                ctx.lineTo(this.x - this.r*(2/3*Math.cos(this.a)+Math.sin(this.a)), this.y + this.r*(2/3*Math.sin(this.a)-Math.cos(this.a)));
+                ctx.lineTo(this.x - this.r*(2/3*Math.cos(this.a)-Math.sin(this.a)), this.y + this.r*(2/3*Math.sin(this.a)+Math.cos(this.a)));
+                ctx.closePath(); ctx.stroke(); ctx.shadowBlur = 0;
+            }
+        }
+
+        class PowerUp {
+            constructor(x, y) {
+                this.x = x; this.y = y; this.r = 15;
+                const rand = Math.random();
+                if(rand < 0.4) this.type = 0; // Shield
+                else if (rand < 0.8) this.type = 1; // Triple
+                else this.type = 2; // Life
+                this.xv = (Math.random()-0.5)*30/FPS; this.yv = (Math.random()-0.5)*30/FPS; this.life = 10;
+            }
+            update(dt) { this.x += this.xv; this.y += this.yv; this.life -= dt; handleWrap(this); }
+            draw() {
+                ctx.globalAlpha = this.life < 2 ? this.life/2 : 1;
+                let color = this.type === 0 ? '#0ff' : (this.type === 1 ? '#d0f' : '#0f0');
+                let char = this.type === 0 ? 'S' : (this.type === 1 ? 'T' : '+');
+                ctx.shadowBlur = 15; ctx.shadowColor = color; ctx.strokeStyle = color; ctx.fillStyle = color;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.stroke();
+                ctx.font = 'bold 16px Orbitron'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(char, this.x, this.y);
+                ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+            }
+        }
+
+        class Laser {
+            constructor(x, y, a) {
+                this.x = x; this.y = y; this.dist = 0;
+                this.xv = LASER_SPD * Math.cos(a) / FPS; this.yv = -LASER_SPD * Math.sin(a) / FPS;
+            }
+            update() { this.x += this.xv; this.y += this.yv; this.dist += Math.sqrt(this.xv**2 + this.yv**2); handleWrap(this); }
+            draw() { ctx.fillStyle = '#ff0055'; ctx.shadowBlur = 10; ctx.shadowColor = '#ff0055'; ctx.beginPath(); ctx.arc(this.x, this.y, 3, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0; }
+        }
+
+        class Asteroid {
+            constructor(x, y, r) {
+                this.x = x; this.y = y; this.r = r || Math.ceil(Math.random()*(ROID_SIZE/2)+ROID_SIZE/2);
+                this.xv = Math.random()*ROID_SPD*2/FPS - ROID_SPD/FPS; this.yv = Math.random()*ROID_SPD*2/FPS - ROID_SPD/FPS;
+                this.a = Math.random()*Math.PI*2; this.vert = 12; this.offs = [];
+                for (let i=0; i<this.vert; i++) this.offs.push(Math.random()*0.4+0.8);
+            }
+            update() { this.x += this.xv; this.y += this.yv; handleWrap(this); }
+            draw() {
+                ctx.strokeStyle = 'rgba(100, 200, 255, 0.8)'; ctx.shadowBlur = 8; ctx.shadowColor = 'rgba(100, 200, 255, 0.3)'; ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                for (let j=0; j<this.vert; j++) ctx.lineTo(this.x+this.r*this.offs[j]*Math.cos(this.a+j*Math.PI*2/this.vert), this.y+this.r*this.offs[j]*Math.sin(this.a+j*Math.PI*2/this.vert));
+                ctx.closePath(); ctx.stroke(); ctx.shadowBlur = 0;
+            }
+        }
+
+        class Particle {
+            constructor(x, y, xv, yv, life, color) { this.x = x; this.y = y; this.xv = xv; this.yv = yv; this.life = life; this.maxLife = life; this.color = color; }
+            update() { this.x += this.xv; this.y += this.yv; this.life -= 0.015; this.xv *= 0.95; this.yv *= 0.95; }
+            draw() { ctx.globalAlpha = Math.max(0, this.life/this.maxLife); ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha = 1.0; }
+        }
+
+        /** HELPERS */
+        function handleWrap(obj) {
+            let r = obj.r || 0;
+            if(obj.x < -r) obj.x = canvas.width+r; else if(obj.x > canvas.width+r) obj.x = -r;
+            if(obj.y < -r) obj.y = canvas.height+r; else if(obj.y > canvas.height+r) obj.y = -r;
+        }
+        function distBetweenPoints(x1, y1, x2, y2) { return Math.sqrt((x2-x1)**2 + (y2-y1)**2); }
+        function showFloatText(text, color) {
+            els.powerupText.innerText = text; els.powerupText.style.color = color; els.powerupText.style.opacity = 1; els.powerupText.style.textShadow = `0 0 10px ${color}`;
+            setTimeout(() => { els.powerupText.style.opacity = 0; }, 2000);
+        }
+
+        /** LOGIC */
+        function createAsteroidBelt(safeX, safeY) {
+            asteroids = [];
+            for (let i=0; i<ROID_NUM+level; i++) {
+                let x, y;
+                do { x = Math.random()*canvas.width; y = Math.random()*canvas.height; } while(safeX && distBetweenPoints(safeX, safeY, x, y) < 250);
+                asteroids.push(new Asteroid(x, y));
+            }
+        }
+
+        function shootLaser() {
+            const noseX = ship.x + 4/3*ship.r*Math.cos(ship.a), noseY = ship.y - 4/3*ship.r*Math.sin(ship.a);
+            if(ship.tripleShotTimer > 0) {
+                lasers.push(new Laser(noseX, noseY, ship.a));
+                lasers.push(new Laser(noseX, noseY, ship.a + 0.15));
+                lasers.push(new Laser(noseX, noseY, ship.a - 0.15));
+            } else if(lasers.length < 5) lasers.push(new Laser(noseX, noseY, ship.a));
+        }
+
+        function destroyAsteroid(index) {
+            const { x, y, r } = asteroids[index];
+            if(Math.random() < POWERUP_CHANCE) powerups.push(new PowerUp(x, y));
+            if(r > ROID_SIZE/2) {
+                asteroids.push(new Asteroid(x, y, Math.ceil(r/2))); asteroids.push(new Asteroid(x, y, Math.ceil(r/2)));
+                score += 20; createExplosion(x, y, 10, '#8888ff');
+            } else if(r > ROID_SIZE/4) {
+                asteroids.push(new Asteroid(x, y, Math.ceil(r/2))); asteroids.push(new Asteroid(x, y, Math.ceil(r/2)));
+                score += 50; createExplosion(x, y, 15, '#aaaaaa');
+            } else {
+                score += 100; createExplosion(x, y, 20, '#ffffff');
+            }
+            asteroids.splice(index, 1); screenShake = 5; els.score.innerText = score;
+            if(asteroids.length === 0) {
+                level++; setTimeout(() => {
+                    for(let i=0; i<ROID_NUM+level; i++) {
+                        let nx, ny; do { nx = Math.random()*canvas.width; ny = Math.random()*canvas.height; } while(distBetweenPoints(ship.x, ship.y, nx, ny) < 250);
+                        asteroids.push(new Asteroid(nx, ny));
+                    }
+                }, 1000);
+            }
+        }
+
+        function createExplosion(x, y, count, color) {
+            for(let i=0; i<count; i++) particles.push(new Particle(x, y, (Math.random()-0.5)*5, (Math.random()-0.5)*5, Math.random()*0.5+0.5, color));
+        }
+
+        function hitShip() {
+            if(ship.shield) {
+                ship.shield = false; createExplosion(ship.x, ship.y, 20, '#00ffff'); showFloatText("SHIELD DEPLETED", "#00ffff"); return;
+            }
+            ship.dead = true; createExplosion(ship.x, ship.y, 50, '#ff0055'); screenShake = 20; lives--; updateLivesUI();
+            if(lives <= 0) setTimeout(gameOver, 1000);
+            else setTimeout(() => {
+                ship = new Ship(); ship.shield = true; showFloatText("RESPAWN SHIELD", "#00ffff");
+                asteroids.forEach(a => { if(distBetweenPoints(ship.x, ship.y, a.x, a.y) < 200) { a.x += 300; } });
+            }, 1500);
+        }
+
+        function applyPowerUp(type) {
+            if(type === 0) { ship.shield = true; showFloatText("SHIELD ACTIVE", "#00ffff"); }
+            else if(type === 1) { ship.tripleShotTimer = 10; showFloatText("TRIPLE SHOT", "#d0f"); }
+            else { lives++; updateLivesUI(); showFloatText("EXTRA LIFE", "#0f0"); }
+        }
+
+        function updateLivesUI() {
+            let html = ''; for(let i=0; i<lives; i++) html += '<span>▲</span>'; els.lives.innerHTML = html;
+        }
+
+        function togglePause() {
+            if(!gameRunning) return; isPaused = !isPaused;
+            screens.pause.classList.toggle('hidden', !isPaused); screens.pause.classList.toggle('flex', isPaused);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            els.finalScore.innerText = score;
+            screens.hud.classList.add('hidden');
+            screens.gameOver.classList.remove('hidden');
+            screens.gameOver.classList.add('flex');
+            checkHighScore(score); // Check for high score
+        }
+
+        function newGame() {
+            score = 0; level = 0; lives = 3; ship = new Ship();
+            lasers = []; particles = []; powerups = []; isPaused = false;
+            els.score.innerText = score; updateLivesUI();
+            createAsteroidBelt(ship.x, ship.y); gameRunning = true;
+            screens.start.classList.add('hidden'); screens.leaderboard.classList.add('hidden'); screens.leaderboard.classList.remove('flex');
+            screens.rules.classList.add('hidden'); screens.pause.classList.add('hidden');
+            screens.gameOver.classList.add('hidden'); screens.gameOver.classList.remove('flex');
+            screens.hud.classList.remove('hidden');
+        }
+
+        function backToMenu() {
+            gameRunning = false;
+            screens.gameOver.classList.add('hidden'); screens.gameOver.classList.remove('flex');
+            screens.leaderboard.classList.add('hidden'); screens.leaderboard.classList.remove('flex');
+            screens.start.classList.remove('hidden');
+            createAsteroidBelt(); // Bg anim
+        }
+
+        /** MAIN LOOP */
+        function loop() {
+            let sx=0, sy=0;
+            if(screenShake>0 && !isPaused) { sx=(Math.random()-0.5)*screenShake; sy=(Math.random()-0.5)*screenShake; screenShake*=0.9; if(screenShake<0.5) screenShake=0; }
+            ctx.save(); ctx.translate(sx, sy);
+            ctx.fillStyle = '#050505'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if(gameRunning) {
+                if(!isPaused) {
+                    const dt = 1/FPS; if(ship) ship.update(dt);
+                    lasers.forEach(l => l.update()); asteroids.forEach(a => a.update());
+                    powerups.forEach((p, i) => { p.update(dt); if(p.life <= 0) powerups.splice(i, 1); });
+                    // Collision
+                    for(let i=asteroids.length-1; i>=0; i--) {
+                        for(let j=lasers.length-1; j>=0; j--) {
+                            if(distBetweenPoints(asteroids[i].x, asteroids[i].y, lasers[j].x, lasers[j].y) < asteroids[i].r) {
+                                destroyAsteroid(i); lasers.splice(j, 1); break;
+                            }
+                        }
+                    }
+                    for(let i=lasers.length-1; i>=0; i--) if(lasers[i].dist > canvas.width*LASER_DIST) lasers.splice(i, 1);
+                    if(ship && !ship.dead) {
+                        for(let i=0; i<asteroids.length; i++) if(distBetweenPoints(ship.x, ship.y, asteroids[i].x, asteroids[i].y) < ship.r+asteroids[i].r) { hitShip(); destroyAsteroid(i); break; }
+                        for(let i=powerups.length-1; i>=0; i--) if(distBetweenPoints(ship.x, ship.y, powerups[i].x, powerups[i].y) < ship.r+powerups[i].r) { applyPowerUp(powerups[i].type); powerups.splice(i, 1); }
+                    }
+                }
+                powerups.forEach(p => p.draw()); asteroids.forEach(a => a.draw()); if(ship) ship.draw(); lasers.forEach(l => l.draw());
+            } else {
+                asteroids.forEach(a => { a.update(); a.draw(); });
+            }
+            for(let i=particles.length-1; i>=0; i--) { if(!isPaused) particles[i].update(); particles[i].draw(); if(particles[i].life<=0) particles.splice(i, 1); }
+            ctx.restore(); requestAnimationFrame(loop);
+        }
+
+        // Listeners
+        document.getElementById('startBtn').onclick = newGame;
+        document.getElementById('restartBtn').onclick = newGame;
+        document.getElementById('resumeBtn').onclick = togglePause;
+        document.getElementById('quitBtn').onclick = () => window.location.reload();
+        document.getElementById('rulesBtn').onclick = () => { screens.start.classList.add('hidden'); screens.rules.classList.remove('hidden'); screens.rules.classList.add('flex'); };
+        document.getElementById('closeRulesBtn').onclick = () => { screens.rules.classList.add('hidden'); screens.rules.classList.remove('flex'); screens.start.classList.remove('hidden'); };
+        document.getElementById('leaderboardBtn').onclick = showLeaderboard;
+        document.getElementById('closeLeaderboardBtn').onclick = backToMenu;
+        document.getElementById('menuBtn').onclick = backToMenu;
+        document.getElementById('saveScoreBtn').onclick = saveHighScore;
+        
+        createAsteroidBelt();
+        requestAnimationFrame(loop);
+    </script>
+</body>
+</html>
