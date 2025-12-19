@@ -5,202 +5,469 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zeeyad Monir | Product Designer</title>
     <style>
-        /* SHARED STYLES */
+        :root {
+            --text: #030213;
+            --muted: #737373;
+            --muted-2: #a3a3a3;
+            --neutral-600: #525252;
+            --neutral-700: #404040;
+            --border: #e6e6e6;
+            --tag-border: #d1d1d1;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #ffffff;
-            color: #111;
+            color: var(--text);
             line-height: 1.6;
+            margin: 0;
+        }
+
+        .page {
             max-width: 680px;
             margin: 0 auto;
             padding: 4rem 1.5rem;
         }
-        h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-        h2 {
-            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
-            color: #666; 
-            /* Increased from 3rem to 3.45rem (15%) */
-            margin-top: 3.25rem; 
-            margin-bottom: 1.5rem;
-            font-weight: 500; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;
+
+        .hero {
+            margin-bottom: 3.5rem;
         }
-        p { font-size: 1rem; color: #333; margin-bottom: 1rem; }
-        
-        /* LINK STYLES */
-        a { color: #111; text-decoration: none; border-bottom: 1px solid #ccc; transition: all 0.2s ease; cursor: pointer; }
-        a:hover { border-bottom: 1px solid #000; background-color: #f0f0f0; }
-        
-        /* SPECIAL BUTTON STYLE FOR FIGMA */
-        .figma-btn, .demo-btn, .slide-btn, .report-btn, .github-btn {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 2px 4px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-            display: inline-block;
-            color: #555;
-            border-bottom: 1px solid #ccc; /* Overwrite default link style */
+
+        .hero h1 {
+            font-size: 3.75rem;
+            letter-spacing: -0.035em;
+            font-weight: 500;
+            margin-bottom: 0.9rem;
+            line-height: 1.05;
         }
-        .figma-btn:hover, .demo-btn:hover, .slide-btn:hover, .report-btn:hover, .github-btn:hover {
-            background-color: #111;
-            color: #fff;
-            border-color: #111;
+
+        .hero .role {
+            font-size: 1.25rem;
+            color: #404040;
+            margin-bottom: 0.3rem;
         }
-        .item-actions {
+
+        .hero .meta {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero-links {
             display: flex;
-            gap: 0.5rem;
+            gap: 1.5rem;
             align-items: center;
-            margin-top: 0.4rem;
+            font-size: 1.125rem;
         }
 
-        .sub-text { color: #666; font-size: 0.95rem; }
-        
-        /* LIST LAYOUTS */
-        .item { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem; }
-        .item-left { flex: 1; padding-right: 20px; }
-        .item-title { font-weight: 600; display: block; margin-bottom: 0.3rem; font-size: 1.1rem; }
-        .item-desc { color: #444; font-size: 1rem; display: block; margin-bottom: 0.5rem; }
-        .item-tools { display: block; font-size: 0.85rem; color: #888; font-family: monospace; margin-top: 0.25rem; }
-        .item-date { font-size: 0.85rem; color: #888; white-space: nowrap; }
+        .hero-links a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
 
-        /* SKILLS SPECIFIC */
-        .skill-group { margin-bottom: 1rem; }
+        .hero-links a:hover {
+            border-color: var(--text);
+        }
 
-        footer { margin-top: 5rem; border-top: 1px solid #eee; padding-top: 2rem; font-size: 0.85rem; color: #666; }
-        
-        @media (max-width: 500px) {
-            .item { flex-direction: column; }
-            .item-date { margin-bottom: 0.25rem; order: -1; display: block; }
+        .hero-links a:nth-child(1):hover {
+            color: #059669;
+            border-color: #059669;
+        }
+
+        .hero-links a:nth-child(2):hover {
+            color: #2563eb;
+            border-color: #2563eb;
+        }
+
+        .hero-links a:nth-child(3):hover {
+            color: #7c3aed;
+            border-color: #7c3aed;
+        }
+
+        .arrow {
+            margin-left: 0.35rem;
+            font-size: 0.95rem;
+        }
+
+        .section {
+            margin-bottom: 3.75rem;
+        }
+
+        .section h2 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #525252;
+            margin-bottom: 1.4rem;
+            font-weight: 500;
+        }
+
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.75rem;
+            align-items: flex-start;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            max-width: 600px;
+            width: 100%;
+            margin: 0;
+        }
+
+        .card-image {
+            display: block;
+            background: #f7f7f7;
+            line-height: 0;
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .card-image img,
+        .card-image .image-placeholder {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-placeholder {
+            background: #f1f1f1;
+        }
+
+        .card-content {
+            padding: 1.85rem 1.4rem 1.95rem;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .card-date {
+            font-size: 0.875rem;
+            color: #a3a3a3;
+            white-space: nowrap;
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: #525252;
+            margin-bottom: 1.05rem;
+        }
+
+        .card-tools {
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            color: #a3a3a3;
+            text-transform: uppercase;
+            margin-bottom: 1.05rem;
+        }
+
+        .card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.5rem 0.85rem;
+            border: 1px solid var(--tag-border);
+            border-radius: 4px;
+            color: #444;
+            background: #fff;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .pill:hover {
+            background: #171717;
+            color: #fff;
+            border-color: #171717;
+        }
+
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.1rem;
+            margin-top: 1.1rem;
+        }
+
+        .experience-item {
+            position: relative;
+            padding: 16px 18px 18px 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 12px;
+            transition: background-color 0.15s ease, transform 0.08s ease;
+            cursor: pointer;
+        }
+
+        .experience-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 2px;
+            height: calc(100% - 12px);
+            background: var(--border);
+            border-radius: 999px;
+        }
+
+        .experience-item:hover,
+        .experience-item:focus-visible {
+            background: #f7f7f7;
+            outline: none;
+        }
+
+        .experience-item:active {
+            transform: translateY(1px);
+        }
+
+        .exp-role {
+            font-weight: 600;
+            font-size: clamp(1.15rem, 1.02rem + 0.35vw, 1.45rem);
+            color: var(--text);
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            margin-bottom: 0.2rem;
+        }
+
+        .exp-desc {
+            color: var(--neutral-700);
+            font-size: clamp(0.94rem, 0.92rem + 0.22vw, 1.08rem);
+            line-height: 1.3;
+        }
+
+        .exp-date {
+            font-size: clamp(0.9rem, 0.9rem + 0.18vw, 1.05rem);
+            color: var(--muted);
+            margin-top: 0.6rem;
+            letter-spacing: 0.005em;
+            font-weight: 500;
+        }
+
+        footer {
+            margin-top: 3.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1.8rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 4.5rem; }
+        }
+
+        @media (max-width: 767px) {
+            .page { padding: 3rem 1.25rem; }
+            .hero { margin-bottom: 3rem; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero-links { flex-wrap: wrap; gap: 1rem 1.5rem; }
+            .card-list { gap: 2.25rem; }
+            .card-top { flex-direction: column; align-items: flex-start; }
+            .card-date { order: -1; }
+            .card { max-width: 100%; }
+            .card-image { height: 240px; }
+            .card-content { padding: 1.5rem 1.25rem; }
+            .experience-list { gap: 1.9rem; }
+            .experience-item { padding: 14px 16px 16px 20px; }
+            .experience-item::before { top: 5px; height: calc(100% - 10px); }
+            .exp-date { margin-top: 0.45rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page { padding: 2.5rem 1rem; }
+            .hero { margin-bottom: 2.5rem; }
+            .hero h1 { font-size: 2.75rem; }
+            .hero .role { font-size: 1.125rem; }
+            .hero .meta { font-size: 0.9375rem; }
+            .hero-links { font-size: 1rem; gap: 0.85rem 1.25rem; }
+            .section { margin-bottom: 3rem; }
+            .card-list { gap: 1.75rem; }
+            .card-image { height: 180px; }
+            .card-content { padding: 1.25rem 1rem; }
+            .card-title { font-size: 1.0625rem; }
+            .card-desc { font-size: 0.9375rem; margin-bottom: 0.9rem; }
+            .card-tools { font-size: 0.7rem; margin-bottom: 0.9rem; }
+            .pill { padding: 0.55rem 0.8rem; font-size: 0.7rem; }
+            .card-actions { gap: 0.45rem; }
+        }
+
+        @media (max-width: 375px) {
+            .page { padding: 2rem 0.85rem; }
+            .hero { margin-bottom: 2rem; }
+            .hero h1 { font-size: 2.35rem; }
+            .hero .role { font-size: 1.0625rem; }
+            .hero .meta { font-size: 0.875rem; margin-bottom: 1.2rem; }
+            .hero-links { font-size: 0.9375rem; gap: 0.75rem 1rem; }
+            .section { margin-bottom: 2.5rem; }
+            .section h2 { font-size: 0.8125rem; margin-bottom: 1.2rem; }
+            .card-list { gap: 1.5rem; }
+            .card-image { height: 160px; }
+            .card-content { padding: 1rem 0.85rem; }
+            .card-title { font-size: 1rem; }
+            .card-desc { font-size: 0.875rem; margin-bottom: 0.85rem; }
+            .card-tools { font-size: 0.65rem; margin-bottom: 0.85rem; }
+            .pill { padding: 0.5rem 0.7rem; font-size: 0.65rem; }
+            .card-actions { gap: 0.4rem; }
+            .experience-list { gap: 1.65rem; }
+            .experience-item { padding: 13px 14px 14px 18px; }
+            .experience-item::before { top: 4px; height: calc(100% - 8px); }
+            .exp-date { margin-top: 0.35rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Zeeyad Monir</h1>
-        <p class="sub-text">
-            Product Designer & Developer in Vancouver, BC. <br>
-            BSc Interactive Tech & Arts at SFU.
-        </p>
-        <div style="margin-top: 1rem;">
-            <a href="mailto:Zeeyadmonir@gmail.com">Email</a> &nbsp;
-            <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a> &nbsp;
-            <a href="https://github.com/Zeeyad-Monir" target="_blank">GitHub</a>
-        </div>
-    </header>
-
-    <section>
-        <h2>Work Experience</h2>
-
-        <div class="item">
-            <div class="item-left">
-                <span class="item-title">Lazer Technologies</span>
-                <span class="item-desc">UI/UX Design Intern.</span>
+    <main class="page">
+        <header class="hero">
+            <h1>Zeeyad Monir</h1>
+            <p class="role">Product Designer & Developer</p>
+            <p class="meta">Vancouver, BC · BSc Interactive Tech &amp; Arts at SFU</p>
+            <div class="hero-links">
+                <a href="mailto:Zeeyadmonir@gmail.com">Email <span class="arrow">↗</span></a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+                <a href="https://github.com/Zeeyad-Monir" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
             </div>
-            <span class="item-date">April 2025 — Sept 2025</span>
-        </div>
+        </header>
 
-        <div class="item">
-            <div class="item-left">
-                <span class="item-title">MarshallVapes</span>
-                <span class="item-desc">Co-Founder & Product Designer.</span>
+        <section class="section">
+            <h2>Featured Work</h2>
+            <div class="card-list">
+                <article class="card">
+                    <a class="card-image" href="compfit.html">
+                        <img src="PortfolioPhotos/compfit/ProjectBanner.png" alt="CompFit project banner">
+                    </a>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <a class="card-title" href="compfit.html">CompFit <span class="arrow">→</span></a>
+                            <span class="card-date">Aug 2025 — Dec 2025</span>
+                        </div>
+                        <p class="card-desc">A fitness competition app where friends track workouts and compete on shared leaderboards.</p>
+                        <div class="card-tools">TOOLS: FIGMA · REACT NATIVE · FIREBASE · EXPO</div>
+                        <div class="card-actions">
+                            <a href="https://youtu.be/unwZhL702ok" target="_blank" rel="noopener" class="pill">Demo</a>
+                            <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                            <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                            <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" rel="noopener" class="pill">Test-Flight Beta</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <a class="card-image" href="packit.html">
+                        <img src="PortfolioPhotos/packit/ProjectBanner.png" alt="PackIt project banner">
+                    </a>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <a class="card-title" href="packit.html">PackIt <span class="arrow">→</span></a>
+                            <span class="card-date">Sept 2024 — Dec 2024</span>
+                        </div>
+                        <p class="card-desc">App/Web UI of pairing institutions with student volunteers to cut food waste.</p>
+                        <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
+                        <div class="card-actions">
+                            <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" rel="noopener" class="pill">Figma</a>
+                            <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <a class="card-image" href="sznluv.html">
+                        <div class="image-placeholder"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <a class="card-title" href="sznluv.html">SznLuv <span class="arrow">→</span></a>
+                            <span class="card-date">Sept 2024 — Dec 2024</span>
+                        </div>
+                        <p class="card-desc">Seasonal Spot discovery app for Vancouver couples.</p>
+                        <div class="card-tools">TOOLS: REACT NATIVE · EXPO SDK · JS</div>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" rel="noopener" class="pill">Demo</a>
+                            <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                            <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                            <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" rel="noopener" class="pill">Report</a>
+                            <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" rel="noopener" class="pill">GitHub</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <a class="card-image" href="flowhive.html">
+                        <div class="image-placeholder"></div>
+                    </a>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <a class="card-title" href="flowhive.html">Flow Hive Companion <span class="arrow">→</span></a>
+                            <span class="card-date">April 2025 — Sept 2025</span>
+                        </div>
+                        <p class="card-desc">Two-part web and mobile companion for new urban beekeepers.</p>
+                        <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
+                        <div class="card-actions">
+                            <a href="https://www.figma.com/design/nbIaNdr9h80ZbVpwotmg8B/Flow-Portfolio?node-id=3-22222&t=Pr7VAjxVcwKvkmkS-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                            <a href="https://drive.google.com/file/d/1cNN2CiPZL08oKpd_dAHAlLvBlBnyaBCo/view?usp=drive_link" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                        </div>
+                    </div>
+                </article>
             </div>
-            <span class="item-date">Sept 2024 — Present</span>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <h2>Selected Projects</h2>
-
-        <div class="item">
-            <div class="item-left">
-                <a href="compfit.html" class="item-title">CompFit &rarr;</a>
-                <span class="item-desc">A fitness competition app where friends track workouts and compete on shared leaderboards.</span>
-                <span class="item-tools">TOOLS: FIGMA · REACT NATIVE · FIREBASE · EXPO</span>
-                <div class="item-actions">
-                    <a href="https://youtu.be/unwZhL702ok" target="_blank" class="demo-btn">Demo</a>
-                    <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="figma-btn">Figma</a>
-                    <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="slide-btn">Slide Deck</a>
-                    <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="demo-btn">Test-Flight Beta</a>
-                </div>
+        <section class="section">
+            <h2>Work Experience</h2>
+            <div class="experience-list">
+                <a class="experience-item" href="https://www.lazertechnologies.com/" target="_blank" rel="noopener">
+                    <div>
+                        <div class="exp-role">Lazer Technologies</div>
+                        <div class="exp-desc">UI/UX Design Intern.</div>
+                    </div>
+                    <div class="exp-date">April 2025 — Sept 2025</div>
+                </a>
+                <a class="experience-item" href="https://marshallvapes.ca/?srsltid=AfmBOooOYpu8yGQKvgNiyLBiOznKbyWRi5nW753b7CXf81uzyPvtuv9u" target="_blank" rel="noopener">
+                    <div>
+                        <div class="exp-role">MarshallVapes</div>
+                        <div class="exp-desc">Co-Founder &amp; Product Designer.</div>
+                    </div>
+                    <div class="exp-date">Sept 2024 — Present</div>
+                </a>
             </div>
-            <span class="item-date">Aug 2025 — Dec 2025</span>
-        </div>
+        </section>
 
-        <div class="item">
-            <div class="item-left">
-                <a href="packit.html" class="item-title">PackIt &rarr;</a>
-                <span class="item-desc">App/Web UI of pairing institutions with student volunteers to cut food waste.</span>
-                <span class="item-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</span>
-                <div class="item-actions">
-                    <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" class="figma-btn">Figma</a>
-                    <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" class="slide-btn">Slide Deck</a>
-                </div>
-            </div>
-            <span class="item-date">Sept 2024 — Dec 2024</span>
-        </div>
-
-        <div class="item">
-            <div class="item-left">
-                <a href="sznluv.html" class="item-title">SznLuv &rarr;</a>
-                <span class="item-desc">Seasonal Spot discovery app for Vancouver couples.</span>
-                <span class="item-tools">TOOLS: REACT NATIVE · EXPO SDK · JS</span>
-                <div class="item-actions">
-                    <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" class="demo-btn">Demo</a>
-                    <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" class="figma-btn">Figma</a>
-                    <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" class="slide-btn">Slide Deck</a>
-                    <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" class="report-btn">Report</a>
-                    <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" class="github-btn">GitHub</a>
-                </div>
-            </div>
-            <span class="item-date">Sept 2024 — Dec 2024</span>
-        </div>
-
-        <div class="item">
-            <div class="item-left">
-                <a href="flowhive.html" class="item-title">Flow Hive Companion &rarr;</a>
-                <span class="item-desc">Two-part web and mobile companion for new urban beekeepers.</span>
-                <span class="item-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</span>
-                <div class="item-actions">
-                    <a href="https://www.figma.com/design/nbIaNdr9h80ZbVpwotmg8B/Flow-Portfolio?node-id=3-22222&t=Pr7VAjxVcwKvkmkS-1" target="_blank" class="figma-btn">Figma</a>
-                    <a href="https://drive.google.com/file/d/1cNN2CiPZL08oKpd_dAHAlLvBlBnyaBCo/view?usp=drive_link" target="_blank" class="slide-btn">Slide Deck</a>
-                </div>
-            </div>
-            <span class="item-date">April 2025 — Sept 2025</span>
-        </div>
-    </section>
-
-    <section>
-        <h2>Skills & Tools</h2>
-
-        <div class="item">
-            <div class="item-left">
-                <span class="item-title">Design & Prototype</span>
-                <span class="item-desc">Figma, Adobe Creative Suite, Final Cut Pro, Photoshop, ProtoPie, Premiere Pro,  Interaction & Motion Design, Rapid Prototyping.</span>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="item-left">
-                <span class="item-title">Development</span>
-                <span class="item-desc">HTML, CSS, JavaScript, React Native, SQL, CMS Tooling, Mobile-first UI Systems.</span>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="item-left">
-                <span class="item-title">Process & Research</span>
-                <span class="item-desc">Usability Testing, A/B Testing, Product Iteration, Market Research, Strategic Problem Solving.</span>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <span>&copy; 2025 Zeeyad Monir</span>
-    </footer>
+        <footer>
+            &copy; 2025 Zeeyad Monir
+        </footer>
+    </main>
 
 </body>
 </html>

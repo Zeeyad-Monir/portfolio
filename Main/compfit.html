@@ -5,130 +5,266 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CompFit - Zeeyad Monir</title>
     <style>
-        /* REUSING MINIMALIST STYLES */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #111;
+            --text-secondary: #444;
+            --text-light: #888;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #ffffff;
-            color: #111;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.6;
-            max-width: 680px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
             margin: 0 auto;
             padding: 4rem 1.5rem;
         }
-        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.03em; }
-        .title-icon {
-            height: 2.75rem;
-            width: auto;
-            margin-left: 0.5rem;
-            vertical-align: baseline;
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        /* --- NAVIGATION --- */
+        .nav-back {
+            font-size: 0.9rem;
+            color: var(--text-light);
             display: inline-block;
-            filter: brightness(1.1);
-            position: relative;
-            top: 0.24rem;
+            margin-bottom: 3rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            margin-bottom: 5rem;
+            text-align: left;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .app-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 12px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* --- METADATA (Stacked Style) --- */
+        .meta-stack {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 2rem;
+        }
+
+        .meta-stack strong {
+            font-weight: 700;
+            color: #222;
+            margin-right: 0.25rem;
+        }
+
+        /* --- ACTION BUTTONS --- */
+        .action-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
             border-radius: 6px;
+            border: 1px solid #ddd;
+            background: transparent;
+            color: #333;
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        h3 { font-size: 1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.5rem; }
-        p { font-size: 1.05rem; color: #333; margin-bottom: 1.5rem; }
-        ul { margin-bottom: 1.5rem; padding-left: 1.2rem; }
-        li { margin-bottom: 0.5rem; color: #444; }
-        .back-link { display: inline-block; margin-bottom: 2rem; color: #666; text-decoration: none; border-bottom: none; font-size: 0.9rem; }
-        .back-link:hover { color: #000; }
-        .meta { color: #666; font-size: 0.9rem; margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
-        .meta-actions { margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .figma-btn, .demo-btn, .slide-btn {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 2px 6px;
-            display: inline-block;
-            color: #555;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .figma-btn:hover, .demo-btn:hover, .slide-btn:hover {
-            background-color: #111;
+        
+        .btn:hover {
+            background: #111;
             color: #fff;
             border-color: #111;
         }
-
-        /* --- GALLERY STYLES --- */
-        .gallery-section {
-            margin-top: 4rem;
-            border-top: 1px solid #eee;
-            padding-top: 2rem;
+        
+        /* Primary button style for the bottom CTA */
+        .btn-primary {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+        .btn-primary:hover {
+            opacity: 0.8;
+            background: #111;
         }
 
-        .gallery-grid {
-            display: flex;
-            gap: 20px;
-            margin-top: 1.5rem;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
+        /* --- SECTIONS COMMON --- */
+        .section-spacer { margin-bottom: 7rem; }
+        
+        .section-header {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
             padding-bottom: 1rem;
         }
 
-        /* Styled scrollbar */
-        .gallery-grid::-webkit-scrollbar {
-            height: 8px;
+        /* --- 01 OVERVIEW --- */
+        .overview-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 720px;
         }
 
-        .gallery-grid::-webkit-scrollbar-track {
-            background: #f5f5f5;
-            border-radius: 4px;
-        }
-
-        .gallery-grid::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 4px;
-        }
-
-        .gallery-grid::-webkit-scrollbar-thumb:hover {
-            background: #999;
-        }
-
-        .gallery-item {
+        /* --- 02 PROCESS (Step List) --- */
+        .process-list {
             display: flex;
             flex-direction: column;
-            flex: 0 0 calc(47.5% - 10px);
-            scroll-snap-align: start;
-            min-width: 0;
+            gap: 3.5rem;
         }
 
-        .gallery-image {
-            cursor: zoom-in;
-            line-height: 0;
+        .process-item {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            gap: 1.5rem;
         }
 
-        .gallery-image img {
+        .process-number {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-family: monospace;
+            padding-top: 5px;
+        }
+
+        .process-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .process-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* --- 03 SOLUTION (Clean Split) --- */
+        .feature-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .feature-block.reversed {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .feature-text h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .feature-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-visual img {
+            max-width: 250px;
             width: 100%;
-            aspect-ratio: 9 / 19.5; /* Phone screenshots */
-            object-fit: cover;
-            border: 1px solid #e8e8e8;
-            border-radius: 4px;
-            display: block;
-            transition: border-color 0.2s ease;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
-        .gallery-image:hover img {
-            border-color: #ccc;
+        /* --- 04 GALLERY SCROLLER (UPDATED SIZE) --- */
+        .gallery-track {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .gallery-track::-webkit-scrollbar { height: 6px; }
+        .gallery-track::-webkit-scrollbar-track { background: transparent; }
+        .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
+
+        .gallery-img {
+            /* Increased by ~15-20% (from 180px to 215px) */
+            flex: 0 0 215px;
+            cursor: zoom-in;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: transform 0.2s;
         }
 
-        figcaption {
-            font-size: 0.875rem;
-            color: #777;
-            margin-top: 0.65rem;
-            padding-bottom: 0.65rem;
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-            border-bottom: 1px solid #f0f0f0;
+        .gallery-img:hover { transform: translateY(-4px); }
+        .gallery-img img { width: 100%; display: block; }
+
+        /* --- BOTTOM CTA --- */
+        .cta-section {
             text-align: center;
+            margin-top: 6rem;
+            padding-top: 4rem;
+            border-top: 1px solid #f0f0f0;
+            padding-bottom: 1rem; /* Spacing before copyright */
         }
 
-        /* Lightbox Overlay */
+        .cta-heading {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-sub {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        /* --- LIGHTBOX --- */
         #lightbox {
             display: none;
             position: fixed;
@@ -138,202 +274,159 @@
             background-color: rgba(255,255,255,0.98);
             justify-content: center;
             align-items: center;
-            cursor: zoom-out;
-            padding: 14px;
+            padding: 2rem;
         }
+        #lightbox img { max-height: 90vh; max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
 
-        #lightbox img {
-            max-width: 100%;
-            max-height: 90vh;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-radius: 4px;
-        }
-
-        /* Mobile Responsive */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
-            body { padding: 3rem 1.25rem; }
-            .title-icon {
-                height: 2.42rem;
-                top: 0.13rem;
-            }
-            .gallery-grid {
-                gap: 16px;
-                padding-bottom: 0.75rem;
-            }
-            .gallery-item {
-                flex: 0 0 85%;
-            }
-            figcaption {
-                font-size: 0.85rem;
-                text-align: center;
-            }
+            .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
+            .feature-block, .feature-block.reversed { flex-direction: column; gap: 2.5rem; text-align: left; }
+            .feature-visual img { max-width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">&larr; Back to Home</a>
+    <div class="container">
+        <a href="index.html" class="nav-back">&larr; Back to Home</a>
 
-    <header>
-        <h1>CompFit <img src="PortfolioPhotos/compfit/CompFitAppIcon.png" alt="CompFit icon" class="title-icon"></h1>
-        <div class="meta">
-            <strong>Role:</strong> Product Designer & Developer <br>
-            <strong>Tools:</strong> React Native, Firebase, Figma, Expo <br>
-            <strong>Date:</strong> Aug 2025 - Dec 2025
-            <div class="meta-actions">
-                <a href="https://youtu.be/unwZhL702ok" target="_blank" class="demo-btn">Demo</a>
-                <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="figma-btn">Figma</a>
-                <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="slide-btn">Slide Deck</a>
-                <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="demo-btn">Test-Flight Beta</a>
+        <header class="hero-section">
+            <h1 class="hero-title">
+                CompFit 
+                <img src="PortfolioPhotos/compfit/CompFitAppIcon.png" alt="CompFit Icon" class="app-icon">
+            </h1>
+            
+            <div class="meta-stack">
+                <p><strong>Role:</strong> Product Designer & Developer</p>
+                <p><strong>Tools:</strong> React Native, Firebase, Figma, Expo</p>
+                <p><strong>Date:</strong> Aug 2025 - Dec 2025</p>
             </div>
-        </div>
-    </header>
 
-    <section>
-        <h3>Overview</h3>
-        <p>
-            CompFit is a workout-competition app that lets friends create custom fitness challenges, track activity,
-            and compete on shared leaderboards. The product focuses on making group accountability fun, simple, and
-            repeatable, so people actually stick with their goals instead of dropping off after a week.
-        </p>
+            <div class="action-row">
+                <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="btn">Test-Flight Beta</a>
+                <a href="https://youtu.be/unwZhL702ok" target="_blank" class="btn">View Demo</a>
+                <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="btn">Slide Deck</a>
+                <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="btn">Figma</a>
+            </div>
+        </header>
 
-        <h3>Design Process</h3>
-        <ul>
-            <li><strong>Product Definition:</strong> Mapped out core use cases around friendly competition, including 1v1 battles, group challenges, and pre-made competition templates.</li>
-            <li><strong>Interaction Design:</strong> Designed flows for creating competitions, inviting friends, logging workouts, and viewing leaderboards, with Figma prototypes guiding every iteration.</li>
-            <li><strong>Feedback & Iteration:</strong> Collected feedback from early testers on scoring clarity, tie-break rules, and notification timing, then refined copy, hierarchy, and flows to reduce confusion.</li>
-            <li><strong>Technical Implementation:</strong> Built the app in React Native with Firebase for auth, data, and real-time updates, aligning the UX with what is feasible on mobile devices and wearables.</li>
-        </ul>
+        <section class="section-spacer">
+            <span class="section-header">01 / Overview</span>
+            <p class="overview-text">
+                Most fitness apps focus on the individual. CompFit focuses on the <strong>group</strong>. 
+                It is a workout-competition app that lets friends create custom challenges, track activity, 
+                and compete on shared leaderboards. The product focuses on making group accountability fun, 
+                simple, and repeatable, so people actually stick with their goals instead of dropping off after a week.
+            </p>
+        </section>
 
-        <h3>The Solution</h3>
-        <ul>
-            <li><strong>Customizable Competitions:</strong> Users can define rules, point systems, and durations so different sports and activities feel fair within the same challenge.</li>
-            <li><strong>Social Accountability:</strong> Leaderboards, streaks, and progress summaries make it easy to see how friends are performing, driving motivation without feeling overly gamified.</li>
-            <li><strong>Flexible Workout Logging:</strong> Users can log walks, runs, gym sessions, and other activities with custom points and notes, so different training styles still fit inside the same shared challenge.</li>
-        </ul>
-
-        <h3>Try It Out</h3>
-        <p>
-            I've launched CompFit on iOS in beta mode! Feel free to test it out and share your feedback.
-        </p>
-        <div class="meta-actions">
-            <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="demo-btn">Test-Flight Beta</a>
-        </div>
-    </section>
-
-    <section class="gallery-section">
-        <h3>Project Gallery Prievew</h3>
-        <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem; margin-bottom: 1.5rem;">Click any image to view full size.</p>
-
-        <div class="gallery-grid">
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/StartScreen.png" alt="Start screen" loading="lazy">
+        <section class="section-spacer">
+            <span class="section-header">02 / Design Process</span>
+            
+            <div class="process-list">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div class="process-content">
+                        <h3>Product Definition</h3>
+                        <p>Mapped out core use cases around friendly competition, including 1v1 battles, group challenges, and pre-made competition templates.</p>
+                    </div>
                 </div>
-                <figcaption>Welcome and start screen</figcaption>
-            </figure>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/OnboardingScreen.png" alt="Onboarding screen" loading="lazy">
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div class="process-content">
+                        <h3>Interaction Design</h3>
+                        <p>Designed flows for creating competitions, inviting friends, logging workouts, and viewing leaderboards, with Figma prototypes guiding every iteration.</p>
+                    </div>
                 </div>
-                <figcaption>User onboarding flow</figcaption>
-            </figure>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/LoginIn.png" alt="Login screen" loading="lazy">
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div class="process-content">
+                        <h3>Feedback & Iteration</h3>
+                        <p>Collected feedback from early testers on scoring clarity, tie-break rules, and notification timing, then refined copy, hierarchy, and flows to reduce confusion.</p>
+                    </div>
                 </div>
-                <figcaption>Login and authentication</figcaption>
-            </figure>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/ActiveCompetitions.png" alt="Active competitions" loading="lazy">
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div class="process-content">
+                        <h3>Technical Implementation</h3>
+                        <p>Built the app in React Native with Firebase for auth, data, and real-time updates, aligning the UX with what is feasible on mobile devices and wearables.</p>
+                    </div>
                 </div>
-                <figcaption>Active competitions dashboard</figcaption>
-            </figure>
+            </div>
+        </section>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/PresetCompetitions.png" alt="Preset competitions" loading="lazy">
+        <section class="section-spacer">
+            <span class="section-header">03 / The Solution</span>
+
+            <div class="feature-block">
+                <div class="feature-text">
+                    <h3>Customizable Competitions</h3>
+                    <p>Users can define rules, point systems, and durations so different sports and activities feel fair within the same challenge. Whether it's steps, calories, or gym visits, the system adapts.</p>
                 </div>
-                <figcaption>Pre-made competition templates</figcaption>
-            </figure>
-
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/CompetitionRulesScreen.png" alt="Competition rules" loading="lazy">
+                <div class="feature-visual">
+                    <img src="PortfolioPhotos/compfit/CustomCompetitions.png" alt="Custom Competitions">
                 </div>
-                <figcaption>Competition rules and settings</figcaption>
-            </figure>
+            </div>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/CustomCompetitions.png" alt="Custom competitions" loading="lazy">
+            <div class="feature-block reversed">
+                <div class="feature-text">
+                    <h3>Social Accountability</h3>
+                    <p>Leaderboards, streaks, and progress summaries make it easy to see how friends are performing, driving motivation without feeling overly gamified or childish.</p>
                 </div>
-                <figcaption>Create custom competition</figcaption>
-            </figure>
-
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/CompetitionLiveScreen.png" alt="Live competition" loading="lazy">
+                <div class="feature-visual">
+                    <img src="PortfolioPhotos/compfit/RankScreen.png" alt="Leaderboard">
                 </div>
-                <figcaption>Live competition tracking</figcaption>
-            </figure>
+            </div>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/RankScreen.png" alt="Rankings" loading="lazy">
+            <div class="feature-block">
+                <div class="feature-text">
+                    <h3>Flexible Workout Logging</h3>
+                    <p>Users can log walks, runs, gym sessions, and other activities with custom points and notes, so different training styles still fit inside the same shared challenge.</p>
                 </div>
-                <figcaption>Leaderboard and rankings</figcaption>
-            </figure>
-
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/ResultsScreen.png" alt="Results" loading="lazy">
+                <div class="feature-visual">
+                    <img src="PortfolioPhotos/compfit/CompetitionLiveScreen.png" alt="Logging Activity">
                 </div>
-                <figcaption>Competition results summary</figcaption>
-            </figure>
+            </div>
+        </section>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/ProfileScreen.png" alt="Profile" loading="lazy">
-                </div>
-                <figcaption>User profile and stats</figcaption>
-            </figure>
+        <section class="section-spacer">
+            <span class="section-header">04 / All Screens</span>
+            <div class="gallery-track">
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/StartScreen.png" alt="Start"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/OnboardingScreen.png" alt="Onboarding"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/ActiveCompetitions.png" alt="Dashboard"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/ResultsScreen.png" alt="Results"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/ProfileScreen.png" alt="Profile"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/FriendsScreen.png" alt="Friends"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/CompetitionRulesScreen.png" alt="Rules"></div>
+            </div>
+        </section>
 
-            <figure class="gallery-item">
-                <div class="gallery-image" onclick="openLightbox(this)">
-                    <img src="PortfolioPhotos/compfit/FriendsScreen.png" alt="Friends" loading="lazy">
-                </div>
-                <figcaption>Friends and social connections</figcaption>
-            </figure>
-        </div>
-    </section>
+        <section class="cta-section">
+            <h3 class="cta-heading">Ready to compete?</h3>
+            <p class="cta-sub">CompFit is live in beta. I'd love your feedback.</p>
+            <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="btn btn-primary">Join the Beta</a>
+        </section>
 
-    <div id="lightbox" onclick="closeLightbox()">
+        <footer style="padding-top: 2rem; text-align: center; color: #999; font-size: 0.9rem;">
+            &copy; 2025 Zeeyad Monir
+        </footer>
+
+    </div>
+
+    <div id="lightbox" onclick="this.style.display='none'">
         <img id="lightbox-img" src="">
     </div>
 
     <script>
-        function openLightbox(element) {
-            const imgSrc = element.querySelector('img').src;
-            const captionText = element.querySelector('.caption')?.textContent || element.querySelector('img').alt;
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-
-            lightboxImg.src = imgSrc;
-            lightboxImg.alt = captionText;
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = '';
+        function openLightbox(el) {
+            document.getElementById('lightbox-img').src = el.querySelector('img').src;
+            document.getElementById('lightbox').style.display = 'flex';
         }
     </script>
-
 </body>
 </html>
