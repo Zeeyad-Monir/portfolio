@@ -184,6 +184,26 @@
             to { transform: translateY(-50%); }
         }
 
+        /* ===== FULL-WIDTH SECTION (Featured Work) ===== */
+        .section-full-width {
+            width: 100%;
+            padding: 4rem 6rem;
+            background: #fff;
+        }
+
+        .section-full-width h2 {
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #525252;
+            margin-bottom: 1.4rem;
+            font-weight: 500;
+        }
+
+        .section-full-width .card-list {
+            max-width: none;
+        }
+
         /* ===== REST OF THE PAGE STYLES ===== */
         .section {
             margin-bottom: 3.75rem;
@@ -267,6 +287,7 @@
             font-size: 1rem;
             color: #525252;
             margin-bottom: 1.05rem;
+            min-height: 3.2em;
         }
 
         .card-tools {
@@ -368,10 +389,10 @@
             font-weight: 500;
         }
 
-        footer {
-            margin-top: 3.5rem;
+        .footer-full-width {
+            width: 100%;
+            padding: 1.8rem 6rem;
             border-top: 1px solid #eee;
-            padding-top: 1.8rem;
             font-size: 0.9rem;
             color: #777;
         }
@@ -384,6 +405,43 @@
         }
 
         /* ===== RESPONSIVE STYLES ===== */
+        @media (min-width: 1025px) {
+            .card-list {
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                gap: 2.5rem;
+                padding-bottom: 0.75rem;
+                scroll-snap-type: x proximity;
+                overscroll-behavior-x: contain;
+                scrollbar-gutter: stable;
+                scrollbar-width: thin;
+                scrollbar-color: #cfcfcf transparent;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .card {
+                flex: 0 0 clamp(420px, 70vw, 560px);
+                width: auto;
+                scroll-snap-align: start;
+            }
+
+            .card-list::-webkit-scrollbar {
+                height: 10px;
+            }
+
+            .card-list::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .card-list::-webkit-scrollbar-thumb {
+                background: #d4d4d4;
+                border-radius: 999px;
+                border: 2px solid transparent;
+                background-clip: padding-box;
+            }
+        }
+
         @media (max-width: 1024px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -409,32 +467,42 @@
             .media-wall {
                 padding: 0 1rem;
             }
+
+            .section-full-width {
+                padding: 3rem 2rem;
+            }
+
+            .footer-full-width {
+                padding: 1.8rem 2rem;
+            }
         }
 
         @media (max-width: 767px) {
             .page { padding: 2rem 1.25rem 3.5rem; }
-            
+
             .hero-content {
                 padding: 3rem 1.5rem;
             }
-            
+
             .hero h1 { font-size: 2.5rem; white-space: nowrap; }
             .hero-links { flex-wrap: wrap; gap: 1rem 1.5rem; }
-            
-            .hero-media { 
+
+            .hero-media {
                 height: 50vh;
                 min-height: 350px;
                 padding: 2.5rem 0;
             }
-            
+
             .media-wall {
                 gap: 0.75rem;
                 padding: 0 0.75rem;
             }
-            
+
             .media-track { gap: 0.75rem; }
             .media-item { border-radius: 16px; }
-            
+
+            .section-full-width { padding: 2.5rem 1.25rem; }
+            .footer-full-width { padding: 1.5rem 1.25rem; }
             .card-list { gap: 2.25rem; }
             .card-top { flex-direction: column; align-items: flex-start; }
             .card-date { order: -1; }
@@ -449,30 +517,32 @@
 
         @media (max-width: 480px) {
             .page { padding: 1.5rem 1rem 3rem; }
-            
+
             .hero-content {
                 padding: 2.5rem 1rem;
             }
-            
+
             .hero h1 { font-size: 2.2rem; white-space: nowrap; }
             .hero .role { font-size: 1.125rem; }
             .hero .meta { font-size: 0.9375rem; }
             .hero-links { font-size: 1rem; gap: 0.85rem 1.25rem; }
-            
-            .hero-media { 
+
+            .hero-media {
                 height: 45vh;
                 min-height: 300px;
                 padding: 2rem 0;
             }
-            
+
             .media-wall {
                 gap: 0.5rem;
                 padding: 0 0.5rem;
             }
-            
+
             .media-track { gap: 0.5rem; }
             .media-item { border-radius: 12px; }
-            
+
+            .section-full-width { padding: 2rem 1rem; }
+            .footer-full-width { padding: 1.25rem 1rem; }
             .section { margin-bottom: 3rem; }
             .card-list { gap: 1.75rem; }
             .card-image { height: 180px; }
@@ -486,22 +556,25 @@
 
         @media (max-width: 375px) {
             .page { padding: 1.25rem 0.85rem 2.5rem; }
-            
+
             .hero-content {
                 padding: 2rem 0.85rem;
             }
-            
+
             .hero h1 { font-size: 1.9rem; white-space: nowrap; }
             .hero .role { font-size: 1.0625rem; }
             .hero .meta { font-size: 0.875rem; margin-bottom: 1.2rem; }
             .hero-links { font-size: 0.9375rem; gap: 0.75rem 1rem; }
-            
+
             .hero-media {
                 height: 40vh;
                 min-height: 260px;
                 padding: 1.5rem 0;
             }
-            
+
+            .section-full-width { padding: 1.5rem 0.85rem; }
+            .section-full-width h2 { font-size: 0.975rem; margin-bottom: 1.2rem; }
+            .footer-full-width { padding: 1rem 0.85rem; }
             .section { margin-bottom: 2.5rem; }
             .section h2 { font-size: 0.8125rem; margin-bottom: 1.2rem; }
             .card-list { gap: 1.5rem; }
@@ -583,121 +656,118 @@
         </div>
     </header>
 
-    <main class="page">
-
-        <section class="section">
-            <h2>Featured Work</h2>
-            <div class="card-list">
-                <article class="card">
-                    <a class="card-image" href="compfit.html">
-                        <img src="PortfolioPhotos/compfit/ProjectBanner.png" alt="CompFit project banner">
-                    </a>
-                    <div class="card-content">
-                        <div class="card-top">
-                            <a class="card-title" href="compfit.html">CompFit <span class="arrow">→</span></a>
-                            <span class="card-date">Aug 2025 — Dec 2025</span>
-                        </div>
-                        <p class="card-desc">A fitness competition app where friends track workouts and compete on shared leaderboards.</p>
-                        <div class="card-tools">TOOLS: FIGMA · REACT NATIVE · FIREBASE · EXPO</div>
-                        <div class="card-actions">
-                            <a href="https://youtu.be/unwZhL702ok" target="_blank" rel="noopener" class="pill">Demo</a>
-                            <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" rel="noopener" class="pill">Figma</a>
-                            <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" rel="noopener" class="pill">Slide Deck</a>
-                            <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" rel="noopener" class="pill">Test-Flight Beta</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <a class="card-image" href="packit.html">
-                        <img src="PortfolioPhotos/packit/ProjectBanner.png" alt="PackIt project banner">
-                    </a>
-                    <div class="card-content">
-                        <div class="card-top">
-                            <a class="card-title" href="packit.html">PackIt <span class="arrow">→</span></a>
-                            <span class="card-date">Sept 2024 — Dec 2024</span>
-                        </div>
-                        <p class="card-desc">App/Web UI of pairing institutions with student volunteers to cut food waste.</p>
-                        <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
-                        <div class="card-actions">
-                            <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" rel="noopener" class="pill">Figma</a>
-                            <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <a class="card-image" href="sznluv.html">
-                        <div class="image-placeholder"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="card-top">
-                            <a class="card-title" href="sznluv.html">SznLuv <span class="arrow">→</span></a>
-                            <span class="card-date">Sept 2024 — Dec 2024</span>
-                        </div>
-                        <p class="card-desc">Seasonal Spot discovery app for Vancouver couples.</p>
-                        <div class="card-tools">TOOLS: REACT NATIVE · EXPO SDK · JS</div>
-                        <div class="card-actions">
-                            <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" rel="noopener" class="pill">Demo</a>
-                            <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" rel="noopener" class="pill">Figma</a>
-                            <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
-                            <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" rel="noopener" class="pill">Report</a>
-                            <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" rel="noopener" class="pill">GitHub</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <a class="card-image" href="flowhive.html">
-                        <div class="image-placeholder"></div>
-                    </a>
-                    <div class="card-content">
-                        <div class="card-top">
-                            <a class="card-title" href="flowhive.html">Flow Hive Companion <span class="arrow">→</span></a>
-                            <span class="card-date">April 2025 — Sept 2025</span>
-                        </div>
-                        <p class="card-desc">Two-part web and mobile companion for new urban beekeepers.</p>
-                        <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
-                        <div class="card-actions">
-                            <a href="https://www.figma.com/design/nbIaNdr9h80ZbVpwotmg8B/Flow-Portfolio?node-id=3-22222&t=Pr7VAjxVcwKvkmkS-1" target="_blank" rel="noopener" class="pill">Figma</a>
-                            <a href="https://drive.google.com/file/d/1cNN2CiPZL08oKpd_dAHAlLvBlBnyaBCo/view?usp=drive_link" target="_blank" rel="noopener" class="pill">Slide Deck</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>Work Experience</h2>
-            <div class="experience-list">
-                <a class="experience-item" href="https://www.lazertechnologies.com/" target="_blank" rel="noopener">
-                    <div>
-                        <div class="exp-role">Lazer Technologies</div>
-                        <div class="exp-desc">UI/UX Design Intern.</div>
-                    </div>
-                    <div class="exp-date">April 2025 — Sept 2025</div>
+    <section class="section-full-width">
+        <h2>Featured Work</h2>
+        <div class="card-list">
+            <article class="card">
+                <a class="card-image" href="compfit.html">
+                    <img src="PortfolioPhotos/compfit/ProjectBanner.png" alt="CompFit project banner">
                 </a>
-                <a class="experience-item" href="https://marshallvapes.ca/?srsltid=AfmBOooOYpu8yGQKvgNiyLBiOznKbyWRi5nW753b7CXf81uzyPvtuv9u" target="_blank" rel="noopener">
-                    <div>
-                        <div class="exp-role">MarshallVapes</div>
-                        <div class="exp-desc">Co-Founder &amp; Product Designer.</div>
+                <div class="card-content">
+                    <div class="card-top">
+                        <a class="card-title" href="compfit.html">CompFit <span class="arrow">→</span></a>
+                        <span class="card-date">Aug 2025 — Dec 2025</span>
                     </div>
-                    <div class="exp-date">Sept 2024 — Present</div>
-                </a>
-                <a class="experience-item" href="https://nutritionhouse.com/?srsltid=AfmBOorPYYWWp_e7eIDVIIPixUazcPGIKMDK7FAjW-pY_AyrCakZScR1" target="_blank" rel="noopener">
-                    <div>
-                        <div class="exp-role">Nutrition House</div>
-                        <div class="exp-desc">Social Media Manager.</div>
+                    <p class="card-desc">A fitness competition app where friends track workouts and compete on shared leaderboards.</p>
+                    <div class="card-tools">TOOLS: FIGMA · REACT NATIVE · FIREBASE · EXPO</div>
+                    <div class="card-actions">
+                        <a href="https://youtu.be/unwZhL702ok" target="_blank" rel="noopener" class="pill">Demo</a>
+                        <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                        <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                        <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" rel="noopener" class="pill">Test-Flight Beta</a>
                     </div>
-                    <div class="exp-date">April 2021 — May 2022</div>
-                </a>
-            </div>
-        </section>
+                </div>
+            </article>
 
-        <footer>
-            &copy; 2025 Zeeyad Monir
-        </footer>
-    </main>
+            <article class="card">
+                <a class="card-image" href="packit.html">
+                    <img src="PortfolioPhotos/packit/ProjectBanner.png" alt="PackIt project banner">
+                </a>
+                <div class="card-content">
+                    <div class="card-top">
+                        <a class="card-title" href="packit.html">PackIt <span class="arrow">→</span></a>
+                        <span class="card-date">Sept 2024 — Dec 2024</span>
+                    </div>
+                    <p class="card-desc">App/Web UI of pairing institutions with student volunteers to cut food waste.</p>
+                    <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
+                    <div class="card-actions">
+                        <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" rel="noopener" class="pill">Figma</a>
+                        <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <a class="card-image" href="sznluv.html">
+                    <img src="PortfolioPhotos/sznluv/homeScreen.png" alt="SznLuv project banner">
+                </a>
+                <div class="card-content">
+                    <div class="card-top">
+                        <a class="card-title" href="sznluv.html">SznLuv <span class="arrow">→</span></a>
+                        <span class="card-date">Sept 2024 — Dec 2024</span>
+                    </div>
+                    <p class="card-desc">Seasonal Spot discovery app for Vancouver couples.</p>
+                    <div class="card-tools">TOOLS: REACT NATIVE · EXPO SDK · JS</div>
+                    <div class="card-actions">
+                        <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" rel="noopener" class="pill">Demo</a>
+                        <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                        <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                        <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" rel="noopener" class="pill">Report</a>
+                        <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" rel="noopener" class="pill">GitHub</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <a class="card-image" href="flowhive.html">
+                    <img src="PortfolioPhotos/FlowImages/Onboarding.png" alt="Flow Hive Companion project banner">
+                </a>
+                <div class="card-content">
+                    <div class="card-top">
+                        <a class="card-title" href="flowhive.html">Flow Hive Companion <span class="arrow">→</span></a>
+                        <span class="card-date">April 2025 — Sept 2025</span>
+                    </div>
+                    <p class="card-desc">Two-part web and mobile companion for new urban beekeepers.</p>
+                    <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
+                    <div class="card-actions">
+                        <a href="https://www.figma.com/design/nbIaNdr9h80ZbVpwotmg8B/Flow-Portfolio?node-id=3-22222&t=Pr7VAjxVcwKvkmkS-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                        <a href="https://drive.google.com/file/d/1cNN2CiPZL08oKpd_dAHAlLvBlBnyaBCo/view?usp=drive_link" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section-full-width">
+        <h2>Work Experience</h2>
+        <div class="experience-list">
+            <a class="experience-item" href="https://www.lazertechnologies.com/" target="_blank" rel="noopener">
+                <div>
+                    <div class="exp-role">Lazer Technologies</div>
+                    <div class="exp-desc">UI/UX Design Intern.</div>
+                </div>
+                <div class="exp-date">April 2025 — Sept 2025</div>
+            </a>
+            <a class="experience-item" href="https://marshallvapes.ca/?srsltid=AfmBOooOYpu8yGQKvgNiyLBiOznKbyWRi5nW753b7CXf81uzyPvtuv9u" target="_blank" rel="noopener">
+                <div>
+                    <div class="exp-role">MarshallVapes</div>
+                    <div class="exp-desc">Co-Founder &amp; Product Designer.</div>
+                </div>
+                <div class="exp-date">Sept 2024 — Present</div>
+            </a>
+            <a class="experience-item" href="https://nutritionhouse.com/?srsltid=AfmBOorPYYWWp_e7eIDVIIPixUazcPGIKMDK7FAjW-pY_AyrCakZScR1" target="_blank" rel="noopener">
+                <div>
+                    <div class="exp-role">Nutrition House</div>
+                    <div class="exp-desc">Social Media Manager.</div>
+                </div>
+                <div class="exp-date">April 2021 — May 2022</div>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer-full-width">
+        &copy; 2025 Zeeyad Monir
+    </footer>
 
 </body>
 </html>
