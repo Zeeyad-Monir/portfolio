@@ -397,10 +397,118 @@
             color: #777;
         }
 
+        /* ===== NAVIGATION MENU ===== */
+        .nav-menu {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            z-index: 9999;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .hamburger {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 2;
+        }
+
+        .hamburger:hover .hamburger-line {
+            background: #525252;
+        }
+
+        .hamburger-line {
+            width: 20px;
+            height: 2px;
+            background: #030213;
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            height: 44px;
+            margin-left: 16px;
+            padding: 0 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 22px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transform: translateX(-20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .nav-link {
+            padding: 8px 0;
+            color: #030213;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            opacity: 0;
+            transform: translateX(-10px);
+            white-space: nowrap;
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav-links.active .nav-link {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-links.active .nav-link:nth-child(1) { transition-delay: 0.05s; }
+        .nav-links.active .nav-link:nth-child(2) { transition-delay: 0.1s; }
+        .nav-links.active .nav-link:nth-child(3) { transition-delay: 0.15s; }
+
+        .nav-link:hover {
+            color: #525252;
+            border-bottom-color: #525252;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             .media-track {
                 animation: none;
                 transform: translateY(0);
+            }
+            .hamburger-line,
+            .nav-links,
+            .nav-link {
+                transition: none;
             }
         }
 
@@ -516,6 +624,14 @@
         }
 
         @media (max-width: 480px) {
+            .nav-menu {
+                top: 16px;
+                left: 16px;
+            }
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.875rem;
+            }
             .page { padding: 1.5rem 1rem 3rem; }
 
             .hero-content {
@@ -594,7 +710,21 @@
 </head>
 <body>
 
-    <header class="hero">
+    <!-- Navigation Menu -->
+    <nav class="nav-menu" id="navMenu">
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <div class="nav-links">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#experience" class="nav-link">Work Experience</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
         <div class="hero-content">
             <h1>Zeeyad Monir</h1>
             <p class="role">Product Designer & Developer</p>
@@ -613,40 +743,54 @@
                         <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/landingPage/FlowLandingPage.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItLandingPage.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="" loading="lazy"></div>
+                        <!-- Duplicated for seamless loop -->
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/FlowLandingPage.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="" loading="lazy"></div>
+
+                        <!-- Duplicated for seamless loop -->
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/FlowLandingPage.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="" loading="lazy"></div>
+                    </div>
+                </div>
+                <div class="media-column">
+                    <div class="media-track">
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPagemarshallvapes2.png" alt="" loading="lazy"></div>
                         <!-- Duplicated for seamless loop -->
                         <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/onboarding.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/FlowImages/Onboarding.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/sznluv/homeScreen.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/studentPage.png" alt="" loading="lazy"></div>
-                    </div>
-                </div>
-                <div class="media-column">
-                    <div class="media-track">
-                        <div class="media-item"><img src="PortfolioPhotos/compfit/ProfileScreen.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/FlowImages/Health.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/mealScreen.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/sznluv/mapScreen.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/compfit/RankScreen.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPagemarshallvapes2.png" alt="" loading="lazy"></div>
+
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/compfit/ProfileScreen.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/FlowImages/Health.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/mealScreen.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/sznluv/mapScreen.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/compfit/RankScreen.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPagemarshallvapes2.png" alt="" loading="lazy"></div>
                     </div>
                 </div>
                 <div class="media-column">
                     <div class="media-track">
-                        <div class="media-item"><img src="PortfolioPhotos/packit/volunteerPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/compfit/FriendsScreen.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/sznluv/weatherScreen.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/packit/studentSettings.png" alt="" loading="lazy"></div>
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/packit/volunteerPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/compfit/FriendsScreen.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/sznluv/weatherScreen.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="" loading="lazy"></div>
                         <div class="media-item"><img src="PortfolioPhotos/packit/studentSettings.png" alt="" loading="lazy"></div>
@@ -656,12 +800,12 @@
         </div>
     </header>
 
-    <section class="section-full-width">
+    <section class="section-full-width" id="projects">
         <h2>Featured Work</h2>
         <div class="card-list">
             <article class="card">
                 <a class="card-image" href="compfit.html">
-                    <img src="PortfolioPhotos/compfit/ProjectBanner.png" alt="CompFit project banner">
+                    <img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="CompFit project banner">
                 </a>
                 <div class="card-content">
                     <div class="card-top">
@@ -681,7 +825,7 @@
 
             <article class="card">
                 <a class="card-image" href="packit.html">
-                    <img src="PortfolioPhotos/packit/ProjectBanner.png" alt="PackIt project banner">
+                    <img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="PackIt project banner">
                 </a>
                 <div class="card-content">
                     <div class="card-top">
@@ -699,7 +843,7 @@
 
             <article class="card">
                 <a class="card-image" href="sznluv.html">
-                    <img src="PortfolioPhotos/sznluv/homeScreen.png" alt="SznLuv project banner">
+                    <img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="SznLuv project banner">
                 </a>
                 <div class="card-content">
                     <div class="card-top">
@@ -720,7 +864,7 @@
 
             <article class="card">
                 <a class="card-image" href="flowhive.html">
-                    <img src="PortfolioPhotos/FlowImages/Onboarding.png" alt="Flow Hive Companion project banner">
+                    <img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="Flow Hive Companion project banner">
                 </a>
                 <div class="card-content">
                     <div class="card-top">
@@ -738,7 +882,7 @@
         </div>
     </section>
 
-    <section class="section-full-width">
+    <section class="section-full-width" id="experience">
         <h2>Work Experience</h2>
         <div class="experience-list">
             <a class="experience-item" href="https://www.lazertechnologies.com/" target="_blank" rel="noopener">
@@ -768,6 +912,45 @@
     <footer class="footer-full-width">
         &copy; 2025 Zeeyad Monir
     </footer>
+
+    <script>
+        // Navigation Menu Toggle
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded',
+                hamburger.classList.contains('active'));
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-menu')) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Close menu and smooth scroll on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+
+                const targetId = link.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
