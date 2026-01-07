@@ -714,7 +714,9 @@
                 max-height: 0;
                 overflow: hidden;
                 opacity: 0;
-                transition: max-height 0.4s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                            margin-top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
                 margin-top: 0;
             }
 
@@ -744,7 +746,7 @@
                 border: 1px solid var(--border);
                 border-radius: 8px;
                 cursor: pointer;
-                transition: all 0.2s ease;
+                transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
                 min-height: 48px;
             }
 
@@ -757,13 +759,14 @@
             }
 
             .view-more-btn:active {
-                transform: scale(0.98);
+                transform: scale(0.97);
+                transition: transform 0.1s ease;
             }
 
             .view-more-icon {
                 font-size: 1.25rem;
                 font-weight: 300;
-                transition: transform 0.3s ease;
+                transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
                 line-height: 1;
             }
 
@@ -795,6 +798,12 @@
             .experience-item { padding: 14px 16px 16px 20px; }
             .experience-item::before { top: 5px; height: calc(100% - 10px); }
             .exp-date { margin-top: 0.45rem; }
+
+            /* Center card action buttons on mobile */
+            .card-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
 
         @media (max-width: 480px) {
@@ -826,7 +835,14 @@
             .card-title { font-size: 1.0625rem; }
             .card-desc { font-size: 0.9375rem; margin-bottom: 0.9rem; }
             .card-tools { font-size: 0.7rem; margin-bottom: 0.9rem; }
-            .pill { padding: 0.5rem 0.6rem; font-size: 0.65rem; min-height: 44px; }
+            .pill {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.5rem 0.6rem;
+                font-size: 0.65rem;
+                min-height: 44px;
+            }
             .card-actions { gap: 0.35rem; }
 
             /* View More Button - smaller screens */
