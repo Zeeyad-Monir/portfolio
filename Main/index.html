@@ -145,21 +145,26 @@
             flex-direction: column;
             gap: 1rem;
             animation: wall-scroll var(--duration) linear infinite;
+            animation-play-state: paused;
             will-change: transform;
         }
 
+        .media-wall.ready .media-track {
+            animation-play-state: running;
+        }
+
         /* Different speeds for each column - very slow */
-        .media-column:nth-child(1) .media-track { 
-            --duration: 100s;
-            animation-delay: -10s;
+        .media-column:nth-child(1) .media-track {
+            --duration: 126.5s;
+            animation-delay: -13s;
         }
-        .media-column:nth-child(2) .media-track { 
-            --duration: 112.5s;
-            animation-delay: -25s;
+        .media-column:nth-child(2) .media-track {
+            --duration: 142.5s;
+            animation-delay: -32s;
         }
-        .media-column:nth-child(3) .media-track { 
-            --duration: 106.25s;
-            animation-delay: -5s;
+        .media-column:nth-child(3) .media-track {
+            --duration: 134s;
+            animation-delay: -7s;
         }
 
         .media-item {
@@ -300,12 +305,14 @@
 
         .card-actions {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 0.5rem;
         }
 
         .pill {
             display: inline-block;
+            flex-shrink: 1;
+            min-width: 0;
             font-size: 0.75rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -316,6 +323,7 @@
             background: #fff;
             text-decoration: none;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .pill:hover {
@@ -510,6 +518,22 @@
             .nav-link {
                 transition: none;
             }
+            .card-list-expandable {
+                transition: none;
+            }
+            .view-more-btn,
+            .view-more-icon {
+                transition: none;
+            }
+        }
+
+        /* ===== EXPANDABLE CARDS - Desktop defaults ===== */
+        .card-list-expandable {
+            display: contents;
+        }
+
+        .view-more-btn {
+            display: none;
         }
 
         /* ===== RESPONSIVE STYLES ===== */
@@ -550,10 +574,114 @@
             }
         }
 
-        @media (max-width: 1024px) {
+        /* ===== TABLET STYLES (768px - 1024px) ===== */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            /* Hero - Keep 2-column but adjust proportions */
             .hero {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1.3fr 1fr;
+            }
+
+            .hero-content {
+                padding: 3rem 2rem 3rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.2rem, 4vw, 3.2rem);
+                white-space: normal;
+            }
+
+            .hero .role { font-size: 1.25rem; }
+            .hero .meta { font-size: 1rem; }
+            .hero-links { font-size: 1.15rem; gap: 1.5rem; }
+
+            /* Media Wall - visible with adjusted sizing */
+            .hero-media {
+                display: flex;
+                padding: 3rem 0;
+            }
+
+            .media-wall { gap: 0.75rem; padding: 0 1rem; }
+            .media-column { border-radius: 16px; }
+            .media-item { border-radius: 16px; }
+
+            /* Featured Work - Horizontal scroll with smaller cards */
+            .section-full-width { padding: 3rem 2rem; }
+
+            .card-list {
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                gap: 1.5rem;
+                padding-bottom: 0.75rem;
+                scroll-snap-type: x proximity;
+                scrollbar-width: thin;
+                scrollbar-color: #cfcfcf transparent;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .card {
+                flex: 0 0 clamp(320px, 50vw, 400px);
+                width: auto;
+                scroll-snap-align: start;
+            }
+
+            .card-image { height: 260px; }
+
+            /* Card content - tighter padding for tablet width */
+            .card-content {
+                padding: 1.5rem 1.25rem;
+            }
+
+            /* Card description - remove min-height for consistent card heights */
+            .card-desc {
                 min-height: auto;
+                font-size: 0.9375rem;
+                margin-bottom: 0.9rem;
+            }
+
+            /* Tools text - smaller to fit on one line */
+            .card-tools {
+                font-size: 0.68rem;
+                letter-spacing: 0.1em;
+                margin-bottom: 0.9rem;
+            }
+
+            /* Buttons - smaller for tablet cards, centered text */
+            .pill {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.45rem 0.6rem;
+                font-size: 0.65rem;
+                min-height: 40px;
+            }
+
+            .card-actions {
+                gap: 0.35rem;
+            }
+
+            /* Expandable cards - show normally on tablet */
+            .card-list-expandable { display: contents; }
+            .view-more-btn { display: none; }
+
+            .card-list::-webkit-scrollbar { height: 8px; }
+            .card-list::-webkit-scrollbar-track { background: transparent; }
+            .card-list::-webkit-scrollbar-thumb {
+                background: #d4d4d4;
+                border-radius: 999px;
+            }
+
+            .footer-full-width { padding: 1.5rem 2rem; }
+        }
+
+        /* ===== MOBILE STYLES (767px and below) ===== */
+        @media (max-width: 767px) {
+            /* Hero - hide media, center content */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .hero-content {
@@ -567,13 +695,7 @@
             }
 
             .hero-media {
-                height: 60vh;
-                min-height: 400px;
-                padding: 3rem 0;
-            }
-
-            .media-wall {
-                padding: 0 1rem;
+                display: none;
             }
 
             .section-full-width {
@@ -583,31 +705,83 @@
             .footer-full-width {
                 padding: 1.8rem 2rem;
             }
+
+            /* Expandable cards - collapsed by default */
+            .card-list-expandable {
+                display: flex;
+                flex-direction: column;
+                gap: 2.25rem;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: max-height 0.4s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
+                margin-top: 0;
+            }
+
+            .card-list-expandable.expanded {
+                max-height: 3000px;
+                opacity: 1;
+                margin-top: 2.25rem;
+            }
+
+            /* View More Button */
+            .view-more-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                width: 100%;
+                max-width: 280px;
+                margin: 2rem auto 0;
+                padding: 0.875rem 1.5rem;
+                font-family: inherit;
+                font-size: 0.875rem;
+                font-weight: 500;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: var(--text);
+                background: #fff;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                min-height: 48px;
+            }
+
+            .view-more-btn:hover,
+            .view-more-btn:focus {
+                background: #f7f7f7;
+                border-color: var(--tag-border);
+                outline: 2px solid var(--text);
+                outline-offset: 2px;
+            }
+
+            .view-more-btn:active {
+                transform: scale(0.98);
+            }
+
+            .view-more-icon {
+                font-size: 1.25rem;
+                font-weight: 300;
+                transition: transform 0.3s ease;
+                line-height: 1;
+            }
+
+            .view-more-btn[aria-expanded="true"] .view-more-icon {
+                transform: rotate(45deg);
+            }
         }
 
         @media (max-width: 767px) {
             .page { padding: 2rem 1.25rem 3.5rem; }
 
             .hero-content {
-                padding: 3rem 1.5rem;
+                padding: 2rem 1.5rem;
             }
 
             .hero h1 { font-size: 2.5rem; white-space: nowrap; }
             .hero-links { flex-wrap: wrap; gap: 1rem 1.5rem; }
-
-            .hero-media {
-                height: 50vh;
-                min-height: 350px;
-                padding: 2.5rem 0;
-            }
-
-            .media-wall {
-                gap: 0.75rem;
-                padding: 0 0.75rem;
-            }
-
-            .media-track { gap: 0.75rem; }
-            .media-item { border-radius: 16px; }
+            .hero-links a { min-height: 44px; display: inline-flex; align-items: center; }
 
             .section-full-width { padding: 2.5rem 1.25rem; }
             .footer-full-width { padding: 1.5rem 1.25rem; }
@@ -643,20 +817,6 @@
             .hero .meta { font-size: 0.9375rem; }
             .hero-links { font-size: 1rem; gap: 0.85rem 1.25rem; }
 
-            .hero-media {
-                height: 45vh;
-                min-height: 300px;
-                padding: 2rem 0;
-            }
-
-            .media-wall {
-                gap: 0.5rem;
-                padding: 0 0.5rem;
-            }
-
-            .media-track { gap: 0.5rem; }
-            .media-item { border-radius: 12px; }
-
             .section-full-width { padding: 2rem 1rem; }
             .footer-full-width { padding: 1.25rem 1rem; }
             .section { margin-bottom: 3rem; }
@@ -666,8 +826,19 @@
             .card-title { font-size: 1.0625rem; }
             .card-desc { font-size: 0.9375rem; margin-bottom: 0.9rem; }
             .card-tools { font-size: 0.7rem; margin-bottom: 0.9rem; }
-            .pill { padding: 0.55rem 0.8rem; font-size: 0.7rem; }
-            .card-actions { gap: 0.45rem; }
+            .pill { padding: 0.5rem 0.6rem; font-size: 0.65rem; min-height: 44px; }
+            .card-actions { gap: 0.35rem; }
+
+            /* View More Button - smaller screens */
+            .view-more-btn {
+                max-width: 240px;
+                padding: 0.75rem 1.25rem;
+                font-size: 0.8125rem;
+            }
+
+            .card-list-expandable.expanded {
+                margin-top: 1.75rem;
+            }
         }
 
         @media (max-width: 375px) {
@@ -682,12 +853,6 @@
             .hero .meta { font-size: 0.875rem; margin-bottom: 1.2rem; }
             .hero-links { font-size: 0.9375rem; gap: 0.75rem 1rem; }
 
-            .hero-media {
-                height: 40vh;
-                min-height: 260px;
-                padding: 1.5rem 0;
-            }
-
             .section-full-width { padding: 1.5rem 0.85rem; }
             .section-full-width h2 { font-size: 0.975rem; margin-bottom: 1.2rem; }
             .footer-full-width { padding: 1rem 0.85rem; }
@@ -699,12 +864,23 @@
             .card-title { font-size: 1rem; }
             .card-desc { font-size: 0.875rem; margin-bottom: 0.85rem; }
             .card-tools { font-size: 0.65rem; margin-bottom: 0.85rem; }
-            .pill { padding: 0.5rem 0.7rem; font-size: 0.65rem; }
-            .card-actions { gap: 0.4rem; }
+            .pill { padding: 0.45rem 0.5rem; font-size: 0.6rem; min-height: 44px; }
+            .card-actions { gap: 0.3rem; }
             .experience-list { gap: 1.65rem; }
             .experience-item { padding: 13px 14px 14px 18px; }
             .experience-item::before { top: 4px; height: calc(100% - 8px); }
             .exp-date { margin-top: 0.35rem; }
+
+            /* View More Button - tiny screens */
+            .view-more-btn {
+                max-width: 200px;
+                padding: 0.7rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .card-list-expandable.expanded {
+                margin-top: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -739,87 +915,87 @@
             <div class="media-wall">
                 <div class="media-column">
                     <div class="media-track">
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageFlow5.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageFlow5.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt=""></div>
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageFlow5.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageFlow5.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt=""></div>
 
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/FlowLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/FlowLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt=""></div>
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/FlowLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFitLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/FlowLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageCompFitTwo.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt=""></div>
                     </div>
                 </div>
                 <div class="media-column">
                     <div class="media-track">
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPagemarshallvapes2.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageMarshallVapes3.png" alt=""></div>
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPagemarshallvapes2.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageMarshallVapes3.png" alt=""></div>
 
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPagemarshallvapes2.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageMarshallVapes3.png" alt=""></div>
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPagemarshallvapes2.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/CompFit.pngLandingScreen3.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/packitlandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageMarshallVapes3.png" alt=""></div>
                     </div>
                 </div>
                 <div class="media-column">
                     <div class="media-track">
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/studentSettings.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/sznLuvLandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageCompFit5.png" alt=""></div>
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/studentSettings.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/sznLuvLandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageCompFit5.png" alt=""></div>
 
                          <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/studentSettings.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/sznLuvLandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageCompFit5.png" alt=""></div>
 
                         <!-- Duplicated for seamless loop -->
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="" loading="lazy"></div>
-                        <div class="media-item"><img src="PortfolioPhotos/packit/studentSettings.png" alt="" loading="lazy"></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingPageMarshallVapes.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/landingpageFlow4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/flowLandingPage6.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/sznLuvLandingPage4.png" alt=""></div>
+                        <div class="media-item"><img src="PortfolioPhotos/landingPage/LandingPageCompFit5.png" alt=""></div>
                     </div>
                 </div>
             </div>
@@ -849,63 +1025,72 @@
                 </div>
             </article>
 
-            <article class="card">
-                <a class="card-image" href="packit.html">
-                    <img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="PackIt project banner">
-                </a>
-                <div class="card-content">
-                    <div class="card-top">
-                        <a class="card-title" href="packit.html">PackIt <span class="arrow">→</span></a>
-                        <span class="card-date">Sept 2024 — Dec 2024</span>
+            <!-- Expandable container for remaining cards (mobile only) -->
+            <div class="card-list-expandable" id="cardListExpandable">
+                <article class="card">
+                    <a class="card-image" href="packit.html">
+                        <img src="PortfolioPhotos/landingPage/PackItlandingPageLaptop.png" alt="PackIt project banner">
+                    </a>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <a class="card-title" href="packit.html">PackIt <span class="arrow">→</span></a>
+                            <span class="card-date">Sept 2024 — Dec 2024</span>
+                        </div>
+                        <p class="card-desc">App/Web UI of pairing institutions with student volunteers to cut food waste.</p>
+                        <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
+                        <div class="card-actions">
+                            <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" rel="noopener" class="pill">Figma</a>
+                            <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                        </div>
                     </div>
-                    <p class="card-desc">App/Web UI of pairing institutions with student volunteers to cut food waste.</p>
-                    <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
-                    <div class="card-actions">
-                        <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" rel="noopener" class="pill">Figma</a>
-                        <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
-                    </div>
-                </div>
-            </article>
+                </article>
 
-            <article class="card">
-                <a class="card-image" href="sznluv.html">
-                    <img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="SznLuv project banner">
-                </a>
-                <div class="card-content">
-                    <div class="card-top">
-                        <a class="card-title" href="sznluv.html">SznLuv <span class="arrow">→</span></a>
-                        <span class="card-date">Sept 2024 — Dec 2024</span>
+                <article class="card">
+                    <a class="card-image" href="sznluv.html">
+                        <img src="PortfolioPhotos/landingPage/SznLuvLandingPage2.png" alt="SznLuv project banner">
+                    </a>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <a class="card-title" href="sznluv.html">SznLuv <span class="arrow">→</span></a>
+                            <span class="card-date">Sept 2024 — Dec 2024</span>
+                        </div>
+                        <p class="card-desc">Seasonal Spot discovery app for Vancouver couples.</p>
+                        <div class="card-tools">TOOLS: REACT NATIVE · EXPO SDK · JS</div>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" rel="noopener" class="pill">Demo</a>
+                            <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                            <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                            <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" rel="noopener" class="pill">Report</a>
+                            <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" rel="noopener" class="pill">GitHub</a>
+                        </div>
                     </div>
-                    <p class="card-desc">Seasonal Spot discovery app for Vancouver couples.</p>
-                    <div class="card-tools">TOOLS: REACT NATIVE · EXPO SDK · JS</div>
-                    <div class="card-actions">
-                        <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" rel="noopener" class="pill">Demo</a>
-                        <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" rel="noopener" class="pill">Figma</a>
-                        <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" rel="noopener" class="pill">Slide Deck</a>
-                        <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" rel="noopener" class="pill">Report</a>
-                        <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" rel="noopener" class="pill">GitHub</a>
-                    </div>
-                </div>
-            </article>
+                </article>
 
-            <article class="card">
-                <a class="card-image" href="flowhive.html">
-                    <img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="Flow Hive Companion project banner">
-                </a>
-                <div class="card-content">
-                    <div class="card-top">
-                        <a class="card-title" href="flowhive.html">Flow Hive Companion <span class="arrow">→</span></a>
-                        <span class="card-date">April 2025 — Sept 2025</span>
+                <article class="card">
+                    <a class="card-image" href="flowhive.html">
+                        <img src="PortfolioPhotos/landingPage/LandingPage2Flow.png" alt="Flow Hive Companion project banner">
+                    </a>
+                    <div class="card-content">
+                        <div class="card-top">
+                            <a class="card-title" href="flowhive.html">Flow Hive Companion <span class="arrow">→</span></a>
+                            <span class="card-date">April 2025 — Sept 2025</span>
+                        </div>
+                        <p class="card-desc">Two-part web and mobile companion for new urban beekeepers.</p>
+                        <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
+                        <div class="card-actions">
+                            <a href="https://www.figma.com/design/nbIaNdr9h80ZbVpwotmg8B/Flow-Portfolio?node-id=3-22222&t=Pr7VAjxVcwKvkmkS-1" target="_blank" rel="noopener" class="pill">Figma</a>
+                            <a href="https://drive.google.com/file/d/1cNN2CiPZL08oKpd_dAHAlLvBlBnyaBCo/view?usp=drive_link" target="_blank" rel="noopener" class="pill">Slide Deck</a>
+                        </div>
                     </div>
-                    <p class="card-desc">Two-part web and mobile companion for new urban beekeepers.</p>
-                    <div class="card-tools">TOOLS: FIGMA · MIRO · ADOBE SUITE</div>
-                    <div class="card-actions">
-                        <a href="https://www.figma.com/design/nbIaNdr9h80ZbVpwotmg8B/Flow-Portfolio?node-id=3-22222&t=Pr7VAjxVcwKvkmkS-1" target="_blank" rel="noopener" class="pill">Figma</a>
-                        <a href="https://drive.google.com/file/d/1cNN2CiPZL08oKpd_dAHAlLvBlBnyaBCo/view?usp=drive_link" target="_blank" rel="noopener" class="pill">Slide Deck</a>
-                    </div>
-                </div>
-            </article>
+                </article>
+            </div>
         </div>
+
+        <!-- View More Projects Button (visible on mobile only) -->
+        <button class="view-more-btn" id="viewMoreBtn" aria-expanded="false" aria-controls="cardListExpandable">
+            <span class="view-more-text">View More Projects</span>
+            <span class="view-more-icon">+</span>
+        </button>
     </section>
 
     <section class="section-full-width" id="experience">
@@ -976,6 +1161,120 @@
                 }
             });
         });
+
+        // Media Wall Animation - Wait for images to load before starting
+        // Only animate on desktop (above 767px)
+        (function initMediaWall() {
+            const mediaWall = document.querySelector('.media-wall');
+            if (!mediaWall) return;
+
+            const MOBILE_BREAKPOINT = 767;
+            const heroImages = mediaWall.querySelectorAll('img');
+            let loaded = false;
+
+            function isMobileView() {
+                return window.innerWidth <= MOBILE_BREAKPOINT;
+            }
+
+            function startAnimation() {
+                if (loaded) return;
+                loaded = true;
+                // Only add ready class (to start animation) on desktop
+                if (!isMobileView()) {
+                    mediaWall.classList.add('ready');
+                }
+            }
+
+            // Handle resize - toggle animation based on viewport
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (isMobileView()) {
+                        mediaWall.classList.remove('ready');
+                    } else if (loaded) {
+                        mediaWall.classList.add('ready');
+                    }
+                }, 150);
+            });
+
+            // Wait for all images to load
+            const imagePromises = Array.from(heroImages).map(img => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    return Promise.resolve();
+                }
+                return new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
+            });
+
+            Promise.all(imagePromises).then(startAnimation);
+
+            // Fallback: start after 3 seconds regardless
+            setTimeout(startAnimation, 3000);
+        })();
+
+        // Featured Work Expand/Collapse
+        (function initExpandableCards() {
+            const viewMoreBtn = document.getElementById('viewMoreBtn');
+            const expandableContainer = document.getElementById('cardListExpandable');
+            if (!viewMoreBtn || !expandableContainer) return;
+
+            const MOBILE_BREAKPOINT = 767;
+            const ANIMATION_DURATION = 400;
+
+            function isMobileView() {
+                return window.innerWidth <= MOBILE_BREAKPOINT;
+            }
+
+            function updateButtonText(isExpanded) {
+                const textSpan = viewMoreBtn.querySelector('.view-more-text');
+                if (textSpan) {
+                    textSpan.textContent = isExpanded ? 'Show Less' : 'View More Projects';
+                }
+            }
+
+            function toggleExpand() {
+                if (!isMobileView()) return;
+
+                const isExpanded = viewMoreBtn.getAttribute('aria-expanded') === 'true';
+                const newState = !isExpanded;
+
+                viewMoreBtn.setAttribute('aria-expanded', String(newState));
+                expandableContainer.classList.toggle('expanded', newState);
+                updateButtonText(newState);
+
+                if (newState) {
+                    // After expand animation, scroll first card into view
+                    setTimeout(() => {
+                        const firstCard = expandableContainer.querySelector('.card');
+                        if (firstCard) {
+                            firstCard.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }, ANIMATION_DURATION);
+                }
+            }
+
+            // Click handler
+            viewMoreBtn.addEventListener('click', toggleExpand);
+
+            // Reset on resize to desktop
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (!isMobileView()) {
+                        expandableContainer.classList.remove('expanded');
+                        viewMoreBtn.setAttribute('aria-expanded', 'false');
+                        updateButtonText(false);
+                    }
+                }, 150);
+            });
+        })();
     </script>
 
 </body>

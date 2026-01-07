@@ -281,7 +281,22 @@
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
             .feature-block, .feature-block.reversed { flex-direction: column; gap: 2.5rem; text-align: left; }
-            .feature-visual img { max-width: 100%; }
+            .feature-visual img {
+                max-width: 220px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature-visual img {
+                max-width: 180px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .feature-visual img {
+                max-width: 160px;
+            }
         }
     </style>
 </head>
