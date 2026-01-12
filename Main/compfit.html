@@ -175,8 +175,8 @@
         .feature-block {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 3rem;
+            justify-content: center;
+            gap: 7.7rem;
             margin-bottom: 6rem;
         }
 
@@ -185,8 +185,7 @@
         }
 
         .feature-text {
-            flex: 1;
-            min-width: 300px;
+            flex: 0 0 400px;
         }
 
         .feature-text h3 {
@@ -202,7 +201,7 @@
         }
 
         .feature-visual {
-            flex: 1;
+            flex: 0 0 250px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -282,6 +281,8 @@
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
             .feature-block, .feature-block.reversed { flex-direction: column; gap: 2.5rem; text-align: left; }
+            .feature-text { flex: 0 0 auto; width: 100%; }
+            .feature-visual { flex: 0 0 auto; width: 100%; }
             .feature-visual img {
                 max-width: 220px;
                 margin: 0 auto;
@@ -319,7 +320,7 @@
             </div>
 
             <div class="action-row">
-                <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="btn">Test-Flight Beta</a>
+                <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="btn">Download Beta</a>
                 <a href="https://youtu.be/unwZhL702ok" target="_blank" class="btn">View Demo</a>
                 <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="btn">Slide Deck</a>
                 <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="btn">Figma</a>
@@ -327,7 +328,7 @@
         </header>
 
         <section class="section-spacer">
-            <span class="section-header">01 / Overview</span>
+            <span class="section-header">Overview</span>
             <p class="overview-text">
                 Most fitness apps focus on the individual. CompFit focuses on the <strong>group</strong>. 
                 It is a workout-competition app that lets friends create custom challenges, track activity, 
@@ -337,7 +338,7 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">02 / Design Process</span>
+            <span class="section-header">Design Process</span>
             
             <div class="process-list">
                 <div class="process-item">
@@ -375,7 +376,7 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">03 / The Solution</span>
+            <span class="section-header">The Solution</span>
 
             <div class="feature-block">
                 <div class="feature-text">
@@ -409,7 +410,7 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">04 / Featured Screens</span>
+            <span class="section-header">Featured Screens</span>
             <div class="gallery-track">
                 <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/StartScreen.png" alt="Start"></div>
                 <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/OnboardingScreen.png" alt="Onboarding"></div>
