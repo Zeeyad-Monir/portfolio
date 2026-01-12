@@ -279,7 +279,7 @@
         #lightbox img { max-height: 90vh; max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
 
         /* --- MOBILE --- */
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
             .feature-block, .feature-block.reversed { flex-direction: column; gap: 2.5rem; text-align: left; }
             .feature-visual img {
@@ -297,6 +297,205 @@
         @media (max-width: 375px) {
             .feature-visual img {
                 max-width: 160px;
+            }
+        }
+
+        /* --- TABLET (768px - 1024px) --- */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                max-width: none;
+                width: 100%;
+                padding: 3rem 2rem;
+            }
+
+            /* Hero - centered, horizontal meta */
+            .hero-section {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+                flex-wrap: nowrap;
+            }
+
+            .meta-stack {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem 2rem;
+            }
+
+            /* Overview - centered */
+            .overview-text {
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 1.15rem;
+            }
+
+            /* Process - centered */
+            .process-list {
+                max-width: 750px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .process-item {
+                grid-template-columns: 45px 1fr;
+            }
+
+            /* Solutions - already good */
+            .feature-block {
+                gap: 2.5rem;
+                max-width: 900px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .feature-text {
+                min-width: 280px;
+            }
+
+            .feature-visual img {
+                max-width: 240px;
+            }
+
+            /* Gallery - full bleed */
+            .section-spacer:has(.gallery-track) {
+                margin-left: -2rem;
+                margin-right: -2rem;
+                width: calc(100% + 4rem);
+            }
+
+            .section-spacer:has(.gallery-track) .section-header {
+                padding-left: 2rem;
+            }
+
+            .gallery-track {
+                padding-left: 2rem;
+                padding-right: 2rem;
+                scroll-snap-type: x mandatory;
+            }
+
+            .gallery-img {
+                flex: 0 0 220px;
+                scroll-snap-align: start;
+            }
+
+            /* CTA - centered, clean */
+            .cta-section {
+                max-width: 550px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-heading {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* --- DESKTOP (1025px+) --- */
+        @media (min-width: 1025px) {
+            .container {
+                max-width: none;
+                width: 100%;
+                padding: 4rem 6rem;
+            }
+
+            /* Hero - centered, horizontal meta */
+            .hero-section {
+                max-width: 1000px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .meta-stack {
+                flex-direction: row;
+                gap: 2.5rem;
+            }
+
+            /* Overview - centered, larger */
+            .overview-text {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 1.25rem;
+                line-height: 1.8;
+            }
+
+            /* Process - centered */
+            .process-list {
+                max-width: 900px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .process-item {
+                grid-template-columns: 45px 1fr;
+            }
+
+            .process-content {
+                max-width: none;
+            }
+
+            /* Solutions - already good */
+            .feature-block {
+                gap: 4rem;
+                max-width: 1100px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .feature-visual img {
+                max-width: 300px;
+            }
+
+            /* Gallery - full bleed */
+            .section-spacer:has(.gallery-track) {
+                margin-left: -6rem;
+                margin-right: -6rem;
+                width: calc(100% + 12rem);
+            }
+
+            .section-spacer:has(.gallery-track) .section-header {
+                padding-left: 6rem;
+            }
+
+            .gallery-track {
+                padding-left: 6rem;
+                padding-right: 6rem;
+                gap: 1.75rem;
+                scroll-snap-type: x mandatory;
+            }
+
+            .gallery-img {
+                flex: 0 0 280px;
+                scroll-snap-align: start;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            }
+
+            .gallery-img:hover {
+                box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            }
+
+            /* CTA - centered, clean */
+            .cta-section {
+                max-width: 650px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-heading {
+                font-size: 1.85rem;
+            }
+
+            .cta-sub {
+                font-size: 1.1rem;
             }
         }
     </style>
