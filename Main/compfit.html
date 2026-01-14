@@ -120,7 +120,7 @@
         .section-spacer { margin-bottom: 7rem; }
         
         .section-header {
-            font-size: 0.8rem;
+            font-size: 0.92rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-light);
@@ -169,6 +169,71 @@
             color: var(--text-secondary);
             font-size: 1.05rem;
             line-height: 1.6;
+        }
+
+        /* --- REASONING INTRO & CITATIONS --- */
+        .reasoning-intro {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 864px;
+            margin-bottom: 3rem;
+        }
+
+        .reasoning-citation {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: var(--text-light);
+            margin-left: 1px;
+        }
+
+        .reasoning-citation-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .reasoning-citation-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- REASONING 2x2 GRID (Desktop) --- */
+        .reasoning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .reasoning-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+        }
+
+        .sources-list {
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .sources-list h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .sources-list ol {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .sources-list a {
+            color: var(--text-secondary);
+            text-decoration: underline;
         }
 
         /* --- 03 SOLUTION (Clean Split) --- */
@@ -376,6 +441,12 @@
         </section>
 
         <section class="section-spacer">
+            <span class="section-header">Reasoning</span>
+            <p class="reasoning-intro">Built for real follow-through. Each feature is designed to make consistency easier, using evidence-backed behavior change patterns.</p>
+            <div class="process-list reasoning-grid" id="reasoning-content"></div>
+        </section>
+
+        <section class="section-spacer">
             <span class="section-header">The Solution</span>
 
             <div class="feature-block">
@@ -443,6 +514,81 @@
             document.getElementById('lightbox-img').src = el.querySelector('img').src;
             document.getElementById('lightbox').style.display = 'flex';
         }
+    </script>
+
+    <script>
+        // Reasoning data
+        const reasoningItems = [
+            {
+                title: "Social Accountability",
+                text: "Competing with people you know makes motivation more resilient than solo tracking. Social support is repeatedly linked with higher activity and better adherence over time.",
+                sourceIds: [1]
+            },
+            {
+                title: "Clear Feedback",
+                text: "Leaderboards and streaks work because they shorten the feedback loop—you see progress instantly and know what to do next. Meta-analyses show gamified activity interventions can increase physical activity compared with non-gamified approaches.",
+                sourceIds: [2, 3]
+            },
+            {
+                title: "Choice and Fairness, Custom Rules",
+                text: "Different sports are not comparable by default, so CompFit lets groups define rules that feel fair for their lives. Self-Determination Theory research shows autonomy-supported motivation is strongly associated with sustained exercise behavior.",
+                sourceIds: [4]
+            },
+            {
+                title: "Consistency via Simple Logging",
+                text: "Logging builds awareness and creates a habit signal, especially when it's quick and flexible. Reviews find self-monitoring is a cornerstone of physical activity interventions and is associated with meaningful increases in activity, including step count improvements.",
+                sourceIds: [5, 6]
+            }
+        ];
+
+        const sources = [
+            { id: 1, author: "Craig BAP, et al.", year: 2025, title: "Social Support in Physical Activity Interventions for Adults: An Overview of Reviews", venue: "Kinesiology Review (Human Kinetics)", url: "https://journals.humankinetics.com/view/journals/krj/aop/article-10.1123-kr.2024-0026/article-10.1123-kr.2024-0026.xml" },
+            { id: 2, author: "Nishi SK, et al.", year: 2024, title: "Gamification in apps and physical activity outcomes: systematic review and meta-analysis of randomized trials", venue: "eClinicalMedicine (The Lancet)", url: "https://www.thelancet.com/journals/eclinm/article/PIIS2589-5370(24)00377-8/fulltext" },
+            { id: 3, author: "Mazeas A, et al.", year: 2022, title: "Evaluating the Effectiveness of Gamification on Physical Activity: Systematic Review and Meta-analysis of Randomized Controlled Trials", venue: "Journal of Medical Internet Research", url: "https://pubmed.ncbi.nlm.nih.gov/34982715/" },
+            { id: 4, author: "Teixeira PJ, et al.", year: 2012, title: "Exercise, physical activity, and self-determination theory: a systematic review", venue: "International Journal of Behavioral Nutrition and Physical Activity", url: "https://pubmed.ncbi.nlm.nih.gov/22726453/" },
+            { id: 5, author: "Vetrovsky T, et al.", year: 2022, title: "Do physical activity interventions combining self-monitoring with other components provide an additional benefit compared with self-monitoring alone? Systematic review and meta-analysis", venue: "British Journal of Sports Medicine", url: "https://pubmed.ncbi.nlm.nih.gov/36396151/" },
+            { id: 6, author: "Larsen RT, et al.", year: 2022, title: "Effectiveness of physical activity monitors in adults: systematic review and meta-analysis", venue: "BMJ", url: "https://pubmed.ncbi.nlm.nih.gov/35082116/" }
+        ];
+
+        // Render reasoning items
+        function renderReasoning() {
+            const container = document.getElementById('reasoning-content');
+            container.innerHTML = reasoningItems.map((item, i) => {
+                const citationLinks = item.sourceIds.map(id => {
+                    const source = sources.find(s => s.id === id);
+                    return source && source.url
+                        ? `<a href="${source.url}" target="_blank" rel="noreferrer" class="reasoning-citation-link">${id}</a>`
+                        : `${id}`;
+                }).join(',');
+                return `
+                <div class="process-item">
+                    <div class="process-number">0${i + 1}</div>
+                    <div class="process-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.text}<sup class="reasoning-citation">${citationLinks}</sup></p>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // Render sources list
+        function renderSources() {
+            const container = document.getElementById('sources-content');
+            container.innerHTML = `
+                <h4>Sources</h4>
+                <ol>
+                    ${sources.map(s => {
+                        const citation = `${s.author} (${s.year}). ${s.title}. <em>${s.venue}</em>.`;
+                        return s.url
+                            ? `<li id="source-${s.id}"><a href="${s.url}" target="_blank" rel="noreferrer">${citation}</a></li>`
+                            : `<li id="source-${s.id}">${citation}</li>`;
+                    }).join('')}
+                </ol>
+            `;
+        }
+
+        // Initialize on load
+        renderReasoning();
     </script>
 </body>
 </html>
