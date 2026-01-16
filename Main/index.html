@@ -341,11 +341,11 @@
 
         .experience-item {
             position: relative;
-            padding: 16px 18px 18px 22px;
+            padding: 28px 18px 32px 22px;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.4rem;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
             text-decoration: none;
             color: inherit;
             border-radius: 12px;
@@ -395,6 +395,55 @@
             margin-top: 0.6rem;
             letter-spacing: 0.005em;
             font-weight: 500;
+        }
+
+        /* ===== EXPERIENCE PREVIEW GALLERY ===== */
+        .exp-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+        }
+
+        .preview-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .experience-item:hover .preview-group,
+        .experience-item:focus-visible .preview-group {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .preview-image {
+            width: auto;
+            height: 84px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+        }
+
+        .experience-item:hover .preview-group .preview-image,
+        .experience-item:focus-visible .preview-group .preview-image {
+            animation: previewEnter 0.35s ease-out forwards;
+        }
+        .experience-item:hover .preview-group .preview-image:nth-child(1),
+        .experience-item:focus-visible .preview-group .preview-image:nth-child(1) { animation-delay: 0s; }
+        .experience-item:hover .preview-group .preview-image:nth-child(2),
+        .experience-item:focus-visible .preview-group .preview-image:nth-child(2) { animation-delay: 0.06s; }
+        .experience-item:hover .preview-group .preview-image:nth-child(3),
+        .experience-item:focus-visible .preview-group .preview-image:nth-child(3) { animation-delay: 0.12s; }
+
+        @keyframes previewEnter {
+            from { opacity: 0; transform: translateY(20px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .footer-full-width {
@@ -525,6 +574,12 @@
             .view-more-icon {
                 transition: none;
             }
+            .experience-item:hover .preview-group .preview-image,
+            .experience-item:focus-visible .preview-group .preview-image {
+                animation: none;
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         /* ===== EXPANDABLE CARDS - Desktop defaults ===== */
@@ -542,7 +597,7 @@
                 flex-direction: row;
                 overflow-x: auto;
                 overflow-y: hidden;
-                gap: 2.5rem;
+                gap: 2.75rem;
                 padding-bottom: 0.75rem;
                 scroll-snap-type: x proximity;
                 overscroll-behavior-x: contain;
@@ -611,7 +666,7 @@
                 flex-direction: row;
                 overflow-x: auto;
                 overflow-y: hidden;
-                gap: 1.5rem;
+                gap: 1.65rem;
                 padding-bottom: 0.75rem;
                 scroll-snap-type: x proximity;
                 scrollbar-width: thin;
@@ -670,6 +725,9 @@
                 background: #d4d4d4;
                 border-radius: 999px;
             }
+
+            /* Experience preview - hidden on tablet */
+            .preview-group { display: none; }
 
             .footer-full-width { padding: 1.5rem 2rem; }
         }
@@ -795,9 +853,10 @@
             .card-image { height: 240px; }
             .card-content { padding: 1.5rem 1.25rem; }
             .experience-list { gap: 1.9rem; }
-            .experience-item { padding: 14px 16px 16px 20px; }
+            .experience-item { padding: 18px 16px 20px 20px; }
             .experience-item::before { top: 5px; height: calc(100% - 10px); }
             .exp-date { margin-top: 0.45rem; }
+            .preview-group { display: none; }
         }
 
         @media (max-width: 480px) {
@@ -1109,25 +1168,40 @@
         <h2>Work Experience</h2>
         <div class="experience-list">
             <a class="experience-item" href="https://www.lazertechnologies.com/" target="_blank" rel="noopener">
-                <div>
+                <div class="exp-content">
                     <div class="exp-role">Lazer Technologies</div>
                     <div class="exp-desc">UI/UX Design Intern.</div>
+                    <div class="exp-date">April 2025 — Sept 2025</div>
                 </div>
-                <div class="exp-date">April 2025 — Sept 2025</div>
+                <div class="preview-group">
+                    <img class="preview-image" src="photos/WorkExperience/lazer/lazer1.png" alt="">
+                    <img class="preview-image" src="photos/WorkExperience/lazer/lazer6.png" alt="">
+                    <img class="preview-image" src="photos/WorkExperience/lazer/lazer5.png" alt="">
+                </div>
             </a>
             <a class="experience-item" href="https://marshallvapes.ca/?srsltid=AfmBOooOYpu8yGQKvgNiyLBiOznKbyWRi5nW753b7CXf81uzyPvtuv9u" target="_blank" rel="noopener">
-                <div>
+                <div class="exp-content">
                     <div class="exp-role">MarshallVapes</div>
                     <div class="exp-desc">Co-Founder &amp; Product Designer.</div>
+                    <div class="exp-date">Sept 2024 — Present</div>
                 </div>
-                <div class="exp-date">Sept 2024 — Present</div>
+                <div class="preview-group">
+                    <img class="preview-image" src="PortfolioPhotos/compfit/ActiveCompetitions.png" alt="">
+                    <img class="preview-image" src="PortfolioPhotos/compfit/ProfileScreen.png" alt="">
+                    <img class="preview-image" src="PortfolioPhotos/compfit/RankScreen.png" alt="">
+                </div>
             </a>
             <a class="experience-item" href="https://nutritionhouse.com/?srsltid=AfmBOorPYYWWp_e7eIDVIIPixUazcPGIKMDK7FAjW-pY_AyrCakZScR1" target="_blank" rel="noopener">
-                <div>
+                <div class="exp-content">
                     <div class="exp-role">Nutrition House</div>
                     <div class="exp-desc">Social Media Manager.</div>
+                    <div class="exp-date">April 2021 — May 2022</div>
                 </div>
-                <div class="exp-date">April 2021 — May 2022</div>
+                <div class="preview-group">
+                    <img class="preview-image" src="PortfolioPhotos/sznluv/homeScreen.png" alt="">
+                    <img class="preview-image" src="PortfolioPhotos/sznluv/profileScreen.png" alt="">
+                    <img class="preview-image" src="PortfolioPhotos/sznluv/mapScreen.png" alt="">
+                </div>
             </a>
         </div>
     </section>
