@@ -171,6 +171,71 @@
             line-height: 1.6;
         }
 
+        /* --- REASONING INTRO & CITATIONS --- */
+        .reasoning-intro {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 864px;
+            margin-bottom: 3rem;
+        }
+
+        .reasoning-citation {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: var(--text-light);
+            margin-left: 1px;
+        }
+
+        .reasoning-citation-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .reasoning-citation-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- REASONING 2x2 GRID (Desktop) --- */
+        .reasoning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .reasoning-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+        }
+
+        .sources-list {
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .sources-list h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .sources-list ol {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .sources-list a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+        }
+
         /* --- 03 SOLUTION (Clean Split) --- */
         .feature-block {
             display: flex;
@@ -371,7 +436,13 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">03 / The Solution</span>
+            <span class="section-header">03 / Reasoning</span>
+            <p class="reasoning-intro">Built for speed, safety, and equity. Each decision reflects evidence on food safety, redistribution logistics, and student food insecurity.</p>
+            <div class="process-list reasoning-grid" id="reasoning-content"></div>
+        </section>
+
+        <section class="section-spacer">
+            <span class="section-header">04 / The Solution</span>
 
             <div class="feature-block">
                 <div class="feature-text">
@@ -405,7 +476,7 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">04 / Featured Screens</span>
+            <span class="section-header">05 / Featured Screens</span>
             <div class="gallery-track">
                 <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/onboarding.png" alt="Onboarding"></div>
                 <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/schoolSelection.png" alt="School Selection"></div>
@@ -443,6 +514,63 @@
             document.getElementById('lightbox-img').src = el.querySelector('img').src;
             document.getElementById('lightbox').style.display = 'flex';
         }
+    </script>
+
+    <script>
+        // Reasoning data
+        const reasoningItems = [
+            {
+                title: "Time-Sensitive Pickups",
+                text: "Perishable food should not remain in the temperature danger zone for more than about two hours (one hour in extreme heat), so PackIt emphasizes pickup windows, quick confirmations, and fast status updates.",
+                sourceIds: [1]
+            },
+            {
+                title: "Coordinated Handoffs",
+                text: "Redistribution depends on safe handling and coordination across donors and volunteers; FAO guidance highlights both as prerequisites, so PackIt uses role-specific flows and clear handoff confirmations.",
+                sourceIds: [2]
+            },
+            {
+                title: "Student Access First",
+                text: "Food insecurity is well documented in higher education settings and impacts student wellbeing, so the product centers student discovery and low-friction onboarding for meal access.",
+                sourceIds: [3]
+            },
+            {
+                title: "Recovering Surplus Matters",
+                text: "The UNEP Food Waste Index documents the scale of food waste globally; capturing edible surplus quickly makes redistribution worthwhile. The UI prioritizes fresh postings and fast matching.",
+                sourceIds: [4]
+            }
+        ];
+
+        const sources = [
+            { id: 1, author: "U.S. Food and Drug Administration (FDA)", year: 2025, title: "Handling Food Safely While Eating Outdoors", venue: "FDA", url: "https://www.fda.gov/food/buy-store-serve-safe-food/handling-food-safely-while-eating-outdoors" },
+            { id: 2, author: "FAO", year: 2025, title: "Food recovery and redistribution", venue: "Food and Agriculture Organization of the United Nations", url: "https://openknowledge.fao.org/handle/20.500.14283/cd4320en" },
+            { id: 3, author: "Loofbourrow BM, Scherr RE", year: 2023, title: "Food Insecurity in Higher Education: A Contemporary Review of Impacts and Explorations of Solutions", venue: "International Journal of Environmental Research and Public Health", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10217872/" },
+            { id: 4, author: "United Nations Environment Programme (UNEP)", year: 2024, title: "Food Waste Index Report 2024", venue: "UNEP", url: "https://unstats.un.org/unsd/envstats/fdes/EGES11/9UNEP_Food%20Waste%20Index.pdf" }
+        ];
+
+        // Render reasoning items
+        function renderReasoning() {
+            const container = document.getElementById('reasoning-content');
+            container.innerHTML = reasoningItems.map((item, i) => {
+                const citationLinks = item.sourceIds.map(id => {
+                    const source = sources.find(s => s.id === id);
+                    return source && source.url
+                        ? `<a href="${source.url}" target="_blank" rel="noreferrer" class="reasoning-citation-link">${id}</a>`
+                        : `${id}`;
+                }).join(',');
+                return `
+                <div class="process-item">
+                    <div class="process-number">0${i + 1}</div>
+                    <div class="process-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.text}<sup class="reasoning-citation">${citationLinks}</sup></p>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // Initialize on load
+        renderReasoning();
     </script>
 </body>
 </html>

@@ -171,6 +171,71 @@
             line-height: 1.6;
         }
 
+        /* --- REASONING INTRO & CITATIONS --- */
+        .reasoning-intro {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 864px;
+            margin-bottom: 3rem;
+        }
+
+        .reasoning-citation {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: var(--text-light);
+            margin-left: 1px;
+        }
+
+        .reasoning-citation-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .reasoning-citation-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- REASONING 2x2 GRID (Desktop) --- */
+        .reasoning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .reasoning-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+        }
+
+        .sources-list {
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .sources-list h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .sources-list ol {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .sources-list a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+        }
+
         /* --- 03 SOLUTION (Clean Split) --- */
         .feature-block {
             display: flex;
@@ -370,7 +435,13 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">03 / The Solution</span>
+            <span class="section-header">03 / Reasoning</span>
+            <p class="reasoning-intro">Built for resilient hives. Each feature reflects evidence about forage availability, seasonal nutrition, and the impact of active stewardship on colony survival.</p>
+            <div class="process-list reasoning-grid" id="reasoning-content"></div>
+        </section>
+
+        <section class="section-spacer">
+            <span class="section-header">04 / The Solution</span>
 
             <div class="feature-block">
                 <div class="feature-text">
@@ -404,7 +475,7 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">04 / Featured Screens</span>
+            <span class="section-header">05 / Featured Screens</span>
             <div class="gallery-track">
                 <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Onboarding.png" alt="Onboarding"></div>
                 <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Health.png" alt="Health Dashboard"></div>
@@ -440,6 +511,63 @@
             document.getElementById('lightbox-img').src = el.querySelector('img').src;
             document.getElementById('lightbox').style.display = 'flex';
         }
+    </script>
+
+    <script>
+        // Reasoning data
+        const reasoningItems = [
+            {
+                title: "Forage Availability Drives Hive Health",
+                text: "Changes in pollen resource availability affect honey bee health and colony development, so the readiness check emphasizes nearby forage and bloom coverage before placing a hive.",
+                sourceIds: [1]
+            },
+            {
+                title: "Seasonal Diversity Matters",
+                text: "Pollen diversity shifts with season and landscape composition; the AR scanner and plant info pages help keepers identify bee-safe plants and plan continuous bloom through the year.",
+                sourceIds: [2]
+            },
+            {
+                title: "Stewardship Reduces Loss",
+                text: "Colony losses are linked to management practices, including Varroa monitoring; the Buzzy health dashboard surfaces inspections and interventions at the right time.",
+                sourceIds: [3]
+            },
+            {
+                title: "Urban Habitats Can Support Pollinators",
+                text: "Urban areas can host high pollinator biodiversity when green spaces are connected, so the community forage map highlights gaps and coordinates neighborhood plantings.",
+                sourceIds: [4]
+            }
+        ];
+
+        const sources = [
+            { id: 1, author: "Di Pasquale G, et al.", year: 2016, title: "Variations in the Availability of Pollen Resources Affect Honey Bee Health", venue: "PLoS ONE", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5025243/" },
+            { id: 2, author: "Malagnini V, et al.", year: 2022, title: "Seasonality and Landscape Composition Drive the Diversity of Pollen Collected by Managed Honey Bees", venue: "Frontiers in Sustainable Food Systems", url: "https://www.frontiersin.org/journals/sustainable-food-systems/articles/10.3389/fsufs.2022.865368/full" },
+            { id: 3, author: "Thoms CA, et al.", year: 2018, title: "Beekeeper stewardship, colony loss, and Varroa destructor management", venue: "Ambio", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6722161/" },
+            { id: 4, author: "Baldock KC, et al.", year: 2015, title: "Where is the UK's pollinator biodiversity? The importance of urban areas for flower-visiting insects", venue: "Proceedings. Biological sciences", url: "https://pubmed.ncbi.nlm.nih.gov/25673686/" }
+        ];
+
+        // Render reasoning items
+        function renderReasoning() {
+            const container = document.getElementById('reasoning-content');
+            container.innerHTML = reasoningItems.map((item, i) => {
+                const citationLinks = item.sourceIds.map(id => {
+                    const source = sources.find(s => s.id === id);
+                    return source && source.url
+                        ? `<a href="${source.url}" target="_blank" rel="noreferrer" class="reasoning-citation-link">${id}</a>`
+                        : `${id}`;
+                }).join(',');
+                return `
+                <div class="process-item">
+                    <div class="process-number">0${i + 1}</div>
+                    <div class="process-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.text}<sup class="reasoning-citation">${citationLinks}</sup></p>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // Initialize on load
+        renderReasoning();
     </script>
 </body>
 </html>

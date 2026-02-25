@@ -171,6 +171,38 @@
             line-height: 1.6;
         }
 
+        /* --- REASONING INTRO & CITATIONS --- */
+        .reasoning-intro {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 864px;
+            margin-bottom: 3rem;
+        }
+
+        .reasoning-citation {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: var(--text-light);
+            margin-left: 1px;
+        }
+
+        .reasoning-citation-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .reasoning-citation-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- REASONING 2x2 GRID (Desktop) --- */
+        .reasoning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 4rem;
+        }
+
         /* --- 03 SOLUTION (Clean Split) --- */
         .feature-block {
             display: flex;
@@ -286,6 +318,10 @@
                 max-width: 220px;
                 margin: 0 auto;
             }
+            .reasoning-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -375,6 +411,12 @@
         </section>
 
         <section class="section-spacer">
+            <span class="section-header">Reasoning</span>
+            <p class="reasoning-intro">Designed around how couples actually plan. Each feature is grounded in research on decision-making, context-aware computing, and relationship psychology.</p>
+            <div class="process-list reasoning-grid" id="reasoning-content"></div>
+        </section>
+
+        <section class="section-spacer">
             <span class="section-header">03 / The Solution</span>
 
             <div class="feature-block">
@@ -444,6 +486,64 @@
             document.getElementById('lightbox-img').src = el.querySelector('img').src;
             document.getElementById('lightbox').style.display = 'flex';
         }
+    </script>
+
+    <script>
+        // Reasoning data
+        const reasoningItems = [
+            {
+                title: "Reducing Decision Fatigue",
+                text: "Couples regularly face the question \u2018what should we do today?\u2019 and too many options leads to avoidance. Research shows that limiting choices to a curated set dramatically increases both decision-making and satisfaction with the outcome.",
+                sourceIds: [1]
+            },
+            {
+                title: "Context-Aware Suggestions",
+                text: "Recommending activities based on real-time weather and season isn\u2019t just convenient\u2014it measurably improves user satisfaction. In a user study, weather-aware recommendations led to significantly higher choice satisfaction and perceived quality compared to weather-agnostic alternatives.",
+                sourceIds: [2]
+            },
+            {
+                title: "Novel Shared Experiences",
+                text: "Surfacing seasonal and location-specific ideas helps couples break routine. Participating in novel activities together leads to higher relationship satisfaction than repeating familiar ones, an effect driven by both excitement and a deeper sense of security between partners.",
+                sourceIds: [3, 4]
+            },
+            {
+                title: "Intentional Couple Time",
+                text: "The Saves feature encourages couples to plan dates together, creating intentional shared time. Longitudinal research shows that leisure spent exclusively with one\u2019s partner is positively associated with relationship quality, while time apart during leisure can reduce commitment.",
+                sourceIds: [5]
+            }
+        ];
+
+        const sources = [
+            { id: 1, author: "Iyengar SS & Lepper MR", year: 2000, title: "When Choice is Demotivating: Can One Desire Too Much of a Good Thing?", venue: "Journal of Personality and Social Psychology", url: "https://faculty.washington.edu/jdb/345/345%20Articles/Iyengar%20&%20Lepper%20(2000).pdf" },
+            { id: 2, author: "Braunhofer M, et al.", year: 2015, title: "STS: A Context-Aware Mobile Recommender System for Places of Interest", venue: "Intelligent Artifacts (Springer)", url: "https://link.springer.com/chapter/10.1007/978-3-319-03973-2_7" },
+            { id: 3, author: "Aron A, et al.", year: 2000, title: "Couples\u2019 Shared Participation in Novel and Arousing Activities and Experienced Relationship Quality", venue: "Journal of Personality and Social Psychology", url: "https://pubmed.ncbi.nlm.nih.gov/10707334/" },
+            { id: 4, author: "Brumbaugh CC & Agishtein P", year: 2020, title: "Our adventures make me feel secure: Novel activities boost relationship satisfaction through felt security", venue: "Journal of Experimental Social Psychology", url: "https://www.sciencedirect.com/science/article/abs/pii/S0022103119308091" },
+            { id: 5, author: "Dobson KA & Ogolsky BG", year: 2022, title: "The role of social context in the association between leisure activities and romantic relationship quality", venue: "Journal of Social and Personal Relationships", url: "https://journals.sagepub.com/doi/10.1177/02654075211036504" }
+        ];
+
+        // Render reasoning items
+        function renderReasoning() {
+            const container = document.getElementById('reasoning-content');
+            container.innerHTML = reasoningItems.map((item, i) => {
+                const citationLinks = item.sourceIds.map(id => {
+                    const source = sources.find(s => s.id === id);
+                    return source && source.url
+                        ? `<a href="${source.url}" target="_blank" rel="noreferrer" class="reasoning-citation-link">${id}</a>`
+                        : `${id}`;
+                }).join(',');
+                return `
+                <div class="process-item">
+                    <div class="process-number">0${i + 1}</div>
+                    <div class="process-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.text}<sup class="reasoning-citation">${citationLinks}</sup></p>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // Initialize
+        renderReasoning();
     </script>
 </body>
 </html>
