@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarshallVapes - Zeeyad Monir</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #111;
+            --text-secondary: #444;
+            --text-light: #888;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        /* --- NAVIGATION --- */
+        .nav-back {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            margin-bottom: 5rem;
+            text-align: left;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- METADATA (Stacked Style) --- */
+        .meta-stack {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 2rem;
+        }
+
+        .meta-stack strong {
+            font-weight: 700;
+            color: #222;
+            margin-right: 0.25rem;
+        }
+
+        /* --- ACTION BUTTONS --- */
+        .action-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: transparent;
+            color: #333;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        /* Primary button style for the bottom CTA */
+        .btn-primary {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+        .btn-primary:hover {
+            opacity: 0.8;
+            background: #111;
+        }
+
+        /* --- SECTIONS COMMON --- */
+        .section-spacer { margin-bottom: 7rem; }
+
+        .section-header {
+            font-size: 0.92rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 1rem;
+        }
+
+        /* --- 01 OVERVIEW --- */
+        .overview-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 864px;
+        }
+
+        /* --- 02 PROCESS (Step List) --- */
+        .process-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        .process-item {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            gap: 1.5rem;
+        }
+
+        .process-number {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-family: monospace;
+            padding-top: 5px;
+        }
+
+        .process-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .process-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* --- REASONING INTRO & CITATIONS --- */
+        .reasoning-intro {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 864px;
+            margin-bottom: 3rem;
+        }
+
+        .reasoning-citation {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: var(--text-light);
+            margin-left: 1px;
+        }
+
+        .reasoning-citation-link {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .reasoning-citation-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- REASONING 2x2 GRID (Desktop) --- */
+        .reasoning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 4rem;
+        }
+
+        /* reasoning-grid mobile rule moved to consolidated 768px block below */
+
+        /* --- GALLERY SCROLLER (Desktop Screenshots) --- */
+        .gallery-track {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-track::-webkit-scrollbar { height: 6px; }
+        .gallery-track::-webkit-scrollbar-track { background: transparent; }
+        .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
+
+        .gallery-img {
+            flex: 0 0 420px;
+            cursor: zoom-in;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: transform 0.2s;
+        }
+
+        .gallery-img:hover { transform: translateY(-4px); }
+        .gallery-img img { width: 100%; display: block; }
+
+        /* --- 03 SOLUTION (Desktop Screenshots — Stacked Layout) --- */
+        .feature-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .feature-text {
+            max-width: 700px;
+        }
+
+        .feature-text h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .feature-visual {
+            width: 100%;
+            cursor: zoom-in;
+        }
+
+        .feature-visual img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        /* --- BOTTOM CTA --- */
+        .cta-section {
+            text-align: center;
+            margin-top: 6rem;
+            padding-top: 4rem;
+            border-top: 1px solid #f0f0f0;
+            padding-bottom: 1rem;
+        }
+
+        .cta-heading {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-sub {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        /* --- LIGHTBOX --- */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(255,255,255,0.98);
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        #lightbox img { max-height: 90vh; max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: all 0.2s;
+        }
+
+        .lightbox-close:hover {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .container { padding: 2.5rem 1.5rem; }
+            .section-spacer { margin-bottom: 4rem; }
+            .hero-section { margin-bottom: 3rem; }
+            .hero-title { font-size: 2.5rem; }
+            .nav-back { margin-bottom: 2rem; }
+            .feature-block { margin-bottom: 3rem; }
+            .feature-text h3 { font-size: 1.35rem; }
+            .feature-visual img { border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
+            .process-list { gap: 2.5rem; }
+            .reasoning-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+            .reasoning-intro { margin-bottom: 2rem; }
+            .gallery-img { flex: 0 0 300px; }
+            .gallery-track { gap: 1rem; padding-bottom: 1.5rem; }
+            .btn { padding: 0.6rem 1.2rem; }
+            .cta-section { margin-top: 3rem; padding-top: 2.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .section-spacer { margin-bottom: 3rem; }
+            .hero-section { margin-bottom: 2.5rem; }
+            .hero-title { font-size: 2rem; }
+            .feature-block { margin-bottom: 2.5rem; }
+            .feature-text h3 { font-size: 1.25rem; }
+            .feature-visual img { border-radius: 8px; }
+            .overview-text { font-size: 1.05rem; line-height: 1.65; }
+            .process-list { gap: 2rem; }
+            .gallery-img { flex: 0 0 260px; }
+            .cta-section { margin-top: 2.5rem; padding-top: 2rem; }
+            .cta-heading { font-size: 1.3rem; }
+        }
+
+        @media (max-width: 375px) {
+            .container { padding: 2rem 1.25rem; }
+            .section-spacer { margin-bottom: 2.5rem; }
+            .hero-title { font-size: 1.8rem; }
+            .feature-block { margin-bottom: 2rem; gap: 1rem; }
+            .feature-text h3 { font-size: 1.15rem; }
+            .process-content h3 { font-size: 1.1rem; }
+            .process-content p { font-size: 0.95rem; }
+            .meta-stack { font-size: 0.95rem; }
+            .gallery-img { flex: 0 0 240px; }
+            .gallery-track { gap: 0.75rem; }
+            .cta-section { margin-top: 2rem; padding-top: 1.5rem; }
+            #lightbox { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="nav-back">&larr; Back to Home</a>
+
+        <header class="hero-section">
+            <h1 class="hero-title">MarshallVapes</h1>
+
+            <div class="meta-stack">
+                <p><strong>Role:</strong> Co-Founder, Product Designer</p>
+                <p><strong>Tools:</strong> Shopify (Liquid), HTML/CSS, GA4, Session Replays, Figma</p>
+                <p><strong>Date:</strong> Sept 2024 – Present</p>
+            </div>
+
+            <div class="action-row">
+                <a href="https://marshallvapes.ca/" target="_blank" class="btn">View Live Site</a>
+            </div>
+        </header>
+
+        <section class="section-spacer">
+            <span class="section-header">Overview</span>
+            <p class="overview-text">
+                MarshallVapes is a Vancouver-based Shopify ecommerce store selling vape products and essentials. I led the storefront UX and conversion improvements across the homepage, collection browsing, merchandising components, and checkout readiness. The goal was to reduce time-to-product, increase trust, and improve completed orders as the business scaled past <strong>1,000+ sales</strong> and <strong>$50,000+ revenue</strong>.
+            </p>
+        </section>
+
+        <section class="section-spacer">
+            <span class="section-header">Design Process</span>
+
+            <div class="process-list">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div class="process-content">
+                        <h3>Product Definition</h3>
+                        <p>Mapped the core customer journeys, returning customers shopping by product format, and new customers browsing deals and essentials. Prioritized fast discovery, promotion clarity, and trust signals above the fold.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div class="process-content">
+                        <h3>Information Architecture and Layout</h3>
+                        <p>Structured the homepage into a repeatable hierarchy, hero promo → trending products → social proof → essentials categories → deeper collections. Built category groupings that match intent, Disposables, E-Liquids (Salt/Freebase), Pod Systems, and Deals.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div class="process-content">
+                        <h3>Component System and Visual Consistency</h3>
+                        <p>Built reusable Shopify theme components for cards, carousels, and category grids to standardize spacing, typography, imagery, and CTAs. This improved consistency and made merchandising faster to maintain.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div class="process-content">
+                        <h3>Feedback and Conversion Iteration</h3>
+                        <p>Used heuristic reviews, analytics, and session replays to find friction and iterate on navigation clarity, promo placement, and checkout confidence cues. These improvements contributed to a 15% lift in completed orders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-spacer">
+            <span class="section-header">Reasoning</span>
+            <p class="reasoning-intro">Ecommerce design is behavior design. Each decision was made to lower cognitive load, increase information scent, and reduce hesitation during the path to checkout.</p>
+            <div class="process-list reasoning-grid" id="reasoning-content"></div>
+        </section>
+
+        <section class="section-spacer">
+            <span class="section-header">The Solution</span>
+
+            <div class="feature-block">
+                <div class="feature-text">
+                    <h3>Conversion-Optimized Homepage Structure</h3>
+                    <p>A homepage flow that front-loads the promo message, then moves users into trending products, proof, and clear category entry points to shorten time-to-product.</p>
+                </div>
+                <div class="feature-visual" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/marshallvapes/HomeScreen.png" alt="Homepage Flow">
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-text">
+                    <h3>Category-Based Shopping, Built for Intent</h3>
+                    <p>A "Vape Essentials" grid that mirrors how customers shop by format, Disposables, Salt, Freebase, Pod Systems, Deals, improving findability and reducing browsing friction.</p>
+                </div>
+                <div class="feature-visual" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/marshallvapes/VapeEssentials.png" alt="Vape Essentials Grid">
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-text">
+                    <h3>Reusable Shopify UI Components</h3>
+                    <p>A modular component system inside Shopify theme architecture that keeps spacing, typography, CTAs, and card layouts consistent across the site.</p>
+                </div>
+                <div class="feature-visual" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/marshallvapes/TrendingVapes.png" alt="Component System">
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-text">
+                    <h3>Checkout Readiness Improvements</h3>
+                    <p>Conversion-focused tweaks informed by replays and heuristics, clarifying incentives, reducing uncertainty, and tightening the path into checkout.</p>
+                </div>
+                <div class="feature-visual" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/marshallvapes/Checkout.png" alt="Checkout Optimization">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-spacer">
+            <span class="section-header">Featured Screens</span>
+            <div class="gallery-track">
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/HomeScreen.png" alt="Homepage"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/TrendingVapes.png" alt="Trending Vapes"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/VapeEssentials.png" alt="Vape Essentials"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/BottleList.png" alt="Product Listing"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/SnackList.png" alt="Snack Products"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/Checkout.png" alt="Checkout"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/CheckOutPage2.png" alt="Checkout Confirmation"></div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h3 class="cta-heading">See it live</h3>
+            <p class="cta-sub">MarshallVapes is live and growing. Check out the store.</p>
+            <a href="https://marshallvapes.ca/" target="_blank" class="btn btn-primary">Visit MarshallVapes</a>
+        </section>
+
+        <footer style="padding-top: 2rem; text-align: center; color: #999; font-size: 0.9rem;">
+            &copy; 2025 Zeeyad Monir
+        </footer>
+
+    </div>
+
+    <div id="lightbox" onclick="this.style.display='none'">
+        <button class="lightbox-close" onclick="document.getElementById('lightbox').style.display='none'" aria-label="Close">&times;</button>
+        <img id="lightbox-img" src="">
+    </div>
+
+    <script>
+        function openLightbox(el) {
+            document.getElementById('lightbox-img').src = el.querySelector('img').src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+    </script>
+
+    <script>
+        // Reasoning data
+        const reasoningItems = [
+            {
+                title: "Fast Discovery Beats Pretty Browsing",
+                text: "Clear product taxonomy and navigation improves findability, reduces cognitive load, and helps users complete shopping tasks faster. Research on ecommerce tasks shows cognitive load correlates with task time and satisfaction, and ecommerce UX research emphasizes findability as a key driver of purchasing success.",
+                sourceIds: [1, 2, 3]
+            },
+            {
+                title: "Promotion Clarity Increases Cart Size",
+                text: "Threshold incentives like \u201cFree delivery over $50\u201d and bundle-style deals encourage users to add items to reach the goal. Research on threshold free shipping policies shows these thresholds shape willingness to pay for shipping and influence shopping behavior.",
+                sourceIds: [4, 5]
+            },
+            {
+                title: "Consistency Builds Trust",
+                text: "A consistent visual system signals professionalism and reduces perceived risk, which impacts trust and conversion. Large-scale web credibility research and UX research on trustworthiness consistently find that design quality and \u201creal-world feel\u201d affect credibility judgments.",
+                sourceIds: [6, 7, 8]
+            },
+            {
+                title: "Social Proof Reduces Risk",
+                text: "Prominent reviews and ratings reduce uncertainty and increase purchase intention. Meta-analytic work finds online review factors significantly influence purchase intention, and broader ecommerce meta-analyses emphasize trust and eWOM as major drivers of purchase decisions.",
+                sourceIds: [9, 10, 11]
+            }
+        ];
+
+        const sources = [
+            { id: 1, author: "Schmutz P, et al.", year: 2009, title: "Cognitive Load in eCommerce Applications", venue: "International Journal of Human-Computer Interaction (Wiley)", url: "https://onlinelibrary.wiley.com/doi/10.1155/2009/121494" },
+            { id: 2, author: "NNGroup", year: 2024, title: "Low Findability and Discoverability: IA and Navigation Testing", venue: "Nielsen Norman Group", url: "https://www.nngroup.com/articles/navigation-ia-tests/" },
+            { id: 3, author: "Baymard Institute", year: 2024, title: "Findability vs Discoverability in Ecommerce", venue: "Baymard Institute", url: "https://baymard.com/learn/findability-vs-discoverability-ux" },
+            { id: 4, author: "Huang WH, et al.", year: 2019, title: "Threshold free shipping policies and willingness to pay for shipping", venue: "Journal of Retailing and Consumer Services (ScienceDirect)", url: "https://www.sciencedirect.com/science/article/abs/pii/S0969698918305757" },
+            { id: 5, author: "Huang WH, et al.", year: 2015, title: "Threshold free shipping policies for internet shoppers", venue: "Transportation Research Part A (ScienceDirect)", url: "https://www.sciencedirect.com/science/article/abs/pii/S0965856415002499" },
+            { id: 6, author: "Fogg BJ, et al.", year: 2001, title: "What Makes Web Sites Credible?", venue: "CHI Conference (Stanford)", url: "https://courses.ischool.berkeley.edu/i290-10/f05/bjfogg.pdf" },
+            { id: 7, author: "Stanford Web Credibility Project", year: 2002, title: "Stanford Guidelines for Web Credibility", venue: "Stanford Persuasive Technology Lab", url: "https://credibility.stanford.edu/guidelines/index.html" },
+            { id: 8, author: "NNGroup", year: 2024, title: "Trustworthy Design: Credibility Factors Including Design Quality", venue: "Nielsen Norman Group", url: "https://www.nngroup.com/articles/trustworthy-design/" },
+            { id: 9, author: "Qiu L", year: 2024, title: "How online reviews affect purchase intention: A meta-analysis", venue: "Electronic Commerce Research and Applications (ScienceDirect)", url: "https://www.sciencedirect.com/science/article/pii/S2543925123000323" },
+            { id: 10, author: "Handoyo S, et al.", year: 2024, title: "Purchasing in the digital age: Meta-analysis emphasizing trust, risk, and eWOM", venue: "Heliyon (PMC)", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11044045/" },
+            { id: 11, author: "Ahn J", year: 2024, title: "Examining social influence of online review ratings on purchase intentions", venue: "Journal of Theoretical and Applied Electronic Commerce Research (MDPI)", url: "https://www.mdpi.com/0718-1876/19/2/55" }
+        ];
+
+        // Render reasoning items
+        function renderReasoning() {
+            const container = document.getElementById('reasoning-content');
+            container.innerHTML = reasoningItems.map((item, i) => {
+                const citationLinks = item.sourceIds.map(id => {
+                    const source = sources.find(s => s.id === id);
+                    return source && source.url
+                        ? `<a href="${source.url}" target="_blank" rel="noreferrer" class="reasoning-citation-link">${id}</a>`
+                        : `${id}`;
+                }).join(',');
+                return `
+                <div class="process-item">
+                    <div class="process-number">0${i + 1}</div>
+                    <div class="process-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.text}<sup class="reasoning-citation">${citationLinks}</sup></p>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // Initialize on load
+        renderReasoning();
+    </script>
+</body>
+</html>
