@@ -236,21 +236,16 @@
             text-decoration: underline;
         }
 
-        /* --- 03 SOLUTION (Clean Split) --- */
+        /* --- 03 SOLUTION (Desktop Screenshots — Stacked Layout) --- */
         .feature-block {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7.7rem;
-            margin-bottom: 6rem;
-        }
-
-        .feature-block.reversed {
-            flex-direction: row-reverse;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 5rem;
         }
 
         .feature-text {
-            flex: 0 0 400px;
+            max-width: 700px;
         }
 
         .feature-text h3 {
@@ -266,15 +261,13 @@
         }
 
         .feature-visual {
-            flex: 0 0 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100%;
+            cursor: zoom-in;
         }
 
         .feature-visual img {
-            max-width: 250px;
-            width: 100%;
+            max-width: 100%;
+            width: 75%;
             height: auto;
             border-radius: 12px;
             border: 1px solid #f0f0f0;
@@ -295,7 +288,7 @@
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
         .gallery-img {
-            flex: 0 0 215px;
+            flex: 0 0 420px;
             cursor: zoom-in;
             border-radius: 8px;
             overflow: hidden;
@@ -344,25 +337,25 @@
         /* --- MOBILE --- */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
-            .feature-block, .feature-block.reversed { flex-direction: column; gap: 2.5rem; text-align: left; }
-            .feature-text { flex: 0 0 auto; width: 100%; }
-            .feature-visual { flex: 0 0 auto; width: 100%; }
-            .feature-visual img {
-                max-width: 220px;
-                margin: 0 auto;
-            }
+            .feature-block { margin-bottom: 3rem; }
+            .feature-text h3 { font-size: 1.35rem; }
+            .feature-visual img { border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
+            .gallery-img { flex: 0 0 300px; }
+            .gallery-track { gap: 1rem; padding-bottom: 1.5rem; }
         }
 
         @media (max-width: 480px) {
-            .feature-visual img {
-                max-width: 180px;
-            }
+            .feature-block { margin-bottom: 2.5rem; }
+            .feature-text h3 { font-size: 1.25rem; }
+            .feature-visual img { border-radius: 8px; }
+            .gallery-img { flex: 0 0 260px; }
         }
 
         @media (max-width: 375px) {
-            .feature-visual img {
-                max-width: 160px;
-            }
+            .feature-block { margin-bottom: 2rem; gap: 1rem; }
+            .feature-text h3 { font-size: 1.15rem; }
+            .gallery-img { flex: 0 0 240px; }
+            .gallery-track { gap: 0.75rem; }
         }
     </style>
 </head>
@@ -449,18 +442,18 @@
                     <h3>Streamlined Discovery</h3>
                     <p>Mapped end-to-end user journeys that simplify how volunteers find available shifts and how institutions post surplus. The dashboard surfaces the most relevant opportunities first.</p>
                 </div>
-                <div class="feature-visual">
-                    <img src="PortfolioPhotos/packit/volunteerPage.png" alt="Volunteer Dashboard">
+                <div class="feature-visual" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/PackItWeb/MainDashboard.png" alt="Main Dashboard">
                 </div>
             </div>
 
-            <div class="feature-block reversed">
+            <div class="feature-block">
                 <div class="feature-text">
                     <h3>Accessible UI</h3>
                     <p>Designed with accessibility in mind, ensuring the interface is usable for a diverse range of users in high-paced environments like campus dining halls and distribution centers.</p>
                 </div>
-                <div class="feature-visual">
-                    <img src="PortfolioPhotos/packit/onboarding.png" alt="Onboarding Flow">
+                <div class="feature-visual" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/PackItWeb/CommunityScreen.png" alt="Community Screen">
                 </div>
             </div>
 
@@ -469,8 +462,8 @@
                     <h3>Dual User Flows</h3>
                     <p>Separate but connected experiences for students seeking meals and staff managing distribution, with clear handoff points and status tracking throughout the process.</p>
                 </div>
-                <div class="feature-visual">
-                    <img src="PortfolioPhotos/packit/studentPage.png" alt="Student Home Feed">
+                <div class="feature-visual" onclick="openLightbox(this)">
+                    <img src="PortfolioPhotos/PackItWeb/MealScreen.png" alt="Meal Screen">
                 </div>
             </div>
         </section>
@@ -478,18 +471,14 @@
         <section class="section-spacer">
             <span class="section-header">05 / Featured Screens</span>
             <div class="gallery-track">
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/onboarding.png" alt="Onboarding"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/schoolSelection.png" alt="School Selection"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/volunteerPage.png" alt="Volunteer Dashboard"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/volunteerDetails.png" alt="Volunteer Details"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/staffMeal.png" alt="Staff Meal View"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/mealScreen.png" alt="Meal Screen"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/studentPage.png" alt="Student Page"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/studentMeal.png" alt="Student Meal"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/studentProfile.png" alt="Student Profile"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/studentSettings.png" alt="Student Settings"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/paymentCheckout.png" alt="Payment Checkout"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/packit/reviewCheckout.png" alt="Review Checkout"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/MainDashboard.png" alt="Main Dashboard"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/CommunityScreen.png" alt="Community Screen"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/MealScreen.png" alt="Meal Screen"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/IndividualMealScreen.png" alt="Individual Meal Screen"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/VolunteerEventSignUp.png" alt="Volunteer Event Sign Up"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/ShiftsScreen.png" alt="Shifts Screen"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/PaymentScreen.png" alt="Payment Screen"></div>
+                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/SettingsScreen.png" alt="Settings Screen"></div>
             </div>
         </section>
 
