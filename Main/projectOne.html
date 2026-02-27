@@ -6,19 +6,39 @@
   <link rel="stylesheet" href="projectOne.css">
   <!-- Include Font Awesome for icons (optional) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="navbar.css">
   <!-- Include Lottie Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="unique-nav">
-      <ul>
-          <li><a href="index.html#home">Home</a></li>
-          <li><a href="index.html#skills">Skills</a></li>
-          <li><a href="index.html#code-projects">Projects</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-      </ul>
+  <!-- Navigation Menu -->
+  <nav class="nav-menu" id="navMenu">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+      </button>
+      <div class="nav-links">
+          <a href="index.html#home" class="nav-link">Home</a>
+          <a href="index.html#projects" class="nav-link">Projects</a>
+          <a href="index.html#experience" class="nav-link">Work Experience</a>
+      </div>
+  </nav>
+
+  <!-- Mobile Sticky Nav Bar -->
+  <nav class="mobile-nav-bar" id="mobileNavBar">
+      <a href="index.html#home" class="mobile-nav-name">Zeeyad Monir</a>
+      <div class="mobile-nav-links">
+          <a href="index.html#home" class="mobile-nav-link">Home</a>
+          <a href="index.html#projects" class="mobile-nav-link">Projects</a>
+          <a href="index.html#experience" class="mobile-nav-link">Work Experience</a>
+      </div>
+      <button class="mobile-hamburger" id="mobileHamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+          <span class="mobile-hamburger-line"></span>
+          <span class="mobile-hamburger-line"></span>
+          <span class="mobile-hamburger-line"></span>
+      </button>
   </nav>
 
   <!-- Hero Section -->
@@ -163,6 +183,7 @@
   <button id="scrollTopBtn" title="Go to top">&#8679;</button>
 
   <script src="scriptProjects.js"></script>
+  <script src="navbar.js"></script>
   <div class="cursor"></div>
 </body>
 

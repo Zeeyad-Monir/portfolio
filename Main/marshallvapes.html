@@ -31,14 +31,6 @@
         a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
         a:hover { opacity: 0.7; }
 
-        /* --- NAVIGATION --- */
-        .nav-back {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            display: inline-block;
-            margin-bottom: 3rem;
-        }
-
         /* --- HERO SECTION --- */
         .hero-section {
             margin-bottom: 5rem;
@@ -323,7 +315,6 @@
             .section-spacer { margin-bottom: 4rem; }
             .hero-section { margin-bottom: 3rem; }
             .hero-title { font-size: 2.5rem; }
-            .nav-back { margin-bottom: 2rem; }
             .feature-block { margin-bottom: 3rem; }
             .feature-text h3 { font-size: 1.35rem; }
             .feature-visual img { border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
@@ -365,11 +356,40 @@
             #lightbox { padding: 1rem; }
         }
     </style>
+    <link rel="stylesheet" href="navbar.css">
 </head>
 <body>
 
+<!-- Navigation Menu -->
+<nav class="nav-menu" id="navMenu">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+    <div class="nav-links">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#projects" class="nav-link">Projects</a>
+        <a href="index.html#experience" class="nav-link">Work Experience</a>
+    </div>
+</nav>
+
+<!-- Mobile Sticky Nav Bar -->
+<nav class="mobile-nav-bar" id="mobileNavBar">
+    <a href="index.html#home" class="mobile-nav-name">Zeeyad Monir</a>
+    <div class="mobile-nav-links">
+        <a href="index.html#home" class="mobile-nav-link">Home</a>
+        <a href="index.html#projects" class="mobile-nav-link">Projects</a>
+        <a href="index.html#experience" class="mobile-nav-link">Work Experience</a>
+    </div>
+    <button class="mobile-hamburger" id="mobileHamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span class="mobile-hamburger-line"></span>
+        <span class="mobile-hamburger-line"></span>
+        <span class="mobile-hamburger-line"></span>
+    </button>
+</nav>
+
     <div class="container">
-        <a href="index.html" class="nav-back">&larr; Back to Home</a>
 
         <header class="hero-section">
             <h1 class="hero-title">MarshallVapes</h1>
@@ -580,5 +600,7 @@
         // Initialize on load
         renderReasoning();
     </script>
+
+    <script src="navbar.js"></script>
 </body>
 </html>
