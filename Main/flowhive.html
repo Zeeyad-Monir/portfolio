@@ -286,17 +286,44 @@
         .gallery-track::-webkit-scrollbar-track { background: transparent; }
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
-        .gallery-img {
+        .gallery-item {
             flex: 0 0 215px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-img {
             cursor: zoom-in;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #eee;
             transition: transform 0.2s;
+            width: 100%;
+            background: #fff;
         }
 
         .gallery-img:hover { transform: translateY(-4px); }
         .gallery-img img { width: 100%; display: block; }
+        .gallery-caption {
+            margin: 0;
+            padding-top: 0.6rem;
+            padding-bottom: 0.5rem;
+            font-size: 0.84rem;
+            color: #6b7280;
+            line-height: 1.35;
+            text-align: center;
+            position: relative;
+        }
+
+        .gallery-caption::after {
+            content: "";
+            display: block;
+            width: 40.56px;
+            height: 1px;
+            margin: 0.45rem auto 0;
+            background: #d9dde3;
+        }
 
         /* --- BOTTOM CTA --- */
         .cta-section {
@@ -498,16 +525,66 @@
         <section class="section-spacer">
             <span class="section-header">05 / Featured Screens</span>
             <div class="gallery-track">
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Onboarding.png" alt="Onboarding"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Health.png" alt="Health Dashboard"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Plant%20AR%20Scanner.png" alt="AR Scanner"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/AR%20Scanner%20Info.png" alt="Scanner Results"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Plant%20Info%20Page.png" alt="Plant Info"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Plant%20Space.png" alt="Plant Space"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Personal%20Garden.png" alt="Personal Garden"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Profile%20Page.png" alt="Profile"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/Hive%20Map.png" alt="Hive Map"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="Forage Heatmap"></div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Onboarding.png" alt="Onboarding flow">
+                    </div>
+                    <p class="gallery-caption">Onboarding flow</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Health.png" alt="Health dashboard">
+                    </div>
+                    <p class="gallery-caption">Health dashboard</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Plant%20AR%20Scanner.png" alt="Plant AR scanner">
+                    </div>
+                    <p class="gallery-caption">Plant AR scanner</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/AR%20Scanner%20Info.png" alt="Scanner results">
+                    </div>
+                    <p class="gallery-caption">Scanner results</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Plant%20Info%20Page.png" alt="Plant info page">
+                    </div>
+                    <p class="gallery-caption">Plant info page</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Plant%20Space.png" alt="Plant space">
+                    </div>
+                    <p class="gallery-caption">Plant space</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Personal%20Garden.png" alt="Personal garden">
+                    </div>
+                    <p class="gallery-caption">Personal garden</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Profile%20Page.png" alt="Profile page">
+                    </div>
+                    <p class="gallery-caption">Profile page</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/Hive%20Map.png" alt="Hive map">
+                    </div>
+                    <p class="gallery-caption">Hive map</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/FlowImages/HiveMap.png" alt="Forage heatmap">
+                    </div>
+                    <p class="gallery-caption">Forage heatmap</p>
+                </div>
             </div>
         </section>
 

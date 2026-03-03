@@ -199,17 +199,44 @@
         .gallery-track::-webkit-scrollbar-track { background: transparent; }
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
-        .gallery-img {
+        .gallery-item {
             flex: 0 0 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-img {
             cursor: zoom-in;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #eee;
             transition: transform 0.2s;
+            width: 100%;
+            background: #fff;
         }
 
         .gallery-img:hover { transform: translateY(-4px); }
         .gallery-img img { width: 100%; display: block; }
+        .gallery-caption {
+            margin: 0;
+            padding-top: 0.6rem;
+            padding-bottom: 0.5rem;
+            font-size: 0.84rem;
+            color: #6b7280;
+            line-height: 1.35;
+            text-align: center;
+            position: relative;
+        }
+
+        .gallery-caption::after {
+            content: "";
+            display: block;
+            width: 40.56px;
+            height: 1px;
+            margin: 0.45rem auto 0;
+            background: #d9dde3;
+        }
 
         /* --- 03 SOLUTION (Desktop Screenshots — Stacked Layout) --- */
         .feature-block {
@@ -321,7 +348,7 @@
             .process-list { gap: 2.5rem; }
             .reasoning-grid { grid-template-columns: 1fr; gap: 3.5rem; }
             .reasoning-intro { margin-bottom: 2rem; }
-            .gallery-img { flex: 0 0 300px; }
+            .gallery-item { flex: 0 0 300px; }
             .gallery-track { gap: 1rem; padding-bottom: 1.5rem; }
             .btn { padding: 0.6rem 1.2rem; }
             .cta-section { margin-top: 3rem; padding-top: 2.5rem; }
@@ -336,7 +363,7 @@
             .feature-visual img { border-radius: 8px; }
             .overview-text { font-size: 1.05rem; line-height: 1.65; }
             .process-list { gap: 2rem; }
-            .gallery-img { flex: 0 0 260px; }
+            .gallery-item { flex: 0 0 260px; }
             .cta-section { margin-top: 2.5rem; padding-top: 2rem; }
             .cta-heading { font-size: 1.3rem; }
         }
@@ -350,7 +377,7 @@
             .process-content h3 { font-size: 1.1rem; }
             .process-content p { font-size: 0.95rem; }
             .meta-stack { font-size: 0.95rem; }
-            .gallery-img { flex: 0 0 240px; }
+            .gallery-item { flex: 0 0 240px; }
             .gallery-track { gap: 0.75rem; }
             .cta-section { margin-top: 2rem; padding-top: 1.5rem; }
             #lightbox { padding: 1rem; }
@@ -503,13 +530,48 @@
         <section class="section-spacer">
             <span class="section-header">Featured Screens</span>
             <div class="gallery-track">
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/HomeScreen.png" alt="Homepage"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/TrendingVapes.png" alt="Trending Vapes"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/VapeEssentials.png" alt="Vape Essentials"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/BottleList.png" alt="Product Listing"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/SnackList.png" alt="Snack Products"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/Checkout.png" alt="Checkout"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/marshallvapes/CheckOutPage2.png" alt="Checkout Confirmation"></div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/marshallvapes/HomeScreen.png" alt="Home screen">
+                    </div>
+                    <p class="gallery-caption">Home screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/marshallvapes/TrendingVapes.png" alt="Trending vapes">
+                    </div>
+                    <p class="gallery-caption">Trending vapes</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/marshallvapes/VapeEssentials.png" alt="Vape essentials">
+                    </div>
+                    <p class="gallery-caption">Vape essentials</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/marshallvapes/BottleList.png" alt="Bottle list">
+                    </div>
+                    <p class="gallery-caption">Bottle list</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/marshallvapes/SnackList.png" alt="Snack list">
+                    </div>
+                    <p class="gallery-caption">Snack list</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/marshallvapes/Checkout.png" alt="Checkout flow">
+                    </div>
+                    <p class="gallery-caption">Checkout flow</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/marshallvapes/CheckOutPage2.png" alt="Checkout confirmation">
+                    </div>
+                    <p class="gallery-caption">Checkout confirmation</p>
+                </div>
             </div>
         </section>
 

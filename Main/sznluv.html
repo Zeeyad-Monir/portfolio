@@ -253,17 +253,44 @@
         .gallery-track::-webkit-scrollbar-track { background: transparent; }
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
-        .gallery-img {
+        .gallery-item {
             flex: 0 0 215px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-img {
             cursor: zoom-in;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #eee;
             transition: transform 0.2s;
+            width: 100%;
+            background: #fff;
         }
 
         .gallery-img:hover { transform: translateY(-4px); }
         .gallery-img img { width: 100%; display: block; }
+        .gallery-caption {
+            margin: 0;
+            padding-top: 0.6rem;
+            padding-bottom: 0.5rem;
+            font-size: 0.84rem;
+            color: #6b7280;
+            line-height: 1.35;
+            text-align: center;
+            position: relative;
+        }
+
+        .gallery-caption::after {
+            content: "";
+            display: block;
+            width: 40.56px;
+            height: 1px;
+            margin: 0.45rem auto 0;
+            background: #d9dde3;
+        }
 
         /* --- BOTTOM CTA --- */
         .cta-section {
@@ -474,15 +501,60 @@
         <section class="section-spacer">
             <span class="section-header">04 / All Screens</span>
             <div class="gallery-track">
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/loginScreen.png" alt="Login"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/homeScreen.png" alt="Home"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/seasonalDates.png" alt="Seasonal Dates"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/seasonalDates2.png" alt="Seasonal Dates Alt"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/mapScreen.png" alt="Map"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/weatherScreen.png" alt="Weather"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/favouriteScreen.png" alt="Favourites"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/spinTheWheel.png" alt="Spin the Wheel"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/sznluv/profileScreen.png" alt="Profile"></div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/loginScreen.png" alt="Login screen">
+                    </div>
+                    <p class="gallery-caption">Login screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/homeScreen.png" alt="Home screen">
+                    </div>
+                    <p class="gallery-caption">Home screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/seasonalDates.png" alt="Seasonal dates">
+                    </div>
+                    <p class="gallery-caption">Seasonal dates</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/seasonalDates2.png" alt="Seasonal dates (alt)">
+                    </div>
+                    <p class="gallery-caption">Seasonal dates (alt)</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/mapScreen.png" alt="Map screen">
+                    </div>
+                    <p class="gallery-caption">Map screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/weatherScreen.png" alt="Weather screen">
+                    </div>
+                    <p class="gallery-caption">Weather screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/favouriteScreen.png" alt="Favourites">
+                    </div>
+                    <p class="gallery-caption">Favourites</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/spinTheWheel.png" alt="Spin-the-wheel">
+                    </div>
+                    <p class="gallery-caption">Spin-the-wheel</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/sznluv/profileScreen.png" alt="Profile screen">
+                    </div>
+                    <p class="gallery-caption">Profile screen</p>
+                </div>
             </div>
         </section>
 

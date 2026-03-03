@@ -286,18 +286,44 @@
         .gallery-track::-webkit-scrollbar-track { background: transparent; }
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
-        .gallery-img {
-            /* Increased by ~15-20% (from 180px to 215px) */
+        .gallery-item {
             flex: 0 0 215px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-img {
             cursor: zoom-in;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #eee;
             transition: transform 0.2s;
+            width: 100%;
+            background: #fff;
         }
 
         .gallery-img:hover { transform: translateY(-4px); }
         .gallery-img img { width: 100%; display: block; }
+        .gallery-caption {
+            margin: 0;
+            padding-top: 0.6rem;
+            padding-bottom: 0.5rem;
+            font-size: 0.84rem;
+            color: #6b7280;
+            line-height: 1.35;
+            text-align: center;
+            position: relative;
+        }
+
+        .gallery-caption::after {
+            content: "";
+            display: block;
+            width: 40.56px;
+            height: 1px;
+            margin: 0.45rem auto 0;
+            background: #d9dde3;
+        }
 
         /* --- BOTTOM CTA --- */
         .cta-section {
@@ -504,14 +530,54 @@
         <section class="section-spacer">
             <span class="section-header">Featured Screens</span>
             <div class="gallery-track">
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/StartScreen.png" alt="Start"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/OnboardingScreen.png" alt="Onboarding"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/ActiveCompetitions.png" alt="Dashboard"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/logworkouts.png" alt="Rules"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/ResultsScreen.png" alt="Results"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/ProfileScreen.png" alt="Profile"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/FriendsScreen.png" alt="Friends"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/compfit/CompetitionRulesScreen.png" alt="Rules"></div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/StartScreen.png" alt="Start screen">
+                    </div>
+                    <p class="gallery-caption">Start screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/OnboardingScreen.png" alt="Onboarding flow">
+                    </div>
+                    <p class="gallery-caption">Onboarding flow</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/ActiveCompetitions.png" alt="Active competitions list">
+                    </div>
+                    <p class="gallery-caption">Active competitions</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/logworkouts.png" alt="Workout logging">
+                    </div>
+                    <p class="gallery-caption">Workout logging</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/ResultsScreen.png" alt="Results summary">
+                    </div>
+                    <p class="gallery-caption">Results summary</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/ProfileScreen.png" alt="User profile">
+                    </div>
+                    <p class="gallery-caption">User profile</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/FriendsScreen.png" alt="Friends screen">
+                    </div>
+                    <p class="gallery-caption">Friends screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/compfit/CompetitionRulesScreen.png" alt="Competition rules">
+                    </div>
+                    <p class="gallery-caption">Competition rules</p>
+                </div>
             </div>
         </section>
 

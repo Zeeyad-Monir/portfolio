@@ -269,6 +269,7 @@
         /* --- 04 GALLERY SCROLLER --- */
         .gallery-track {
             display: flex;
+            align-items: stretch;
             overflow-x: auto;
             gap: 1.5rem;
             padding-bottom: 2rem;
@@ -279,17 +280,46 @@
         .gallery-track::-webkit-scrollbar-track { background: transparent; }
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
-        .gallery-img {
+        .gallery-item {
             flex: 0 0 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-self: stretch;
+        }
+
+        .gallery-img {
             cursor: zoom-in;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #eee;
             transition: transform 0.2s;
+            width: 100%;
+            background: #fff;
         }
 
         .gallery-img:hover { transform: translateY(-4px); }
         .gallery-img img { width: 100%; display: block; }
+        .gallery-caption {
+            margin: 0;
+            margin-top: auto;
+            padding-top: 0.6rem;
+            padding-bottom: 0.5rem;
+            font-size: 0.84rem;
+            color: #6b7280;
+            line-height: 1.35;
+            text-align: center;
+            position: relative;
+        }
+
+        .gallery-caption::after {
+            content: "";
+            display: block;
+            width: 40.56px;
+            height: 1px;
+            margin: 0.45rem auto 0;
+            background: #d9dde3;
+        }
 
         /* --- BOTTOM CTA --- */
         .cta-section {
@@ -332,7 +362,7 @@
             .feature-block { margin-bottom: 3rem; }
             .feature-text h3 { font-size: 1.35rem; }
             .feature-visual img { border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
-            .gallery-img { flex: 0 0 300px; }
+            .gallery-item { flex: 0 0 300px; }
             .gallery-track { gap: 1rem; padding-bottom: 1.5rem; }
         }
 
@@ -340,13 +370,13 @@
             .feature-block { margin-bottom: 2.5rem; }
             .feature-text h3 { font-size: 1.25rem; }
             .feature-visual img { border-radius: 8px; }
-            .gallery-img { flex: 0 0 260px; }
+            .gallery-item { flex: 0 0 260px; }
         }
 
         @media (max-width: 375px) {
             .feature-block { margin-bottom: 2rem; gap: 1rem; }
             .feature-text h3 { font-size: 1.15rem; }
-            .gallery-img { flex: 0 0 240px; }
+            .gallery-item { flex: 0 0 240px; }
             .gallery-track { gap: 0.75rem; }
         }
     </style>
@@ -492,14 +522,54 @@
         <section class="section-spacer">
             <span class="section-header">05 / Featured Screens</span>
             <div class="gallery-track">
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/MainDashboard.png" alt="Main Dashboard"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/CommunityScreen.png" alt="Community Screen"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/MealScreen.png" alt="Meal Screen"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/IndividualMealScreen.png" alt="Individual Meal Screen"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/VolunteerEventSignUp.png" alt="Volunteer Event Sign Up"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/ShiftsScreen.png" alt="Shifts Screen"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/PaymentScreen.png" alt="Payment Screen"></div>
-                <div class="gallery-img" onclick="openLightbox(this)"><img src="PortfolioPhotos/PackItWeb/SettingsScreen.png" alt="Settings Screen"></div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/MainDashboard.png" alt="Main dashboard">
+                    </div>
+                    <p class="gallery-caption">Main dashboard</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/CommunityScreen.png" alt="Community screen">
+                    </div>
+                    <p class="gallery-caption">Community screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/MealScreen.png" alt="Meal screen">
+                    </div>
+                    <p class="gallery-caption">Meal screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/IndividualMealScreen.png" alt="Meal details">
+                    </div>
+                    <p class="gallery-caption">Meal details</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/VolunteerEventSignUp.png" alt="Volunteer sign-up">
+                    </div>
+                    <p class="gallery-caption">Volunteer sign-up</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/ShiftsScreen.png" alt="Shifts screen">
+                    </div>
+                    <p class="gallery-caption">Shifts screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/PaymentScreen.png" alt="Payment checkout">
+                    </div>
+                    <p class="gallery-caption">Payment checkout</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/SettingsScreen.png" alt="Settings screen">
+                    </div>
+                    <p class="gallery-caption">Settings screen</p>
+                </div>
             </div>
         </section>
 
