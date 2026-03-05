@@ -23,7 +23,7 @@
         }
 
         .container {
-            max-width: 960px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 1.5rem;
         }
@@ -109,7 +109,7 @@
         }
 
         /* --- SECTIONS COMMON --- */
-        .section-spacer { margin-bottom: 7rem; }
+        .section-spacer { margin-bottom: 7.7rem; }
 
         .section-header {
             font-size: 0.8rem;
@@ -127,7 +127,7 @@
             font-size: 1.15rem;
             line-height: 1.7;
             color: #333;
-            max-width: 864px;
+            max-width: 1080px;
         }
 
         /* --- 02 PROCESS (Step List) --- */
@@ -141,6 +141,34 @@
             display: grid;
             grid-template-columns: 30px 1fr;
             gap: 1.5rem;
+        }
+
+        @media (min-width: 1025px) {
+            .process-list-horizontal {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 2rem;
+                align-items: start;
+            }
+
+            .process-list-horizontal .process-item {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .process-list-horizontal .process-number {
+                padding-top: 0;
+            }
+
+            .process-list-horizontal .process-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .process-list-horizontal .process-content p {
+                font-size: 0.98rem;
+                line-height: 1.55;
+            }
         }
 
         .process-number {
@@ -168,7 +196,7 @@
             font-size: 1.15rem;
             line-height: 1.7;
             color: #333;
-            max-width: 864px;
+            max-width: 1080px;
             margin-bottom: 3rem;
         }
 
@@ -447,7 +475,7 @@
         <section class="section-spacer">
             <span class="section-header">02 / Design Process</span>
 
-            <div class="process-list">
+            <div class="process-list process-list-horizontal">
                 <div class="process-item">
                     <div class="process-number">01</div>
                     <div class="process-content">

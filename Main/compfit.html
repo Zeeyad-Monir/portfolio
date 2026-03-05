@@ -23,7 +23,7 @@
         }
 
         .container {
-            max-width: 960px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 1.5rem;
         }
@@ -109,7 +109,7 @@
         }
 
         /* --- SECTIONS COMMON --- */
-        .section-spacer { margin-bottom: 7rem; }
+        .section-spacer { margin-bottom: 7.7rem; }
         
         .section-header {
             font-size: 0.92rem;
@@ -127,7 +127,7 @@
             font-size: 1.15rem;
             line-height: 1.7;
             color: #333;
-            max-width: 864px;
+            max-width: 1080px;
         }
 
         /* --- 02 PROCESS (Step List) --- */
@@ -141,6 +141,34 @@
             display: grid;
             grid-template-columns: 30px 1fr;
             gap: 1.5rem;
+        }
+
+        @media (min-width: 1025px) {
+            .process-list-horizontal {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 2rem;
+                align-items: start;
+            }
+
+            .process-list-horizontal .process-item {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .process-list-horizontal .process-number {
+                padding-top: 0;
+            }
+
+            .process-list-horizontal .process-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .process-list-horizontal .process-content p {
+                font-size: 0.98rem;
+                line-height: 1.55;
+            }
         }
 
         .process-number {
@@ -168,7 +196,7 @@
             font-size: 1.15rem;
             line-height: 1.7;
             color: #333;
-            max-width: 864px;
+            max-width: 1080px;
             margin-bottom: 3rem;
         }
 
@@ -273,6 +301,17 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
+        .feature-visual video {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            background: #000;
+            display: block;
+        }
+
         /* --- 04 GALLERY SCROLLER (UPDATED SIZE) --- */
         .gallery-track {
             display: flex;
@@ -370,16 +409,29 @@
                 max-width: 220px;
                 margin: 0 auto;
             }
+
+            .feature-visual video {
+                max-width: 220px;
+                margin: 0 auto;
+            }
         }
 
         @media (max-width: 480px) {
             .feature-visual img {
                 max-width: 180px;
             }
+
+            .feature-visual video {
+                max-width: 180px;
+            }
         }
 
         @media (max-width: 375px) {
             .feature-visual img {
+                max-width: 160px;
+            }
+
+            .feature-visual video {
                 max-width: 160px;
             }
         }
@@ -452,7 +504,7 @@
         <section class="section-spacer">
             <span class="section-header">Design Process</span>
             
-            <div class="process-list">
+            <div class="process-list process-list-horizontal">
                 <div class="process-item">
                     <div class="process-number">01</div>
                     <div class="process-content">
@@ -502,7 +554,16 @@
                     <p>Users can define rules, point systems, and durations so different sports and activities feel fair within the same challenge. Whether it's steps, calories, or gym visits, the system adapts.</p>
                 </div>
                 <div class="feature-visual">
-                    <img src="PortfolioPhotos/compfit/CustomCompetitions.png" alt="Custom Competitions">
+                    <video
+                        class="scroll-autoplay-video"
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="PortfolioPhotos/compfit/CustomCompetitions.png"
+                        aria-label="Create competition flow demo video">
+                        <source src="PortfolioPhotos/compfit/CreateCompetition.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 
@@ -677,6 +738,34 @@
 
         // Initialize on load
         renderReasoning();
+    </script>
+
+    <script>
+        function setupScrollAutoplayVideos() {
+            const videos = document.querySelectorAll('.scroll-autoplay-video');
+            if (!videos.length) return;
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    const video = entry.target;
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        const playPromise = video.play();
+                        if (playPromise && typeof playPromise.catch === 'function') {
+                            playPromise.catch(() => {});
+                        }
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            videos.forEach((video) => observer.observe(video));
+        }
+
+        setupScrollAutoplayVideos();
     </script>
 
     <script src="navbar.js"></script>
