@@ -16,6 +16,10 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+        }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -145,6 +149,26 @@
             visibility: hidden;
         }
 
+        .hero-video-replay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.96);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.32s ease, visibility 0.32s ease;
+        }
+
+        .hero-video-frame.is-replay-visible .hero-video-replay {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
         .hero-video-loading-content {
             display: flex;
             flex-direction: column;
@@ -167,6 +191,28 @@
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: rgba(17, 24, 39, 0.72);
+        }
+
+        .hero-video-replay-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.95rem;
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .hero-video-replay-title {
+            margin: 0;
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(17, 24, 39, 0.72);
+        }
+
+        .hero-video-replay-button {
+            min-width: 132px;
         }
 
         @keyframes hero-float {
@@ -236,8 +282,36 @@
             background: #111;
         }
 
+        .hero-scroll-cue {
+            display: none;
+        }
+
+        .hero-scroll-cue-arrow {
+            display: block;
+            width: 0.9rem;
+            height: 0.9rem;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+        }
+
+        @keyframes hero-scroll-cue-bob {
+            0%, 100% {
+                transform: translate(-50%, 0);
+                opacity: 0.66;
+            }
+            50% {
+                transform: translate(-50%, 7px);
+                opacity: 1;
+            }
+        }
+        
         /* --- SECTIONS COMMON --- */
         .section-spacer { margin-bottom: calc(7.7rem * 1.1); }
+
+        #overview {
+            scroll-margin-top: 84px;
+        }
         
         .section-header {
             font-size: 0.92rem;
@@ -584,9 +658,17 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
             .hero-video-frame {
                 animation: none;
                 transform: translateX(-10%) translateY(0) rotate(-0.8deg);
+            }
+
+            .hero-scroll-cue {
+                animation: none;
             }
         }
 
@@ -735,19 +817,81 @@
 
         /* --- MOBILE --- */
         @media (max-width: 767px) {
+            .container {
+                padding-top: 60px;
+            }
+
             .hero-section {
+                position: relative;
                 grid-template-columns: 1fr;
-                min-height: auto;
-                margin-top: 0.4rem;
-                margin-bottom: 4.4rem;
+                justify-items: center;
+                align-content: center;
+                min-height: calc(100svh - 60px);
+                margin-top: 0;
+                margin-bottom: 2.8rem;
+                padding: 1.4rem 0 4.9rem;
+                text-align: center;
             }
             .hero-layout-content {
-                max-width: none;
+                width: min(100%, 32rem);
+                max-width: 32rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.35rem;
+                text-align: center;
             }
             .hero-media-shell {
                 display: none;
             }
-            .hero-title { font-size: calc(2.88rem * 1.265); flex-wrap: wrap; }
+            .hero-title {
+                justify-content: center;
+                gap: 0.8rem;
+                margin-bottom: 0;
+                font-size: clamp(3rem, 12vw, 3.45rem);
+                flex-wrap: wrap;
+            }
+            .app-icon {
+                width: 58px;
+                height: 58px;
+                border-radius: 14px;
+            }
+            .meta-stack {
+                width: 100%;
+                align-items: center;
+                gap: 0.55rem;
+                margin-bottom: 0;
+                font-size: 1.08rem;
+            }
+            .action-row {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: min(100%, 21.5rem);
+                gap: 0.7rem;
+                margin: 0 auto;
+            }
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 44px;
+                width: 100%;
+                padding: 0.7rem 0.85rem;
+                font-size: 0.88rem;
+                white-space: nowrap;
+            }
+            .hero-scroll-cue {
+                position: absolute;
+                left: 50%;
+                bottom: 1rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 2.75rem;
+                height: 2.75rem;
+                color: rgba(17, 17, 17, 0.72);
+                animation: hero-scroll-cue-bob 1.8s ease-in-out infinite;
+            }
             .art-subsection { margin-top: 2.7rem; }
             .art-heading { font-size: 1.35rem; }
             .art-body-copy { font-size: 1rem; line-height: 1.58; margin-top: 1.1rem; }
@@ -778,6 +922,30 @@
         }
 
         @media (max-width: 480px) {
+            .hero-section {
+                padding-top: 1rem;
+                padding-bottom: 4.6rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2.55rem, 14vw, 3rem);
+                gap: 0.65rem;
+            }
+
+            .app-icon {
+                width: 52px;
+                height: 52px;
+            }
+
+            .meta-stack {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.72rem 0.8rem;
+                font-size: 0.83rem;
+            }
+
             .art-color-grid { grid-template-columns: 1fr; }
             .feature-visual img {
                 max-width: 180px;
@@ -854,6 +1022,10 @@
                 </div>
             </div>
 
+            <a href="#overview" class="hero-scroll-cue" aria-label="Scroll to overview">
+                <span class="hero-scroll-cue-arrow" aria-hidden="true"></span>
+            </a>
+
             <div class="hero-media-shell" aria-hidden="true">
                 <div class="hero-video-frame">
                     <div class="hero-video-viewport">
@@ -863,11 +1035,17 @@
                                 <p class="hero-video-loading-text">Loading...</p>
                             </div>
                         </div>
+                        <div class="hero-video-replay" aria-hidden="true">
+                            <div class="hero-video-replay-content">
+                                <img src="PortfolioPhotos/compfit/CompFitAppIcon.png" alt="" class="hero-video-loading-icon">
+                                <p class="hero-video-replay-title">Play Again</p>
+                                <button type="button" class="btn hero-video-replay-button">Replay Demo</button>
+                            </div>
+                        </div>
                         <video
                             class="hero-demo-video"
                             autoplay
                             muted
-                            loop
                             playsinline
                             preload="metadata"
                             poster="PortfolioPhotos/compfit/ProjectBanner3.png"
@@ -879,7 +1057,7 @@
             </div>
         </header>
 
-        <section class="section-spacer">
+        <section class="section-spacer" id="overview">
             <span class="section-header">Overview</span>
             <p class="overview-text">
                 Most fitness apps focus on the individual. CompFit focuses on the <strong>group</strong>. 
@@ -1224,7 +1402,9 @@
             const frame = document.querySelector('.hero-video-frame');
             const video = frame?.querySelector('.hero-demo-video');
             const overlay = frame?.querySelector('.hero-video-loading');
-            if (!frame || !video || !overlay) return;
+            const replayOverlay = frame?.querySelector('.hero-video-replay');
+            const replayButton = frame?.querySelector('.hero-video-replay-button');
+            if (!frame || !video || !overlay || !replayOverlay || !replayButton) return;
 
             const minimumLoadingMs = 2000;
             let hasRevealedVideo = false;
@@ -1238,6 +1418,28 @@
                 }, 450);
             };
 
+            const hideReplayState = () => {
+                frame.classList.remove('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'true');
+            };
+
+            const showReplayState = () => {
+                revealVideo();
+                frame.classList.add('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'false');
+                video.pause();
+            };
+
+            const playHeroVideo = () => {
+                hideReplayState();
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        showReplayState();
+                    });
+                }
+            };
+
             video.pause();
             try {
                 video.currentTime = 0;
@@ -1246,16 +1448,20 @@
             }
 
             window.setTimeout(() => {
-                const playPromise = video.play();
-                if (playPromise && typeof playPromise.catch === 'function') {
-                    playPromise.catch(() => {
-                        revealVideo();
-                    });
-                }
+                playHeroVideo();
             }, minimumLoadingMs);
 
             video.addEventListener('playing', revealVideo, { once: true });
             video.addEventListener('error', revealVideo, { once: true });
+            video.addEventListener('ended', showReplayState);
+            replayButton.addEventListener('click', () => {
+                try {
+                    video.currentTime = 0;
+                } catch (error) {
+                    // Ignore currentTime errors and attempt playback anyway.
+                }
+                playHeroVideo();
+            });
         }
 
         setupHeroVideoLoader();
