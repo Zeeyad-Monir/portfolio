@@ -10,6 +10,8 @@
             --text-main: #111;
             --text-secondary: #444;
             --text-light: #888;
+            --mobile-nav-height: 60px;
+            --mobile-hero-gap: 1.5rem;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -417,6 +419,9 @@
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
+            .container {
+                padding-top: calc(var(--mobile-nav-height) + var(--mobile-hero-gap));
+            }
             .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
             .feature-block { margin-bottom: 3rem; }
             .feature-text h3 { font-size: 1.35rem; }

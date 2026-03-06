@@ -10,6 +10,8 @@
             --text-main: #111;
             --text-secondary: #444;
             --text-light: #888;
+            --mobile-nav-height: 60px;
+            --mobile-hero-gap: 1.5rem;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -384,7 +386,10 @@
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            .container { padding: 2.5rem 1.5rem; }
+            .container {
+                padding: 2.5rem 1.5rem;
+                padding-top: calc(var(--mobile-nav-height) + var(--mobile-hero-gap));
+            }
             .section-spacer { margin-bottom: 4.4rem; }
             .hero-section { margin-bottom: 3rem; }
             .hero-title { font-size: 2.5rem; }
@@ -415,7 +420,10 @@
         }
 
         @media (max-width: 375px) {
-            .container { padding: 2rem 1.25rem; }
+            .container {
+                padding: 2rem 1.25rem;
+                padding-top: calc(var(--mobile-nav-height) + var(--mobile-hero-gap));
+            }
             .section-spacer { margin-bottom: 2.75rem; }
             .hero-title { font-size: 1.8rem; }
             .feature-block { margin-bottom: 2rem; gap: 1rem; }
