@@ -186,8 +186,10 @@
         position: absolute;
         display: flex;
         gap: 24px;
+        left: 50%;
+        width: max-content;
         opacity: 0;
-        transform: translateY(-8px);
+        transform: translate(-50%, -8px);
         pointer-events: none;
         transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
                     transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -195,7 +197,7 @@
 
     .mobile-nav-bar.expanded .mobile-nav-links {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, 0);
         pointer-events: auto;
     }
 
