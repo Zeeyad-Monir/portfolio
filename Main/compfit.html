@@ -1438,6 +1438,8 @@
             const minimumLoadingMs = 2000;
             let hasRevealedVideo = false;
 
+            video.loop = false;
+
             const revealVideo = () => {
                 if (hasRevealedVideo) return;
                 hasRevealedVideo = true;
@@ -1454,6 +1456,8 @@
 
             const showReplayState = () => {
                 revealVideo();
+                video.autoplay = false;
+                video.removeAttribute('autoplay');
                 frame.classList.add('is-replay-visible');
                 replayOverlay.setAttribute('aria-hidden', 'false');
                 video.pause();
