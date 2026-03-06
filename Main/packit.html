@@ -294,6 +294,37 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
+        @media (min-width: 769px) {
+            .feature-block {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 7.7rem;
+                margin-bottom: 7.935rem;
+            }
+
+            .feature-block.reversed {
+                flex-direction: row-reverse;
+            }
+
+            .feature-text {
+                flex: 0 0 400px;
+                max-width: none;
+            }
+
+            .feature-visual {
+                flex: 0 0 347px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .feature-visual img {
+                width: 100%;
+                max-width: 347px;
+            }
+        }
+
         /* --- 04 GALLERY SCROLLER --- */
         .gallery-track {
             display: flex;
@@ -526,7 +557,7 @@
                 </div>
             </div>
 
-            <div class="feature-block">
+            <div class="feature-block reversed">
                 <div class="feature-text">
                     <h3>Accessible UI</h3>
                     <p>Designed with accessibility in mind, ensuring the interface is usable for a diverse range of users in high-paced environments like campus dining halls and distribution centers.</p>
@@ -564,6 +595,18 @@
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/VolunteerEventSignUp.png" alt="Volunteer sign-up">
+                    </div>
+                    <p class="gallery-caption">Volunteer sign-up</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
+                        <img src="PortfolioPhotos/PackItWeb/SettingsScreen.png" alt="Settings screen">
+                    </div>
+                    <p class="gallery-caption">Settings screen</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" onclick="openLightbox(this)">
                         <img src="PortfolioPhotos/PackItWeb/MealScreen.png" alt="Meal screen">
                     </div>
                     <p class="gallery-caption">Meal screen</p>
@@ -576,12 +619,6 @@
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img" onclick="openLightbox(this)">
-                        <img src="PortfolioPhotos/PackItWeb/VolunteerEventSignUp.png" alt="Volunteer sign-up">
-                    </div>
-                    <p class="gallery-caption">Volunteer sign-up</p>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img" onclick="openLightbox(this)">
                         <img src="PortfolioPhotos/PackItWeb/ShiftsScreen.png" alt="Shifts screen">
                     </div>
                     <p class="gallery-caption">Shifts screen</p>
@@ -591,12 +628,6 @@
                         <img src="PortfolioPhotos/PackItWeb/PaymentScreen.png" alt="Payment checkout">
                     </div>
                     <p class="gallery-caption">Payment checkout</p>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img" onclick="openLightbox(this)">
-                        <img src="PortfolioPhotos/PackItWeb/SettingsScreen.png" alt="Settings screen">
-                    </div>
-                    <p class="gallery-caption">Settings screen</p>
                 </div>
             </div>
         </section>
