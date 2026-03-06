@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SznLuv - Zeeyad Monir</title>
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -13,6 +16,10 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -33,12 +40,21 @@
 
         /* --- HERO SECTION --- */
         .hero-section {
-            margin-bottom: 5rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(272px, 349px);
+            align-items: center;
+            column-gap: clamp(2rem, 4vw, 4.5rem);
+            min-height: calc(100vh - 8rem);
+            margin-bottom: 5.5rem;
             text-align: left;
         }
 
+        .hero-layout-content {
+            max-width: 640px;
+        }
+
         .hero-title {
-            font-size: 3.5rem;
+            font-size: calc(4.03rem * 1.265);
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -49,16 +65,174 @@
         }
 
         .app-icon {
-            width: 58px;
-            height: 58px;
+            width: 67px;
+            height: 67px;
             border-radius: 12px;
             display: inline-block;
             vertical-align: middle;
         }
 
+        .hero-media-shell {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .hero-video-frame {
+            position: relative;
+            width: min(100%, 315px);
+            aspect-ratio: 9 / 19.5;
+            border-radius: 30px;
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            background: linear-gradient(180deg, #fafafa 0%, #ececec 100%);
+            box-shadow:
+                0 24px 50px rgba(17, 24, 39, 0.14),
+                0 10px 24px rgba(17, 24, 39, 0.1);
+            transform: translateX(-10%) translateY(4px) rotate(-1deg);
+            animation: hero-float 6s ease-in-out infinite;
+        }
+
+        .hero-video-frame::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            pointer-events: none;
+        }
+
+        .hero-video-viewport {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        }
+
+        .hero-demo-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #000;
+            transition: opacity 0.42s ease;
+        }
+
+        .hero-video-loading {
+            display: none;
+        }
+
+        .js .hero-video-frame:not(.is-video-ready) .hero-demo-video {
+            opacity: 0;
+        }
+
+        .js .hero-video-loading {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: none;
+            transition: opacity 0.42s ease, visibility 0.42s ease;
+        }
+
+        .js .hero-video-frame.is-video-ready .hero-video-loading {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .hero-video-replay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.96);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.32s ease, visibility 0.32s ease;
+        }
+
+        .hero-video-frame.is-replay-visible .hero-video-replay {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .hero-video-loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.85rem;
+            text-align: center;
+        }
+
+        .hero-video-loading-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            box-shadow: 0 18px 34px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-video-loading-text {
+            margin: 0;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(17, 24, 39, 0.72);
+        }
+
+        .hero-video-replay-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.95rem;
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .hero-video-replay-title {
+            margin: 0;
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(17, 24, 39, 0.72);
+        }
+
+        .hero-video-replay-button {
+            min-width: 132px;
+        }
+
+        @keyframes hero-float {
+            0%, 100% {
+                transform: translateX(-10%) translateY(4px) rotate(-1deg);
+                box-shadow:
+                    0 24px 50px rgba(17, 24, 39, 0.14),
+                    0 10px 24px rgba(17, 24, 39, 0.1);
+            }
+            50% {
+                transform: translateX(-10%) translateY(-6px) rotate(-0.6deg);
+                box-shadow:
+                    0 30px 56px rgba(17, 24, 39, 0.16),
+                    0 14px 30px rgba(17, 24, 39, 0.12);
+            }
+        }
+
         /* --- METADATA (Stacked Style) --- */
         .meta-stack {
-            font-size: 1.05rem;
+            font-size: 1.21rem;
             color: var(--text-secondary);
             display: flex;
             flex-direction: column;
@@ -69,21 +243,21 @@
         .meta-stack strong {
             font-weight: 700;
             color: #222;
-            margin-right: 0.25rem;
+            margin-right: 0.29rem;
         }
 
         /* --- ACTION BUTTONS --- */
         .action-row {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.86rem;
             flex-wrap: wrap;
         }
 
         .btn {
-            font-size: 0.85rem;
+            font-size: 0.98rem;
             font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.575rem 1.15rem;
+            border-radius: 7px;
             border: 1px solid #ddd;
             background: transparent;
             color: #333;
@@ -97,19 +271,47 @@
             border-color: #111;
         }
 
-        /* Primary button style for the bottom CTA */
         .btn-primary {
             background: #111;
             color: #fff;
             border-color: #111;
         }
+
         .btn-primary:hover {
             opacity: 0.8;
             background: #111;
         }
 
+        .hero-scroll-cue {
+            display: none;
+        }
+
+        .hero-scroll-cue-arrow {
+            display: block;
+            width: 0.9rem;
+            height: 0.9rem;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+        }
+
+        @keyframes hero-scroll-cue-bob {
+            0%, 100% {
+                transform: translate(-50%, 0);
+                opacity: 0.66;
+            }
+            50% {
+                transform: translate(-50%, 7px);
+                opacity: 1;
+            }
+        }
+
         /* --- SECTIONS COMMON --- */
-        .section-spacer { margin-bottom: 7.7rem; }
+        .section-spacer { margin-bottom: calc(7.7rem * 1.1); }
+
+        #overview {
+            scroll-margin-top: 84px;
+        }
 
         .section-header {
             font-size: 0.92rem;
@@ -122,7 +324,6 @@
             padding-bottom: 1rem;
         }
 
-        /* --- 01 OVERVIEW --- */
         .overview-text {
             font-size: 1.15rem;
             line-height: 1.7;
@@ -130,7 +331,6 @@
             max-width: 1080px;
         }
 
-        /* --- 02 PROCESS (Step List) --- */
         .process-list {
             display: flex;
             flex-direction: column;
@@ -191,7 +391,6 @@
             line-height: 1.6;
         }
 
-        /* --- REASONING INTRO & CITATIONS --- */
         .reasoning-intro {
             font-size: 1.15rem;
             line-height: 1.7;
@@ -216,14 +415,19 @@
             text-decoration: underline;
         }
 
-        /* --- REASONING 2x2 GRID (Desktop) --- */
         .reasoning-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 3rem 4rem;
         }
 
-        /* --- 03 SOLUTION (Clean Split) --- */
+        @media (max-width: 768px) {
+            .reasoning-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+        }
+
         .feature-block {
             display: flex;
             align-items: center;
@@ -259,16 +463,21 @@
             align-items: center;
         }
 
-        .feature-visual img {
+        .feature-visual img,
+        .feature-visual video {
             max-width: 250px;
             width: 100%;
             height: auto;
             border-radius: 12px;
             border: 1px solid #f0f0f0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            display: block;
         }
 
-        /* --- 04 GALLERY SCROLLER --- */
+        .feature-visual video {
+            background: #000;
+        }
+
         .gallery-track {
             display: flex;
             overflow-x: auto;
@@ -282,7 +491,7 @@
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
         .gallery-item {
-            flex: 0 0 215px;
+            flex: 0 0 calc(215px * 1.1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -300,6 +509,7 @@
 
         .gallery-img:hover { transform: translateY(-4px); }
         .gallery-img img { width: 100%; display: block; }
+
         .gallery-caption {
             margin: 0;
             padding-top: 0.6rem;
@@ -320,7 +530,6 @@
             background: #d9dde3;
         }
 
-        /* --- BOTTOM CTA --- */
         .cta-section {
             text-align: center;
             margin-top: 6rem;
@@ -341,44 +550,213 @@
             font-size: 1.05rem;
         }
 
-        /* --- LIGHTBOX --- */
         #lightbox {
             display: none;
             position: fixed;
             z-index: 1000;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-color: rgba(255,255,255,0.98);
             justify-content: center;
             align-items: center;
             padding: 2rem;
         }
-        #lightbox img { max-height: 90vh; max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
 
-        /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
-            .feature-block, .feature-block.reversed { flex-direction: column; gap: 2.5rem; text-align: left; }
-            .feature-text { flex: 0 0 auto; width: 100%; }
-            .feature-visual { flex: 0 0 auto; width: 100%; }
-            .feature-visual img {
-                max-width: 220px;
+        #lightbox img {
+            max-height: 90vh;
+            max-width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-section {
+                grid-template-columns: minmax(0, 1fr) minmax(221px, 289px);
+                column-gap: 2rem;
+            }
+
+            .hero-title {
+                font-size: 3.45rem;
+            }
+
+            .hero-video-frame {
+                width: min(100%, 272px);
+                border-radius: 24px;
+                padding: 10px;
+            }
+
+            .hero-video-frame::before {
+                border-radius: 16px;
+            }
+
+            .hero-video-viewport {
+                border-radius: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .hero-video-frame {
+                animation: none;
+                transform: translateX(-10%) translateY(0) rotate(-0.8deg);
+            }
+
+            .hero-scroll-cue {
+                animation: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                padding-top: 60px;
+            }
+
+            .hero-section {
+                position: relative;
+                grid-template-columns: 1fr;
+                justify-items: center;
+                align-content: center;
+                min-height: calc(100svh - 60px);
+                margin-top: 0;
+                margin-bottom: 2.8rem;
+                padding: 1.4rem 0 4.9rem;
+                text-align: center;
+            }
+
+            .hero-layout-content {
+                width: min(100%, 32rem);
+                max-width: 32rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.35rem;
+                text-align: center;
+            }
+
+            .hero-media-shell {
+                display: none;
+            }
+
+            .hero-title {
+                justify-content: center;
+                gap: 0.8rem;
+                margin-bottom: 0;
+                font-size: clamp(3rem, 12vw, 3.45rem);
+                flex-wrap: wrap;
+            }
+
+            .app-icon {
+                width: 58px;
+                height: 58px;
+                border-radius: 14px;
+            }
+
+            .meta-stack {
+                width: 100%;
+                align-items: center;
+                gap: 0.55rem;
+                margin-bottom: 0;
+                font-size: 1.08rem;
+            }
+
+            .action-row {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: min(100%, 21.5rem);
+                gap: 0.7rem;
                 margin: 0 auto;
             }
-            .reasoning-grid {
-                grid-template-columns: 1fr;
-                gap: 3.5rem;
+
+            .action-row .btn:last-child {
+                grid-column: 1 / -1;
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 44px;
+                width: 100%;
+                padding: 0.7rem 0.85rem;
+                font-size: 0.88rem;
+                white-space: nowrap;
+            }
+
+            .hero-scroll-cue {
+                position: absolute;
+                left: 50%;
+                bottom: 1rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 2.75rem;
+                height: 2.75rem;
+                color: rgba(17, 17, 17, 0.72);
+                animation: hero-scroll-cue-bob 1.8s ease-in-out infinite;
+            }
+
+            .feature-block,
+            .feature-block.reversed {
+                flex-direction: column;
+                gap: 2.5rem;
+                text-align: left;
+            }
+
+            .feature-text {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+
+            .feature-visual {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+
+            .feature-visual img,
+            .feature-visual video {
+                max-width: 220px;
+                margin: 0 auto;
             }
         }
 
         @media (max-width: 480px) {
-            .feature-visual img {
+            .hero-section {
+                padding-top: 1rem;
+                padding-bottom: 4.6rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2.55rem, 14vw, 3rem);
+                gap: 0.65rem;
+            }
+
+            .app-icon {
+                width: 52px;
+                height: 52px;
+            }
+
+            .meta-stack {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.72rem 0.8rem;
+                font-size: 0.83rem;
+            }
+
+            .feature-visual img,
+            .feature-visual video {
                 max-width: 180px;
             }
         }
 
         @media (max-width: 375px) {
-            .feature-visual img {
+            .feature-visual img,
+            .feature-visual video {
                 max-width: 160px;
             }
         }
@@ -419,27 +797,63 @@
     <div class="container">
 
         <header class="hero-section">
-            <h1 class="hero-title">
-                SznLuv
-                <img src="PortfolioPhotos/sznluv/sznluvIcon4.png" alt="SznLuv Icon" class="app-icon">
-            </h1>
+            <div class="hero-layout-content">
+                <h1 class="hero-title">
+                    SznLuv
+                    <img src="PortfolioPhotos/sznluv/sznluvIcon4.png" alt="SznLuv Icon" class="app-icon">
+                </h1>
 
-            <div class="meta-stack">
-                <p><strong>Role:</strong> Developer & Designer</p>
-                <p><strong>Tools:</strong> React Native, Expo SDK, JavaScript, Figma, Miro</p>
-                <p><strong>Date:</strong> Sept 2024 - Dec 2024</p>
+                <div class="meta-stack">
+                    <p><strong>Role:</strong> Developer & Designer</p>
+                    <p><strong>Tools:</strong> React Native, Expo SDK, JavaScript, Figma, Miro</p>
+                    <p><strong>Date:</strong> Sept 2024 - Dec 2024</p>
+                </div>
+
+                <div class="action-row">
+                    <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" class="btn">View Demo</a>
+                    <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" class="btn">Figma</a>
+                    <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" class="btn">Slide Deck</a>
+                    <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" class="btn">Report</a>
+                    <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" class="btn">GitHub</a>
+                </div>
             </div>
 
-            <div class="action-row">
-                <a href="https://www.youtube.com/watch?v=xEkahSnfmGQ" target="_blank" class="btn">View Demo</a>
-                <a href="https://www.figma.com/design/95UCNuPVfIKNhU9VrFawji/SznLuv-Portfolio?node-id=0-1&t=y2OL7WTq6v0ZigJL-1" target="_blank" class="btn">Figma</a>
-                <a href="https://drive.google.com/file/d/16xanwbfY4Jiua5u1kG8NueMZizXjJlUC/view" target="_blank" class="btn">Slide Deck</a>
-                <a href="https://drive.google.com/file/d/1CJXmyDo_9duAKB63FeIuxXVBkd5OwXWm/view?usp=sharing" target="_blank" class="btn">Report</a>
-                <a href="https://github.com/Zeeyad-Monir/SznLuv" target="_blank" class="btn">GitHub</a>
+            <a href="#overview" class="hero-scroll-cue" aria-label="Scroll to overview">
+                <span class="hero-scroll-cue-arrow" aria-hidden="true"></span>
+            </a>
+
+            <div class="hero-media-shell">
+                <div class="hero-video-frame">
+                    <div class="hero-video-viewport">
+                        <div class="hero-video-loading">
+                            <div class="hero-video-loading-content">
+                                <img src="PortfolioPhotos/sznluv/sznluvIcon4.png" alt="" class="hero-video-loading-icon">
+                                <p class="hero-video-loading-text">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="hero-video-replay" aria-hidden="true">
+                            <div class="hero-video-replay-content">
+                                <img src="PortfolioPhotos/sznluv/sznluvIcon4.png" alt="" class="hero-video-loading-icon">
+                                <p class="hero-video-replay-title">Play Again</p>
+                                <button type="button" class="btn hero-video-replay-button">Replay Demo</button>
+                            </div>
+                        </div>
+                        <video
+                            class="hero-demo-video"
+                            autoplay
+                            muted
+                            playsinline
+                            preload="metadata"
+                            poster="PortfolioPhotos/sznluv/homeScreen.png"
+                            aria-label="SznLuv full demo preview">
+                            <source src="https://firebasestorage.googleapis.com/v0/b/compfit-196e8.firebasestorage.app/o/SznLuvfullVideo.mp4?alt=media&token=4ec98c5a-9780-4ed8-a976-d1a985edd7f9" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
             </div>
         </header>
 
-        <section class="section-spacer">
+        <section class="section-spacer" id="overview">
             <span class="section-header">Overview</span>
             <p class="overview-text">
                 SznLuv is a seasonal discovery mobile application designed specifically for <strong>Vancouver couples</strong>.
@@ -527,7 +941,7 @@
         </section>
 
         <section class="section-spacer">
-            <span class="section-header">All Screens</span>
+            <span class="section-header">Featured Screens</span>
             <div class="gallery-track">
                 <div class="gallery-item">
                     <div class="gallery-img" onclick="openLightbox(this)">
@@ -665,6 +1079,76 @@
 
         // Initialize
         renderReasoning();
+    </script>
+
+    <script>
+        function setupHeroVideoLoader() {
+            const frame = document.querySelector('.hero-video-frame');
+            const video = frame?.querySelector('.hero-demo-video');
+            const overlay = frame?.querySelector('.hero-video-loading');
+            const replayOverlay = frame?.querySelector('.hero-video-replay');
+            const replayButton = frame?.querySelector('.hero-video-replay-button');
+            if (!frame || !video || !overlay || !replayOverlay || !replayButton) return;
+
+            const minimumLoadingMs = 2000;
+            let hasRevealedVideo = false;
+
+            const revealVideo = () => {
+                if (hasRevealedVideo) return;
+                hasRevealedVideo = true;
+                frame.classList.add('is-video-ready');
+                window.setTimeout(() => {
+                    overlay.hidden = true;
+                }, 450);
+            };
+
+            const hideReplayState = () => {
+                frame.classList.remove('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'true');
+            };
+
+            const showReplayState = () => {
+                revealVideo();
+                frame.classList.add('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'false');
+                video.pause();
+            };
+
+            const playHeroVideo = () => {
+                hideReplayState();
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        showReplayState();
+                    });
+                }
+            };
+
+            video.pause();
+            try {
+                video.currentTime = 0;
+            } catch (error) {
+                // Some browsers block currentTime updates before enough data is loaded.
+            }
+
+            window.setTimeout(() => {
+                playHeroVideo();
+            }, minimumLoadingMs);
+
+            video.addEventListener('playing', revealVideo, { once: true });
+            video.addEventListener('error', revealVideo, { once: true });
+            video.addEventListener('ended', showReplayState);
+            replayButton.addEventListener('click', () => {
+                try {
+                    video.currentTime = 0;
+                } catch (error) {
+                    // Ignore currentTime errors and attempt playback anyway.
+                }
+                playHeroVideo();
+            });
+        }
+
+        setupHeroVideoLoader();
     </script>
 
     <script src="navbar.js"></script>
