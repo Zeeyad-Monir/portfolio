@@ -33,12 +33,21 @@
 
         /* --- HERO SECTION --- */
         .hero-section {
-            margin-bottom: 5rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(272px, 349px);
+            align-items: center;
+            column-gap: clamp(2rem, 4vw, 4.5rem);
+            min-height: calc(100vh - 8rem);
+            margin-bottom: 5.5rem;
             text-align: left;
         }
 
+        .hero-layout-content {
+            max-width: 640px;
+        }
+
         .hero-title {
-            font-size: 3.5rem;
+            font-size: calc(4.03rem * 1.265);
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -49,16 +58,72 @@
         }
 
         .app-icon {
-            width: 58px;
-            height: 58px;
+            width: 67px;
+            height: 67px;
             border-radius: 12px;
             display: inline-block;
             vertical-align: middle;
         }
 
+        .hero-media-shell {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .hero-video-frame {
+            position: relative;
+            width: min(100%, 315px);
+            aspect-ratio: 9 / 19.5;
+            border-radius: 30px;
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            background: linear-gradient(180deg, #fafafa 0%, #ececec 100%);
+            box-shadow:
+                0 24px 50px rgba(17, 24, 39, 0.14),
+                0 10px 24px rgba(17, 24, 39, 0.1);
+            transform: translateX(-10%) translateY(4px) rotate(-1deg);
+            animation: hero-float 6s ease-in-out infinite;
+        }
+
+        .hero-video-frame::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            pointer-events: none;
+        }
+
+        .hero-demo-video {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+            display: block;
+            background: #000;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        }
+
+        @keyframes hero-float {
+            0%, 100% {
+                transform: translateX(-10%) translateY(4px) rotate(-1deg);
+                box-shadow:
+                    0 24px 50px rgba(17, 24, 39, 0.14),
+                    0 10px 24px rgba(17, 24, 39, 0.1);
+            }
+            50% {
+                transform: translateX(-10%) translateY(-6px) rotate(-0.6deg);
+                box-shadow:
+                    0 30px 56px rgba(17, 24, 39, 0.16),
+                    0 14px 30px rgba(17, 24, 39, 0.12);
+            }
+        }
+
         /* --- METADATA (Stacked Style) --- */
         .meta-stack {
-            font-size: 1.05rem;
+            font-size: 1.21rem;
             color: var(--text-secondary);
             display: flex;
             flex-direction: column;
@@ -69,21 +134,21 @@
         .meta-stack strong {
             font-weight: 700;
             color: #222;
-            margin-right: 0.25rem;
+            margin-right: 0.29rem;
         }
 
         /* --- ACTION BUTTONS --- */
         .action-row {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.86rem;
             flex-wrap: wrap;
         }
 
         .btn {
-            font-size: 0.85rem;
+            font-size: 0.98rem;
             font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.575rem 1.15rem;
+            border-radius: 7px;
             border: 1px solid #ddd;
             background: transparent;
             color: #333;
@@ -109,7 +174,7 @@
         }
 
         /* --- SECTIONS COMMON --- */
-        .section-spacer { margin-bottom: 7.7rem; }
+        .section-spacer { margin-bottom: calc(7.7rem * 1.1); }
         
         .section-header {
             font-size: 0.92rem;
@@ -256,6 +321,212 @@
             text-decoration: underline;
         }
 
+        /* --- ART DIRECTION --- */
+        .art-subsection {
+            margin-top: 3.6rem;
+        }
+
+        .art-subsection:first-of-type {
+            margin-top: 0;
+        }
+
+        .art-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin: 0 0 1.8rem;
+            color: var(--text-main);
+        }
+
+        .art-body-copy {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            max-width: 1080px;
+            margin: 1.3rem 0 0;
+        }
+
+        .art-body-copy-tight {
+            margin-top: 0.75rem;
+        }
+
+        .art-color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            column-gap: 1.6rem;
+            row-gap: 1rem;
+        }
+
+        .art-color-item {
+            min-width: 0;
+            width: 85%;
+            justify-self: center;
+        }
+
+        .art-color-chip {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 0.65rem;
+        }
+
+        .art-color-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 0.15rem;
+        }
+
+        .art-color-hex {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            margin: 0 0 0.45rem;
+        }
+
+        .art-color-meaning {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        .art-type-showcase {
+            margin-top: calc(1rem * 1.05);
+            max-width: 1080px;
+        }
+
+        .art-type-specimen {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+        }
+
+        .art-type-meta {
+            margin-top: calc(1rem * 1.05);
+            display: flex;
+            flex-direction: column;
+            gap: calc(0.25rem * 1.05);
+            color: #4b5563;
+        }
+
+        .art-type-meta p {
+            margin: 0;
+            font-size: 0.98rem;
+            line-height: 1.45;
+        }
+
+        .art-type-divider {
+            margin-top: calc(1.25rem * 1.05);
+            border-top: 1px solid #e8ebef;
+        }
+
+        .art-type-preview {
+            margin-top: calc(1.25rem * 1.05);
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            column-gap: 1.25rem;
+            row-gap: calc(1.25rem * 1.05);
+        }
+
+        .art-type-preview-item p {
+            margin: 0;
+        }
+
+        .art-type-preview-sample {
+            color: var(--text-main);
+        }
+
+        .art-type-preview-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .art-type-preview-body {
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0.005em;
+            color: #111827;
+        }
+
+        .art-type-preview-label {
+            font-size: 0.74rem;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+
+        .art-type-preview-spec {
+            margin-top: calc(0.38rem * 1.05) !important;
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        .art-type-note {
+            margin: calc(1.35rem * 1.05) 0 0;
+            max-width: 980px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+
+        .art-color-note {
+            margin-left: calc(((100% - (4 * 1.6rem)) / 5) * 0.075);
+        }
+
+        @media (max-width: 1200px) {
+            .art-color-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .art-color-note {
+                margin-left: calc(((100% - (2 * 1.6rem)) / 3) * 0.075);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-section {
+                grid-template-columns: minmax(0, 1fr) minmax(221px, 289px);
+                column-gap: 2rem;
+            }
+
+            .hero-title {
+                font-size: 3.45rem;
+            }
+
+            .hero-video-frame {
+                width: min(100%, 272px);
+                border-radius: 24px;
+                padding: 10px;
+            }
+
+            .hero-video-frame::before {
+                border-radius: 16px;
+            }
+
+            .hero-demo-video {
+                border-radius: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-video-frame {
+                animation: none;
+                transform: translateX(-10%) translateY(0) rotate(-0.8deg);
+            }
+        }
+
         /* --- 03 SOLUTION (Clean Split) --- */
         .feature-block {
             display: flex;
@@ -326,7 +597,7 @@
         .gallery-track::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
 
         .gallery-item {
-            flex: 0 0 215px;
+            flex: 0 0 calc(215px * 1.1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -400,8 +671,35 @@
         #lightbox img { max-height: 90vh; max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
 
         /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
+        @media (max-width: 767px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                margin-top: 0.4rem;
+                margin-bottom: 4.4rem;
+            }
+            .hero-layout-content {
+                max-width: none;
+            }
+            .hero-media-shell {
+                display: none;
+            }
+            .hero-title { font-size: calc(2.88rem * 1.265); flex-wrap: wrap; }
+            .art-subsection { margin-top: 2.7rem; }
+            .art-heading { font-size: 1.35rem; }
+            .art-body-copy { font-size: 1rem; line-height: 1.58; margin-top: 1.1rem; }
+            .art-body-copy-tight { margin-top: 0.7rem; }
+            .art-color-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+            .art-color-item { width: 100%; }
+            .art-color-note { margin-left: 0; }
+            .art-type-specimen { font-size: 1.35rem; }
+            .art-type-meta p { font-size: 0.93rem; }
+            .art-type-preview {
+                grid-template-columns: 1fr;
+                row-gap: calc(1rem * 1.05);
+            }
+            .art-type-preview-heading { font-size: 1.35rem; }
+            .art-type-note { font-size: 0.88rem; }
             .feature-block, .feature-block.reversed { flex-direction: column; gap: 2.5rem; text-align: left; }
             .feature-text { flex: 0 0 auto; width: 100%; }
             .feature-visual { flex: 0 0 auto; width: 100%; }
@@ -417,6 +715,7 @@
         }
 
         @media (max-width: 480px) {
+            .art-color-grid { grid-template-columns: 1fr; }
             .feature-visual img {
                 max-width: 180px;
             }
@@ -472,22 +771,40 @@
     <div class="container">
 
         <header class="hero-section">
-            <h1 class="hero-title">
-                CompFit 
-                <img src="PortfolioPhotos/compfit/CompFitAppIcon.png" alt="CompFit Icon" class="app-icon">
-            </h1>
-            
-            <div class="meta-stack">
-                <p><strong>Role:</strong> Product Designer & Developer</p>
-                <p><strong>Tools:</strong> React Native, Firebase, Figma, Expo</p>
-                <p><strong>Date:</strong> Aug 2025 - Dec 2025</p>
+            <div class="hero-layout-content">
+                <h1 class="hero-title">
+                    CompFit 
+                    <img src="PortfolioPhotos/compfit/CompFitAppIcon.png" alt="CompFit Icon" class="app-icon">
+                </h1>
+                
+                <div class="meta-stack">
+                    <p><strong>Role:</strong> Product Designer & Developer</p>
+                    <p><strong>Tools:</strong> React Native, Firebase, Figma, Expo</p>
+                    <p><strong>Date:</strong> Aug 2025 - Dec 2025</p>
+                </div>
+
+                <div class="action-row">
+                    <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="btn">Download Beta</a>
+                    <a href="https://youtu.be/unwZhL702ok" target="_blank" class="btn">View Demo</a>
+                    <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="btn">Slide Deck</a>
+                    <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="btn">Figma</a>
+                </div>
             </div>
 
-            <div class="action-row">
-                <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="btn">Download Beta</a>
-                <a href="https://youtu.be/unwZhL702ok" target="_blank" class="btn">View Demo</a>
-                <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="btn">Slide Deck</a>
-                <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="btn">Figma</a>
+            <div class="hero-media-shell" aria-hidden="true">
+                <div class="hero-video-frame">
+                    <video
+                        class="hero-demo-video"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="PortfolioPhotos/compfit/ProjectBanner3.png"
+                        aria-label="CompFit full demo preview">
+                        <source src="https://firebasestorage.googleapis.com/v0/b/compfit-196e8.firebasestorage.app/o/CompFitDemo.mp4?alt=media&token=059ca095-9bab-47f2-81d0-17f9fc3fd750" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </header>
 
@@ -539,6 +856,79 @@
             </div>
         </section>
 
+        <section class="section-spacer art-direction-section">
+            <span class="section-header">Art Direction</span>
+
+            <div class="art-subsection">
+                <h3 class="art-heading">Color Scheme</h3>
+                <div class="art-color-grid">
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#90C010;"></div>
+                        <p class="art-color-name">Primary Action</p>
+                        <p class="art-color-hex">#90C010</p>
+                        <p class="art-color-meaning">Energy, progress, momentum</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#A0D050;"></div>
+                        <p class="art-color-name">Support Accent</p>
+                        <p class="art-color-hex">#A0D050</p>
+                        <p class="art-color-meaning">Secondary highlights and states</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#C0E090;"></div>
+                        <p class="art-color-name">Soft Surface</p>
+                        <p class="art-color-hex">#C0E090</p>
+                        <p class="art-color-meaning">Calm panels and progress areas</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#101020;"></div>
+                        <p class="art-color-name">Deep Neutral</p>
+                        <p class="art-color-hex">#101020</p>
+                        <p class="art-color-meaning">High-contrast text and controls</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#F4F5F3;"></div>
+                        <p class="art-color-name">UI Neutral</p>
+                        <p class="art-color-hex">#F4F5F3</p>
+                        <p class="art-color-meaning">Background clarity and breathing room</p>
+                    </div>
+                </div>
+                <p class="art-body-copy art-color-note">
+                    Shades of green were chosen because it is strongly associated with health, energy, and progress, helping workout actions feel motivating while keeping the interface clear.
+                </p>
+            </div>
+
+            <div class="art-subsection">
+                <h3 class="art-heading">Typography</h3>
+                <div class="art-type-showcase">
+                    <p class="art-type-specimen">Aa Bb Cc</p>
+                    <div class="art-type-meta">
+                        <p><strong>Primary Typeface:</strong> System UI / San Francisco</p>
+                        <p>Used for headings, body text, and UI elements.</p>
+                    </div>
+                    <div class="art-type-divider"></div>
+                    <div class="art-type-preview">
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-heading">Heading</p>
+                            <p class="art-type-preview-spec">32px / Bold / -0.02em tracking</p>
+                        </div>
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-body">Body Text</p>
+                            <p class="art-type-preview-spec">16px / Regular / 1.6 line height</p>
+                        </div>
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-label">Section Label</p>
+                            <p class="art-type-preview-spec">11px / Uppercase / 0.15em tracking</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="art-type-note">
+                    The hierarchy uses clear size and weight contrast to keep content scannable and interface sections easy to distinguish.
+                </p>
+            </div>
+
+        </section>
+
         <section class="section-spacer">
             <span class="section-header">Reasoning</span>
             <p class="reasoning-intro">Built for real follow-through. Each feature is designed to make consistency easier, using evidence-backed behavior change patterns.</p>
@@ -569,21 +959,39 @@
 
             <div class="feature-block reversed">
                 <div class="feature-text">
-                    <h3>Social Accountability</h3>
+                    <h3>Active Competitions</h3>
                     <p>Leaderboards, streaks, and progress summaries make it easy to see how friends are performing, driving motivation without feeling overly gamified or childish.</p>
                 </div>
                 <div class="feature-visual">
-                    <img src="PortfolioPhotos/compfit/RankScreen.png" alt="Leaderboard">
+                    <video
+                        class="scroll-autoplay-video"
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="PortfolioPhotos/compfit/ActiveCompetitions.png"
+                        aria-label="Active competitions demo video">
+                        <source src="PortfolioPhotos/compfit/ActiveCompetitionsDemo.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 
             <div class="feature-block">
                 <div class="feature-text">
-                    <h3>Flexible Workout Logging</h3>
-                    <p>Users can log walks, runs, gym sessions, and other activities with custom points and notes, so different training styles still fit inside the same shared challenge.</p>
+                    <h3>Profile Page</h3>
+                    <p>The profile page gives users a clear view of their progress, recent activity, and competitive standing so they can track momentum and stay accountable over time.</p>
                 </div>
                 <div class="feature-visual">
-                    <img src="PortfolioPhotos/compfit/logworkouts.png" alt="Logging Activity">
+                    <video
+                        class="scroll-autoplay-video"
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="PortfolioPhotos/compfit/ProfileScreen.png"
+                        aria-label="Profile page demo video">
+                        <source src="PortfolioPhotos/compfit/ProfileScreen.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </section>
