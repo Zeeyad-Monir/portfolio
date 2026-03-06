@@ -896,8 +896,32 @@
             .art-heading { font-size: 1.35rem; }
             .art-body-copy { font-size: 1rem; line-height: 1.58; margin-top: 1.1rem; }
             .art-body-copy-tight { margin-top: 0.7rem; }
-            .art-color-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-            .art-color-item { width: 100%; }
+            .art-color-grid {
+                grid-template-columns: repeat(2, minmax(0, 8rem));
+                justify-content: center;
+                gap: 0.9rem 1rem;
+            }
+            .art-color-item {
+                width: 100%;
+                max-width: 8rem;
+            }
+            .art-color-grid .art-color-item:last-child {
+                grid-column: 1 / -1;
+                width: min(100%, 8rem);
+            }
+            .art-color-chip {
+                border-radius: 10px;
+                margin-bottom: 0.45rem;
+            }
+            .art-color-name { font-size: 0.78rem; }
+            .art-color-hex {
+                font-size: 0.68rem;
+                margin-bottom: 0.25rem;
+            }
+            .art-color-meaning {
+                font-size: 0.68rem;
+                line-height: 1.3;
+            }
             .art-color-note { margin-left: 0; }
             .art-type-specimen { font-size: 1.35rem; }
             .art-type-meta p { font-size: 0.93rem; }
@@ -946,7 +970,19 @@
                 font-size: 0.83rem;
             }
 
-            .art-color-grid { grid-template-columns: 1fr; }
+            .art-color-grid {
+                grid-template-columns: repeat(2, minmax(0, 6.9rem));
+                gap: 0.75rem 0.85rem;
+            }
+            .art-color-item {
+                max-width: 6.9rem;
+            }
+            .art-color-grid .art-color-item:last-child {
+                width: min(100%, 6.9rem);
+            }
+            .art-color-name { font-size: 0.74rem; }
+            .art-color-hex,
+            .art-color-meaning { font-size: 0.65rem; }
             .feature-visual img {
                 max-width: 180px;
             }
