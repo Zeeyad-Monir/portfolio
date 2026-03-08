@@ -920,8 +920,8 @@
             .hero-section {
                 position: relative;
                 --mobile-demo-base-padding: 4.9rem;
-                --mobile-demo-open-gap-top: 1rem;
-                --mobile-demo-open-gap-bottom: 1.75rem;
+                --mobile-demo-open-gap-top: 1.1025rem;
+                --mobile-demo-open-gap-bottom: 1.9294rem;
                 --mobile-demo-ease: cubic-bezier(0.22, 1, 0.36, 1);
                 --mobile-demo-padding-duration: 420ms;
                 --mobile-demo-shell-opacity-duration: 320ms;
@@ -966,6 +966,7 @@
                 max-height: 0;
                 align-items: center;
                 justify-content: flex-start;
+                gap: 0.8925rem;
                 padding-inline: 0.35rem;
                 margin-top: 0;
                 margin-bottom: 0;
@@ -1054,7 +1055,7 @@
 
             .hero-video-close {
                 display: inline-flex;
-                order: 1;
+                order: 2;
                 opacity: 0;
                 transform: translate3d(0, var(--mobile-demo-close-offset), 0);
                 pointer-events: none;
@@ -1079,7 +1080,7 @@
             }
 
             .hero-video-frame {
-                order: 2;
+                order: 1;
                 width: min(100%, 17.8125rem);
                 border-radius: 26px;
                 padding: 10px;
