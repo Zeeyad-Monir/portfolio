@@ -919,10 +919,9 @@
 
             .hero-section {
                 position: relative;
-                --mobile-demo-gap: 1rem;
-                --mobile-demo-top: 0px;
-                --mobile-demo-reserve: 0px;
                 --mobile-demo-base-padding: 4.9rem;
+                --mobile-demo-open-gap-top: 1rem;
+                --mobile-demo-open-gap-bottom: 1.75rem;
                 --mobile-demo-ease: cubic-bezier(0.22, 1, 0.36, 1);
                 --mobile-demo-padding-duration: 420ms;
                 --mobile-demo-shell-opacity-duration: 320ms;
@@ -946,7 +945,8 @@
             .hero-section.is-mobile-demo-open {
                 align-content: start;
                 min-height: auto;
-                padding-bottom: calc(var(--mobile-demo-base-padding) + var(--mobile-demo-reserve));
+                padding-bottom: 0;
+                overflow-anchor: none;
             }
 
             .hero-layout-content {
@@ -960,36 +960,48 @@
             }
             .hero-media-shell {
                 display: flex;
-                position: absolute;
-                left: 50%;
-                top: var(--mobile-demo-top);
+                position: static;
+                justify-self: center;
                 width: min(100%, 22rem);
+                max-height: 0;
                 align-items: center;
                 justify-content: flex-start;
                 padding-inline: 0.35rem;
+                margin-top: 0;
+                margin-bottom: 0;
                 opacity: 0;
-                transform: translate3d(-50%, calc(-1 * var(--mobile-demo-shell-offset)), 0);
+                transform: translate3d(0, calc(-1 * var(--mobile-demo-shell-offset)), 0);
                 visibility: hidden;
                 pointer-events: none;
-                overflow: visible;
+                overflow: hidden;
                 border: 0;
                 background: transparent;
                 box-shadow: none;
                 z-index: 1;
-                will-change: opacity, transform;
+                will-change: max-height, opacity, transform;
                 backface-visibility: hidden;
                 transition:
+                    max-height var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-top var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-bottom var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
                     opacity var(--mobile-demo-shell-opacity-duration) ease,
                     transform var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
                     visibility 0s linear var(--mobile-demo-shell-transform-duration);
             }
 
             .hero-section.is-mobile-demo-open .hero-media-shell {
+                max-height: 48rem;
+                margin-top: var(--mobile-demo-open-gap-top);
+                margin-bottom: var(--mobile-demo-open-gap-bottom);
                 opacity: 1;
-                transform: translate3d(-50%, 0, 0);
+                transform: translate3d(0, 0, 0);
                 visibility: visible;
                 pointer-events: auto;
+                overflow: visible;
                 transition:
+                    max-height var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-top var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-bottom var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
                     opacity var(--mobile-demo-shell-opacity-duration) ease,
                     transform var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
                     visibility 0s linear 0s;
@@ -1042,8 +1054,9 @@
 
             .hero-video-close {
                 display: inline-flex;
+                order: 1;
                 opacity: 0;
-                transform: translate3d(0, calc(-1 * var(--mobile-demo-close-offset)), 0);
+                transform: translate3d(0, var(--mobile-demo-close-offset), 0);
                 pointer-events: none;
                 transition:
                     opacity var(--mobile-demo-close-opacity-duration) ease,
@@ -1066,7 +1079,8 @@
             }
 
             .hero-video-frame {
-                width: min(100%, 18.75rem);
+                order: 2;
+                width: min(100%, 17.8125rem);
                 border-radius: 26px;
                 padding: 10px;
                 transform: none;
@@ -1097,6 +1111,12 @@
                 backdrop-filter: none;
                 -webkit-backdrop-filter: none;
                 color: rgba(17, 17, 17, 0.72);
+            }
+
+            .hero-section.is-mobile-demo-open .hero-scroll-cue {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
             }
             .art-subsection { margin-top: 2.7rem; }
             .art-heading { font-size: 1.35rem; }
@@ -1182,7 +1202,7 @@
             }
 
             .hero-video-frame {
-                width: min(100%, 16.75rem);
+                width: min(100%, 15.9125rem);
                 border-radius: 22px;
                 padding: 8px;
             }
@@ -1660,8 +1680,6 @@
     <script>
         function setupHeroVideoLoader() {
             const heroSection = document.querySelector('.hero-section');
-            const heroLayoutContent = heroSection?.querySelector('.hero-layout-content');
-            const scrollCue = heroSection?.querySelector('.hero-scroll-cue');
             const mediaShell = document.getElementById('heroDemoShell');
             const frame = mediaShell?.querySelector('.hero-video-frame');
             const video = frame?.querySelector('.hero-demo-video');
@@ -1670,7 +1688,7 @@
             const replayButton = frame?.querySelector('.hero-video-replay-button');
             const demoToggle = document.querySelector('.btn-demo-toggle');
             const closeButton = mediaShell?.querySelector('.hero-video-close');
-            if (!heroSection || !heroLayoutContent || !mediaShell || !frame || !video || !overlay || !replayOverlay || !replayButton || !demoToggle || !closeButton) return;
+            if (!heroSection || !mediaShell || !frame || !video || !overlay || !replayOverlay || !replayButton || !demoToggle || !closeButton) return;
 
             const minimumLoadingMs = 2000;
             const mobileScrollAssistDelayMs = 260;
@@ -1685,8 +1703,6 @@
             let mobileScrollAssistTimerId = 0;
             let mobileOpenPlaybackTimerId = 0;
             let mobileCloseCleanupTimerId = 0;
-            let mobileMetricsRafId = 0;
-            let mobileMetricsObserver = null;
             let playbackRequestId = 0;
 
             video.loop = false;
@@ -1735,13 +1751,6 @@
                 }
             };
 
-            const cancelScheduledMobileMetricsUpdate = () => {
-                if (mobileMetricsRafId) {
-                    window.cancelAnimationFrame(mobileMetricsRafId);
-                    mobileMetricsRafId = 0;
-                }
-            };
-
             const cancelMobileCloseCleanup = () => {
                 if (mobileCloseCleanupTimerId) {
                     window.clearTimeout(mobileCloseCleanupTimerId);
@@ -1749,57 +1758,10 @@
                 }
             };
 
-            const getMobileDemoGap = () => {
-                const gapValue = parseFloat(window.getComputedStyle(heroSection).getPropertyValue('--mobile-demo-gap'));
-                return Number.isFinite(gapValue) ? gapValue : 16;
-            };
-
-            const clearMobileDemoMetrics = () => {
-                heroSection.style.removeProperty('--mobile-demo-top');
-                heroSection.style.removeProperty('--mobile-demo-reserve');
-            };
-
-            const updateMobileDemoMetrics = () => {
-                if (!isMobileViewport) {
-                    clearMobileDemoMetrics();
-                    return;
-                }
-
-                const shellStyles = window.getComputedStyle(mediaShell);
-                const shellGap = parseFloat(shellStyles.rowGap || shellStyles.gap) || 0;
-                const mobileGap = getMobileDemoGap();
-                const scrollCueHeight = scrollCue ? scrollCue.offsetHeight : 0;
-                const contentBottom = heroLayoutContent.offsetTop + heroLayoutContent.offsetHeight;
-                const shellHeight = closeButton.offsetHeight + shellGap + frame.offsetHeight;
-                const scrollCueClearance = scrollCueHeight ? scrollCueHeight + mobileGap + 8 : mobileGap * 2;
-
-                heroSection.style.setProperty('--mobile-demo-top', `${Math.ceil(contentBottom + mobileGap)}px`);
-                heroSection.style.setProperty('--mobile-demo-reserve', `${Math.ceil(shellHeight + mobileGap + scrollCueClearance)}px`);
-            };
-
-            const scheduleMobileMetricsUpdate = () => {
-                cancelScheduledMobileMetricsUpdate();
-                mobileMetricsRafId = window.requestAnimationFrame(() => {
-                    mobileMetricsRafId = 0;
-                    updateMobileDemoMetrics();
-                });
-            };
-
-            const setupMobileMetricsObserver = () => {
-                if (typeof ResizeObserver !== 'function') return;
-                mobileMetricsObserver = new ResizeObserver(() => {
-                    scheduleMobileMetricsUpdate();
-                });
-                mobileMetricsObserver.observe(heroLayoutContent);
-                mobileMetricsObserver.observe(frame);
-                mobileMetricsObserver.observe(closeButton);
-            };
-
             const cancelMobileOpenSequence = () => {
                 cancelMobileScrollAssist();
                 cancelMobileOpenPlayback();
                 cancelMobileCloseCleanup();
-                cancelScheduledMobileMetricsUpdate();
             };
 
             const revealVideo = () => {
@@ -1900,22 +1862,20 @@
             const openMobileDemo = () => {
                 if (!isMobileViewport) return;
                 cancelMobileOpenSequence();
-                updateMobileDemoMetrics();
                 isMobileDemoOpen = true;
                 resetVideoForClosedState();
                 syncShellState();
 
-                if (reducedMotionQuery.matches) {
-                    updateMobileDemoMetrics();
+                mobileScrollAssistTimerId = window.setTimeout(() => {
+                    mobileScrollAssistTimerId = 0;
                     ensureMobileDemoVisible();
+                }, reducedMotionQuery.matches ? 0 : mobileScrollAssistDelayMs);
+
+                if (reducedMotionQuery.matches) {
                     playHeroVideo({ immediate: hasRevealedVideo });
                     return;
                 }
 
-                mobileScrollAssistTimerId = window.setTimeout(() => {
-                    mobileScrollAssistTimerId = 0;
-                    ensureMobileDemoVisible();
-                }, mobileScrollAssistDelayMs);
                 mobileOpenPlaybackTimerId = window.setTimeout(() => {
                     mobileOpenPlaybackTimerId = 0;
                     playHeroVideo({ immediate: hasRevealedVideo });
@@ -1931,14 +1891,12 @@
 
                 if (reducedMotionQuery.matches) {
                     resetVideoForClosedState();
-                    scheduleMobileMetricsUpdate();
                     return;
                 }
 
                 mobileCloseCleanupTimerId = window.setTimeout(() => {
                     mobileCloseCleanupTimerId = 0;
                     resetVideoForClosedState();
-                    scheduleMobileMetricsUpdate();
                 }, mobileCloseCleanupDelayMs);
             };
 
@@ -1955,7 +1913,6 @@
                 pauseVideoPlayback();
                 resetVideoForClosedState();
                 syncShellState();
-                scheduleMobileMetricsUpdate();
 
                 if (!isMobileViewport) {
                     playHeroVideo({ immediate: hasRevealedVideo });
@@ -1963,8 +1920,6 @@
             };
 
             syncShellState();
-            scheduleMobileMetricsUpdate();
-            setupMobileMetricsObserver();
 
             if (!isMobileViewport) {
                 playHeroVideo();
@@ -1973,7 +1928,6 @@
             video.addEventListener('playing', revealVideo);
             video.addEventListener('error', showReplayState);
             video.addEventListener('ended', showReplayState);
-            video.addEventListener('loadedmetadata', scheduleMobileMetricsUpdate);
             replayButton.addEventListener('click', () => {
                 resetVideoPosition();
                 playHeroVideo({ immediate: true });
@@ -1998,9 +1952,6 @@
             } else if (typeof mobileViewportQuery.addListener === 'function') {
                 mobileViewportQuery.addListener(handleViewportChange);
             }
-
-            window.addEventListener('orientationchange', scheduleMobileMetricsUpdate);
-            window.addEventListener('load', scheduleMobileMetricsUpdate, { once: true });
         }
 
         setupHeroVideoLoader();
