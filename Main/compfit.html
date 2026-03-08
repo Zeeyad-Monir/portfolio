@@ -76,9 +76,38 @@
 
         .hero-media-shell {
             display: flex;
-            align-items: center;
-            justify-content: flex-end;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 0.85rem;
             width: 100%;
+        }
+
+        .hero-media-shell[hidden] {
+            display: none !important;
+        }
+
+        .hero-video-close {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid #e5e7eb;
+            background: rgba(255, 255, 255, 0.94);
+            color: #333;
+            font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        .hero-video-close:hover {
+            background: #111;
+            color: #fff;
+            border-color: #111;
         }
 
         .hero-video-frame {
@@ -282,6 +311,44 @@
         .btn-primary:hover {
             opacity: 0.8;
             background: #111;
+        }
+
+        .btn-demo-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-demo-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-color: #90C010;
+            background: rgba(255, 255, 255, 0.98);
+            color: #101020;
+            box-shadow:
+                0 0 0 1px rgba(144, 192, 16, 0.08),
+                0 10px 22px rgba(144, 192, 16, 0.12);
+        }
+
+        .btn-demo-toggle:hover,
+        .btn-demo-toggle:focus-visible {
+            background: rgba(192, 224, 144, 0.18);
+            color: #101020;
+            border-color: #90C010;
+            box-shadow:
+                0 0 0 4px rgba(144, 192, 16, 0.12),
+                0 12px 26px rgba(144, 192, 16, 0.16);
+            outline: none;
+        }
+
+        .btn-demo-toggle[aria-expanded="true"] {
+            background: rgba(192, 224, 144, 0.24);
+            color: #101020;
+            border-color: #90C010;
+            box-shadow:
+                0 0 0 4px rgba(144, 192, 16, 0.1),
+                0 12px 26px rgba(144, 192, 16, 0.16);
         }
 
         .hero-scroll-cue {
@@ -693,6 +760,12 @@
             .hero-scroll-cue {
                 animation: none;
             }
+
+            .hero-section,
+            .hero-media-shell,
+            .hero-video-close {
+                transition: none;
+            }
         }
 
         /* --- 03 SOLUTION (Clean Split) --- */
@@ -846,15 +919,27 @@
 
             .hero-section {
                 position: relative;
+                --mobile-demo-gap: 1rem;
+                --mobile-demo-top: 0px;
+                --mobile-demo-reserve: 0px;
+                --mobile-demo-base-padding: 4.9rem;
                 grid-template-columns: 1fr;
                 justify-items: center;
                 align-content: center;
                 min-height: calc(100svh - 60px);
                 margin-top: 0;
                 margin-bottom: 2.8rem;
-                padding: 1.4rem 0 4.9rem;
+                padding: 1.4rem 0 var(--mobile-demo-base-padding);
                 text-align: center;
+                transition: padding-bottom 360ms cubic-bezier(0.22, 1, 0.36, 1);
             }
+
+            .hero-section.is-mobile-demo-open {
+                align-content: start;
+                min-height: auto;
+                padding-bottom: calc(var(--mobile-demo-base-padding) + var(--mobile-demo-reserve));
+            }
+
             .hero-layout-content {
                 width: min(100%, 32rem);
                 max-width: 32rem;
@@ -865,7 +950,38 @@
                 text-align: center;
             }
             .hero-media-shell {
-                display: none;
+                display: flex;
+                position: absolute;
+                left: 50%;
+                top: var(--mobile-demo-top);
+                width: min(100%, 22rem);
+                align-items: center;
+                justify-content: flex-start;
+                padding-inline: 0.35rem;
+                opacity: 0;
+                transform: translate(-50%, -10px);
+                visibility: hidden;
+                pointer-events: none;
+                overflow: visible;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
+                z-index: 1;
+                transition:
+                    opacity 280ms ease,
+                    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0s linear 360ms;
+            }
+
+            .hero-section.is-mobile-demo-open .hero-media-shell {
+                opacity: 1;
+                transform: translate(-50%, 0);
+                visibility: visible;
+                pointer-events: auto;
+                transition:
+                    opacity 280ms ease,
+                    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0s linear 0s;
             }
             .hero-title {
                 justify-content: center;
@@ -893,6 +1009,15 @@
                 gap: 0.7rem;
                 margin: 0 auto;
             }
+
+            .action-row .btn-demo-link {
+                display: none;
+            }
+
+            .action-row .btn-demo-toggle {
+                display: inline-flex;
+            }
+
             .btn {
                 display: inline-flex;
                 align-items: center;
@@ -903,6 +1028,43 @@
                 font-size: 0.88rem;
                 white-space: nowrap;
             }
+
+            .hero-video-close {
+                display: inline-flex;
+                opacity: 0;
+                transform: translateY(-6px);
+                pointer-events: none;
+                transition:
+                    opacity 220ms ease,
+                    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+                    background-color 0.2s ease,
+                    color 0.2s ease,
+                    border-color 0.2s ease;
+            }
+
+            .hero-section.is-mobile-demo-open .hero-video-close {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .hero-video-frame {
+                width: min(100%, 18.75rem);
+                border-radius: 26px;
+                padding: 10px;
+                transform: none;
+                animation: none;
+            }
+
+            .hero-video-frame::before {
+                inset: 7px;
+                border-radius: 18px;
+            }
+
+            .hero-video-viewport {
+                border-radius: 18px;
+            }
+
             .hero-scroll-cue {
                 position: absolute;
                 left: 50%;
@@ -971,7 +1133,7 @@
         @media (max-width: 480px) {
             .hero-section {
                 padding-top: 1rem;
-                padding-bottom: 4.6rem;
+                --mobile-demo-base-padding: 4.6rem;
             }
 
             .hero-title {
@@ -991,6 +1153,30 @@
             .btn {
                 padding: 0.72rem 0.8rem;
                 font-size: 0.83rem;
+            }
+
+            .hero-media-shell {
+                width: min(100%, 19rem);
+            }
+
+            .hero-video-close {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.78rem;
+            }
+
+            .hero-video-frame {
+                width: min(100%, 16.75rem);
+                border-radius: 22px;
+                padding: 8px;
+            }
+
+            .hero-video-frame::before {
+                inset: 6px;
+                border-radius: 14px;
+            }
+
+            .hero-video-viewport {
+                border-radius: 14px;
             }
 
             .art-color-grid {
@@ -1072,9 +1258,10 @@
 
                 <div class="action-row">
                     <a href="https://testflight.apple.com/join/R2CptARq" target="_blank" class="btn">Download Beta</a>
-                    <a href="https://youtu.be/unwZhL702ok" target="_blank" class="btn">View Demo</a>
+                    <a href="https://youtu.be/unwZhL702ok" target="_blank" class="btn btn-demo-link">View Demo</a>
                     <a href="https://drive.google.com/file/d/1ZBbFhUk4K1fQgdb5X6UZZRnnC2mY6u3s/view?usp=sharing" target="_blank" class="btn">Slide Deck</a>
                     <a href="https://www.figma.com/design/BIUtbgECGBczskmIKCuTbl/CompFit-Portfolio?node-id=0-1&t=DD6Lu7H4OhIl7ShF-1" target="_blank" class="btn">Figma</a>
+                    <button type="button" class="btn btn-demo-toggle" aria-controls="heroDemoShell" aria-expanded="false">Demo</button>
                 </div>
             </div>
 
@@ -1082,7 +1269,8 @@
                 <span class="hero-scroll-cue-arrow" aria-hidden="true"></span>
             </a>
 
-            <div class="hero-media-shell" aria-hidden="true">
+            <div class="hero-media-shell" id="heroDemoShell">
+                <button type="button" class="hero-video-close" aria-label="Close demo">Close Demo</button>
                 <div class="hero-video-frame">
                     <div class="hero-video-viewport">
                         <div class="hero-video-loading">
@@ -1100,7 +1288,6 @@
                         </div>
                         <video
                             class="hero-demo-video"
-                            autoplay
                             muted
                             playsinline
                             preload="metadata"
@@ -1455,17 +1642,129 @@
 
     <script>
         function setupHeroVideoLoader() {
-            const frame = document.querySelector('.hero-video-frame');
+            const heroSection = document.querySelector('.hero-section');
+            const heroLayoutContent = heroSection?.querySelector('.hero-layout-content');
+            const scrollCue = heroSection?.querySelector('.hero-scroll-cue');
+            const mediaShell = document.getElementById('heroDemoShell');
+            const frame = mediaShell?.querySelector('.hero-video-frame');
             const video = frame?.querySelector('.hero-demo-video');
             const overlay = frame?.querySelector('.hero-video-loading');
             const replayOverlay = frame?.querySelector('.hero-video-replay');
             const replayButton = frame?.querySelector('.hero-video-replay-button');
-            if (!frame || !video || !overlay || !replayOverlay || !replayButton) return;
+            const demoToggle = document.querySelector('.btn-demo-toggle');
+            const closeButton = mediaShell?.querySelector('.hero-video-close');
+            if (!heroSection || !heroLayoutContent || !mediaShell || !frame || !video || !overlay || !replayOverlay || !replayButton || !demoToggle || !closeButton) return;
 
             const minimumLoadingMs = 2000;
+            const mobileViewportQuery = window.matchMedia('(max-width: 767px)');
+            const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let isMobileViewport = mobileViewportQuery.matches;
+            let isMobileDemoOpen = false;
             let hasRevealedVideo = false;
+            let playbackStartTimerId = 0;
+            let mobileScrollAssistTimerId = 0;
+            let mobileOpenPlaybackTimerId = 0;
+            let mobileMetricsRafId = 0;
+            let playbackRequestId = 0;
 
             video.loop = false;
+            video.pause();
+            video.autoplay = false;
+            video.removeAttribute('autoplay');
+
+            const resetVideoPosition = () => {
+                try {
+                    video.currentTime = 0;
+                } catch (error) {
+                    // Some browsers block currentTime updates before enough data is loaded.
+                }
+            };
+
+            const syncLoadingState = () => {
+                if (hasRevealedVideo) {
+                    frame.classList.add('is-video-ready');
+                    overlay.hidden = true;
+                    return;
+                }
+
+                frame.classList.remove('is-video-ready');
+                overlay.hidden = false;
+            };
+
+            const cancelPendingPlayback = () => {
+                playbackRequestId += 1;
+                if (playbackStartTimerId) {
+                    window.clearTimeout(playbackStartTimerId);
+                    playbackStartTimerId = 0;
+                }
+            };
+
+            const cancelMobileScrollAssist = () => {
+                if (mobileScrollAssistTimerId) {
+                    window.clearTimeout(mobileScrollAssistTimerId);
+                    mobileScrollAssistTimerId = 0;
+                }
+            };
+
+            const cancelMobileOpenPlayback = () => {
+                if (mobileOpenPlaybackTimerId) {
+                    window.clearTimeout(mobileOpenPlaybackTimerId);
+                    mobileOpenPlaybackTimerId = 0;
+                }
+            };
+
+            const cancelScheduledMobileMetricsUpdate = () => {
+                if (mobileMetricsRafId) {
+                    window.cancelAnimationFrame(mobileMetricsRafId);
+                    mobileMetricsRafId = 0;
+                }
+            };
+
+            const getMobileDemoGap = () => {
+                const gapValue = parseFloat(window.getComputedStyle(heroSection).getPropertyValue('--mobile-demo-gap'));
+                return Number.isFinite(gapValue) ? gapValue : 16;
+            };
+
+            const clearMobileDemoMetrics = () => {
+                heroSection.style.removeProperty('--mobile-demo-top');
+                heroSection.style.removeProperty('--mobile-demo-reserve');
+            };
+
+            const updateMobileDemoMetrics = () => {
+                if (!isMobileViewport) {
+                    clearMobileDemoMetrics();
+                    return;
+                }
+
+                const heroRect = heroSection.getBoundingClientRect();
+                const contentRect = heroLayoutContent.getBoundingClientRect();
+                const closeRect = closeButton.getBoundingClientRect();
+                const frameRect = frame.getBoundingClientRect();
+                const shellStyles = window.getComputedStyle(mediaShell);
+                const shellGap = parseFloat(shellStyles.rowGap || shellStyles.gap) || 0;
+                const mobileGap = getMobileDemoGap();
+                const scrollCueHeight = scrollCue ? scrollCue.getBoundingClientRect().height : 0;
+                const contentBottom = Math.max(0, contentRect.bottom - heroRect.top);
+                const shellHeight = closeRect.height + shellGap + frameRect.height;
+                const scrollCueClearance = scrollCueHeight ? scrollCueHeight + mobileGap + 8 : mobileGap * 2;
+
+                heroSection.style.setProperty('--mobile-demo-top', `${Math.ceil(contentBottom + mobileGap)}px`);
+                heroSection.style.setProperty('--mobile-demo-reserve', `${Math.ceil(shellHeight + mobileGap + scrollCueClearance)}px`);
+            };
+
+            const scheduleMobileMetricsUpdate = () => {
+                cancelScheduledMobileMetricsUpdate();
+                mobileMetricsRafId = window.requestAnimationFrame(() => {
+                    mobileMetricsRafId = 0;
+                    updateMobileDemoMetrics();
+                });
+            };
+
+            const cancelMobileOpenSequence = () => {
+                cancelMobileScrollAssist();
+                cancelMobileOpenPlayback();
+                cancelScheduledMobileMetricsUpdate();
+            };
 
             const revealVideo = () => {
                 if (hasRevealedVideo) return;
@@ -1482,6 +1781,7 @@
             };
 
             const showReplayState = () => {
+                cancelPendingPlayback();
                 revealVideo();
                 video.autoplay = false;
                 video.removeAttribute('autoplay');
@@ -1490,38 +1790,154 @@
                 video.pause();
             };
 
-            const playHeroVideo = () => {
+            const isPlaybackAllowed = () => !isMobileViewport || isMobileDemoOpen;
+
+            const syncShellState = () => {
+                const shouldShowShell = !isMobileViewport || isMobileDemoOpen;
+                heroSection.classList.toggle('is-mobile-demo-open', isMobileViewport && isMobileDemoOpen);
+                mediaShell.setAttribute('aria-hidden', shouldShowShell ? 'false' : 'true');
+                demoToggle.setAttribute('aria-expanded', String(isMobileViewport && isMobileDemoOpen));
+                closeButton.tabIndex = shouldShowShell && isMobileViewport ? 0 : -1;
+                closeButton.setAttribute('aria-hidden', shouldShowShell && isMobileViewport ? 'false' : 'true');
+                syncLoadingState();
+            };
+
+            const pauseAndResetVideo = () => {
+                cancelPendingPlayback();
+                video.pause();
+                video.autoplay = false;
+                video.removeAttribute('autoplay');
+                resetVideoPosition();
+            };
+
+            const playHeroVideo = ({ immediate = false } = {}) => {
+                cancelPendingPlayback();
                 hideReplayState();
-                const playPromise = video.play();
-                if (playPromise && typeof playPromise.catch === 'function') {
-                    playPromise.catch(() => {
-                        showReplayState();
-                    });
+                if (!isPlaybackAllowed()) return;
+
+                const requestId = playbackRequestId;
+                const attemptPlayback = () => {
+                    if (requestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                    const playPromise = video.play();
+                    if (playPromise && typeof playPromise.catch === 'function') {
+                        playPromise.catch(() => {
+                            if (requestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                            showReplayState();
+                        });
+                    }
+                };
+
+                if (!immediate && !hasRevealedVideo) {
+                    playbackStartTimerId = window.setTimeout(() => {
+                        playbackStartTimerId = 0;
+                        attemptPlayback();
+                    }, minimumLoadingMs);
+                    return;
+                }
+
+                attemptPlayback();
+            };
+
+            const ensureMobileDemoVisible = () => {
+                if (!isMobileViewport || !isMobileDemoOpen) return;
+                const rect = mediaShell.getBoundingClientRect();
+                if (rect.bottom <= window.innerHeight && rect.top >= 0) return;
+                mediaShell.scrollIntoView({
+                    behavior: reducedMotionQuery.matches ? 'auto' : 'smooth',
+                    block: 'nearest'
+                });
+            };
+
+            const openMobileDemo = () => {
+                if (!isMobileViewport) return;
+                cancelMobileOpenSequence();
+                updateMobileDemoMetrics();
+                isMobileDemoOpen = true;
+                hideReplayState();
+                resetVideoPosition();
+                syncShellState();
+
+                if (reducedMotionQuery.matches) {
+                    updateMobileDemoMetrics();
+                    ensureMobileDemoVisible();
+                    playHeroVideo({ immediate: hasRevealedVideo });
+                    return;
+                }
+
+                mobileScrollAssistTimerId = window.setTimeout(() => {
+                    mobileScrollAssistTimerId = 0;
+                    ensureMobileDemoVisible();
+                }, 180);
+                mobileOpenPlaybackTimerId = window.setTimeout(() => {
+                    mobileOpenPlaybackTimerId = 0;
+                    playHeroVideo({ immediate: hasRevealedVideo });
+                }, 240);
+            };
+
+            const closeMobileDemo = () => {
+                if (!isMobileViewport) return;
+                cancelMobileOpenSequence();
+                isMobileDemoOpen = false;
+                hideReplayState();
+                pauseAndResetVideo();
+                syncShellState();
+                scheduleMobileMetricsUpdate();
+            };
+
+            const handleViewportChange = () => {
+                const nextIsMobileViewport = mobileViewportQuery.matches;
+                if (nextIsMobileViewport === isMobileViewport) {
+                    syncShellState();
+                    return;
+                }
+
+                isMobileViewport = nextIsMobileViewport;
+                cancelMobileOpenSequence();
+                isMobileDemoOpen = false;
+                hideReplayState();
+                pauseAndResetVideo();
+                syncShellState();
+                scheduleMobileMetricsUpdate();
+
+                if (!isMobileViewport) {
+                    playHeroVideo({ immediate: hasRevealedVideo });
                 }
             };
 
-            video.pause();
-            try {
-                video.currentTime = 0;
-            } catch (error) {
-                // Some browsers block currentTime updates before enough data is loaded.
+            syncShellState();
+            scheduleMobileMetricsUpdate();
+
+            if (!isMobileViewport) {
+                playHeroVideo();
             }
 
-            window.setTimeout(() => {
-                playHeroVideo();
-            }, minimumLoadingMs);
-
-            video.addEventListener('playing', revealVideo, { once: true });
-            video.addEventListener('error', revealVideo, { once: true });
+            video.addEventListener('playing', revealVideo);
+            video.addEventListener('error', showReplayState);
             video.addEventListener('ended', showReplayState);
+            video.addEventListener('loadedmetadata', scheduleMobileMetricsUpdate);
             replayButton.addEventListener('click', () => {
-                try {
-                    video.currentTime = 0;
-                } catch (error) {
-                    // Ignore currentTime errors and attempt playback anyway.
-                }
-                playHeroVideo();
+                resetVideoPosition();
+                playHeroVideo({ immediate: true });
             });
+            demoToggle.addEventListener('click', () => {
+                if (isMobileDemoOpen) {
+                    closeMobileDemo();
+                    return;
+                }
+
+                openMobileDemo();
+            });
+            closeButton.addEventListener('click', closeMobileDemo);
+
+            if (typeof mobileViewportQuery.addEventListener === 'function') {
+                mobileViewportQuery.addEventListener('change', handleViewportChange);
+            } else if (typeof mobileViewportQuery.addListener === 'function') {
+                mobileViewportQuery.addListener(handleViewportChange);
+            }
+
+            window.addEventListener('resize', scheduleMobileMetricsUpdate);
+            window.addEventListener('orientationchange', scheduleMobileMetricsUpdate);
+            window.addEventListener('load', scheduleMobileMetricsUpdate, { once: true });
         }
 
         setupHeroVideoLoader();
