@@ -257,7 +257,7 @@
 
 @media (max-width: 560px) {
     .mobile-nav-bar {
-        --mobile-nav-side-space: 52px;
+        --mobile-nav-side-space: 56px;
         padding: 0 16px;
     }
 
@@ -266,11 +266,11 @@
     }
 
     .mobile-nav-links {
-        gap: 16px;
+        gap: 14px;
     }
 
     .mobile-nav-link {
-        font-size: clamp(1.02rem, calc(0.8rem + 1.5vw), 1.14rem);
+        font-size: clamp(0.95rem, calc(0.7rem + 1.4vw), 1.05rem);
     }
 
     .mobile-hamburger {
@@ -281,24 +281,24 @@
 /* ===== SMALL MOBILE (480px and below) ===== */
 @media (max-width: 480px) {
     .mobile-nav-bar {
-        --mobile-nav-side-space: 44px;
+        --mobile-nav-side-space: 48px;
     }
 
     .mobile-nav-links {
-        gap: 14px;
+        gap: 12px;
     }
 }
 
 @media (max-width: 390px) {
     .mobile-nav-bar {
-        --mobile-nav-side-space: 36px;
+        --mobile-nav-side-space: 40px;
     }
 
     .mobile-nav-links {
-        gap: 11px;
+        gap: 9px;
     }
 
     .mobile-nav-link {
-        font-size: 0.98rem;
+        font-size: 0.92rem;
     }
 }
