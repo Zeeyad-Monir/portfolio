@@ -130,6 +130,7 @@
 
     /* Mobile Sticky Nav Bar */
     .mobile-nav-bar {
+        --mobile-nav-side-space: 72px;
         display: flex;
         position: fixed;
         top: 0;
@@ -189,7 +190,7 @@
         justify-content: center;
         gap: clamp(16px, 4vw, 24px);
         inset: 0;
-        padding: 0 72px;
+        padding: 0 var(--mobile-nav-side-space);
         opacity: 0;
         transform: translateY(-8px);
         pointer-events: none;
@@ -207,6 +208,7 @@
         font-size: 0.95rem;
         color: #111;
         text-decoration: none;
+        white-space: nowrap;
         transition: color 0.2s ease;
     }
 
@@ -253,14 +255,41 @@
     }
 }
 
-/* ===== SMALL MOBILE (480px and below) ===== */
-@media (max-width: 480px) {
-    .nav-menu {
-        top: 16px;
+@media (max-width: 560px) {
+    .mobile-nav-bar {
+        --mobile-nav-side-space: 56px;
+        padding: 0 16px;
+    }
+
+    .mobile-nav-name {
+        font-size: 1.1rem;
+    }
+
+    .mobile-nav-links {
+        gap: 12px;
+    }
+
+    .mobile-nav-link {
+        font-size: 0.86rem;
+    }
+
+    .mobile-hamburger {
         left: 16px;
     }
-    .nav-link {
-        padding: 8px 12px;
-        font-size: 0.875rem;
+}
+
+/* ===== SMALL MOBILE (480px and below) ===== */
+@media (max-width: 480px) {
+    .mobile-nav-bar {
+        --mobile-nav-side-space: 48px;
+    }
+
+    .mobile-nav-links {
+        gap: 10px;
+    }
+
+    .mobile-nav-link {
+        font-size: 0.8rem;
+        letter-spacing: -0.01em;
     }
 }
