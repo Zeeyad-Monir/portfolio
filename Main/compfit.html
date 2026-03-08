@@ -923,6 +923,15 @@
                 --mobile-demo-top: 0px;
                 --mobile-demo-reserve: 0px;
                 --mobile-demo-base-padding: 4.9rem;
+                --mobile-demo-ease: cubic-bezier(0.22, 1, 0.36, 1);
+                --mobile-demo-padding-duration: 420ms;
+                --mobile-demo-shell-opacity-duration: 320ms;
+                --mobile-demo-shell-transform-duration: 460ms;
+                --mobile-demo-close-opacity-duration: 260ms;
+                --mobile-demo-close-transform-duration: 360ms;
+                --mobile-demo-shell-offset: 12px;
+                --mobile-demo-close-offset: 8px;
+                --mobile-demo-close-enter-delay: 70ms;
                 grid-template-columns: 1fr;
                 justify-items: center;
                 align-content: center;
@@ -931,7 +940,7 @@
                 margin-bottom: 2.8rem;
                 padding: 1.4rem 0 var(--mobile-demo-base-padding);
                 text-align: center;
-                transition: padding-bottom 360ms cubic-bezier(0.22, 1, 0.36, 1);
+                transition: padding-bottom var(--mobile-demo-padding-duration) var(--mobile-demo-ease);
             }
 
             .hero-section.is-mobile-demo-open {
@@ -959,7 +968,7 @@
                 justify-content: flex-start;
                 padding-inline: 0.35rem;
                 opacity: 0;
-                transform: translate(-50%, -10px);
+                transform: translate3d(-50%, calc(-1 * var(--mobile-demo-shell-offset)), 0);
                 visibility: hidden;
                 pointer-events: none;
                 overflow: visible;
@@ -967,20 +976,22 @@
                 background: transparent;
                 box-shadow: none;
                 z-index: 1;
+                will-change: opacity, transform;
+                backface-visibility: hidden;
                 transition:
-                    opacity 280ms ease,
-                    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-                    visibility 0s linear 360ms;
+                    opacity var(--mobile-demo-shell-opacity-duration) ease,
+                    transform var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    visibility 0s linear var(--mobile-demo-shell-transform-duration);
             }
 
             .hero-section.is-mobile-demo-open .hero-media-shell {
                 opacity: 1;
-                transform: translate(-50%, 0);
+                transform: translate3d(-50%, 0, 0);
                 visibility: visible;
                 pointer-events: auto;
                 transition:
-                    opacity 280ms ease,
-                    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity var(--mobile-demo-shell-opacity-duration) ease,
+                    transform var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
                     visibility 0s linear 0s;
             }
             .hero-title {
@@ -1032,11 +1043,11 @@
             .hero-video-close {
                 display: inline-flex;
                 opacity: 0;
-                transform: translateY(-6px);
+                transform: translate3d(0, calc(-1 * var(--mobile-demo-close-offset)), 0);
                 pointer-events: none;
                 transition:
-                    opacity 220ms ease,
-                    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity var(--mobile-demo-close-opacity-duration) ease,
+                    transform var(--mobile-demo-close-transform-duration) var(--mobile-demo-ease),
                     background-color 0.2s ease,
                     color 0.2s ease,
                     border-color 0.2s ease;
@@ -1044,8 +1055,14 @@
 
             .hero-section.is-mobile-demo-open .hero-video-close {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translate3d(0, 0, 0);
                 pointer-events: auto;
+                transition:
+                    opacity var(--mobile-demo-close-opacity-duration) ease var(--mobile-demo-close-enter-delay),
+                    transform var(--mobile-demo-close-transform-duration) var(--mobile-demo-ease) var(--mobile-demo-close-enter-delay),
+                    background-color 0.2s ease,
+                    color 0.2s ease,
+                    border-color 0.2s ease;
             }
 
             .hero-video-frame {
@@ -1656,6 +1673,9 @@
             if (!heroSection || !heroLayoutContent || !mediaShell || !frame || !video || !overlay || !replayOverlay || !replayButton || !demoToggle || !closeButton) return;
 
             const minimumLoadingMs = 2000;
+            const mobileScrollAssistDelayMs = 260;
+            const mobileOpenPlaybackDelayMs = 440;
+            const mobileCloseCleanupDelayMs = 320;
             const mobileViewportQuery = window.matchMedia('(max-width: 767px)');
             const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
             let isMobileViewport = mobileViewportQuery.matches;
@@ -1664,7 +1684,9 @@
             let playbackStartTimerId = 0;
             let mobileScrollAssistTimerId = 0;
             let mobileOpenPlaybackTimerId = 0;
+            let mobileCloseCleanupTimerId = 0;
             let mobileMetricsRafId = 0;
+            let mobileMetricsObserver = null;
             let playbackRequestId = 0;
 
             video.loop = false;
@@ -1720,6 +1742,13 @@
                 }
             };
 
+            const cancelMobileCloseCleanup = () => {
+                if (mobileCloseCleanupTimerId) {
+                    window.clearTimeout(mobileCloseCleanupTimerId);
+                    mobileCloseCleanupTimerId = 0;
+                }
+            };
+
             const getMobileDemoGap = () => {
                 const gapValue = parseFloat(window.getComputedStyle(heroSection).getPropertyValue('--mobile-demo-gap'));
                 return Number.isFinite(gapValue) ? gapValue : 16;
@@ -1736,16 +1765,12 @@
                     return;
                 }
 
-                const heroRect = heroSection.getBoundingClientRect();
-                const contentRect = heroLayoutContent.getBoundingClientRect();
-                const closeRect = closeButton.getBoundingClientRect();
-                const frameRect = frame.getBoundingClientRect();
                 const shellStyles = window.getComputedStyle(mediaShell);
                 const shellGap = parseFloat(shellStyles.rowGap || shellStyles.gap) || 0;
                 const mobileGap = getMobileDemoGap();
-                const scrollCueHeight = scrollCue ? scrollCue.getBoundingClientRect().height : 0;
-                const contentBottom = Math.max(0, contentRect.bottom - heroRect.top);
-                const shellHeight = closeRect.height + shellGap + frameRect.height;
+                const scrollCueHeight = scrollCue ? scrollCue.offsetHeight : 0;
+                const contentBottom = heroLayoutContent.offsetTop + heroLayoutContent.offsetHeight;
+                const shellHeight = closeButton.offsetHeight + shellGap + frame.offsetHeight;
                 const scrollCueClearance = scrollCueHeight ? scrollCueHeight + mobileGap + 8 : mobileGap * 2;
 
                 heroSection.style.setProperty('--mobile-demo-top', `${Math.ceil(contentBottom + mobileGap)}px`);
@@ -1760,9 +1785,20 @@
                 });
             };
 
+            const setupMobileMetricsObserver = () => {
+                if (typeof ResizeObserver !== 'function') return;
+                mobileMetricsObserver = new ResizeObserver(() => {
+                    scheduleMobileMetricsUpdate();
+                });
+                mobileMetricsObserver.observe(heroLayoutContent);
+                mobileMetricsObserver.observe(frame);
+                mobileMetricsObserver.observe(closeButton);
+            };
+
             const cancelMobileOpenSequence = () => {
                 cancelMobileScrollAssist();
                 cancelMobileOpenPlayback();
+                cancelMobileCloseCleanup();
                 cancelScheduledMobileMetricsUpdate();
             };
 
@@ -1790,7 +1826,8 @@
                 video.pause();
             };
 
-            const isPlaybackAllowed = () => !isMobileViewport || isMobileDemoOpen;
+            const isDocumentVisible = () => document.visibilityState !== 'hidden';
+            const isPlaybackAllowed = () => isDocumentVisible() && (!isMobileViewport || isMobileDemoOpen);
 
             const syncShellState = () => {
                 const shouldShowShell = !isMobileViewport || isMobileDemoOpen;
@@ -1802,12 +1839,24 @@
                 syncLoadingState();
             };
 
-            const pauseAndResetVideo = () => {
+            const pauseVideoPlayback = () => {
                 cancelPendingPlayback();
                 video.pause();
                 video.autoplay = false;
                 video.removeAttribute('autoplay');
+            };
+
+            const resetVideoForClosedState = () => {
+                hideReplayState();
                 resetVideoPosition();
+            };
+
+            const stopBackgroundPlayback = () => {
+                cancelMobileOpenSequence();
+                pauseVideoPlayback();
+                if (isMobileViewport && !isMobileDemoOpen) {
+                    resetVideoForClosedState();
+                }
             };
 
             const playHeroVideo = ({ immediate = false } = {}) => {
@@ -1853,8 +1902,7 @@
                 cancelMobileOpenSequence();
                 updateMobileDemoMetrics();
                 isMobileDemoOpen = true;
-                hideReplayState();
-                resetVideoPosition();
+                resetVideoForClosedState();
                 syncShellState();
 
                 if (reducedMotionQuery.matches) {
@@ -1867,21 +1915,31 @@
                 mobileScrollAssistTimerId = window.setTimeout(() => {
                     mobileScrollAssistTimerId = 0;
                     ensureMobileDemoVisible();
-                }, 180);
+                }, mobileScrollAssistDelayMs);
                 mobileOpenPlaybackTimerId = window.setTimeout(() => {
                     mobileOpenPlaybackTimerId = 0;
                     playHeroVideo({ immediate: hasRevealedVideo });
-                }, 240);
+                }, mobileOpenPlaybackDelayMs);
             };
 
             const closeMobileDemo = () => {
                 if (!isMobileViewport) return;
                 cancelMobileOpenSequence();
+                pauseVideoPlayback();
                 isMobileDemoOpen = false;
-                hideReplayState();
-                pauseAndResetVideo();
                 syncShellState();
-                scheduleMobileMetricsUpdate();
+
+                if (reducedMotionQuery.matches) {
+                    resetVideoForClosedState();
+                    scheduleMobileMetricsUpdate();
+                    return;
+                }
+
+                mobileCloseCleanupTimerId = window.setTimeout(() => {
+                    mobileCloseCleanupTimerId = 0;
+                    resetVideoForClosedState();
+                    scheduleMobileMetricsUpdate();
+                }, mobileCloseCleanupDelayMs);
             };
 
             const handleViewportChange = () => {
@@ -1894,8 +1952,8 @@
                 isMobileViewport = nextIsMobileViewport;
                 cancelMobileOpenSequence();
                 isMobileDemoOpen = false;
-                hideReplayState();
-                pauseAndResetVideo();
+                pauseVideoPlayback();
+                resetVideoForClosedState();
                 syncShellState();
                 scheduleMobileMetricsUpdate();
 
@@ -1906,6 +1964,7 @@
 
             syncShellState();
             scheduleMobileMetricsUpdate();
+            setupMobileMetricsObserver();
 
             if (!isMobileViewport) {
                 playHeroVideo();
@@ -1928,6 +1987,11 @@
                 openMobileDemo();
             });
             closeButton.addEventListener('click', closeMobileDemo);
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) return;
+                stopBackgroundPlayback();
+            });
+            window.addEventListener('pagehide', stopBackgroundPlayback);
 
             if (typeof mobileViewportQuery.addEventListener === 'function') {
                 mobileViewportQuery.addEventListener('change', handleViewportChange);
@@ -1935,7 +1999,6 @@
                 mobileViewportQuery.addListener(handleViewportChange);
             }
 
-            window.addEventListener('resize', scheduleMobileMetricsUpdate);
             window.addEventListener('orientationchange', scheduleMobileMetricsUpdate);
             window.addEventListener('load', scheduleMobileMetricsUpdate, { once: true });
         }
