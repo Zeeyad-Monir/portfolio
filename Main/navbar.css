@@ -270,7 +270,7 @@
     }
 
     .mobile-nav-link {
-        font-size: 0.86rem;
+        font-size: clamp(0.85rem, calc(2vw + 0.45rem), 0.95rem);
     }
 
     .mobile-hamburger {
@@ -287,9 +287,19 @@
     .mobile-nav-links {
         gap: 10px;
     }
+}
+
+@media (max-width: 390px) {
+    .mobile-nav-bar {
+        --mobile-nav-side-space: 40px;
+    }
+
+    .mobile-nav-links {
+        gap: 8px;
+    }
 
     .mobile-nav-link {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         letter-spacing: -0.01em;
     }
 }
