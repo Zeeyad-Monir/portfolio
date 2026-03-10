@@ -279,7 +279,7 @@
             display: flex;
             flex-direction: column;
             gap: 2.75rem;
-            align-items: flex-start;
+            align-items: stretch;
         }
 
         .card {
@@ -290,6 +290,8 @@
             max-width: 600px;
             width: 100%;
             margin: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-image {
@@ -317,11 +319,14 @@
 
         .card-content {
             padding: 1.85rem 1.4rem 1.95rem;
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
         }
 
         .card-top {
             display: flex;
-            align-items: baseline;
+            align-items: flex-start;
             justify-content: space-between;
             gap: 1rem;
             margin-bottom: 0.7rem;
@@ -338,6 +343,7 @@
             font-size: 0.875rem;
             color: #a3a3a3;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .card-desc {
@@ -357,8 +363,9 @@
 
         .card-actions {
             display: flex;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             gap: 0.5rem;
+            margin-top: auto;
         }
 
         .pill {
@@ -1299,6 +1306,12 @@
 
     <script src="navbar.js"></script>
     <script>
+        const FEATURED_WORK_LAYOUT_EVENT = 'featured-work:layout';
+
+        function dispatchFeaturedWorkLayout() {
+            window.dispatchEvent(new CustomEvent(FEATURED_WORK_LAYOUT_EVENT));
+        }
+
         // Media Wall Animation - Wait for images to load before starting
         // Only animate on desktop (above 767px)
         (function initMediaWall() {
@@ -1381,6 +1394,7 @@
                 viewMoreBtn.setAttribute('aria-expanded', String(newState));
                 expandableContainer.classList.toggle('expanded', newState);
                 updateButtonText(newState);
+                dispatchFeaturedWorkLayout();
 
                 if (newState) {
                     // After expand animation, scroll first card into view
@@ -1392,7 +1406,10 @@
                                 block: 'start'
                             });
                         }
+                        dispatchFeaturedWorkLayout();
                     }, ANIMATION_DURATION);
+                } else {
+                    setTimeout(dispatchFeaturedWorkLayout, ANIMATION_DURATION);
                 }
             }
 
@@ -1408,9 +1425,86 @@
                         expandableContainer.classList.remove('expanded');
                         viewMoreBtn.setAttribute('aria-expanded', 'false');
                         updateButtonText(false);
+                        dispatchFeaturedWorkLayout();
                     }
                 }, 150);
             });
+        })();
+
+        // Keep Featured Work cards matched to the tallest visible card at each breakpoint.
+        (function initFeaturedWorkCardHeights() {
+            const projectsSection = document.getElementById('projects');
+            if (!projectsSection) return;
+
+            const cards = Array.from(projectsSection.querySelectorAll('.card'));
+            const expandableContainer = document.getElementById('cardListExpandable');
+            const MOBILE_BREAKPOINT = 767;
+            const RESIZE_DEBOUNCE_MS = 120;
+            let resizeTimeout;
+            let animationFrameId = 0;
+
+            if (!cards.length) return;
+
+            function isMobileView() {
+                return window.innerWidth <= MOBILE_BREAKPOINT;
+            }
+
+            function isCardVisibleForMeasurement(card) {
+                const insideExpandable = expandableContainer && expandableContainer.contains(card);
+                return !(insideExpandable && isMobileView() && !expandableContainer.classList.contains('expanded'));
+            }
+
+            function syncFeaturedWorkCardHeights() {
+                const measurableCards = cards.filter(isCardVisibleForMeasurement);
+
+                cards.forEach(card => {
+                    card.style.height = '';
+                });
+
+                if (!measurableCards.length) return;
+
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+
+                animationFrameId = requestAnimationFrame(() => {
+                    const maxHeight = Math.max(
+                        ...measurableCards.map(card => card.getBoundingClientRect().height)
+                    );
+                    const heightValue = `${Math.ceil(maxHeight)}px`;
+
+                    cards.forEach(card => {
+                        if (isCardVisibleForMeasurement(card)) {
+                            card.style.height = heightValue;
+                        }
+                    });
+
+                    animationFrameId = 0;
+                });
+            }
+
+            function scheduleSync() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(syncFeaturedWorkCardHeights, RESIZE_DEBOUNCE_MS);
+            }
+
+            projectsSection.querySelectorAll('.card-image img').forEach(img => {
+                if (!img.complete) {
+                    img.addEventListener('load', scheduleSync, { once: true });
+                    img.addEventListener('error', scheduleSync, { once: true });
+                }
+            });
+
+            window.addEventListener('load', syncFeaturedWorkCardHeights);
+            window.addEventListener('resize', scheduleSync);
+            window.addEventListener('orientationchange', scheduleSync);
+            window.addEventListener(FEATURED_WORK_LAYOUT_EVENT, scheduleSync);
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(syncFeaturedWorkCardHeights);
+            }
+
+            syncFeaturedWorkCardHeights();
         })();
 
         // Work Experience Toggle Functionality
