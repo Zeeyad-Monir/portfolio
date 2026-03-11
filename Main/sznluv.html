@@ -519,6 +519,180 @@
             }
         }
 
+        /* --- ART DIRECTION --- */
+        .art-subsection {
+            margin-top: 3.6rem;
+        }
+
+        .art-subsection:first-of-type {
+            margin-top: 0;
+        }
+
+        .art-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin: 0 0 1.8rem;
+            color: var(--text-main);
+        }
+
+        .art-body-copy {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            max-width: 1080px;
+            margin: 1.3rem 0 0;
+        }
+
+        .art-body-copy-tight {
+            margin-top: 0.75rem;
+        }
+
+        .art-color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            column-gap: 1.6rem;
+            row-gap: 1rem;
+        }
+
+        .art-color-item {
+            min-width: 0;
+            width: 85%;
+            justify-self: center;
+        }
+
+        .art-color-chip {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 0.65rem;
+        }
+
+        .art-color-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 0.15rem;
+        }
+
+        .art-color-hex {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            margin: 0 0 0.45rem;
+        }
+
+        .art-color-meaning {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        .art-type-showcase {
+            margin-top: calc(1rem * 1.05);
+            max-width: 1080px;
+        }
+
+        .art-type-specimen {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+        }
+
+        .art-type-meta {
+            margin-top: calc(1rem * 1.05);
+            display: flex;
+            flex-direction: column;
+            gap: calc(0.25rem * 1.05);
+            color: #4b5563;
+        }
+
+        .art-type-meta p {
+            margin: 0;
+            font-size: 0.98rem;
+            line-height: 1.45;
+        }
+
+        .art-type-divider {
+            margin-top: calc(1.25rem * 1.05);
+            border-top: 1px solid #e8ebef;
+        }
+
+        .art-type-preview {
+            margin-top: calc(1.25rem * 1.05);
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            column-gap: 1.25rem;
+            row-gap: calc(1.25rem * 1.05);
+        }
+
+        .art-type-preview-item p {
+            margin: 0;
+        }
+
+        .art-type-preview-sample {
+            color: var(--text-main);
+        }
+
+        .art-type-preview-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .art-type-preview-body {
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0.005em;
+            color: #111827;
+        }
+
+        .art-type-preview-label {
+            font-size: 0.74rem;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+
+        .art-type-preview-spec {
+            margin-top: calc(0.38rem * 1.05) !important;
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        .art-type-note {
+            margin: calc(1.35rem * 1.05) 0 0;
+            max-width: 980px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+
+        .art-color-note {
+            margin-left: calc(((100% - (4 * 1.6rem)) / 5) * 0.075);
+        }
+
+        @media (max-width: 1200px) {
+            .art-color-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .art-color-note {
+                margin-left: calc(((100% - (2 * 1.6rem)) / 3) * 0.075);
+            }
+        }
+
         .feature-block {
             display: flex;
             align-items: center;
@@ -927,6 +1101,42 @@
                 pointer-events: none;
             }
 
+            .art-subsection { margin-top: 2.7rem; }
+            .art-heading { font-size: 1.35rem; }
+            .art-body-copy { font-size: 1rem; line-height: 1.58; margin-top: 1.1rem; }
+            .art-body-copy-tight { margin-top: 0.7rem; }
+            .art-color-grid {
+                grid-template-columns: repeat(3, minmax(0, 8.8rem));
+                justify-content: center;
+                gap: 1.04rem 1rem;
+            }
+            .art-color-item {
+                width: 100%;
+                max-width: 8.8rem;
+            }
+            .art-color-chip {
+                border-radius: 10px;
+                margin-bottom: 0.45rem;
+            }
+            .art-color-name { font-size: 0.78rem; }
+            .art-color-hex {
+                font-size: 0.68rem;
+                margin-bottom: 0.25rem;
+            }
+            .art-color-meaning {
+                font-size: 0.68rem;
+                line-height: 1.3;
+            }
+            .art-color-note { margin-left: 0; }
+            .art-type-specimen { font-size: 1.35rem; }
+            .art-type-meta p { font-size: 0.93rem; }
+            .art-type-preview {
+                grid-template-columns: 1fr;
+                row-gap: calc(1rem * 1.05);
+            }
+            .art-type-preview-heading { font-size: 1.35rem; }
+            .art-type-note { font-size: 0.88rem; }
+
             .feature-block,
             .feature-block.reversed {
                 flex-direction: column;
@@ -1150,6 +1360,78 @@
                         <p>Integrated external map services for location-based discovery alongside weather APIs to suggest activities appropriate for the current forecast, delivering real-time value to users.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="section-spacer art-direction-section">
+            <span class="section-header">Art Direction</span>
+
+            <div class="art-subsection">
+                <h3 class="art-heading">Color Scheme</h3>
+                <div class="art-color-grid">
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#EDA15A;"></div>
+                        <p class="art-color-name">Primary Seasonal Action</p>
+                        <p class="art-color-hex">#EDA15A</p>
+                        <p class="art-color-meaning">Warmth, discovery, spontaneity</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#E8E1D3;"></div>
+                        <p class="art-color-name">Support Neutral</p>
+                        <p class="art-color-hex">#E8E1D3</p>
+                        <p class="art-color-meaning">Soft cards and interface balance</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#2F2F31;"></div>
+                        <p class="art-color-name">Deep Charcoal</p>
+                        <p class="art-color-hex">#2F2F31</p>
+                        <p class="art-color-meaning">Grounded navigation and text contrast</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#AEBEDD;"></div>
+                        <p class="art-color-name">Cool Accent</p>
+                        <p class="art-color-hex">#AEBEDD</p>
+                        <p class="art-color-meaning">Weather, winter, and calm secondary moments</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#E89AC8;"></div>
+                        <p class="art-color-name">Playful Accent</p>
+                        <p class="art-color-hex">#E89AC8</p>
+                        <p class="art-color-meaning">Romance, spring energy, and light interaction cues</p>
+                    </div>
+                </div>
+                <p class="art-body-copy art-color-note">
+                    The palette blends warm seasonal tones with soft neutrals to make date planning feel inviting, playful, and easy to explore, while the darker header and text keep navigation clear and grounded.
+                </p>
+            </div>
+
+            <div class="art-subsection">
+                <h3 class="art-heading">Typography</h3>
+                <div class="art-type-showcase">
+                    <p class="art-type-specimen">Aa Bb Cc</p>
+                    <div class="art-type-meta">
+                        <p><strong>Primary Typeface:</strong> System UI / San Francisco</p>
+                        <p>Used for headings, body text, and mobile UI elements.</p>
+                    </div>
+                    <div class="art-type-divider"></div>
+                    <div class="art-type-preview">
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-heading">Heading</p>
+                            <p class="art-type-preview-spec">32px / Bold / -0.02em tracking</p>
+                        </div>
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-body">Body Text</p>
+                            <p class="art-type-preview-spec">16px / Regular / 1.6 line height</p>
+                        </div>
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-label">Section Label</p>
+                            <p class="art-type-preview-spec">11px / Uppercase / 0.15em tracking</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="art-type-note">
+                    The hierarchy uses strong contrast between oversized titles, clean body copy, and subtle labels so seasonal categories, place names, and supporting details feel easy to scan on mobile.
+                </p>
             </div>
         </section>
 
