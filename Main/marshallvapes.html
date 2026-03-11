@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarshallVapes - Zeeyad Monir</title>
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -115,29 +118,121 @@
         }
 
         .hero-browser-viewport {
+            position: relative;
             width: 100%;
             height: calc(100% - 32px);
             overflow: hidden;
             background: #fff;
         }
 
-        .hero-browser-img {
+        .hero-demo-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: top center;
             display: block;
+            background: #000;
+            transition: opacity 0.42s ease;
+        }
+
+        .hero-video-loading {
+            display: none;
+        }
+
+        .js .hero-browser-frame:not(.is-video-ready) .hero-demo-video {
+            opacity: 0;
+        }
+
+        .js .hero-video-loading {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 244, 235, 0.98) 100%);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: none;
+            transition: opacity 0.42s ease, visibility 0.42s ease;
+        }
+
+        .js .hero-browser-frame.is-video-ready .hero-video-loading {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .hero-video-loading-text {
+            margin: 0;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(16, 16, 32, 0.72);
+        }
+
+        .hero-video-replay {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.96);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.32s ease, visibility 0.32s ease;
+        }
+
+        .hero-browser-frame.is-replay-visible .hero-video-replay {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .hero-video-replay-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.95rem;
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .hero-video-replay-title {
+            margin: 0;
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(16, 16, 32, 0.72);
+        }
+
+        .hero-video-replay-button {
+            min-width: 144px;
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.08);
+            color: #101020;
+        }
+
+        .hero-video-replay-button:hover,
+        .hero-video-replay-button:focus-visible {
+            background: #101020;
+            color: #fff;
+            border-color: #101020;
         }
 
         @keyframes hero-float {
             0%, 100% {
-                transform: translateX(5%) translateY(4px) rotate(-0.6deg);
+                transform: translateX(5%) translateY(4px) rotate(-0.6deg) scale(1.1);
                 box-shadow:
                     0 24px 50px rgba(17, 24, 39, 0.13),
                     0 10px 24px rgba(17, 24, 39, 0.09);
             }
             50% {
-                transform: translateX(5%) translateY(-5px) rotate(-0.35deg);
+                transform: translateX(5%) translateY(-5px) rotate(-0.35deg) scale(1.1);
                 box-shadow:
                     0 30px 56px rgba(17, 24, 39, 0.15),
                     0 14px 30px rgba(17, 24, 39, 0.11);
@@ -150,8 +245,24 @@
             }
 
             .hero-browser-frame {
-                transform: translateX(5%) translateY(4px) rotate(-0.6deg);
+                transform-origin: left center;
+                transform: translateX(5%) translateY(4px) rotate(-0.6deg) scale(1.1);
                 animation: hero-float 6s ease-in-out infinite;
+            }
+        }
+
+        @media (min-width: 961px) {
+            .hero-title {
+                font-size: clamp(2.86rem, 5.39vw, 4.6rem);
+            }
+
+            .meta-stack {
+                font-size: 1.1025rem;
+            }
+
+            .btn {
+                font-size: 0.935rem;
+                padding: 0.551rem 1.103rem;
             }
         }
 
@@ -747,8 +858,13 @@
             .hero-browser-frame {
                 width: 100%;
                 max-width: 100%;
-                transform: translateY(4px) rotate(-0.25deg);
+                transform-origin: left center;
+                transform: translateY(4px) rotate(-0.25deg) scale(1.1);
                 animation: none;
+            }
+
+            .hero-title {
+                font-size: clamp(3.3rem, 6.6vw, 3.96rem);
             }
         }
 
@@ -781,7 +897,8 @@
 
         @media (prefers-reduced-motion: reduce) and (min-width: 1281px) {
             .hero-browser-frame {
-                transform: translateX(5%) translateY(0) rotate(-0.4deg);
+                transform-origin: left center;
+                transform: translateX(5%) translateY(0) rotate(-0.4deg) scale(1.1);
             }
         }
 
@@ -1131,7 +1248,24 @@
                         <span class="hero-browser-dot" style="background: #27C93F;"></span>
                     </div>
                     <div class="hero-browser-viewport">
-                        <img src="PortfolioPhotos/marshallvapes/HomeScreen.png" alt="MarshallVapes homepage preview" class="hero-browser-img">
+                        <div class="hero-video-loading">
+                            <p class="hero-video-loading-text">Loading...</p>
+                        </div>
+                        <div class="hero-video-replay" aria-hidden="true">
+                            <div class="hero-video-replay-content">
+                                <p class="hero-video-replay-title">Play Again</p>
+                                <button type="button" class="btn hero-video-replay-button">Replay Demo</button>
+                            </div>
+                        </div>
+                        <video
+                            class="hero-demo-video"
+                            muted
+                            playsinline
+                            preload="auto"
+                            src="https://firebasestorage.googleapis.com/v0/b/compfit-196e8.firebasestorage.app/o/MarshallVapesDemo.mov?alt=media&token=39a6aa33-a3de-472b-a25a-b477593226a4"
+                            poster="PortfolioPhotos/marshallvapes/HomeScreen.png"
+                            aria-label="MarshallVapes full demo preview">
+                        </video>
                     </div>
                 </div>
             </div>
@@ -1446,64 +1580,324 @@
     </script>
 
     <script>
-        function setupMobileDemoToggle() {
+        function setupHeroVideoLoader() {
             const heroSection = document.querySelector('.hero-section');
             const shell = document.getElementById('heroDemoShell');
+            const frame = shell?.querySelector('.hero-browser-frame');
+            const video = frame?.querySelector('.hero-demo-video');
+            const overlay = frame?.querySelector('.hero-video-loading');
+            const replayOverlay = frame?.querySelector('.hero-video-replay');
+            const replayButton = frame?.querySelector('.hero-video-replay-button');
             const toggle = document.querySelector('.btn-demo-toggle');
             const close = shell?.querySelector('.hero-demo-close');
-            if (!heroSection || !shell || !toggle || !close) return;
+            if (!heroSection || !shell || !frame || !video || !overlay || !replayOverlay || !replayButton || !toggle || !close) return;
 
-            const mobileQuery = window.matchMedia('(max-width: 960px)');
-            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-            let isMobile = mobileQuery.matches;
-            let isOpen = false;
+            const minimumLoadingMs = 2000;
+            const maximumLoadingMs = 12000;
+            const mobileScrollAssistDelayMs = 260;
+            const mobileCloseCleanupDelayMs = 320;
+            const mobileViewportQuery = window.matchMedia('(max-width: 960px)');
+            const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let isMobileViewport = mobileViewportQuery.matches;
+            let isMobileDemoOpen = false;
+            let hasRevealedVideo = false;
+            let playbackStartTimerId = 0;
+            let loadingFallbackTimerId = 0;
+            let mobileScrollAssistTimerId = 0;
+            let mobileCloseCleanupTimerId = 0;
+            let playbackRequestId = 0;
+            let minimumLoadingReadyRequestId = 0;
 
-            const sync = () => {
-                const show = !isMobile || isOpen;
-                heroSection.classList.toggle('is-mobile-demo-open', isMobile && isOpen);
-                shell.setAttribute('aria-hidden', show ? 'false' : 'true');
-                toggle.setAttribute('aria-expanded', String(isMobile && isOpen));
-                close.tabIndex = (show && isMobile) ? 0 : -1;
-                close.setAttribute('aria-hidden', (show && isMobile) ? 'false' : 'true');
+            video.loop = false;
+            video.pause();
+            video.autoplay = false;
+            video.removeAttribute('autoplay');
+            video.defaultMuted = true;
+
+            const resetVideoPosition = () => {
+                try {
+                    video.currentTime = 0;
+                } catch (error) {
+                    // Some browsers block currentTime updates before enough data is loaded.
+                }
             };
 
-            const open = () => {
-                if (!isMobile) return;
-                isOpen = true;
-                sync();
-                setTimeout(() => {
-                    if (!isMobile || !isOpen) return;
-                    const rect = shell.getBoundingClientRect();
-                    if (rect.bottom > window.innerHeight || rect.top < 0) {
-                        shell.scrollIntoView({
-                            behavior: reducedMotion.matches ? 'auto' : 'smooth',
-                            block: 'nearest'
+            const syncLoadingState = () => {
+                if (hasRevealedVideo) {
+                    frame.classList.add('is-video-ready');
+                    overlay.hidden = true;
+                    return;
+                }
+
+                frame.classList.remove('is-video-ready');
+                overlay.hidden = false;
+            };
+
+            const cancelLoadingFallback = () => {
+                if (loadingFallbackTimerId) {
+                    window.clearTimeout(loadingFallbackTimerId);
+                    loadingFallbackTimerId = 0;
+                }
+            };
+
+            const cancelPendingPlayback = () => {
+                playbackRequestId += 1;
+                minimumLoadingReadyRequestId = 0;
+                if (playbackStartTimerId) {
+                    window.clearTimeout(playbackStartTimerId);
+                    playbackStartTimerId = 0;
+                }
+                cancelLoadingFallback();
+            };
+
+            const cancelMobileScrollAssist = () => {
+                if (mobileScrollAssistTimerId) {
+                    window.clearTimeout(mobileScrollAssistTimerId);
+                    mobileScrollAssistTimerId = 0;
+                }
+            };
+
+            const cancelMobileCloseCleanup = () => {
+                if (mobileCloseCleanupTimerId) {
+                    window.clearTimeout(mobileCloseCleanupTimerId);
+                    mobileCloseCleanupTimerId = 0;
+                }
+            };
+
+            const cancelMobileOpenSequence = () => {
+                cancelMobileScrollAssist();
+                cancelMobileCloseCleanup();
+            };
+
+            const revealVideo = () => {
+                if (hasRevealedVideo) return;
+                hasRevealedVideo = true;
+                cancelLoadingFallback();
+                frame.classList.add('is-video-ready');
+                window.setTimeout(() => {
+                    overlay.hidden = true;
+                }, 450);
+            };
+
+            const hideReplayState = () => {
+                frame.classList.remove('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'true');
+            };
+
+            const showReplayState = () => {
+                cancelPendingPlayback();
+                revealVideo();
+                video.autoplay = false;
+                video.removeAttribute('autoplay');
+                frame.classList.add('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'false');
+                video.pause();
+            };
+
+            const isDocumentVisible = () => document.visibilityState !== 'hidden';
+            const isPlaybackAllowed = () => isDocumentVisible() && (!isMobileViewport || isMobileDemoOpen);
+
+            const syncShellState = () => {
+                const shouldShowShell = !isMobileViewport || isMobileDemoOpen;
+                heroSection.classList.toggle('is-mobile-demo-open', isMobileViewport && isMobileDemoOpen);
+                shell.setAttribute('aria-hidden', shouldShowShell ? 'false' : 'true');
+                toggle.setAttribute('aria-expanded', String(isMobileViewport && isMobileDemoOpen));
+                close.tabIndex = shouldShowShell && isMobileViewport ? 0 : -1;
+                close.setAttribute('aria-hidden', shouldShowShell && isMobileViewport ? 'false' : 'true');
+                syncLoadingState();
+            };
+
+            const pauseVideoPlayback = () => {
+                cancelPendingPlayback();
+                video.pause();
+                video.autoplay = false;
+                video.removeAttribute('autoplay');
+            };
+
+            const resetVideoForClosedState = ({ showLoader = false } = {}) => {
+                hideReplayState();
+                resetVideoPosition();
+                hasRevealedVideo = !showLoader;
+                syncLoadingState();
+            };
+
+            const stopBackgroundPlayback = () => {
+                cancelMobileOpenSequence();
+                pauseVideoPlayback();
+                if (isMobileViewport && !isMobileDemoOpen) {
+                    resetVideoForClosedState({ showLoader: true });
+                }
+            };
+
+            const isVideoReadyToPlay = () => video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
+
+            const ensureVideoLoadRequested = () => {
+                if (video.currentSrc && isVideoReadyToPlay()) return;
+                video.load();
+            };
+
+            const scheduleLoadingFallback = (requestId) => {
+                cancelLoadingFallback();
+                loadingFallbackTimerId = window.setTimeout(() => {
+                    loadingFallbackTimerId = 0;
+                    if (requestId !== playbackRequestId || hasRevealedVideo) return;
+                    showReplayState();
+                }, maximumLoadingMs);
+            };
+
+            const playHeroVideo = ({ immediate = false } = {}) => {
+                cancelPendingPlayback();
+                hideReplayState();
+                if (!isPlaybackAllowed()) return;
+
+                const requestId = playbackRequestId;
+                const attemptPlayback = () => {
+                    if (requestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                    if (minimumLoadingReadyRequestId !== requestId || !isVideoReadyToPlay()) return;
+                    const playPromise = video.play();
+                    if (playPromise && typeof playPromise.catch === 'function') {
+                        playPromise.catch(() => {
+                            if (requestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                            showReplayState();
                         });
                     }
-                }, reducedMotion.matches ? 0 : 380);
+                };
+
+                scheduleLoadingFallback(requestId);
+
+                if (!immediate && !hasRevealedVideo) {
+                    syncLoadingState();
+                    ensureVideoLoadRequested();
+                    playbackStartTimerId = window.setTimeout(() => {
+                        playbackStartTimerId = 0;
+                        minimumLoadingReadyRequestId = requestId;
+                        attemptPlayback();
+                    }, minimumLoadingMs);
+                    return;
+                }
+
+                minimumLoadingReadyRequestId = requestId;
+                ensureVideoLoadRequested();
+                attemptPlayback();
             };
 
-            const closeDemo = () => {
-                if (!isMobile) return;
-                isOpen = false;
-                sync();
+            const ensureMobileDemoVisible = () => {
+                if (!isMobileViewport || !isMobileDemoOpen) return;
+                const rect = shell.getBoundingClientRect();
+                if (rect.bottom <= window.innerHeight && rect.top >= 0) return;
+                shell.scrollIntoView({
+                    behavior: reducedMotionQuery.matches ? 'auto' : 'smooth',
+                    block: 'nearest'
+                });
             };
 
-            const onViewportChange = () => {
-                const next = mobileQuery.matches;
-                if (next === isMobile) { sync(); return; }
-                isMobile = next;
-                isOpen = false;
-                sync();
+            const openMobileDemo = () => {
+                if (!isMobileViewport) return;
+                cancelMobileOpenSequence();
+                isMobileDemoOpen = true;
+                resetVideoForClosedState({ showLoader: true });
+                syncShellState();
+
+                mobileScrollAssistTimerId = window.setTimeout(() => {
+                    mobileScrollAssistTimerId = 0;
+                    ensureMobileDemoVisible();
+                }, reducedMotionQuery.matches ? 0 : mobileScrollAssistDelayMs);
+                playHeroVideo({ immediate: false });
             };
 
-            sync();
-            toggle.addEventListener('click', () => isOpen ? closeDemo() : open());
-            close.addEventListener('click', closeDemo);
-            mobileQuery.addEventListener('change', onViewportChange);
+            const closeMobileDemo = () => {
+                if (!isMobileViewport) return;
+                cancelMobileOpenSequence();
+                pauseVideoPlayback();
+                isMobileDemoOpen = false;
+                syncShellState();
+
+                if (reducedMotionQuery.matches) {
+                    resetVideoForClosedState({ showLoader: true });
+                    return;
+                }
+
+                mobileCloseCleanupTimerId = window.setTimeout(() => {
+                    mobileCloseCleanupTimerId = 0;
+                    resetVideoForClosedState({ showLoader: true });
+                }, mobileCloseCleanupDelayMs);
+            };
+
+            const handleViewportChange = () => {
+                const nextIsMobileViewport = mobileViewportQuery.matches;
+                if (nextIsMobileViewport === isMobileViewport) {
+                    syncShellState();
+                    return;
+                }
+
+                isMobileViewport = nextIsMobileViewport;
+                cancelMobileOpenSequence();
+                isMobileDemoOpen = false;
+                pauseVideoPlayback();
+                resetVideoForClosedState({ showLoader: true });
+                syncShellState();
+
+                if (!isMobileViewport) {
+                    playHeroVideo({ immediate: false });
+                }
+            };
+
+            syncShellState();
+
+            if (!isMobileViewport) {
+                playHeroVideo();
+            }
+
+            video.addEventListener('playing', revealVideo);
+            video.addEventListener('loadeddata', () => {
+                if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                        showReplayState();
+                    });
+                }
+            });
+            video.addEventListener('canplay', () => {
+                if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                        showReplayState();
+                    });
+                }
+            });
+            video.addEventListener('error', showReplayState);
+            video.addEventListener('ended', showReplayState);
+            replayButton.addEventListener('click', () => {
+                resetVideoPosition();
+                playHeroVideo({ immediate: true });
+            });
+            toggle.addEventListener('click', () => {
+                if (isMobileDemoOpen) {
+                    closeMobileDemo();
+                    return;
+                }
+
+                openMobileDemo();
+            });
+            close.addEventListener('click', closeMobileDemo);
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) return;
+                stopBackgroundPlayback();
+            });
+            window.addEventListener('pagehide', stopBackgroundPlayback);
+
+            if (typeof mobileViewportQuery.addEventListener === 'function') {
+                mobileViewportQuery.addEventListener('change', handleViewportChange);
+            } else if (typeof mobileViewportQuery.addListener === 'function') {
+                mobileViewportQuery.addListener(handleViewportChange);
+            }
         }
 
-        setupMobileDemoToggle();
+        setupHeroVideoLoader();
     </script>
 
     <script src="navbar.js"></script>

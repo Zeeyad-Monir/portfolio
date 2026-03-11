@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PackIt - Zeeyad Monir</title>
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -15,6 +18,10 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -35,12 +42,24 @@
 
         /* --- HERO SECTION --- */
         .hero-section {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(449px, 634px);
+            align-items: center;
+            column-gap: clamp(2.2rem, 4.4vw, 4.4rem);
+            min-height: calc(100vh - 8rem);
+            padding-bottom: 3.75rem;
             margin-bottom: 5rem;
             text-align: left;
         }
 
+        .hero-layout-content {
+            min-width: 0;
+            max-width: min(100%, 36rem);
+        }
+
         .hero-title {
-            font-size: 3.5rem;
+            font-size: clamp(2.6rem, 4.9vw, 4.18rem);
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -48,14 +67,289 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            flex-wrap: nowrap;
         }
 
         .app-icon {
             width: 58px;
             height: 58px;
             border-radius: 12px;
-            display: inline-block;
-            vertical-align: middle;
+            display: block;
+            flex: 0 0 auto;
+        }
+
+        .hero-browser-shell {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 0;
+            width: 100%;
+        }
+
+        .hero-browser-frame {
+            position: relative;
+            width: min(100%, 634px);
+            aspect-ratio: 16 / 10.5;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            background: linear-gradient(180deg, #f8f8f8 0%, #e8e8e8 100%);
+            box-shadow:
+                0 24px 50px rgba(17, 24, 39, 0.13),
+                0 10px 24px rgba(17, 24, 39, 0.09);
+            overflow: hidden;
+        }
+
+        .hero-browser-frame::before {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            top: 32px;
+            border-radius: 0 0 9px 9px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-browser-chrome {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 12px;
+            height: 32px;
+            background: linear-gradient(180deg, #f0f0f0 0%, #e0e0e0 100%);
+            border-bottom: 1px solid #d4d4d4;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .hero-browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .hero-browser-viewport {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 32px);
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .hero-demo-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            background: #000;
+            transition: opacity 0.42s ease;
+        }
+
+        .hero-video-loading {
+            display: none;
+        }
+
+        .js .hero-browser-frame:not(.is-video-ready) .hero-demo-video {
+            opacity: 0;
+        }
+
+        .js .hero-video-loading {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 239, 242, 0.98) 100%);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: none;
+            transition: opacity 0.42s ease, visibility 0.42s ease;
+        }
+
+        .js .hero-browser-frame.is-video-ready .hero-video-loading {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .hero-video-loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.9rem;
+            text-align: center;
+        }
+
+        .hero-video-loading-icon {
+            width: 74px;
+            height: 74px;
+            border-radius: 18px;
+            box-shadow: 0 18px 34px rgba(122, 31, 51, 0.18);
+        }
+
+        .hero-video-loading-text {
+            margin: 0;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(16, 16, 32, 0.72);
+        }
+
+        .hero-video-replay {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.96);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.32s ease, visibility 0.32s ease;
+        }
+
+        .hero-browser-frame.is-replay-visible .hero-video-replay {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .hero-video-replay-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.95rem;
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .hero-video-replay-title {
+            margin: 0;
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(16, 16, 32, 0.72);
+        }
+
+        .hero-video-replay-button {
+            min-width: 144px;
+            border-color: #7a1f33;
+            background: rgba(122, 31, 51, 0.08);
+            color: #101020;
+            box-shadow:
+                0 0 0 1px rgba(122, 31, 51, 0.08),
+                0 10px 22px rgba(122, 31, 51, 0.12);
+        }
+
+        .hero-video-replay-button:hover,
+        .hero-video-replay-button:focus-visible {
+            background: #7a1f33;
+            color: #fff;
+            border-color: #7a1f33;
+            box-shadow:
+                0 0 0 4px rgba(122, 31, 51, 0.1),
+                0 12px 26px rgba(122, 31, 51, 0.18);
+            outline: none;
+        }
+
+        @keyframes hero-float {
+            0%, 100% {
+                transform: translateX(5%) translateY(4px) rotate(-0.6deg);
+                box-shadow:
+                    0 24px 50px rgba(17, 24, 39, 0.13),
+                    0 10px 24px rgba(17, 24, 39, 0.09);
+            }
+            50% {
+                transform: translateX(5%) translateY(-5px) rotate(-0.35deg);
+                box-shadow:
+                    0 30px 56px rgba(17, 24, 39, 0.15),
+                    0 14px 30px rgba(17, 24, 39, 0.11);
+            }
+        }
+
+        @media (min-width: 1281px) {
+            .hero-browser-shell {
+                margin-left: 1.5rem;
+            }
+
+            .hero-browser-frame {
+                transform: translateX(5%) translateY(4px) rotate(-0.6deg);
+                animation: hero-float 6s ease-in-out infinite;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .hero-layout-content {
+                max-width: min(100%, 41.4rem);
+            }
+
+            .hero-title {
+                font-size: clamp(2.99rem, 5.64vw, 4.81rem);
+                gap: 1.15rem;
+            }
+
+            .app-icon {
+                width: 67px;
+                height: 67px;
+                border-radius: 14px;
+            }
+
+            .meta-stack {
+                font-size: 1.21rem;
+                gap: 0.4rem;
+            }
+
+            .hero-section .action-row {
+                gap: 0.825rem;
+            }
+
+            .hero-section .action-row .btn {
+                font-size: 0.98rem;
+                padding: 0.58rem 1.16rem;
+            }
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            left: 50%;
+            bottom: 0.35rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.15rem;
+            height: 3.15rem;
+            border-radius: 50%;
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: rgba(17, 17, 17, 0.72);
+            animation: hero-scroll-cue-bob 1.8s ease-in-out infinite;
+        }
+
+        .hero-scroll-cue-arrow {
+            display: block;
+            width: 0.9rem;
+            height: 0.9rem;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+        }
+
+        @keyframes hero-scroll-cue-bob {
+            0%, 100% {
+                transform: translate(-50%, 0);
+                opacity: 0.66;
+            }
+            50% {
+                transform: translate(-50%, 7px);
+                opacity: 1;
+            }
         }
 
         /* --- METADATA (Stacked Style) --- */
@@ -82,9 +376,9 @@
         }
 
         .btn {
-            font-size: 0.85rem;
+            font-size: 0.89rem;
             font-weight: 600;
-            padding: 0.5rem 1rem;
+            padding: 0.525rem 1.05rem;
             border-radius: 6px;
             border: 1px solid #ddd;
             background: transparent;
@@ -108,6 +402,398 @@
         .btn-primary:hover {
             opacity: 0.8;
             background: #111;
+        }
+
+        .btn-demo-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-color: #7a1f33;
+            background: rgba(255, 255, 255, 0.98);
+            color: #101020;
+            box-shadow:
+                0 0 0 1px rgba(122, 31, 51, 0.08),
+                0 10px 22px rgba(122, 31, 51, 0.12);
+        }
+
+        .btn-demo-toggle:hover,
+        .btn-demo-toggle:focus-visible {
+            background: rgba(122, 31, 51, 0.08);
+            color: #101020;
+            border-color: #7a1f33;
+            box-shadow:
+                0 0 0 4px rgba(122, 31, 51, 0.1),
+                0 12px 26px rgba(122, 31, 51, 0.16);
+            outline: none;
+        }
+
+        .btn-demo-toggle[aria-expanded="true"] {
+            background: rgba(122, 31, 51, 0.14);
+            color: #101020;
+            border-color: #7a1f33;
+            box-shadow:
+                0 0 0 4px rgba(122, 31, 51, 0.08),
+                0 12px 26px rgba(122, 31, 51, 0.16);
+        }
+
+        .hero-demo-close {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid #e5e7eb;
+            background: rgba(255, 255, 255, 0.94);
+            color: #333;
+            font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        .hero-demo-close:hover {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        @media (min-width: 961px) and (max-width: 1280px) {
+            .hero-section {
+                grid-template-columns: minmax(0, 0.99fr) minmax(352px, 1.01fr);
+                column-gap: clamp(1.25rem, 2.6vw, 2rem);
+            }
+
+            .hero-browser-shell {
+                margin-left: 0;
+            }
+
+            .hero-browser-frame {
+                width: 100%;
+                max-width: 100%;
+                transform: translateY(4px) rotate(-0.25deg);
+                animation: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-section {
+                padding-bottom: 3.35rem;
+            }
+
+            .hero-browser-frame { border-radius: 10px; }
+
+            .hero-browser-chrome {
+                height: 28px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .hero-browser-dot { width: 8px; height: 8px; }
+            .hero-browser-viewport { height: calc(100% - 28px); }
+            .hero-browser-frame::before { top: 28px; }
+            .hero-scroll-cue { width: 2.85rem; height: 2.85rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-browser-frame {
+                animation: none;
+            }
+
+            .hero-scroll-cue { animation: none; }
+
+            .hero-section,
+            .hero-browser-shell,
+            .hero-demo-close {
+                transition: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) and (min-width: 1281px) {
+            .hero-browser-frame {
+                transform: translateX(5%) translateY(0) rotate(-0.4deg);
+            }
+        }
+
+        @media (max-width: 960px) {
+            .hero-section {
+                position: relative;
+                --mobile-demo-base-padding: 4.9rem;
+                --mobile-demo-open-gap-top: 1.2rem;
+                --mobile-demo-open-gap-bottom: 1.6rem;
+                --mobile-demo-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+                --mobile-demo-padding-duration: 560ms;
+                --mobile-demo-shell-opacity-duration: 450ms;
+                --mobile-demo-shell-transform-duration: 600ms;
+                --mobile-demo-close-opacity-duration: 380ms;
+                --mobile-demo-close-transform-duration: 480ms;
+                --mobile-demo-shell-offset: 12px;
+                --mobile-demo-close-offset: 8px;
+                --mobile-demo-close-enter-delay: 100ms;
+                grid-template-columns: 1fr;
+                justify-items: center;
+                align-content: center;
+                min-height: calc(100svh - var(--mobile-nav-height));
+                margin-bottom: 3rem;
+                padding: 1.4rem 0 var(--mobile-demo-base-padding);
+                text-align: center;
+                transition: padding-bottom var(--mobile-demo-padding-duration) var(--mobile-demo-ease);
+            }
+
+            .hero-section.is-mobile-demo-open {
+                align-content: start;
+                min-height: auto;
+                padding-bottom: 0;
+                overflow-anchor: none;
+            }
+
+            .hero-layout-content {
+                width: min(100%, 32rem);
+                max-width: 32rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.35rem;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.75rem;
+                margin-bottom: 0;
+                justify-content: center;
+                flex-wrap: wrap;
+                row-gap: 0.45rem;
+            }
+
+            .meta-stack {
+                width: 100%;
+                align-items: center;
+                gap: 0.55rem;
+                margin-bottom: 0;
+            }
+
+            .hero-browser-shell {
+                display: flex;
+                position: static;
+                justify-self: center;
+                width: min(100%, 32rem);
+                max-height: 0;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 0;
+                margin-bottom: 0;
+                margin-left: 0;
+                opacity: 0;
+                transform: translate3d(0, calc(-1 * var(--mobile-demo-shell-offset)), 0);
+                visibility: hidden;
+                pointer-events: none;
+                overflow: hidden;
+                z-index: 1;
+                will-change: max-height, opacity, transform;
+                backface-visibility: hidden;
+                transition:
+                    max-height var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-top var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-bottom var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    opacity var(--mobile-demo-shell-opacity-duration) ease,
+                    transform var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    visibility 0s linear var(--mobile-demo-shell-transform-duration);
+            }
+
+            .hero-section.is-mobile-demo-open .hero-browser-shell {
+                max-height: 36rem;
+                margin-top: var(--mobile-demo-open-gap-top);
+                margin-bottom: var(--mobile-demo-open-gap-bottom);
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+                visibility: visible;
+                pointer-events: auto;
+                overflow: visible;
+                transition:
+                    max-height var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-top var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    margin-bottom var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    opacity var(--mobile-demo-shell-opacity-duration) ease,
+                    transform var(--mobile-demo-shell-transform-duration) var(--mobile-demo-ease),
+                    visibility 0s linear 0s;
+            }
+
+            .hero-browser-frame {
+                order: 1;
+                width: min(100%, 504px);
+                transform: none;
+                animation: none;
+                border-radius: 10px;
+            }
+
+            .hero-browser-chrome {
+                height: 26px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .hero-browser-dot { width: 8px; height: 8px; }
+            .hero-browser-viewport { height: calc(100% - 26px); }
+            .hero-browser-frame::before { top: 26px; }
+            .hero-scroll-cue { display: none; }
+
+            .action-row {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: min(100%, 21.5rem);
+                gap: 0.7rem;
+                margin: 0 auto;
+            }
+
+            .action-row .btn-demo-toggle {
+                display: inline-flex;
+                grid-column: 1 / -1;
+            }
+
+            .action-row .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 44px;
+                width: 100%;
+                padding: 0.7rem 0.85rem;
+                font-size: 0.88rem;
+                white-space: nowrap;
+            }
+
+            .hero-demo-close {
+                display: inline-flex;
+                order: 2;
+                opacity: 0;
+                transform: translate3d(0, var(--mobile-demo-close-offset), 0);
+                pointer-events: none;
+                transition:
+                    opacity var(--mobile-demo-close-opacity-duration) ease,
+                    transform var(--mobile-demo-close-transform-duration) var(--mobile-demo-ease),
+                    background-color 0.2s ease,
+                    color 0.2s ease,
+                    border-color 0.2s ease;
+            }
+
+            .hero-section.is-mobile-demo-open .hero-demo-close {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+                pointer-events: auto;
+                transition:
+                    opacity var(--mobile-demo-close-opacity-duration) ease var(--mobile-demo-close-enter-delay),
+                    transform var(--mobile-demo-close-transform-duration) var(--mobile-demo-ease) var(--mobile-demo-close-enter-delay),
+                    background-color 0.2s ease,
+                    color 0.2s ease,
+                    border-color 0.2s ease;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 960px) {
+            .hero-section {
+                --mobile-demo-open-gap-top: 1.38rem;
+                grid-template-columns: 1fr;
+                justify-items: center;
+                align-content: center;
+                min-height: calc(100vh - 8rem);
+                margin-bottom: 4rem;
+                padding: 2rem 0 var(--mobile-demo-base-padding);
+                text-align: center;
+            }
+
+            .hero-section.is-mobile-demo-open {
+                align-content: start;
+                min-height: auto;
+                padding-bottom: 0;
+            }
+
+            .hero-layout-content {
+                width: min(100%, 36rem);
+                max-width: 36rem;
+            }
+
+            .hero-title {
+                font-size: clamp(3rem, 6vw, 3.6rem);
+            }
+
+            .hero-browser-shell {
+                width: min(100%, 38rem);
+            }
+
+            .hero-section.is-mobile-demo-open .hero-browser-shell {
+                max-height: 42rem;
+            }
+
+            .hero-browser-frame {
+                width: min(100%, 554px);
+                transform: none;
+                animation: none;
+                border-radius: 10px;
+            }
+
+            .action-row {
+                width: min(100%, 24rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                margin-bottom: 2.5rem;
+                --mobile-demo-base-padding: 4.6rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                gap: 0.75rem;
+            }
+
+            .app-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 10px;
+            }
+
+            .hero-browser-frame {
+                width: min(100%, 408px);
+                border-radius: 8px;
+            }
+
+            .hero-browser-chrome {
+                height: 24px;
+                gap: 5px;
+                padding: 0 10px;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .hero-browser-dot { width: 7px; height: 7px; }
+            .hero-browser-viewport { height: calc(100% - 24px); }
+            .hero-browser-frame::before { top: 24px; }
+            .hero-browser-shell { width: min(100%, 26rem); }
+            .hero-demo-close { padding: 0.5rem 0.8rem; font-size: 0.78rem; }
+        }
+
+        @media (max-width: 375px) {
+            .hero-title {
+                font-size: 1.98rem;
+                gap: 0.6rem;
+            }
+
+            .app-icon {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-browser-frame { width: 100%; }
+            .hero-browser-shell { width: 100%; }
+
+            .action-row {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+
+            .action-row .btn-demo-toggle {
+                grid-column: auto;
+            }
         }
 
         /* --- SECTIONS COMMON --- */
@@ -420,28 +1106,246 @@
         /* --- MOBILE --- */
         @media (max-width: 768px) {
             .container {
+                padding: 2.5rem 1.5rem;
                 padding-top: calc(var(--mobile-nav-height) + var(--mobile-hero-gap));
             }
-            .hero-title { font-size: 2.5rem; flex-wrap: wrap; }
+            .section-spacer { margin-bottom: 4.4rem; }
             .feature-block { margin-bottom: 3rem; }
             .feature-text h3 { font-size: 1.35rem; }
             .feature-visual img { border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
+            .process-list { gap: 2.5rem; }
             .gallery-item { flex: 0 0 300px; }
             .gallery-track { gap: 1rem; padding-bottom: 1.5rem; }
+            .btn { padding: 0.63rem 1.26rem; }
+            .cta-section { margin-top: 3rem; padding-top: 2.5rem; }
         }
 
         @media (max-width: 480px) {
             .feature-block { margin-bottom: 2.5rem; }
             .feature-text h3 { font-size: 1.25rem; }
             .feature-visual img { border-radius: 8px; }
+            .overview-text { font-size: 1.05rem; line-height: 1.65; }
+            .process-list { gap: 2rem; }
             .gallery-item { flex: 0 0 260px; }
+            .cta-section { margin-top: 2.5rem; padding-top: 2rem; }
+            .cta-heading { font-size: 1.3rem; }
         }
 
         @media (max-width: 375px) {
+            .container {
+                padding: 2rem 1.25rem;
+                padding-top: calc(var(--mobile-nav-height) + var(--mobile-hero-gap));
+            }
             .feature-block { margin-bottom: 2rem; gap: 1rem; }
             .feature-text h3 { font-size: 1.15rem; }
+            .process-content h3 { font-size: 1.1rem; }
+            .process-content p { font-size: 0.95rem; }
+            .meta-stack { font-size: 0.95rem; }
             .gallery-item { flex: 0 0 240px; }
             .gallery-track { gap: 0.75rem; }
+            .cta-section { margin-top: 2rem; padding-top: 1.5rem; }
+            #lightbox { padding: 1rem; }
+        }
+
+        /* --- ART DIRECTION --- */
+
+        .art-subsection {
+            margin-top: 3.6rem;
+        }
+
+        .art-subsection:first-of-type {
+            margin-top: 0;
+        }
+
+        .art-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin: 0 0 1.8rem;
+            color: var(--text-main);
+        }
+
+        .art-body-copy {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            max-width: 1080px;
+            margin: 1.3rem 0 0;
+        }
+
+        .art-body-copy-tight {
+            margin-top: 0.75rem;
+        }
+
+        .art-color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            column-gap: 1.6rem;
+            row-gap: 1rem;
+        }
+
+        .art-color-item {
+            min-width: 0;
+            width: 85%;
+            justify-self: center;
+        }
+
+        .art-color-chip {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 0.65rem;
+        }
+
+        .art-color-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 0.15rem;
+        }
+
+        .art-color-hex {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            margin: 0 0 0.45rem;
+        }
+
+        .art-color-meaning {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        .art-type-showcase {
+            margin-top: calc(1rem * 1.05);
+            max-width: 1080px;
+        }
+
+        .art-type-specimen {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+        }
+
+        .art-type-meta {
+            margin-top: calc(1rem * 1.05);
+            display: flex;
+            flex-direction: column;
+            gap: calc(0.25rem * 1.05);
+            color: #4b5563;
+        }
+
+        .art-type-meta p {
+            margin: 0;
+            font-size: 0.98rem;
+            line-height: 1.45;
+        }
+
+        .art-type-divider {
+            margin-top: calc(1.25rem * 1.05);
+            border-top: 1px solid #e8ebef;
+        }
+
+        .art-type-preview {
+            margin-top: calc(1.25rem * 1.05);
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            column-gap: 1.25rem;
+            row-gap: calc(1.25rem * 1.05);
+        }
+
+        .art-type-preview-item p {
+            margin: 0;
+        }
+
+        .art-type-preview-sample {
+            color: var(--text-main);
+        }
+
+        .art-type-preview-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .art-type-preview-body {
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0.005em;
+            color: #111827;
+        }
+
+        .art-type-preview-label {
+            font-size: 0.74rem;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+
+        .art-type-preview-spec {
+            margin-top: calc(0.38rem * 1.05) !important;
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        .art-type-note {
+            margin: calc(1.35rem * 1.05) 0 0;
+            max-width: 980px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+
+        .art-color-note {
+            margin-left: calc(((100% - (4 * 1.6rem)) / 5) * 0.075);
+        }
+
+        @media (max-width: 1200px) {
+            .art-color-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .art-color-note {
+                margin-left: calc(((100% - (2 * 1.6rem)) / 3) * 0.075);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .art-subsection { margin-top: 2.7rem; }
+            .art-heading { font-size: 1.35rem; }
+            .art-body-copy { font-size: 1rem; line-height: 1.58; margin-top: 1.1rem; }
+            .art-body-copy-tight { margin-top: 0.7rem; }
+            .art-color-grid { grid-template-columns: repeat(3, minmax(0, 8.8rem)); justify-content: center; gap: 1.04rem 1rem; }
+            .art-color-item { width: 100%; max-width: 8.8rem; }
+            .art-color-chip { border-radius: 10px; margin-bottom: 0.45rem; }
+            .art-color-name { font-size: 0.78rem; }
+            .art-color-hex { font-size: 0.68rem; margin-bottom: 0.25rem; }
+            .art-color-meaning { font-size: 0.68rem; line-height: 1.3; }
+            .art-color-note { margin-left: 0; }
+            .art-type-specimen { font-size: 1.35rem; }
+            .art-type-meta p { font-size: 0.93rem; }
+            .art-type-preview { grid-template-columns: 1fr; row-gap: calc(1rem * 1.05); }
+            .art-type-preview-heading { font-size: 1.35rem; }
+            .art-type-note { font-size: 0.88rem; }
+        }
+
+        @media (max-width: 480px) {
+            .art-color-grid { grid-template-columns: repeat(3, minmax(0, 7.6rem)); gap: 0.86rem 0.85rem; }
+            .art-color-item { max-width: 7.6rem; }
+            .art-color-name { font-size: 0.74rem; }
+            .art-color-hex, .art-color-meaning { font-size: 0.65rem; }
         }
     </style>
     <link rel="stylesheet" href="navbar.css">
@@ -480,24 +1384,66 @@
     <div class="container">
 
         <header class="hero-section">
-            <h1 class="hero-title">
-                PackIt
-                <img src="PortfolioPhotos/packit/packItIcon2.png" alt="PackIt Icon" class="app-icon">
-            </h1>
+            <div class="hero-layout-content">
+                <h1 class="hero-title">
+                    <span>PackIt</span>
+                    <img src="PortfolioPhotos/packit/packItIcon2.png" alt="PackIt app icon" class="app-icon">
+                </h1>
 
-            <div class="meta-stack">
-                <p><strong>Role:</strong> UX/UI Designer</p>
-                <p><strong>Tools:</strong> Figma, Miro, Adobe Creative Suite</p>
-                <p><strong>Date:</strong> Sept 2024 - Dec 2024</p>
+                <div class="meta-stack">
+                    <p><strong>Role:</strong> UX/UI Designer</p>
+                    <p><strong>Tools:</strong> Figma, Miro, Adobe Creative Suite</p>
+                    <p><strong>Date:</strong> Sept 2024 - Dec 2024</p>
+                </div>
+
+                <div class="action-row">
+                    <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" rel="noreferrer" class="btn">Figma</a>
+                    <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" rel="noreferrer" class="btn">Slide Deck</a>
+                    <button type="button" class="btn btn-demo-toggle" aria-controls="heroDemoShell" aria-expanded="false">Demo</button>
+                </div>
             </div>
 
-            <div class="action-row">
-                <a href="https://www.figma.com/design/0bcTQSotJAHZyl8TuTDpW2/PACK---IT-Designs?node-id=0-1&p=f" target="_blank" class="btn">Figma</a>
-                <a href="https://drive.google.com/file/d/1TtgfkF39wC2RXVqvoryYD8VG4JS927eI/view" target="_blank" class="btn">Slide Deck</a>
+            <div class="hero-browser-shell" id="heroDemoShell">
+                <button type="button" class="hero-demo-close" aria-label="Close demo">Close Demo</button>
+                <div class="hero-browser-frame">
+                    <div class="hero-browser-chrome">
+                        <span class="hero-browser-dot" style="background: #FF5F56;"></span>
+                        <span class="hero-browser-dot" style="background: #FFBD2E;"></span>
+                        <span class="hero-browser-dot" style="background: #27C93F;"></span>
+                    </div>
+                    <div class="hero-browser-viewport">
+                        <div class="hero-video-loading">
+                            <div class="hero-video-loading-content">
+                                <img src="PortfolioPhotos/packit/packItIcon2.png" alt="" class="hero-video-loading-icon">
+                                <p class="hero-video-loading-text">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="hero-video-replay" aria-hidden="true">
+                            <div class="hero-video-replay-content">
+                                <img src="PortfolioPhotos/packit/packItIcon2.png" alt="" class="hero-video-loading-icon">
+                                <p class="hero-video-replay-title">Play Again</p>
+                                <button type="button" class="btn hero-video-replay-button">Replay Demo</button>
+                            </div>
+                        </div>
+                        <video
+                            class="hero-demo-video"
+                            muted
+                            playsinline
+                            preload="auto"
+                            src="https://firebasestorage.googleapis.com/v0/b/compfit-196e8.firebasestorage.app/o/PackItDemo.mov?alt=media&token=1cd19403-b7f1-41cb-a684-d6a3a8cdf3d3"
+                            poster="PortfolioPhotos/PackItWeb/MealScreen.png"
+                            aria-label="PackIt full demo preview">
+                        </video>
+                    </div>
+                </div>
             </div>
+
+            <a href="#overview" class="hero-scroll-cue" aria-label="Scroll to overview">
+                <span class="hero-scroll-cue-arrow" aria-hidden="true"></span>
+            </a>
         </header>
 
-        <section class="section-spacer">
+        <section class="section-spacer" id="overview">
             <span class="section-header">Overview</span>
             <p class="overview-text">
                 PackIt bridges the gap between <strong>institutions with surplus food</strong> and <strong>student volunteers</strong> willing to redistribute it.
@@ -541,6 +1487,79 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section class="section-spacer art-direction-section">
+            <span class="section-header">Art Direction</span>
+
+            <div class="art-subsection">
+                <h3 class="art-heading">Color Scheme</h3>
+                <div class="art-color-grid">
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#9A0F3F;"></div>
+                        <p class="art-color-name">Primary Action</p>
+                        <p class="art-color-hex">#9A0F3F</p>
+                        <p class="art-color-meaning">Community, urgency, action</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#2457F5;"></div>
+                        <p class="art-color-name">Support Blue</p>
+                        <p class="art-color-hex">#2457F5</p>
+                        <p class="art-color-meaning">Trust, security, system messaging</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#F7F5F4;"></div>
+                        <p class="art-color-name">Soft Surface</p>
+                        <p class="art-color-hex">#F7F5F4</p>
+                        <p class="art-color-meaning">Breathing room for cards and content zones</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#1F1F1F;"></div>
+                        <p class="art-color-name">Deep Neutral</p>
+                        <p class="art-color-hex">#1F1F1F</p>
+                        <p class="art-color-meaning">Readable text and interface structure</p>
+                    </div>
+                    <div class="art-color-item">
+                        <div class="art-color-chip" style="background:#E9E6E4;"></div>
+                        <p class="art-color-name">UI Neutral</p>
+                        <p class="art-color-hex">#E9E6E4</p>
+                        <p class="art-color-meaning">Borders, dividers, and quiet backgrounds</p>
+                    </div>
+                </div>
+                <p class="art-body-copy art-color-note">
+                    A deep berry-red palette was chosen because it signals urgency and care, helping food redistribution actions feel human while keeping the interface clear.
+                </p>
+            </div>
+
+            <div class="art-subsection">
+                <h3 class="art-heading">Typography</h3>
+                <div class="art-type-showcase">
+                    <p class="art-type-specimen">Aa Bb Cc</p>
+                    <div class="art-type-meta">
+                        <p><strong>Primary Typeface:</strong> System UI / San Francisco</p>
+                        <p>Used for headings, body text, and UI elements.</p>
+                    </div>
+                    <div class="art-type-divider"></div>
+                    <div class="art-type-preview">
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-heading">Heading</p>
+                            <p class="art-type-preview-spec">32px / Bold / -0.02em tracking</p>
+                        </div>
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-body">Body Text</p>
+                            <p class="art-type-preview-spec">16px / Regular / 1.6 line height</p>
+                        </div>
+                        <div class="art-type-preview-item">
+                            <p class="art-type-preview-sample art-type-preview-label">Section Label</p>
+                            <p class="art-type-preview-spec">11px / Uppercase / 0.15em tracking</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="art-type-note">
+                    The hierarchy uses clear size and weight contrast to keep dashboards, meal flows, and settings easy to scan.
+                </p>
+            </div>
+
         </section>
 
         <section class="section-spacer">
@@ -715,6 +1734,331 @@
 
         // Initialize on load
         renderReasoning();
+    </script>
+
+    <script>
+        function setupHeroVideoLoader() {
+            const heroSection = document.querySelector('.hero-section');
+            const shell = document.getElementById('heroDemoShell');
+            const frame = shell?.querySelector('.hero-browser-frame');
+            const video = frame?.querySelector('.hero-demo-video');
+            const overlay = frame?.querySelector('.hero-video-loading');
+            const replayOverlay = frame?.querySelector('.hero-video-replay');
+            const replayButton = frame?.querySelector('.hero-video-replay-button');
+            const toggle = document.querySelector('.btn-demo-toggle');
+            const close = shell?.querySelector('.hero-demo-close');
+            if (!heroSection || !shell || !frame || !video || !overlay || !replayOverlay || !replayButton || !toggle || !close) return;
+
+            const minimumLoadingMs = 2000;
+            const maximumLoadingMs = 12000;
+            const mobileScrollAssistDelayMs = 260;
+            const mobileCloseCleanupDelayMs = 320;
+            const mobileViewportQuery = window.matchMedia('(max-width: 960px)');
+            const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let isMobileViewport = mobileViewportQuery.matches;
+            let isMobileDemoOpen = false;
+            let hasRevealedVideo = false;
+            let playbackStartTimerId = 0;
+            let loadingFallbackTimerId = 0;
+            let mobileScrollAssistTimerId = 0;
+            let mobileCloseCleanupTimerId = 0;
+            let playbackRequestId = 0;
+            let minimumLoadingReadyRequestId = 0;
+
+            video.loop = false;
+            video.pause();
+            video.muted = true;
+            video.autoplay = false;
+            video.removeAttribute('autoplay');
+            video.defaultMuted = true;
+            video.playsInline = true;
+            video.setAttribute('muted', '');
+            video.setAttribute('playsinline', '');
+
+            const resetVideoPosition = () => {
+                try {
+                    video.currentTime = 0;
+                } catch (error) {
+                    // Some browsers block currentTime updates before enough data is loaded.
+                }
+            };
+
+            const syncLoadingState = () => {
+                if (hasRevealedVideo) {
+                    frame.classList.add('is-video-ready');
+                    overlay.hidden = true;
+                    return;
+                }
+
+                frame.classList.remove('is-video-ready');
+                overlay.hidden = false;
+            };
+
+            const cancelLoadingFallback = () => {
+                if (loadingFallbackTimerId) {
+                    window.clearTimeout(loadingFallbackTimerId);
+                    loadingFallbackTimerId = 0;
+                }
+            };
+
+            const cancelPendingPlayback = () => {
+                playbackRequestId += 1;
+                minimumLoadingReadyRequestId = 0;
+                if (playbackStartTimerId) {
+                    window.clearTimeout(playbackStartTimerId);
+                    playbackStartTimerId = 0;
+                }
+                cancelLoadingFallback();
+            };
+
+            const cancelMobileScrollAssist = () => {
+                if (mobileScrollAssistTimerId) {
+                    window.clearTimeout(mobileScrollAssistTimerId);
+                    mobileScrollAssistTimerId = 0;
+                }
+            };
+
+            const cancelMobileCloseCleanup = () => {
+                if (mobileCloseCleanupTimerId) {
+                    window.clearTimeout(mobileCloseCleanupTimerId);
+                    mobileCloseCleanupTimerId = 0;
+                }
+            };
+
+            const cancelMobileOpenSequence = () => {
+                cancelMobileScrollAssist();
+                cancelMobileCloseCleanup();
+            };
+
+            const revealVideo = () => {
+                if (hasRevealedVideo) return;
+                hasRevealedVideo = true;
+                cancelLoadingFallback();
+                frame.classList.add('is-video-ready');
+                window.setTimeout(() => {
+                    overlay.hidden = true;
+                }, 450);
+            };
+
+            const hideReplayState = () => {
+                frame.classList.remove('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'true');
+            };
+
+            const showReplayState = () => {
+                cancelPendingPlayback();
+                revealVideo();
+                video.autoplay = false;
+                video.removeAttribute('autoplay');
+                frame.classList.add('is-replay-visible');
+                replayOverlay.setAttribute('aria-hidden', 'false');
+                video.pause();
+            };
+
+            const isDocumentVisible = () => document.visibilityState !== 'hidden';
+            const isPlaybackAllowed = () => isDocumentVisible() && (!isMobileViewport || isMobileDemoOpen);
+
+            const syncShellState = () => {
+                const shouldShowShell = !isMobileViewport || isMobileDemoOpen;
+                heroSection.classList.toggle('is-mobile-demo-open', isMobileViewport && isMobileDemoOpen);
+                shell.setAttribute('aria-hidden', shouldShowShell ? 'false' : 'true');
+                toggle.setAttribute('aria-expanded', String(isMobileViewport && isMobileDemoOpen));
+                close.tabIndex = shouldShowShell && isMobileViewport ? 0 : -1;
+                close.setAttribute('aria-hidden', shouldShowShell && isMobileViewport ? 'false' : 'true');
+                syncLoadingState();
+            };
+
+            const pauseVideoPlayback = () => {
+                cancelPendingPlayback();
+                video.pause();
+                video.autoplay = false;
+                video.removeAttribute('autoplay');
+            };
+
+            const resetVideoForClosedState = ({ showLoader = false } = {}) => {
+                hideReplayState();
+                resetVideoPosition();
+                hasRevealedVideo = !showLoader;
+                syncLoadingState();
+            };
+
+            const stopBackgroundPlayback = () => {
+                cancelMobileOpenSequence();
+                pauseVideoPlayback();
+                if (isMobileViewport && !isMobileDemoOpen) {
+                    resetVideoForClosedState({ showLoader: true });
+                }
+            };
+
+            const isVideoReadyToPlay = () => video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
+
+            const ensureVideoLoadRequested = () => {
+                if (video.currentSrc && isVideoReadyToPlay()) return;
+                video.load();
+            };
+
+            const scheduleLoadingFallback = (requestId) => {
+                cancelLoadingFallback();
+                loadingFallbackTimerId = window.setTimeout(() => {
+                    loadingFallbackTimerId = 0;
+                    if (requestId !== playbackRequestId || hasRevealedVideo) return;
+                    showReplayState();
+                }, maximumLoadingMs);
+            };
+
+            const playHeroVideo = ({ immediate = false } = {}) => {
+                cancelPendingPlayback();
+                hideReplayState();
+                if (!isPlaybackAllowed()) return;
+
+                const requestId = playbackRequestId;
+                const attemptPlayback = () => {
+                    if (requestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                    if (minimumLoadingReadyRequestId !== requestId || !isVideoReadyToPlay()) return;
+                    const playPromise = video.play();
+                    if (playPromise && typeof playPromise.catch === 'function') {
+                        playPromise.catch(() => {
+                            if (requestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                            showReplayState();
+                        });
+                    }
+                };
+
+                scheduleLoadingFallback(requestId);
+
+                if (!immediate && !hasRevealedVideo) {
+                    syncLoadingState();
+                    ensureVideoLoadRequested();
+                    playbackStartTimerId = window.setTimeout(() => {
+                        playbackStartTimerId = 0;
+                        minimumLoadingReadyRequestId = requestId;
+                        attemptPlayback();
+                    }, minimumLoadingMs);
+                    return;
+                }
+
+                minimumLoadingReadyRequestId = requestId;
+                ensureVideoLoadRequested();
+                attemptPlayback();
+            };
+
+            const ensureMobileDemoVisible = () => {
+                if (!isMobileViewport || !isMobileDemoOpen) return;
+                const rect = shell.getBoundingClientRect();
+                if (rect.bottom <= window.innerHeight && rect.top >= 0) return;
+                shell.scrollIntoView({
+                    behavior: reducedMotionQuery.matches ? 'auto' : 'smooth',
+                    block: 'nearest'
+                });
+            };
+
+            const openMobileDemo = () => {
+                if (!isMobileViewport) return;
+                cancelMobileOpenSequence();
+                isMobileDemoOpen = true;
+                resetVideoForClosedState({ showLoader: true });
+                syncShellState();
+
+                mobileScrollAssistTimerId = window.setTimeout(() => {
+                    mobileScrollAssistTimerId = 0;
+                    ensureMobileDemoVisible();
+                }, reducedMotionQuery.matches ? 0 : mobileScrollAssistDelayMs);
+                playHeroVideo({ immediate: false });
+            };
+
+            const closeMobileDemo = () => {
+                if (!isMobileViewport) return;
+                cancelMobileOpenSequence();
+                pauseVideoPlayback();
+                isMobileDemoOpen = false;
+                syncShellState();
+
+                if (reducedMotionQuery.matches) {
+                    resetVideoForClosedState({ showLoader: true });
+                    return;
+                }
+
+                mobileCloseCleanupTimerId = window.setTimeout(() => {
+                    mobileCloseCleanupTimerId = 0;
+                    resetVideoForClosedState({ showLoader: true });
+                }, mobileCloseCleanupDelayMs);
+            };
+
+            const handleViewportChange = () => {
+                const nextIsMobileViewport = mobileViewportQuery.matches;
+                if (nextIsMobileViewport === isMobileViewport) {
+                    syncShellState();
+                    return;
+                }
+
+                isMobileViewport = nextIsMobileViewport;
+                cancelMobileOpenSequence();
+                isMobileDemoOpen = false;
+                pauseVideoPlayback();
+                resetVideoForClosedState({ showLoader: true });
+                syncShellState();
+
+                if (!isMobileViewport) {
+                    playHeroVideo({ immediate: false });
+                }
+            };
+
+            video.addEventListener('playing', revealVideo);
+            video.addEventListener('loadeddata', () => {
+                if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                        showReplayState();
+                    });
+                }
+            });
+            video.addEventListener('canplay', () => {
+                if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        if (minimumLoadingReadyRequestId !== playbackRequestId || !isPlaybackAllowed()) return;
+                        showReplayState();
+                    });
+                }
+            });
+            video.addEventListener('error', showReplayState);
+            video.addEventListener('ended', showReplayState);
+            replayButton.addEventListener('click', () => {
+                resetVideoPosition();
+                playHeroVideo({ immediate: true });
+            });
+            toggle.addEventListener('click', () => {
+                if (isMobileDemoOpen) {
+                    closeMobileDemo();
+                    return;
+                }
+
+                openMobileDemo();
+            });
+            close.addEventListener('click', closeMobileDemo);
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) return;
+                stopBackgroundPlayback();
+            });
+            window.addEventListener('pagehide', stopBackgroundPlayback);
+
+            if (typeof mobileViewportQuery.addEventListener === 'function') {
+                mobileViewportQuery.addEventListener('change', handleViewportChange);
+            } else if (typeof mobileViewportQuery.addListener === 'function') {
+                mobileViewportQuery.addListener(handleViewportChange);
+            }
+
+            syncShellState();
+
+            if (!isMobileViewport) {
+                playHeroVideo();
+            }
+        }
+
+        setupHeroVideoLoader();
     </script>
 
     <script src="navbar.js"></script>
